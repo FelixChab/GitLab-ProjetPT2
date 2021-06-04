@@ -74,5 +74,21 @@ namespace ProjetPT2K
             }
 
         }
+
+        public List<ALBUMS> GetLoans()
+        {
+            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
+            List<ALBUMS> loans = (from a in connection.ALBUMS
+                                  join e in connection.EMPRUNTER
+                                  on a.CODE_ALBUM equals e.CODE_ALBUM
+                                  join ab in connection.ABONNÉS on e.CODE_ABONNÉ equals CODE_ABONNÉ
+                                  select a).ToList();
+            return loans;
+        }
+
+        public override String ToString()
+        {
+            return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";
+        }
     }
 }
