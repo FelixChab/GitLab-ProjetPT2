@@ -3,20 +3,6 @@ Pipeline disabled
 [![pipeline status](https://gitlab-ce.iut.u-bordeaux.fr/Pierre/m2106_bd_pt_agile/badges/master/pipeline.svg)](https://gitlab-ce.iut.u-bordeaux.fr/Pierre/m2106_bd_pt_agile/pipelines)
 -->
 
-# Comment dupliquer ce dépôt
-
-<!-- Vous pouvez `forker` ce projet (la fourchette en haut à droite sur la page principale du dépôt) dans votre espace pour travailler tranquillement sur une copie privée, ou `commiter` dans ce dépôt si vous avez les droits de `Developer`.
-Mais lors du `fork` l’organisation (`issues`, `milestones`, `labels`) est réinitialisée. -->
-
-L'un des membres de l'équipe (`maintainer`) doit réaliser cette étape.
-
-Pour faire une copie intégrale du dépôt, il faut passer par la fonction `export/import` de `Gitlab` :  https://docs.gitlab.com/ee/user/project/settings/import_export.html .
-La démarche est alors la suivante :
-- depuis `Gitlab` : créer un nouveau projet (le `+` dans le bandeau principal), sélectionner `import project` puis  `from Gitlab export`,
-- donner un nom au nouveau projet (par exemple `m2106_bd_pt_agile_import`) et choisir le fichier d'export (TODO:),
-- lancer `import project`,
-- vous avez votre copie personnelle du dépôt.
-
 # Mise en place de l'environnement technique
 
 Vous devez installer le même environnement technique que pour le module "M2106 BD"
