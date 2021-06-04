@@ -13,25 +13,49 @@ namespace ProjetPT2K
 
         }
 
+        /**
+         * Method to get albums albums that are late
+         */
         public List<ALBUMS> GetLateLoans()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ALBUMS> lateLoans = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
+            List<ALBUMS> lateLoans = (from a in Connection.ALBUMS
+                                  join e in Connection.EMPRUNTER
                                   on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where e.DATE_RETOUR_ATTENDU < e.DATE_RETOUR select a).ToList();
+                                  where (e.DATE_RETOUR == null && e.DATE_RETOUR_ATTENDUE > DateTime.Now) select a).ToList();
             return lateLoans;
         }
 
-        public List<ABONNÉS> getLateSubscribers()
+        /**
+         * Method to get subscriber who have 10 more days late
+         */
+        public List<ABONNÉS> GetLateSubscribers()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ABONNÉS> lateSubscribers = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
+            List<ABONNÉS> lateSubscribers = (from a in Connection.ALBUMS
+                                  join e in Connection.EMPRUNTER
                                   on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where (e.DATE_EMPRUNT.AddDays(10).CompareTo(new DateTime()) <= 0)
-                                  from s in connection.ABONNÉS where s.CODE_ABONNÉ==e.CODE_ABONNÉ select s).ToList();
+                                  where (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
+                                  from s in Connection.ABONNÉS where s.CODE_ABONNÉ==e.CODE_ABONNÉ select s).ToList();
             return lateSubscribers;
+        }
+
+        /**
+         * Method to purge database : remove subscriber who have not borrowed for a year (and its loans)
+         */
+        public int PurgeDatabase()
+        {
+            for (int index = 0; index < Connection.ABONNÉS.Count(); index++){
+                ABONNÉS sub = Connection.ABONNÉS.ElementAt(index);
+                EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
+                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now && ){
+                    foreach(EMPRUNTER e in sub.EMPRUNTER)
+                    {
+                        Connection.EMPRUNTER.Remove(e);
+                    }
+                    Connection.ABONNÉS.Remove(sub);
+                }
+            }
+            Connection.SaveChanges();
+            return 0;
         }
     }
 }
