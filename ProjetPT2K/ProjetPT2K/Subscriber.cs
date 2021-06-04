@@ -17,25 +17,30 @@ namespace ProjetPT2K
          */
         public void BorrowAlbum(string title)
         {
-            var theAlbum = from album in this.Connection.ALBUMS
+            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
                             where album.TITRE_ALBUM == title
-                            select album;
+                            select album).First();
 
-            var delay = from genre in this.Connection.GENRES
+            if (theAlbum == null)
+                return;
+
+            GENRES theGenre = (from genre in this.Connection.GENRES
                         where genre.CODE_GENRE == theAlbum.CODE_GENRE
-                        select genre.DELAI;
+                        select genre).First();
 
+            if (theGenre == null)
+                return;
 
             EMPRUNTER borrow = new EMPRUNTER
             {
                 CODE_ABONNÉ = this.CODE_ABONNÉ,
                 CODE_ALBUM = theAlbum.CODE_ALBUM,
                 DATE_EMPRUNT = DateTime.Today,
-                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(delay)
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
             };
 
             this.Connection.EMPRUNTER.Add(borrow);
-            this.Connection.EMPRUNTER.SaveChanges();
+            this.Connection.SaveChanges();
         }
 
         /**

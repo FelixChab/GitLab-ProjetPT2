@@ -5,10 +5,19 @@ namespace ProjetPT2K
 
 	public class Database
 	{
+		/**
+		 * The (unique) instance of the database.
+		 */
 		private static Database _Database;
 
-		private readonly MusiquePT2_KEntities Connection; // allows the connection
+		/**
+		 * Attributes allowing the connection.
+		 */
+		private readonly MusiquePT2_KEntities Connection;
 		
+		/**
+		 * The non-paraterised constructor creating a new instance of Database.
+		 */
 		private Database() {
 			this.Connection = new MusiquePT2_KEntities();
 		}
@@ -26,7 +35,7 @@ namespace ProjetPT2K
 		}
 
 		/**
-		 * Function responsible of the connection with the database.
+		 * Function responsible for the connection with the database.
 		 */
 		public MusiquePT2_KEntities GetConnection()
         {
@@ -35,6 +44,7 @@ namespace ProjetPT2K
 
 		/**
 		 * Function that allows a subscriber to log itself the application.
+		 * 
 		 * @param login, the login of the subscriber.
 		 * @param password, the passeword of the subscriber.
 		 * */
