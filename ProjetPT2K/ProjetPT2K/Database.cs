@@ -54,7 +54,7 @@ namespace ProjetPT2K
 						  where (subscriber.LOGIN_ABONNÉ == login)
 						  && (subscriber.PASSWORD_ABONNÉ == password)
 						  select subscriber;
-			return (ABONNÉS)request.First();
+			return (ABONNÉS)request.FirstOrDefault();
 		}
 	}
 }
