@@ -9,5 +9,11 @@ namespace ProjetPT2K
     public class Subscriber : Account
     {
 
+        public Subscriber(string username, string password) : base(username, password) {}
+
+        public Subscriber newSubscriber()
+        {
+            
+        }
     }
 }

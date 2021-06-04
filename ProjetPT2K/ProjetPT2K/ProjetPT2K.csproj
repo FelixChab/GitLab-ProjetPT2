@@ -64,6 +64,7 @@
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="BD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
