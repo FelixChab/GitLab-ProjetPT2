@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
-    public class Admin : Account 
+    public class Admin : Account
     {
         public Admin()
         {
@@ -15,23 +15,24 @@ namespace ProjetPT2K
 
         public List<ALBUMS> GetLateLoans()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ALBUMS> lateLoans = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where e.DATE_RETOUR_ATTENDU < e.DATE_RETOUR select a).ToList();
+            List<ALBUMS> lateLoans = (from a in this.Connection.ALBUMS
+                                      join e in this.Connection.EMPRUNTER
+                                      on a.CODE_ALBUM equals e.CODE_ALBUM
+                                      where e.DATE_RETOUR_ATTENDUE < e.DATE_RETOUR
+                                      select a).ToList();
             return lateLoans;
         }
 
-        public List<ABONNÉS> getLateSubscribers()
+        public List<ALBUMS> getLateSubscribers()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ABONNÉS> lateSubscribers = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where (e.DATE_EMPRUNT.AddDays(10).CompareTo(new DateTime()) <= 0)
-                                  from s in connection.ABONNÉS where s.CODE_ABONNÉ==e.CODE_ABONNÉ select s).ToList();
-            return lateSubscribers;
+            var lateLoans = (from a in this.Connection.ALBUMS
+                             join e in this.Connection.EMPRUNTER
+                             on a.CODE_ALBUM equals e.CODE_ALBUM
+                             join g in this.Connection.GENRES
+                             on a.CODE_GENRE equals g.CODE_GENRE
+                             where e.DATE_RETOUR_ATTENDUE.CompareTo(e.DATE_EMPRUNT) <= a.GENRES.DÉLAI
+                             select a).ToList();
+            return lateLoans;
         }
     }
 }

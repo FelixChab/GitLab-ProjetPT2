@@ -21,14 +21,11 @@ namespace ProjetPT2K
                             where album.TITRE_ALBUM == title
                             select album).First();
 
-            if (theAlbum == null)
-                return;
-
             GENRES theGenre = (from genre in this.Connection.GENRES
                         where genre.CODE_GENRE == theAlbum.CODE_GENRE
                         select genre).First();
 
-            if (theGenre == null)
+            if (theAlbum == null || theGenre == null)
                 return;
 
             EMPRUNTER borrow = new EMPRUNTER
