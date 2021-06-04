@@ -8,9 +8,19 @@ namespace ProjetPT2K
 {
     public class Admin : Account
     {
+        /**
+         * The administrator login.
+         */
+        public static string LOGIN = "ADMIN";
+
+        /**
+         * The administrator password.
+         */
+        public static string PASSWORD = "admin";
+
         public Admin()
         {
-
+            this.isAdministrator = true;
         }
 
         public List<ALBUMS> GetLateLoans()

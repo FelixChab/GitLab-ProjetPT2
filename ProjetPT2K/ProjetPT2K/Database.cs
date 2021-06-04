@@ -48,8 +48,21 @@ namespace ProjetPT2K
 		 * @param login, the login of the subscriber.
 		 * @param password, the passeword of the subscriber.
 		 * */
-		public ABONNÉS Login(string login, string password)
+		public Account Login(string login, string password)
 		{
+			Account account;
+			if (login == Admin.LOGIN && password == Admin.PASSWORD)
+				account = new Admin();
+			else
+				account = FetchSubscriberAccount(login, password);
+			return account;
+		}
+
+		/**
+		 * Retrieve the subscriber account corresponding to the given login and password.
+		 */
+		private Account FetchSubscriberAccount(string login, string password)
+        {
 			var request = from subscriber in this.Connection.ABONNÉS
 						  where (subscriber.LOGIN_ABONNÉ == login)
 						  && (subscriber.PASSWORD_ABONNÉ == password)
