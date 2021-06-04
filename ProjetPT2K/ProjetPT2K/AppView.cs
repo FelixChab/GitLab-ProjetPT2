@@ -43,15 +43,22 @@ namespace ProjetPT2K
          */
         private void Login()
         {
-            string login = passwordTextBox.Text;
-            string password = loginTextBox.Text;
+            string login = loginTextBox.Text;
+            string password = passwordTextBox.Text;
 
-            ABONNÉS subscriber = Database.GetInstance().Login(login, password);
-            if (subscriber == null)
+            Account account = Database.GetInstance().Login(login, password);
+            if (account == null)
+            {
                 mainMenuText.Items.Add("Mauvais identifiant ou mauvais mot de passe");
+                loginTextBox.Text = "";
+                passwordTextBox.Text = "";
+            }
             else
-                mainMenuText.Items.Add("A décommenter");
-            //    subscriber.Menu();
+            {
+                string accountType = account.isAdministrator ? "(administrateur)" : "(abonné)";
+                mainMenuText.Items.Add("Compte récupéré " + accountType);
+                // subscriber.Menu();
+            }
         }
 
         /**
