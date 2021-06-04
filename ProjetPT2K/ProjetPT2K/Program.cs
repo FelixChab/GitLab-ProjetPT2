@@ -17,14 +17,23 @@ namespace ProjetPT2K
         
         static void Main()
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new App();
-
+            
+            ABONNÉS sub = LoginUser();
+            if (sub == null)
+            {
+                Console.WriteLine("Mauvais identifiant ou mauvais mot de passe");
+            }
         }
 
-        // ...
+        private static ABONNÉS LoginUser()
+        {
+            string login = Console.ReadLine();
+            string password = Console.ReadLine();
+            Database database = Database.GetInstance();
+            return database.Login(login, password);
+        }
 
     }
 }

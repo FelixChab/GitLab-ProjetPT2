@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
-    public class Subscriber : Account
+    public partial class ABONNÉS : Account
     {
-
-        public Subscriber(string username, string password) : base(username, password) {}
-
-        public Subscriber newSubscriber()
-        {
-            
-        }
+        // Penser à ajouter une méthode ToString() (Override)
     }
 }
