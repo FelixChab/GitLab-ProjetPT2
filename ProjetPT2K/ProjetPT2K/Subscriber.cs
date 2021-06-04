@@ -8,8 +8,38 @@ namespace ProjetPT2K
 {
     public partial class ABONNÉS : Account
     {
-        // Penser à ajouter une méthode ToString() (Override)
 
+        /**
+        * Function responsible of the dialogue with subscriber in aims to search an album by its title.
+        * */
+        public void Menu()
+        {
+            bool connected = true;
+
+
+            while (connected)
+            {
+                Console.WriteLine("Menu abonné\n");
+                Console.WriteLine("1. Emprunter un livre");
+                Console.WriteLine("2. Deconnexion");
+
+                string choice = Console.ReadLine();
+                string title;
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Quel album souhaitez vous emprunter ?");
+                        title = Console.ReadLine();
+                        BorrowAlbum(title);
+                        break;
+                    case "2":
+                        connected = false;
+                        break;
+
+                }
+            }
+
+        }
 
         /**
          *Function that allows to borrow an album.
@@ -38,38 +68,6 @@ namespace ProjetPT2K
 
             this.Connection.EMPRUNTER.Add(borrow);
             this.Connection.SaveChanges();
-        }
-
-        /**
-         * Function responsible of the dialogue with subscriber in aims to search an album by its title.
-         * */
-        public void Menu()
-        {
-            bool connected = true;
-
-
-            while (connected)
-            {
-                Console.WriteLine("Menu abonné\n");
-                Console.WriteLine("1. Emprunter un livre");
-                Console.WriteLine("2. Deconnexion");
-
-                string choice = Console.ReadLine();
-                string title;
-                switch(choice)
-                {
-                    case "1":
-                        Console.WriteLine("Quel album souhaitez vous emprunter ?");
-                        title = Console.ReadLine();
-                        BorrowAlbum(title);
-                        break;
-                    case "2":
-                        connected = false;
-                        break;
-
-                }
-            }
-
         }
 
         public List<ALBUMS> GetLoans()

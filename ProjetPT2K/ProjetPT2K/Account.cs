@@ -8,6 +8,9 @@ namespace ProjetPT2K
 {
     public abstract class Account
     {
+
+        public bool isAdministrator; 
+
         protected MusiquePT2_KEntities Connection;
 
         public Account()
