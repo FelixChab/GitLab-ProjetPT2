@@ -24,7 +24,9 @@ namespace ProjetPT2K
 
         private static void MainMenu()
         {
+            string choice;
             bool onTheApp = true;
+            Console.ReadLine();
             while (onTheApp)
             {
                 Console.WriteLine("\nApplication\n");
@@ -32,7 +34,7 @@ namespace ProjetPT2K
                 Console.WriteLine("2. Créer un compte");
                 Console.WriteLine("3. Quitter");
 
-                string choice = Console.ReadLine();
+                choice = Console.ReadLine();
                 switch (choice)
                 {
                     case "1":
