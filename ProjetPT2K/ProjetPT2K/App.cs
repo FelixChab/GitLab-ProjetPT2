@@ -1,25 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
-    public static class App
-    {
-        /// <summary>
-        /// Application main starting point
-        /// </summary>
-        [STAThread]
-        static void Main()
+
+	public class App
+	{
+		private static App app;
+
+		private MusiquePT2_KEntities Connection;
+		
+		public App()
+		{
+			app = this;
+			Connection = new MusiquePT2_KEntities();
+
+			string username = Console.ReadLine();
+			string password = Console.ReadLine();
+		}
+
+		public static App getInstance()
+		{
+			return app;
+		}
+
+		public MusiquePT2_KEntities getConnection()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
+			return this.Connection;
         }
-
-        // ...
-
-    }
+	}
 }
