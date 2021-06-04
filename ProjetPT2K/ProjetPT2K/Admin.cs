@@ -57,5 +57,17 @@ namespace ProjetPT2K
             Connection.SaveChanges();
             return 0;
         }
+        /**
+        * Method to get top 10 albums in the year
+        */
+        public List<ALBUMS> getBestAlbums()
+        {
+            List<ALBUMS> albums = (from a in Connection.ALBUMS join e in Connection.EMPRUNTER
+                                   on a.CODE_ALBUM equals e.CODE_ALBUM
+                                  where (e.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                                  orderby a.EMPRUNTER.Count descending
+                                  select a).ToList();
+            return albums;
+        }
     }
 }
