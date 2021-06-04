@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
-    public class Admin : Account 
+    public class Admin : Account
     {
         public Admin()
         {
