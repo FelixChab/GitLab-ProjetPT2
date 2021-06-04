@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="62e803134fe94d19a89491e558e2db55" Name="Diagram1">
+        <EntityTypeShape EntityType="MusiquePT2_KModel.ABONNÉS" Width="1.5" PointX="2.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusiquePT2_KModel.ALBUMS" Width="1.5" PointX="6.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusiquePT2_KModel.EDITEURS" Width="1.5" PointX="3.125" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusiquePT2_KModel.EMPRUNTER" Width="1.5" PointX="5.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusiquePT2_KModel.GENRES" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusiquePT2_KModel.PAYS" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_ABONNÉS_PAYS" ManuallyRouted="false" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_EMPRUNTER_ABONNÉS" ManuallyRouted="false" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_ALBUMS_EDITEURS" ManuallyRouted="false" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_ALBUMS_GENRES" ManuallyRouted="false" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_EMPRUNTER_ALBUMS" ManuallyRouted="false" />
+        <AssociationConnector Association="MusiquePT2_KModel.FK_EDITEURS_PAYS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
