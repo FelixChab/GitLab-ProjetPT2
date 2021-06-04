@@ -12,9 +12,14 @@ namespace ProjetPT2K
 {
     public partial class AppView : Form
     {
-
+        /**
+         * The index of the selected item of the main menu.
+         */
         private int MenuIndex;
 
+        /**
+         * The non-paratorised constructor creating a new AppView object.
+         */
         public AppView()
         {
             InitializeComponent();
@@ -22,6 +27,9 @@ namespace ProjetPT2K
             MainMenu();
         }
 
+        /**
+         * Display the main menu on the form.
+         */
         private void MainMenu()
         {
             mainMenuText.Items.Add("\nApplication\n");
@@ -30,6 +38,9 @@ namespace ProjetPT2K
             mainMenuText.Items.Add("3. Quitter");
         }
 
+        /**
+         * Attempt to connect the user to the database.
+         */
         private void Login()
         {
             string login = passwordTextBox.Text;
@@ -43,25 +54,19 @@ namespace ProjetPT2K
             //    subscriber.Menu();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.MenuIndex = mainMenuText.SelectedIndex;
-            if (this.MenuIndex == 1)
-            {
-                connexionButton.Enabled = true;
-                passwordTextBox.Enabled = true;
-                loginTextBox.Enabled = true;
-                mainMenuButton.Enabled = true;
-            }
-        }
-
+        /**
+         * Event triggered when the connexionButton is clicked.
+         */
         private void ConnexionButton_Click(object sender, EventArgs e)
         {
             if (passwordTextBox.Text.Length > 0 && loginTextBox.Text.Length > 0 && this.MenuIndex == 1)
                 Login();
         }
 
-        private void mainMenuButton_Click(object sender, EventArgs e)
+        /**
+         * Event triggered when the mainMenuButton is clicked.
+         */
+        private void MainMenuButton_Click(object sender, EventArgs e)
         {
             this.MenuIndex = mainMenuText.SelectedIndex;
             if (this.MenuIndex == 1)
