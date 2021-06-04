@@ -82,7 +82,7 @@ namespace ProjetPT2K
             this.mainMenuButton.TabIndex = 4;
             this.mainMenuButton.Text = "Valider";
             this.mainMenuButton.UseVisualStyleBackColor = true;
-            this.mainMenuButton.Click += new System.EventHandler(this.mainMenuButton_Click);
+            this.mainMenuButton.Click += new System.EventHandler(this.MainMenuButton_Click);
             // 
             // loginLabel
             // 
