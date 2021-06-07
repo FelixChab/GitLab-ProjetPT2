@@ -60,7 +60,7 @@ namespace ProjetPT2K
         }
             else
         {
-                string accountType = account.isAdministrator ? "(administrateur)" : "(abonné)";
+                string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                 mainMenuText.Items.Add("Compte récupéré " + accountType);
                 if (!account.IsAdministrator)
                 {

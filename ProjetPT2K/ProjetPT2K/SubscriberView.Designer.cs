@@ -90,7 +90,7 @@ namespace ProjetPT2K
             // albumTitleTextBox
             // 
             this.albumTitleTextBox.Enabled = false;
-            this.albumTitleTextBox.Location = new System.Drawing.Point(535, 259);
+            this.albumTitleTextBox.Location = new System.Drawing.Point(544, 259);
             this.albumTitleTextBox.Name = "albumTitleTextBox";
             this.albumTitleTextBox.Size = new System.Drawing.Size(255, 20);
             this.albumTitleTextBox.TabIndex = 5;
