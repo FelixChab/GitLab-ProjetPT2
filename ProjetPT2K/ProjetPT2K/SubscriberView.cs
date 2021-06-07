@@ -48,15 +48,16 @@ namespace ProjetPT2K
                 case 1:
                     {
                         HideActionVisuals();
-                    InitializeAlbumList();
-                    break;
+                        albumTitleTextBox.Enabled = albumTitleTextBox.Visible = true;
+                        InitializeAlbumList();
+                        break;
                     }
                 case 2:
                     {
-                    ListLoans();
-                    break;
+                        ListLoans();
+                        break;
+                    }
             }
-        }
         }
 
         private void InitializeAlbumList()
@@ -112,11 +113,12 @@ namespace ProjetPT2K
                     }
                     break;
             }
+
         }
 
         private void ActionListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+
             if (this.MenuIndex == 1)
             {
                 actionButton.Text = "Emprunter";
