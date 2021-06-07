@@ -10,8 +10,8 @@ namespace ProjetPT2K
     {
 
         /**
-        * Function responsible of the dialogue with subscriber in aims to search an album by its title.
-        * */
+         * Function responsible of the dialogue with subscriber in aims to search an album by its title.
+         */
         public void Menu()
         {
             bool connected = true;
@@ -35,25 +35,25 @@ namespace ProjetPT2K
                     case "2":
                         connected = false;
                         break;
-
                 }
             }
 
         }
 
         /**
-         *Function that allows to borrow an album.
-         *@param title, the title that the subscriber cwants to borrow.
+         * Function that allows to borrow an album.
+         *
+         * @param title, the title that the subscriber cwants to borrow.
          */
         public void BorrowAlbum(string title)
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                            where album.TITRE_ALBUM == title
-                            select album).First();
+                    where album.TITRE_ALBUM == title
+                    select album).FirstOrDefault();
 
             GENRES theGenre = (from genre in this.Connection.GENRES
-                        where genre.CODE_GENRE == theAlbum.CODE_GENRE
-                        select genre).First();
+                    where genre.CODE_GENRE == theAlbum.CODE_GENRE
+                    select genre).FirstOrDefault();
 
             if (theAlbum == null || theGenre == null)
                 return;
@@ -61,9 +61,9 @@ namespace ProjetPT2K
             EMPRUNTER borrow = new EMPRUNTER
             {
                 CODE_ABONNÉ = this.CODE_ABONNÉ,
-                CODE_ALBUM = theAlbum.CODE_ALBUM,
-                DATE_EMPRUNT = DateTime.Today,
-                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
+                    CODE_ALBUM = theAlbum.CODE_ALBUM,
+                    DATE_EMPRUNT = DateTime.Today,
+                    DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
             };
 
             this.Connection.EMPRUNTER.Add(borrow);
@@ -72,15 +72,19 @@ namespace ProjetPT2K
 
         public List<ALBUMS> GetLoans()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ALBUMS> loans = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  join ab in connection.ABONNÉS on e.CODE_ABONNÉ equals CODE_ABONNÉ
-                                  select a).ToList();
-            return loans;
+            List<ALBUMS> loans = from album in this.Connection.ALBUMS
+                join borrower in this.Connection.EMPRUNTER
+                on album.CODE_ALBUM equals borrower.CODE_ALBUM
+                join subscriber in this.Connection.ABONNÉS 
+                on borrower.CODE_ABONNÉ equals CODE_ABONNÉ
+                select album;
+
+            return loans.ToList();
         }
 
+        /**
+         * Return the string representation of the Subscriber.
+         */
         public override String ToString()
         {
             return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";
