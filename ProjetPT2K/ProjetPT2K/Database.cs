@@ -73,10 +73,10 @@ namespace ProjetPT2K
         /**
          * Return true if an account with the given login already exists in the database.
          */
-        private bool LoginExists(string login)
+        public bool AccountExists(string login)
         {
             ABONNÉS account = (from subscriber in this.Connection.ABONNÉS
-                    where (subscriber.LOGIN_ABONNÉ == view.Login)
+                    where (subscriber.LOGIN_ABONNÉ == login)
                     select subscriber).FirstOrDefault();
 
             return account != null;
@@ -85,7 +85,7 @@ namespace ProjetPT2K
         /**
          * Create a new subscriber account in the database.
          */
-        private Account CreateAccount(string firstname, string lastname, int countryCode, 
+        public void CreateAccount(string firstname, string lastname, int countryCode, 
                 string login, string password)
         {
             ABONNÉS subscriber = new ABONNÉS
@@ -93,7 +93,7 @@ namespace ProjetPT2K
                 CODE_PAYS = countryCode,
                 NOM_ABONNÉ = lastname,
                 PRÉNOM_ABONNÉ = firstname,
-                LOGIN_ABONNÉ - login,
+                LOGIN_ABONNÉ = login,
                 PASSWORD_ABONNÉ = password
             };
 

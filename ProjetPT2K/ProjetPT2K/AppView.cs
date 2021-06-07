@@ -99,29 +99,16 @@ namespace ProjetPT2K
         private void AttemptSubscriberCreation()
         {
             CreateAccountView view = new CreateAccountView();
-            if (view.ShowDialog() == Form.Answer.Validate)
+            if (view.ShowDialog() == DialogResult.OK)
             {
-                if (!this.Database.LoginExists(view.Login))
+                if (!this.Database.AccountExists(view.Login))
                 {
-                    PAYS country = (from country in this.Database.GetConnection().PAYS
-                            where (country.NOM_PAYS == view.Country)
-                            select country).FirstOrDefault();
-
-                    if (country == null)
-                    {
-                        // TODO: handle (somehow) the error message (alertBox ?)
-                        mainMenuText.Items.Add("Le pays '" + view.Country + "' n'est pas valide");
-                    }
-                    else
-                    {
-                        this.Database.CreateAccount(view.FirstName, view.LastName, 
-                                country.CODE_PAYS, view.Login, view.Password);
-                        mainMenuText.Items.Add("Compte abonné créé avec succès");
-                    }
+                    this.Database.CreateAccount(view.FirstName, view.LastName, view.Country.CODE_PAYS, view.Login, view.Password);
+                    mainMenuText.Items.Add("Compte abonné créé avec succès");
                 }
                 else
                 {
-                    mainMenuText.Items.Add("Un compte possèdant le login '" + view.Login + "' existe déjà");
+                    mainMenuText.Items.Add("Un compte avec le nom d'utilisateur '" + view.Login + "' existe déjà");
                 }
             }
 
