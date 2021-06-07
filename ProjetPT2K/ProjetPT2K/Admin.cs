@@ -89,7 +89,7 @@ namespace ProjetPT2K
             var allQuery = (from a in Connection.ALBUMS
                             join e in Connection.EMPRUNTER
                             on a.CODE_ALBUM equals e.CODE_ALBUM
-                            where (e.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                            where (e.DATE_EMPRUNT.AddYears(1).CompareTo(DateTime.Now) > 0)
                             orderby a.EMPRUNTER.Count descending
                             select a);
             return allQuery.Take(10).ToList();
