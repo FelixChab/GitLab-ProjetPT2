@@ -8,27 +8,54 @@ namespace ProjetPT2K
 {
     public partial class ABONNÉS : Account
     {
-        // Penser à ajouter une méthode ToString() (Override)
-
 
         /**
-         *Function that allows to borrow an album.
-         *@param title, the title that the subscriber cwants to borrow.
+         * Function responsible of the dialogue with subscriber in aims to search an album by its title.
+         */
+        public void Menu()
+        {
+            bool connected = true;
+
+
+            while (connected)
+            {
+                Console.WriteLine("Menu abonné\n");
+                Console.WriteLine("1. Emprunter un livre");
+                Console.WriteLine("2. Deconnexion");
+
+                string choice = Console.ReadLine();
+                string title;
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Quel album souhaitez vous emprunter ?");
+                        title = Console.ReadLine();
+                        BorrowAlbum(title);
+                        break;
+                    case "2":
+                        connected = false;
+                        break;
+                }
+            }
+
+        }
+
+        /**
+         * Function that allows to borrow an album.
+         *
+         * @param title, the title that the subscriber cwants to borrow.
          */
         public void BorrowAlbum(string title)
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                            where album.TITRE_ALBUM == title
-                            select album).First();
-
-            if (theAlbum == null)
-                return;
+                               where album.TITRE_ALBUM == title
+                               select album).FirstOrDefault();
 
             GENRES theGenre = (from genre in this.Connection.GENRES
-                        where genre.CODE_GENRE == theAlbum.CODE_GENRE
-                        select genre).First();
+                               where genre.CODE_GENRE == theAlbum.CODE_GENRE
+                               select genre).FirstOrDefault();
 
-            if (theGenre == null)
+            if (theAlbum == null || theGenre == null)
                 return;
 
             EMPRUNTER borrow = new EMPRUNTER
@@ -43,49 +70,21 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
-        /**
-         * Function responsible of the dialogue with subscriber in aims to search an album by its title.
-         * */
-        public void Menu()
-        {
-            bool connected = true;
-
-
-            while (connected)
-            {
-                Console.WriteLine("Menu abonné\n");
-                Console.WriteLine("1. Emprunter un livre");
-                Console.WriteLine("2. Deconnexion");
-
-                string choice = Console.ReadLine();
-                string title;
-                switch(choice)
-                {
-                    case "1":
-                        Console.WriteLine("Quel album souhaitez vous emprunter ?");
-                        title = Console.ReadLine();
-                        BorrowAlbum(title);
-                        break;
-                    case "2":
-                        connected = false;
-                        break;
-
-                }
-            }
-
-        }
-
         public List<ALBUMS> GetLoans()
         {
-            MusiquePT2_KEntities connection = Database.GetInstance().GetConnection();
-            List<ALBUMS> loans = (from a in connection.ALBUMS
-                                  join e in connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  join ab in connection.ABONNÉS on e.CODE_ABONNÉ equals CODE_ABONNÉ
-                                  select a).ToList();
-            return loans;
+            var loans = from album in this.Connection.ALBUMS
+                        join borrower in this.Connection.EMPRUNTER
+                        on album.CODE_ALBUM equals borrower.CODE_ALBUM
+                        join subscriber in this.Connection.ABONNÉS
+                        on borrower.CODE_ABONNÉ equals CODE_ABONNÉ
+                        select album;
+
+            return loans.ToList();
         }
 
+        /**
+         * Return the string representation of the Subscriber.
+         */
         public override String ToString()
         {
             return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";

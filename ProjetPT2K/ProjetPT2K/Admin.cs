@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
-    public class Admin : Account 
+    public class Admin : Account
     {
+        /**
+         * The administrator login.
+         */
+        public static string LOGIN = "ADMIN";
+
+        /**
+         * The administrator password.
+         */
+        public static string PASSWORD = "admin";
+
         public Admin()
         {
-
+            this.isAdministrator = true;
         }
 
         /**
