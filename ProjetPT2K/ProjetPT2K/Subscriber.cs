@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjetPT2K
 {
@@ -24,7 +26,30 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
+        /**
+        public List<ALBUMS> GetRecommandations()
+        {
+            var top = (from loan in this.EMPRUNTER
+                       // group loan.ALBUMS by loan.ALBUMS.GENRES into groups
+                       orderby loan.ALBUMS.Count descending
+                       select loan);
 
+            Dictionary<GENRES, int> preferences = new Dictionary<GENRES, int>();
+            foreach (var request in top)
+            {
+                if (preferences.ContainsKey(request.Key))
+                {
+                    preferences[request.Key]++;
+                }
+                else
+                {
+                    preferences[request.Key] = 1;
+                }
+            }
+
+            return null;
+        }
+        */
 
         /**
          * Return the string representation of the subscriber
