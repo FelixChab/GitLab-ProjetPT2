@@ -56,7 +56,7 @@ namespace ProjetPT2K
             for (int index = 0; index < Connection.ABONNÉS.Count(); index++){
                 ABONNÉS sub = Connection.ABONNÉS.ElementAt(index);
                 EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
-                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now && ){
+                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now /* && ... */ ){
                     foreach(EMPRUNTER e in sub.EMPRUNTER)
                     {
                         Connection.EMPRUNTER.Remove(e);
@@ -67,10 +67,24 @@ namespace ProjetPT2K
             Connection.SaveChanges();
             return 0;
         }
+
+        /**
+         * Method that returns a list of albums not loan in a year
+         */
+        public List<ALBUMS> GetAlbumsNoLoan()
+        {
+            List<ALBUMS> noLoans = (from a in Connection.ALBUMS
+                                    join e in Connection.EMPRUNTER
+                                    on a.CODE_ALBUM equals e.CODE_ALBUM
+                                    where e.DATE_EMPRUNT.AddYears(1).CompareTo(new DateTime()) <= 0
+                                    select a).ToList();
+            return noLoans;
+        }
+
         /**
         * Method to get top 10 albums of the year
         */
-        public List<ALBUMS> getBestAlbums()
+        public List<ALBUMS> GetBestAlbums()
         {
             var allQuery = (from a in Connection.ALBUMS
                             join e in Connection.EMPRUNTER
