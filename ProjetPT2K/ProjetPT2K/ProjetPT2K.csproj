@@ -58,14 +58,10 @@
   <ItemGroup>
     <Compile Include="ABONNÉS.cs">
       <DependentUpon>BD.tt</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Account.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Account.cs" />
+    <Compile Include="Admin.cs" />
+    <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
@@ -83,6 +79,7 @@
     <Compile Include="AppView.Designer.cs">
       <DependentUpon>AppView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Loan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="BD.Context.cs">
       <AutoGen>True</AutoGen>
@@ -112,8 +109,12 @@
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subscriber.cs">
+    <Compile Include="Subscriber.cs" />
+    <Compile Include="SubscriberView.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriberView.Designer.cs">
+      <DependentUpon>SubscriberView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AppView.resx">
       <DependentUpon>AppView.cs</DependentUpon>
@@ -130,6 +131,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SubscriberView.resx">
+      <DependentUpon>SubscriberView.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="BD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BD.Designer.cs</LastGenOutput>
