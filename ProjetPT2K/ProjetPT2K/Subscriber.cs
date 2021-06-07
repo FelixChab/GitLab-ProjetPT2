@@ -100,6 +100,19 @@ namespace ProjetPT2K
             return recommendations.ToList();
         }
 
+
+        /**
+         * Function that allows to extend borrows date.
+         */
+        public void ExtendBorrowDate()
+        {
+            foreach (EMPRUNTER e in this.EMPRUNTER)
+            {
+                e.DATE_RETOUR = DateTime.Today.AddDays(30);
+            }
+            this.Connection.SaveChanges();
+        }
+
         /**
          * Return the string representation of the Subscriber.
          */
