@@ -23,9 +23,10 @@ namespace ProjetPT2K
         public List<ALBUMS> GetLateLoans()
         {
             List<ALBUMS> lateLoans = (from a in Connection.ALBUMS
-                                  join e in Connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where (e.DATE_RETOUR == null && e.DATE_RETOUR_ATTENDUE > DateTime.Now) select a).ToList();
+                                      join e in Connection.EMPRUNTER
+                                      on a.CODE_ALBUM equals e.CODE_ALBUM
+                                      where (e.DATE_RETOUR == null && e.DATE_RETOUR_ATTENDUE > DateTime.Now)
+                                      select a).ToList();
             return lateLoans;
         }
 
