@@ -15,7 +15,8 @@ namespace ProjetPT2K
 
         public Account()
         {
-            this.Connection = Database.GetInstance().GetConnection();
+            Database database = Database.GetInstance();
+            this.Connection = database.GetConnection();
         }
 
     }
