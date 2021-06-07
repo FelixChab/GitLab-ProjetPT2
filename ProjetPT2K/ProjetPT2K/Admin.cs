@@ -48,21 +48,21 @@ namespace ProjetPT2K
         /**
          * Method to purge database : remove subscriber who have not borrowed for a year (and his loans)
          */
-        public int PurgeDatabase()
+        public void PurgeDatabase()
         {
             foreach (ABONNÉS sub in Connection.ABONNÉS){
-                EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
+                EMPRUNTER music = sub.EMPRUNTER.FirstOrDefault();
                 if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now){
-                    
-                    foreach(EMPRUNTER e in sub.EMPRUNTER)
+                    List < EMPRUNTER >loans = new List<EMPRUNTER>();
+                    loans.AddRange(sub.EMPRUNTER);
+                    foreach(EMPRUNTER e in loans)
                     {
-                        Connection.EMPRUNTER.Remove(e);
+                        sub.EMPRUNTER.Remove(e);
                     }
                     Connection.ABONNÉS.Remove(sub);
                 }
             }
             Connection.SaveChanges();
-            return 0;
         }
 
         /**
