@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
@@ -22,6 +16,11 @@ namespace ProjetPT2K
          */
         private readonly ABONNÉS Subscriber;
 
+        /**
+         * Parametorised constructor creating a new SubscriberView object.
+         * 
+         * @param subscriber the logged in account
+         */
         public SubscriberView(Account subscriber)
         {
             InitializeComponent();
@@ -102,7 +101,11 @@ namespace ProjetPT2K
                     break;
                 case 2:
                     EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
-                    loan.Extend();
+                    if (loan != null)
+                    {
+                        loan.Extend();
+                        RefreshLoanList();
+                    }
                     break;
             }
         }
@@ -126,6 +129,9 @@ namespace ProjetPT2K
             }
         }
 
+        /**
+         * Event triggered when the extendAll button is clicked.
+         */
         private void ExtendAllButton_Click(object sender, EventArgs e)
         {
             foreach (EMPRUNTER loan in this.Subscriber.EMPRUNTER)
