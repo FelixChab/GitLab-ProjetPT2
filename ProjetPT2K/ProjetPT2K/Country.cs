@@ -13,7 +13,7 @@ namespace ProjetPT2K
          */
         public override String ToString()
         {
-            return NOM_PAYS;
+            return NOM_PAYS.Trim();
         }
     }
 }

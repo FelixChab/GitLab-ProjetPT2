@@ -41,28 +41,18 @@ namespace ProjetPT2K
 
         /**
          * Function that allows to borrow an album
+         * Function that allows to borrow an album.
          *
          * @param title, the title of the album that the subscriber wants to borrow
          */
-        public void BorrowAlbum(string title)
+        public void BorrowAlbum(ALBUMS album)
         {
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.TITRE_ALBUM == title
-                               select album).FirstOrDefault();
-
-            GENRES theGenre = (from genre in this.Connection.GENRES
-                               where genre.CODE_GENRE == theAlbum.CODE_GENRE
-                               select genre).FirstOrDefault();
-
-            if (theAlbum == null || theGenre == null)
-                return;
-
             EMPRUNTER borrow = new EMPRUNTER
             {
                 CODE_ABONNÉ = this.CODE_ABONNÉ,
-                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                CODE_ALBUM = album.CODE_ALBUM,
                 DATE_EMPRUNT = DateTime.Today,
-                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(album.GENRES.DÉLAI)
             };
 
             this.Connection.EMPRUNTER.Add(borrow);
