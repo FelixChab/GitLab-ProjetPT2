@@ -85,15 +85,29 @@ namespace ProjetPT2K
         /**
         * Method to get top 10 albums of the year
         */
-        public List<ALBUMS> GetBestAlbums()
+        public Dictionary<ALBUMS, int> GetBestAlbums()
         {
-            var allQuery = (from a in Connection.ALBUMS
-                            join e in Connection.EMPRUNTER
-                            on a.CODE_ALBUM equals e.CODE_ALBUM
-                            where (e.DATE_EMPRUNT.AddYears(1).CompareTo(DateTime.Now) > 0)
-                            orderby a.EMPRUNTER.Count descending
-                            select a);
-            return allQuery.Take(10).ToList();
+            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
+            List<ALBUMS> list = (from a in Connection.ALBUMS join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM orderby a.EMPRUNTER.Count descending select a).ToList();
+            for (int start = 0; start < list.Count; start++)
+            {
+                ALBUMS target = list[start];
+                int empruntCount = target.EMPRUNTER.Count;
+                foreach (EMPRUNTER e in target.EMPRUNTER)
+                {
+                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
+                    {
+                        empruntCount--;
+                    }
+
+                }
+                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
+                {
+                    topAlbums.Add(target, empruntCount);
+                }
+            }
+            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value ascending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
+            return sorted;
         }
     }
 }
