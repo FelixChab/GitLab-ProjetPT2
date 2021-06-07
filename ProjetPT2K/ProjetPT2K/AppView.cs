@@ -57,9 +57,9 @@ namespace ProjetPT2K
             {
                 mainMenuText.Items.Add("Mauvais identifiant ou mauvais mot de passe");
                 loginTextBox.Text = passwordTextBox.Text = "";
-        }
+            }
             else
-        {
+            {
                 string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                 mainMenuText.Items.Add("Compte récupéré " + accountType);
                 if (!account.IsAdministrator)
@@ -111,7 +111,7 @@ namespace ProjetPT2K
                     mainMenuText.Items.Add("Compte abonné créé avec succès");
                 }
                 else
-            {
+                {
                     mainMenuText.Items.Add("Un compte avec le nom d'utilisateur '" + view.Login + "' existe déjà");
                 }
             }

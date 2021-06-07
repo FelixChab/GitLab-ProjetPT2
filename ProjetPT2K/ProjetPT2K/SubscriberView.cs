@@ -48,22 +48,24 @@ namespace ProjetPT2K
                 case 1:
                     {
                         HideActionVisuals();
-                        InitializeAlbumList();
-                        break;
+                    InitializeAlbumList();
+                    break;
                     }
                 case 2:
                     {
-                        ListLoans();
-                        break;
-                    }
+                    ListLoans();
+                    break;
             }
+        }
         }
 
         private void InitializeAlbumList()
         {
             actionListBox.Items.Clear();
             List<ALBUMS> albums = Database.GetInstance().GetAllAlbums();
-            albums.ForEach(album => actionListBox.Items.Add(album));            
+            albums.ForEach(album => actionListBox.Items.Add(album));
+            albumTitleTextBox.Enabled = albumTitleTextBox.Visible = true;
+            
         }
 
         private void RefreshAlbumList()
