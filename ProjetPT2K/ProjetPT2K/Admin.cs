@@ -8,14 +8,8 @@ namespace ProjetPT2K
 {
     public class Admin : Account
     {
-        /**
-         * The administrator login.
-         */
+        /* Administrator login & credentials */
         public static string LOGIN = "ADMIN";
-
-        /**
-         * The administrator password.
-         */
         public static string PASSWORD = "admin";
 
         public Admin()
@@ -24,7 +18,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Method to get albums albums that are late
+         * Method to get albums loans that are late
          */
         public List<ALBUMS> GetLateLoans()
         {
@@ -36,7 +30,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Method to get subscriber who have 10 more days late
+         * Method to get subscriber who are 10-days late on a loan
          */
         public List<ABONNÉS> GetLateSubscribers()
         {
@@ -49,7 +43,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Method to purge database : remove subscriber who have not borrowed for a year (and its loans)
+         * Method to purge database : remove subscriber who have not borrowed for a year (and his loans)
          */
         public int PurgeDatabase()
         {

@@ -10,7 +10,7 @@ namespace ProjetPT2K
     {
 
         /**
-         * Function responsible of the dialogue with subscriber in aims to search an album by its title.
+         * Function responsible of the dialogue with subscriber in aims to search an album by its title
          */
         public void MainMenu()
         {
@@ -40,9 +40,9 @@ namespace ProjetPT2K
         }
 
         /**
-         * Function that allows to borrow an album.
+         * Function that allows to borrow an album
          *
-         * @param title, the title that the subscriber cwants to borrow.
+         * @param title, the title of the album that the subscriber wants to borrow
          */
         public void BorrowAlbum(string title)
         {
@@ -70,7 +70,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Function that returns a list of active loans.
+         * Method that returns a list of active loans
          */ 
         public List<ALBUMS> GetLoans()
         {
@@ -85,7 +85,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Function that returns a list of albums' recommendation to the Subscriber.
+         * Method that returns a list of recommendations (albums based on genre) to the subscriber
          */
         public List<ALBUMS> GetRecommendations()
         {
@@ -102,7 +102,7 @@ namespace ProjetPT2K
 
 
         /**
-         * Function that allows to extend borrows date.
+         * Function that allows to extend borrows date
          */
         public void ExtendBorrowDate()
         {
@@ -114,7 +114,7 @@ namespace ProjetPT2K
         }
 
         /**
-         * Return the string representation of the Subscriber.
+         * Return the string representation of the subscriber
          */
         public override String ToString()
         {

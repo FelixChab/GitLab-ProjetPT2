@@ -10,8 +10,7 @@ namespace ProjetPT2K
     public abstract class Account : Form
     {
 
-        public bool isAdministrator; 
-
+        public bool isAdministrator;
         protected MusiquePT2_KEntities Connection;
 
         public Account()
