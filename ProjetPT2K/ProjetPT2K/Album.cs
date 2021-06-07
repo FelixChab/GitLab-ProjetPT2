@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
     public partial class ALBUMS
     {
-
+        /**
+         * Return true if the album is available, i.e. can be borrowed.
+         * 
+         * @return a boolean
+         */
         public bool IsAvailable()
         {
             foreach (EMPRUNTER loan in this.EMPRUNTER)
@@ -21,6 +21,8 @@ namespace ProjetPT2K
 
         /**
          * Return the string representation of the Album.
+         * 
+         * @return a string
          */
         public override String ToString()
         {

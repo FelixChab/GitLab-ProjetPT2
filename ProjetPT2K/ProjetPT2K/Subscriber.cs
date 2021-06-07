@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
@@ -27,6 +23,8 @@ namespace ProjetPT2K
             this.Connection.EMPRUNTER.Add(borrow);
             this.Connection.SaveChanges();
         }
+
+
 
         /**
          * Return the string representation of the Subscriber.
