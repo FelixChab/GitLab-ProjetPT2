@@ -60,9 +60,9 @@ namespace ProjetPT2K
             EMPRUNTER borrow = new EMPRUNTER
             {
                 CODE_ABONNÉ = this.CODE_ABONNÉ,
-                    CODE_ALBUM = theAlbum.CODE_ALBUM,
-                    DATE_EMPRUNT = DateTime.Today,
-                    DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                DATE_EMPRUNT = DateTime.Today,
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
             };
 
             this.Connection.EMPRUNTER.Add(borrow);
