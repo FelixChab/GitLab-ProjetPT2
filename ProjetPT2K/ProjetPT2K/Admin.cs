@@ -20,7 +20,7 @@ namespace ProjetPT2K
 
         public Admin()
         {
-            this.isAdministrator = true;
+            this.IsAdministrator = true;
         }
 
         /**

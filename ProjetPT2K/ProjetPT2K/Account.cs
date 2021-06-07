@@ -12,7 +12,7 @@ namespace ProjetPT2K
         /**
          * True if the considered account has administrator priviledges.
          */
-        public bool IsAdministrator { get; }
+        public bool IsAdministrator { get; set; }
 
         /**
          * Return the open connection to the database.

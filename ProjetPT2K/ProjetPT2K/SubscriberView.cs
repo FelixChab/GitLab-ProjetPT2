@@ -37,6 +37,7 @@ namespace ProjetPT2K
             mainMenuListBox.Items.Add("Abonné");
             mainMenuListBox.Items.Add("1. Emprunter un album");
             mainMenuListBox.Items.Add("2. Lister les emprunts");
+            mainMenuListBox.Items.Add("3. Voir les recommendations");
         }
 
         private void SelectionButton_Click(object sender, EventArgs e)
@@ -45,11 +46,16 @@ namespace ProjetPT2K
             switch (this.MenuIndex)
             {
                 case 1:
-                    InitializeAlbumList();
-                    break;
+                    {
+                        HideActionVisuals();
+                        InitializeAlbumList();
+                        break;
+                    }
                 case 2:
-                    ListLoans();
-                    break;
+                    {
+                        ListLoans();
+                        break;
+                    }
             }
         }
 
@@ -57,9 +63,7 @@ namespace ProjetPT2K
         {
             actionListBox.Items.Clear();
             List<ALBUMS> albums = Database.GetInstance().GetAllAlbums();
-            albums.ForEach(album => actionListBox.Items.Add(album));
-            albumTitleTextBox.Enabled = albumTitleTextBox.Visible = true;
-            
+            albums.ForEach(album => actionListBox.Items.Add(album));            
         }
 
         private void RefreshAlbumList()
@@ -140,6 +144,13 @@ namespace ProjetPT2K
                     loan.Extend();
             }
             RefreshLoanList();
+        }
+
+        private void HideActionVisuals()
+        {
+            actionButton.Enabled = actionButton.Visible = false;
+            extendAllButton.Enabled = extendAllButton.Visible = false;
+            albumTitleTextBox.Enabled = albumTitleTextBox.Visible = false;
         }
     }
 }
