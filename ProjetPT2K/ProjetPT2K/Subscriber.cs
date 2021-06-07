@@ -69,6 +69,9 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
+        /**
+         * Function that returns a list of active loans.
+         */ 
         public List<ALBUMS> GetLoans()
         {
             var loans = from album in this.Connection.ALBUMS
@@ -79,6 +82,22 @@ namespace ProjetPT2K
                         select album;
 
             return loans.ToList();
+        }
+
+        /**
+         * Function that returns a list of albums' recommendation to the Subscriber.
+         */
+        public List<ALBUMS> GetRecommendations()
+        {
+            var recommendations = from e in Connection.EMPRUNTER
+                                  join al in Connection.ALBUMS
+                                  on e.CODE_ALBUM equals al.CODE_ALBUM
+                                  join g in Connection.GENRES
+                                  on al.CODE_GENRE equals g.CODE_GENRE
+                                  orderby g.LIBELLÉ_GENRE
+                                  select al;
+
+            return recommendations.ToList();
         }
 
         /**
