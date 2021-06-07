@@ -34,32 +34,35 @@ namespace ProjetPT2K
          */
         public List<ABONNÉS> GetLateSubscribers()
         {
-            List<ABONNÉS> lateSubscribers = (from a in Connection.ALBUMS
-                                  join e in Connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
-                                  from s in Connection.ABONNÉS where s.CODE_ABONNÉ==e.CODE_ABONNÉ select s).ToList();
+            List<ABONNÉS> lateSubscribers= new List<ABONNÉS>();
+            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            {
+                if (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
+                {
+                    lateSubscribers.Add(e.ABONNÉS);
+                }
+            }
             return lateSubscribers;
         }
 
         /**
          * Method to purge database : remove subscriber who have not borrowed for a year (and his loans)
          */
-        public int PurgeDatabase()
+        public void PurgeDatabase()
         {
-            for (int index = 0; index < Connection.ABONNÉS.Count(); index++){
-                ABONNÉS sub = Connection.ABONNÉS.ElementAt(index);
-                EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
-                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now /* && ... */ ){
-                    foreach(EMPRUNTER e in sub.EMPRUNTER)
+            foreach (ABONNÉS sub in Connection.ABONNÉS){
+                EMPRUNTER music = sub.EMPRUNTER.FirstOrDefault();
+                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now){
+                    List < EMPRUNTER >loans = new List<EMPRUNTER>();
+                    loans.AddRange(sub.EMPRUNTER);
+                    foreach(EMPRUNTER e in loans)
                     {
-                        Connection.EMPRUNTER.Remove(e);
+                        sub.EMPRUNTER.Remove(e);
                     }
                     Connection.ABONNÉS.Remove(sub);
                 }
             }
             Connection.SaveChanges();
-            return 0;
         }
 
         /**
@@ -67,11 +70,14 @@ namespace ProjetPT2K
          */
         public List<ALBUMS> GetAlbumsNoLoan()
         {
-            List<ALBUMS> noLoans = (from a in Connection.ALBUMS
-                                    join e in Connection.EMPRUNTER
-                                    on a.CODE_ALBUM equals e.CODE_ALBUM
-                                    where e.DATE_EMPRUNT.AddYears(1).CompareTo(DateTime.Now) <= 0
-                                    select a).ToList();
+            List<ALBUMS> noLoans = new List<ALBUMS>();
+            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            {
+                    if ((DateTime.Now-e.DATE_RETOUR)>=TimeSpan.FromDays(365))
+                {
+                    noLoans.Add(e.ALBUMS);
+                }
+            }
             return noLoans;
         }
 
