@@ -61,6 +61,12 @@
     </Compile>
     <Compile Include="Account.cs" />
     <Compile Include="Admin.cs" />
+    <Compile Include="AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminView.Designer.cs">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
@@ -116,6 +122,10 @@
     <Compile Include="SubscriberView.Designer.cs">
       <DependentUpon>SubscriberView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subscriber.cs" />
+    <EmbeddedResource Include="AdminView.resx">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppView.resx">
       <DependentUpon>AppView.cs</DependentUpon>
     </EmbeddedResource>
