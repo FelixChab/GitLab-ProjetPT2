@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
-    public abstract class Account : Form
+    public abstract class Account
     {
 
         public bool isAdministrator; 

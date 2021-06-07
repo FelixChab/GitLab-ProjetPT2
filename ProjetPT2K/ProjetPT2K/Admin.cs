@@ -40,11 +40,14 @@ namespace ProjetPT2K
          */
         public List<ABONNÉS> GetLateSubscribers()
         {
-            List<ABONNÉS> lateSubscribers = (from a in Connection.ALBUMS
-                                  join e in Connection.EMPRUNTER
-                                  on a.CODE_ALBUM equals e.CODE_ALBUM
-                                  where (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
-                                  from s in Connection.ABONNÉS where s.CODE_ABONNÉ==e.CODE_ABONNÉ select s).ToList();
+            List<ABONNÉS> lateSubscribers= new List<ABONNÉS>();
+            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            {
+                if (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
+                {
+                    lateSubscribers.Add(e.ABONNÉS);
+                }
+            }
             return lateSubscribers;
         }
 
@@ -53,10 +56,10 @@ namespace ProjetPT2K
          */
         public int PurgeDatabase()
         {
-            for (int index = 0; index < Connection.ABONNÉS.Count(); index++){
-                ABONNÉS sub = Connection.ABONNÉS.ElementAt(index);
+            foreach (ABONNÉS sub in Connection.ABONNÉS){
                 EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
-                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now /* && ... */ ){
+                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now){
+                    
                     foreach(EMPRUNTER e in sub.EMPRUNTER)
                     {
                         Connection.EMPRUNTER.Remove(e);
@@ -73,11 +76,14 @@ namespace ProjetPT2K
          */
         public List<ALBUMS> GetAlbumsNoLoan()
         {
-            List<ALBUMS> noLoans = (from a in Connection.ALBUMS
-                                    join e in Connection.EMPRUNTER
-                                    on a.CODE_ALBUM equals e.CODE_ALBUM
-                                    where e.DATE_EMPRUNT.AddYears(1).CompareTo(new DateTime()) <= 0
-                                    select a).ToList();
+            List<ALBUMS> noLoans = new List<ALBUMS>();
+            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            {
+                    if ((DateTime.Now-e.DATE_RETOUR)>=TimeSpan.FromDays(365))
+                {
+                    noLoans.Add(e.ALBUMS);
+                }
+            }
             return noLoans;
         }
 
