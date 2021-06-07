@@ -107,7 +107,7 @@ namespace ProjetPT2K
                     EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
                     if (loan != null)
                     {
-                    loan.Extend();
+                        loan.Extend();
                         RefreshLoanList();
                     }
                     break;

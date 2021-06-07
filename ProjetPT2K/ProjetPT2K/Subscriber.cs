@@ -24,12 +24,7 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
-        /*  public void changeTheExpectedReturnDate()
-       {
-           foreach (EMPRUNTER emp in EMPRUNTER)
-           {
-               listBox1.Items.Add(emp.ToString());
-           }
+
 
         /**
          * Return the string representation of the subscriber
