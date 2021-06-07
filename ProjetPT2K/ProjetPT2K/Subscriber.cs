@@ -69,9 +69,26 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
+        /*  public void changeTheExpectedReturnDate()
+       {
+           foreach (EMPRUNTER emp in EMPRUNTER)
+           {
+               listBox1.Items.Add(emp.ToString());
+           }
+
+           string answer = textBox1.Text;
+           EMPRUNTER emprunt = this.EMPRUNTER.ElementAt(Int32.Parse(answer));
+
+           emprunt.DATE_RETOUR_ATTENDUE = DateTime.Now.AddDays(31);
+           Connection.SaveChanges();
+
+       }
+    */
+
+
         /**
          * Method that returns a list of active loans
-         */ 
+         */
         public List<ALBUMS> GetLoans()
         {
             var loans = from album in this.Connection.ALBUMS
