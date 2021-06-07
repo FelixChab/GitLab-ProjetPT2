@@ -56,7 +56,7 @@ namespace ProjetPT2K
             for (int index = 0; index < Connection.ABONNÉS.Count(); index++){
                 ABONNÉS sub = Connection.ABONNÉS.ElementAt(index);
                 EMPRUNTER music = sub.EMPRUNTER.LastOrDefault();
-                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now && ){
+                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now ){
                     foreach(EMPRUNTER e in sub.EMPRUNTER)
                     {
                         Connection.EMPRUNTER.Remove(e);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjetPT2K
 {
@@ -99,6 +100,23 @@ namespace ProjetPT2K
 
             this.Connection.ABONNÉS.Add(subscriber);
             this.Connection.SaveChanges();
+        }
+
+        public List<ALBUMS> GetAllAlbums()
+        {
+            var albums = from album in this.Connection.ALBUMS
+                         select album;
+
+            return albums.ToList();
+        }
+
+        public List<ALBUMS> GetAlbumsContaining(string pattern)
+        {
+            var albums = from album in this.Connection.ALBUMS
+                         where album.TITRE_ALBUM.Contains(pattern)
+                         select album;
+
+            return albums.ToList();
         }
     }
 }
