@@ -12,10 +12,9 @@ namespace ProjetPT2K
         /**
          * Function responsible of the dialogue with subscriber in aims to search an album by its title.
          */
-        public void Menu()
+        public void MainMenu()
         {
             bool connected = true;
-
 
             while (connected)
             {
@@ -89,5 +88,6 @@ namespace ProjetPT2K
         {
             return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";
         }
+
     }
 }
