@@ -48,12 +48,12 @@ namespace ProjetPT2K
         public void BorrowAlbum(string title)
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                    where album.TITRE_ALBUM == title
-                    select album).FirstOrDefault();
+                               where album.TITRE_ALBUM == title
+                               select album).FirstOrDefault();
 
             GENRES theGenre = (from genre in this.Connection.GENRES
-                    where genre.CODE_GENRE == theAlbum.CODE_GENRE
-                    select genre).FirstOrDefault();
+                               where genre.CODE_GENRE == theAlbum.CODE_GENRE
+                               select genre).FirstOrDefault();
 
             if (theAlbum == null || theGenre == null)
                 return;
@@ -61,9 +61,9 @@ namespace ProjetPT2K
             EMPRUNTER borrow = new EMPRUNTER
             {
                 CODE_ABONNÉ = this.CODE_ABONNÉ,
-                    CODE_ALBUM = theAlbum.CODE_ALBUM,
-                    DATE_EMPRUNT = DateTime.Today,
-                    DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                DATE_EMPRUNT = DateTime.Today,
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theGenre.DÉLAI)
             };
 
             this.Connection.EMPRUNTER.Add(borrow);
@@ -72,12 +72,12 @@ namespace ProjetPT2K
 
         public List<ALBUMS> GetLoans()
         {
-            List<ALBUMS> loans = from album in this.Connection.ALBUMS
-                join borrower in this.Connection.EMPRUNTER
-                on album.CODE_ALBUM equals borrower.CODE_ALBUM
-                join subscriber in this.Connection.ABONNÉS 
-                on borrower.CODE_ABONNÉ equals CODE_ABONNÉ
-                select album;
+            var loans = from album in this.Connection.ALBUMS
+                        join borrower in this.Connection.EMPRUNTER
+                        on album.CODE_ALBUM equals borrower.CODE_ALBUM
+                        join subscriber in this.Connection.ABONNÉS
+                        on borrower.CODE_ABONNÉ equals CODE_ABONNÉ
+                        select album;
 
             return loans.ToList();
         }
