@@ -76,7 +76,7 @@ namespace ProjetPT2K
             List<ALBUMS> noLoans = (from a in Connection.ALBUMS
                                     join e in Connection.EMPRUNTER
                                     on a.CODE_ALBUM equals e.CODE_ALBUM
-                                    where e.DATE_EMPRUNT.AddYears(1).CompareTo(new DateTime()) <= 0
+                                    where e.DATE_EMPRUNT.AddYears(1).CompareTo(DateTime.Now) <= 0
                                     select a).ToList();
             return noLoans;
         }
