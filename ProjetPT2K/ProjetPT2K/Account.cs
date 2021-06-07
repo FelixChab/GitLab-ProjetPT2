@@ -7,16 +7,24 @@ using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
-    public abstract class Account : Form
+    public abstract class Account
     {
+        /**
+         * True if the considered account has administrator priviledges.
+         */
+        public bool IsAdministrator { get; set; }
 
-        public bool isAdministrator;
-        protected MusiquePT2_KEntities Connection;
-
-        public Account()
-        {
-            Database database = Database.GetInstance();
-            this.Connection = database.GetConnection();
+        /**
+         * Return the open connection to the database.
+         * 
+         * @return a MusiquePT2_KEntities object
+         */
+        protected MusiquePT2_KEntities Connection 
+        { 
+            get 
+            { 
+                return Database.GetInstance().GetConnection(); 
+            } 
         }
 
     }

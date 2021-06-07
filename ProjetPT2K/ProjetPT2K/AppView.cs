@@ -20,7 +20,7 @@ namespace ProjetPT2K
         /**
          * The connection to the database.
          */
-        private Database Database;
+        private readonly Database Database;
 
         /**
          * The non-paratorised constructor creating a new AppView object.
@@ -38,7 +38,7 @@ namespace ProjetPT2K
          */
         private void MainMenu()
         {
-            mainMenuText.Items.Add("\nApplication\n");
+            mainMenuText.Items.Add("Application");
             mainMenuText.Items.Add("1. Se connecter");
             mainMenuText.Items.Add("2. Créer un compte");
             mainMenuText.Items.Add("3. Quitter");
@@ -57,12 +57,16 @@ namespace ProjetPT2K
             {
                 mainMenuText.Items.Add("Mauvais identifiant ou mauvais mot de passe");
                 loginTextBox.Text = passwordTextBox.Text = "";
-            }
+        }
             else
-            {
-                string accountType = account.isAdministrator ? "(administrateur)" : "(abonné)";
+        {
+                string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                 mainMenuText.Items.Add("Compte récupéré " + accountType);
-                // subscriber.Menu();
+                if (!account.IsAdministrator)
+                {
+                    SubscriberView view = new SubscriberView(account);
+                    view.ShowDialog();
+                }
             }
         }
 
@@ -107,7 +111,7 @@ namespace ProjetPT2K
                     mainMenuText.Items.Add("Compte abonné créé avec succès");
                 }
                 else
-                {
+            {
                     mainMenuText.Items.Add("Un compte avec le nom d'utilisateur '" + view.Login + "' existe déjà");
                 }
             }

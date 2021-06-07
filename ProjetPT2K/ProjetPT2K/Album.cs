@@ -1,28 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
-    public class Albums : ALBUMS
+    public partial class ALBUMS
     {
+        /**
+         * Return true if the album is available, i.e. can be borrowed.
+         * 
+         * @return a boolean
+         */
+        public bool IsAvailable()
+        {
+            foreach (EMPRUNTER loan in this.EMPRUNTER)
+            {
+                if (loan.DATE_RETOUR != null)
+                    return false;
+            }
+            return true;
         }
-        public int CODE_ALBUM { get; set; }
-        public Nullable<int> CODE_EDITEUR { get; set; }
-        public Nullable<int> CODE_GENRE { get; set; }
-        public string TITRE_ALBUM { get; set; }
-        public Nullable<int> ANNÉE_ALBUM { get; set; }
-        public decimal PRIX_ALBUM { get; set; }
-        public string ALLÉE_ALBUM { get; set; }
-        public int CASIER_ALBUM { get; set; }
-        public byte[] POCHETTE { get; set; }
 
-        public virtual EDITEURS EDITEURS { get; set; }
-        public virtual GENRES GENRES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EMPRUNTER> EMPRUNTER { get; set; }
-
+        /**
+         * Return the string representation of the Album.
+         * 
+         * @return a string
+         */
+        public override String ToString()
+        {
+            string availability = this.IsAvailable() ? "" : " (indisponible)";
+            return this.TITRE_ALBUM.Trim() + " - " + this.GENRES.LIBELLÉ_GENRE.Trim() + availability;
+        }
     }
 }
