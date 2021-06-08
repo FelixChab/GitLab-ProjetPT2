@@ -31,7 +31,7 @@ namespace ProjetPT2K
             if(accountView.DialogResult == DialogResult.OK && accountView.Created)
             {
                 errorLabel.Text = "Votre compte a bien été créer.";
-                errorLabel.ForeColor = Color.LightBlue;
+                errorLabel.ForeColor = Color.LightGreen;
                 errorLabel.Visible = true;
             }
 

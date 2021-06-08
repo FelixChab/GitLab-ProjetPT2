@@ -40,12 +40,12 @@ namespace ProjetPT2K
             this.familyNameLabelTitle = new System.Windows.Forms.Label();
             this.namelabel = new System.Windows.Forms.TextBox();
             this.nameLabelTitle = new System.Windows.Forms.Label();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.userlabel = new System.Windows.Forms.TextBox();
             this.passwordlabel = new System.Windows.Forms.TextBox();
             this.labelPasswordTitle = new System.Windows.Forms.Label();
             this.labelUsernameTitle = new System.Windows.Forms.Label();
             this.connectionButton = new System.Windows.Forms.Button();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.connectionBackground.SuspendLayout();
             this.SuspendLayout();
@@ -147,19 +147,6 @@ namespace ProjetPT2K
             this.nameLabelTitle.TabIndex = 8;
             this.nameLabelTitle.Text = "Prénom";
             // 
-            // errorLabel
-            // 
-            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
-            this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorLabel.Location = new System.Drawing.Point(0, 361);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(475, 23);
-            this.errorLabel.TabIndex = 7;
-            this.errorLabel.Text = "Identifiant non disponible";
-            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.errorLabel.Visible = false;
-            // 
             // userlabel
             // 
             this.userlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -209,6 +196,19 @@ namespace ProjetPT2K
             this.connectionButton.UseVisualStyleBackColor = true;
             this.connectionButton.Click += new System.EventHandler(this.inscriptionButton);
             // 
+            // errorLabel
+            // 
+            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.errorLabel.Location = new System.Drawing.Point(0, 361);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(475, 23);
+            this.errorLabel.TabIndex = 7;
+            this.errorLabel.Text = "Identifiant non disponible";
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorLabel.Visible = false;
+            // 
             // NewAccountView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,7 +234,6 @@ namespace ProjetPT2K
         private System.Windows.Forms.Panel connectionBackground;
         private System.Windows.Forms.TextBox namelabel;
         private System.Windows.Forms.Label nameLabelTitle;
-        private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.TextBox userlabel;
         private System.Windows.Forms.TextBox passwordlabel;
         private System.Windows.Forms.Label labelPasswordTitle;
@@ -244,5 +243,6 @@ namespace ProjetPT2K
         private System.Windows.Forms.Label familyNameLabelTitle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox countryboxlabel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }

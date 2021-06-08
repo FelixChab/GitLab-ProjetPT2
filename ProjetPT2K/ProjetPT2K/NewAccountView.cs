@@ -49,6 +49,7 @@ namespace ProjetPT2K
             }
             this.DialogResult = DialogResult.OK;
             Database.GetInstance().CreateAccount(prenom, nom, pays.CODE_PAYS, username, password);
+            created = true;
             Close();
         }
 
