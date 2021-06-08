@@ -46,6 +46,15 @@ namespace ProjetPT2K
         }
 
         /**
+         * Restore the database to a state where no subscribers and no loans are registered.
+         */
+        public void RestoreCleanState()
+        {
+            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
+            this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
+        }
+
+        /**
          * Function that allows a subscriber to log itself the application
          * 
          * @param login, the login of the subscriber
