@@ -57,12 +57,12 @@ namespace ProjetPT2K
             // 
             // logo
             // 
-            this.logo.Image = global::ProjetPT2K.Properties.Resources.Logo;
-            this.logo.Location = new System.Drawing.Point(5, 5);
+            this.logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
+            this.logo.Location = new System.Drawing.Point(0, 0);
             this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(105, 105);
+            this.logo.Size = new System.Drawing.Size(121, 112);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.TabIndex = 1;
+            this.logo.TabIndex = 3;
             this.logo.TabStop = false;
             // 
             // connectionBackground
@@ -87,45 +87,47 @@ namespace ProjetPT2K
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorLabel.Location = new System.Drawing.Point(75, 277);
+            this.errorLabel.Location = new System.Drawing.Point(132, 230);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(292, 19);
+            this.errorLabel.Size = new System.Drawing.Size(150, 19);
             this.errorLabel.TabIndex = 7;
-            this.errorLabel.Text = "Mauvais identifiant ou mauvais mot de passe";
+            this.errorLabel.Text = "Mot de passe incorect";
             this.errorLabel.Visible = false;
             // 
             // userlabel
             // 
-            this.userlabel.Location = new System.Drawing.Point(132, 111);
+            this.userlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userlabel.Location = new System.Drawing.Point(116, 102);
             this.userlabel.Name = "userlabel";
-            this.userlabel.Size = new System.Drawing.Size(153, 20);
+            this.userlabel.Size = new System.Drawing.Size(192, 30);
             this.userlabel.TabIndex = 6;
             // 
             // passwordlabel
             // 
-            this.passwordlabel.Location = new System.Drawing.Point(135, 175);
+            this.passwordlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordlabel.Location = new System.Drawing.Point(117, 175);
             this.passwordlabel.Name = "passwordlabel";
-            this.passwordlabel.Size = new System.Drawing.Size(150, 20);
+            this.passwordlabel.Size = new System.Drawing.Size(191, 30);
             this.passwordlabel.TabIndex = 5;
             this.passwordlabel.UseSystemPasswordChar = true;
             // 
             // labelPasswordLogin
             // 
             this.labelPasswordLogin.AutoSize = true;
-            this.labelPasswordLogin.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPasswordLogin.Location = new System.Drawing.Point(161, 149);
+            this.labelPasswordLogin.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPasswordLogin.Location = new System.Drawing.Point(148, 146);
             this.labelPasswordLogin.Name = "labelPasswordLogin";
-            this.labelPasswordLogin.Size = new System.Drawing.Size(106, 23);
+            this.labelPasswordLogin.Size = new System.Drawing.Size(128, 26);
             this.labelPasswordLogin.TabIndex = 4;
             this.labelPasswordLogin.Text = "Mot de passe";
             // 
             // labelUserLogin
             // 
             this.labelUserLogin.AutoSize = true;
-            this.labelUserLogin.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUserLogin.Location = new System.Drawing.Point(163, 85);
+            this.labelUserLogin.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUserLogin.Location = new System.Drawing.Point(158, 73);
             this.labelUserLogin.Name = "labelUserLogin";
-            this.labelUserLogin.Size = new System.Drawing.Size(92, 23);
+            this.labelUserLogin.Size = new System.Drawing.Size(107, 26);
             this.labelUserLogin.TabIndex = 3;
             this.labelUserLogin.Text = "Identifiant";
             // 
@@ -147,9 +149,9 @@ namespace ProjetPT2K
             // 
             this.connectionButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.connectionButton.ForeColor = System.Drawing.Color.Black;
-            this.connectionButton.Location = new System.Drawing.Point(135, 220);
+            this.connectionButton.Location = new System.Drawing.Point(116, 252);
             this.connectionButton.Name = "connectionButton";
-            this.connectionButton.Size = new System.Drawing.Size(150, 40);
+            this.connectionButton.Size = new System.Drawing.Size(192, 40);
             this.connectionButton.TabIndex = 1;
             this.connectionButton.Text = "Connexion";
             this.connectionButton.UseVisualStyleBackColor = true;

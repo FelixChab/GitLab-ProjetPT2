@@ -35,7 +35,7 @@ namespace ProjetPT2K
             Account account = Database.GetInstance().Login(login, password);
             if (account == null)
             {
-                errorLabel.Text = "Mauvais identifiant ou mauvais mot de passe";
+                errorLabel.Text = "Mot de passe incorect";
                 userlabel.Text = passwordlabel.Text = "";
                 errorLabel.Visible = true;
             }
@@ -43,16 +43,16 @@ namespace ProjetPT2K
             {
                 string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                
-                errorLabel.ForeColor = Color.Green;
+                errorLabel.ForeColor = Color.LightGreen;
                 
                 if (!account.IsAdministrator)
                 {
-                    errorLabel.Text = "Connexion réussi ! (ABONNÉ)";
+                    errorLabel.Text = "Succés ! (ABONNÉ)";
                     // todo show subscriber panel
                 }
                 else
                 {
-                    errorLabel.Text = "Connexion réussi ! (ADMIN)";
+                    errorLabel.Text = "Succés ! (ADMIN)";
                     // TODO show admin panel
                 }
                 errorLabel.Visible = true;

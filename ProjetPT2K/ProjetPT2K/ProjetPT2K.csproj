@@ -185,7 +185,11 @@
       <DependentUpon>BD.edmx</DependentUpon>
       <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
-    <None Include="Logo.png" />
+    <None Include="img\icon.ico" />
+    <None Include="img\App-Logo.png" />
+    <None Include="img\Logo.ico" />
+    <None Include="Resources\logo.bmp" />
+    <None Include="/img/Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
