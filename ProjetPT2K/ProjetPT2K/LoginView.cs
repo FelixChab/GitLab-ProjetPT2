@@ -53,7 +53,8 @@ namespace ProjetPT2K
                 else
                 {
                     errorLabel.Text = "Succés ! (ADMIN)";
-                    // TODO show admin panel
+                    FormAdmin formAdmin = new FormAdmin((Admin)account);
+                    formAdmin.Show();
                 }
                 errorLabel.Visible = true;
 
