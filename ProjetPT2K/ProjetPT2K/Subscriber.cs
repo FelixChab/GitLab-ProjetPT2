@@ -26,30 +26,31 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
-        /**
-        public List<ALBUMS> GetRecommandations()
+        public Dictionary<ALBUMS, int> GetRecommandations()
         {
-            var top = (from loan in this.EMPRUNTER
-                       // group loan.ALBUMS by loan.ALBUMS.GENRES into groups
-                       orderby loan.ALBUMS.Count descending
-                       select loan);
-
-            Dictionary<GENRES, int> preferences = new Dictionary<GENRES, int>();
-            foreach (var request in top)
+            int loanNumber = -1;
+            GENRES theGenre = null;
+            Dictionary<GENRES, int> topGenres = new Dictionary<GENRES, int>();
+            foreach (EMPRUNTER loan in this.EMPRUNTER)
             {
-                if (preferences.ContainsKey(request.Key))
+                if (topGenres.ContainsKey(loan.ALBUMS.GENRES))
                 {
-                    preferences[request.Key]++;
+                    topGenres[loan.ALBUMS.GENRES]++;
                 }
                 else
                 {
-                    preferences[request.Key] = 1;
+                    topGenres[loan.ALBUMS.GENRES] = 1;
                 }
-            }
 
-            return null;
+                if (topGenres[loan.ALBUMS.GENRES] > loanNumber)
+                {
+                    loanNumber = topGenres[loan.ALBUMS.GENRES];
+                    theGenre = loan.ALBUMS.GENRES;
+                }
+
+            }
+            return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
         }
-        */
 
         /**
          * Return the string representation of the subscriber

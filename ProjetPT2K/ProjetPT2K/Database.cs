@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjetPT2K
@@ -19,7 +20,8 @@ namespace ProjetPT2K
         /**
          * The non-parameterised constructor creating a new instance of Database
          */
-        private Database() {
+        private Database()
+        {
             this.Connection = new MusiquePT2_KEntities();
         }
 
@@ -65,9 +67,9 @@ namespace ProjetPT2K
         private Account FetchSubscriberAccount(string login, string password)
         {
             var request = from subscriber in this.Connection.ABONNÉS
-                where (subscriber.LOGIN_ABONNÉ == login)
-                && (subscriber.PASSWORD_ABONNÉ == password)
-                select subscriber;
+                          where (subscriber.LOGIN_ABONNÉ == login)
+                          && (subscriber.PASSWORD_ABONNÉ == password)
+                          select subscriber;
             return (ABONNÉS)request.FirstOrDefault();
         }
 
@@ -77,8 +79,8 @@ namespace ProjetPT2K
         public bool AccountExists(string login)
         {
             ABONNÉS account = (from subscriber in this.Connection.ABONNÉS
-                    where (subscriber.LOGIN_ABONNÉ == login)
-                    select subscriber).FirstOrDefault();
+                               where (subscriber.LOGIN_ABONNÉ == login)
+                               select subscriber).FirstOrDefault();
 
             return account != null;
         }
@@ -86,7 +88,7 @@ namespace ProjetPT2K
         /**
          * Create a new subscriber account in the database
          */
-        public void CreateAccount(string firstname, string lastname, int countryCode, 
+        public void CreateAccount(string firstname, string lastname, int countryCode,
                 string login, string password)
         {
             ABONNÉS subscriber = new ABONNÉS
@@ -118,5 +120,35 @@ namespace ProjetPT2K
 
             return albums.ToList();
         }
+
+        public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)
+        {
+            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
+            List<ALBUMS> list = (from a in Connection.ALBUMS
+                                 join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM
+                                 where a.GENRES.LIBELLÉ_GENRE == genre.LIBELLÉ_GENRE
+                                 orderby a.EMPRUNTER.Count descending
+                                 select a).ToList();
+            for (int start = 0; start < list.Count; start++)
+            {
+                ALBUMS target = list[start];
+                int empruntCount = target.EMPRUNTER.Count;
+                foreach (EMPRUNTER e in target.EMPRUNTER)
+                {
+                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
+                    {
+                        empruntCount--;
+                    }
+
+                }
+                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
+                {
+                    topAlbums.Add(target, empruntCount);
+                }
+            }
+            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
+            return sorted;
+        }
+
     }
 }

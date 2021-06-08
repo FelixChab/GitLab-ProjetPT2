@@ -57,6 +57,21 @@ namespace ProjetPT2K
                         ListLoans();
                         break;
                     }
+                case 3:
+                    {
+                        GetRecommandations();
+                        break;
+                    }
+            }
+        }
+
+        private void GetRecommandations()
+        {
+            actionListBox.Items.Clear();
+            var recommandations = this.Subscriber.GetRecommandations();
+            foreach (var entry in recommandations)
+            {
+                actionListBox.Items.Add(entry.Key.ToString() + " - Emprunté par " + entry.Value + " abonnés");
             }
         }
 

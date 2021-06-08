@@ -62,7 +62,7 @@ namespace ProjetPT2K
         {
                 string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                 mainMenuText.Items.Add("Compte récupéré " + accountType);
-                if (!account.isAdministrator)
+                if (!account.IsAdministrator)
                 {
                     SubscriberView view = new SubscriberView(account);
                     view.ShowDialog();
