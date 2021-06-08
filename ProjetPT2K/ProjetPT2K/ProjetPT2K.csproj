@@ -92,6 +92,10 @@
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
     <Compile Include="Loan.cs" />
+    <Compile Include="NewAccountView.cs" />
+    <Compile Include="NewAccountView.Designer.cs">
+      <DependentUpon>NewAccountView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="BD.Context.cs">
       <AutoGen>True</AutoGen>
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewAccountView.resx">
+      <DependentUpon>NewAccountView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
