@@ -12,10 +12,10 @@ namespace ProjetPT2K
 {
     public partial class NewAccountView : Form
     {
-
-        
         public Login login;
-        private MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
+        private readonly MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
+
+        /* Constructeur */
         public NewAccountView(Login l)
         {
             InitializeComponent();
@@ -27,35 +27,37 @@ namespace ProjetPT2K
             }
         }
 
-        private void inscriptionButton(object sender, EventArgs e)
+        /* Function of the inscription button */
+        private void InscriptionButton(object sender, EventArgs e)
         {
             String prenom = namelabel.Text;
             String nom = familyNameLabel.Text;
             PAYS pays = (PAYS)countryboxlabel.SelectedItem;
             String username = userlabel.Text;
             String password = passwordlabel.Text;
-            if (!validArgs(new string[] { prenom, nom, pays.ToString(), username, password}))
+            if (!ValidArgs(new string[] { prenom, nom, pays.ToString(), username, password}))
             {
-                errorLabel.Text = "Une des informations est incorrecte";
+                errorLabel.Text = "Une des informations est incorrecte.";
                 errorLabel.Visible = true;
-                reset();
+                Reset();
                 return;
             }
             if(Database.GetInstance().AccountExists(username))
             {
-                errorLabel.Text = "Identifiant non disponible";
+                errorLabel.Text = "Identifiant non disponible.";
                 errorLabel.Visible = true;
-                reset();
+                Reset();
                 return;
             }
             Database.GetInstance().CreateAccount(prenom, nom, pays.CODE_PAYS, username, password);
-            login.getErrorLabel().Text = "Votre compte a bien été créer.";
-            login.getErrorLabel().ForeColor = Color.LightGreen;
-            login.getErrorLabel().Visible = true;
+            login.GetErrorLabel().Text = "Votre compte a bien été créer.";
+            login.GetErrorLabel().ForeColor = Color.LightGreen;
+            login.GetErrorLabel().Visible = true;
             Close();
         }
 
-        public void reset()
+        /* Method of reset */
+        public void Reset()
         {
             namelabel.Text = "";
             familyNameLabel.Text = "";
@@ -63,13 +65,19 @@ namespace ProjetPT2K
             passwordlabel.Text = "";
         }
 
-        private Boolean validArgs(String[] args)
+        /* ??? */
+        private Boolean ValidArgs(String[] args)
         {
             foreach(String s in args)
             {
                 if (s.Length <= 1) return false;
             }
             return true;
+        }
+
+        private void PictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            // TODO (retour accueil / connexion)
         }
     }
 }

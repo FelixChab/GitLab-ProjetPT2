@@ -145,7 +145,7 @@ namespace ProjetPT2K
             this.linkLabel.TabStop = true;
             this.linkLabel.Text = "Vous n\'avez pas de compte ?";
             this.linkLabel.VisitedLinkColor = System.Drawing.Color.White;
-            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // connectionButton
             // 
@@ -157,7 +157,7 @@ namespace ProjetPT2K
             this.connectionButton.TabIndex = 1;
             this.connectionButton.Text = "Connexion";
             this.connectionButton.UseVisualStyleBackColor = true;
-            this.connectionButton.Click += new System.EventHandler(this.connectionButton_Click);
+            this.connectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
             // 
             // Login
             // 

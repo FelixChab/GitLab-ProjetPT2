@@ -14,28 +14,25 @@ namespace ProjetPT2K
 {
     public partial class Login : Form
     {
-
         private MusiquePT2_KEntities database = Database.GetInstance().GetConnection();
 
+        /* Constructeur standard */
         public Login()
         {
             InitializeComponent();
             errorLabel.Visible = false;
         }
 
-        // clique sur création de compte
-        private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        /* Method of the "create account" button */
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             NewAccountView accountView = new NewAccountView(this);
             accountView.Show();
 
         }
 
-
-
-
-        // clique sur connexion
-        private void connectionButton_Click(object sender, EventArgs e)
+        /* Method of the "connection" button */
+        private void ConnectionButton_Click(object sender, EventArgs e)
         {
             string login = userlabel.Text;
             string password = passwordlabel.Text;
@@ -52,27 +49,23 @@ namespace ProjetPT2K
             }
             else
             {
-                string accountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
-
+                string AccountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
                 errorLabel.ForeColor = Color.LightGreen;
-
                 if (!account.IsAdministrator)
                 {
-                    errorLabel.Text = "Succés ! (ABONNÉ)";
                     // todo show subscriber panel
                 }
                 else
                 {
-                    errorLabel.Text = "Succés ! (ADMIN)";
                     FormAdmin formAdmin = new FormAdmin((Admin)account);
                     formAdmin.Show();
                 }
+                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
                 errorLabel.Visible = true;
-
             }
         }
 
-        public Label getErrorLabel()
+        public Label GetErrorLabel()
         {
             return errorLabel;
         }
