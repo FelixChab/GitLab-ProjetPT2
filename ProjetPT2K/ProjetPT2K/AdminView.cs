@@ -41,7 +41,7 @@ namespace ProjetPT2K
         private void mostBorrowedAlbumsButton_Click(object sender, EventArgs e)
         {
             result.Items.Clear();
-            foreach(ALBUMS albums in admin.GetBestAlbums().Keys){
+            foreach(ALBUMS albums in Database.GetInstance().GetBestAlbums().Keys){
                 result.Items.Add(albums);
             }
         }
