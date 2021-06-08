@@ -10,7 +10,10 @@ namespace ProjetPT2K
 {
     class DisplayAlbum : ALBUMS
     {
+        //List<ALBUMS> albums;
         private ALBUMS album;
+        //private List<byte[]> pictures { get; set; }
+
         private byte[] picture { get; set; }
         private string title;
         public string Title { get { return this.title; } set { this.title = TITRE_ALBUM; } }
@@ -37,6 +40,9 @@ namespace ProjetPT2K
         /// </summary>
         public Image GetImage()
         {
+            List<Image> images = new List<Image>();
+            //foreach (byte[] pictureInBytes in pictures)
+            //{
             MemoryStream ms = new MemoryStream(picture);
             Bitmap img = new Bitmap (ms);
             //img.SetResolution(ImageWidth.Width, ImageWidth.Height);
