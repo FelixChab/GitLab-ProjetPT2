@@ -36,6 +36,7 @@ namespace ProjetPT2K
             this.tagRecommandations = new System.Windows.Forms.Label();
             this.tagBestAlbums = new System.Windows.Forms.Label();
             this.goToAcountView = new System.Windows.Forms.PictureBox();
+            this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.goToAcountView)).BeginInit();
             this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -116,6 +117,16 @@ namespace ProjetPT2K
             this.goToAcountView.TabStop = false;
             this.goToAcountView.Click += new System.EventHandler(this.GoToAccountView_Click);
             // 
+            // mostBorrowedAlbumsLabel
+            // 
+            this.mostBorrowedAlbumsLabel.AutoSize = true;
+            this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 332);
+            this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
+            this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
+            this.mostBorrowedAlbumsLabel.TabIndex = 16;
+            this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,5 +163,6 @@ namespace ProjetPT2K
         private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox goToAcountView;
+        private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
     }
 }
