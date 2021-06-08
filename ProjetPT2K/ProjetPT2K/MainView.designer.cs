@@ -36,6 +36,7 @@ namespace ProjetPT2K
             this.tagRecommandations = new System.Windows.Forms.Label();
             this.tagBestAlbums = new System.Windows.Forms.Label();
             this.goToAcountView = new System.Windows.Forms.PictureBox();
+            this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.goToAcountView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,20 +72,22 @@ namespace ProjetPT2K
             // tagRecommandations
             // 
             this.tagRecommandations.AutoSize = true;
-            this.tagRecommandations.Location = new System.Drawing.Point(231, 186);
+            this.tagRecommandations.BackColor = System.Drawing.Color.Transparent;
+            this.tagRecommandations.Location = new System.Drawing.Point(231, 168);
             this.tagRecommandations.Name = "tagRecommandations";
-            this.tagRecommandations.Size = new System.Drawing.Size(25, 13);
+            this.tagRecommandations.Size = new System.Drawing.Size(10, 13);
             this.tagRecommandations.TabIndex = 13;
-            this.tagRecommandations.Text = "___";
+            this.tagRecommandations.Text = " ";
             // 
             // tagBestAlbums
             // 
             this.tagBestAlbums.AutoSize = true;
-            this.tagBestAlbums.Location = new System.Drawing.Point(231, 342);
+            this.tagBestAlbums.BackColor = System.Drawing.Color.Transparent;
+            this.tagBestAlbums.Location = new System.Drawing.Point(231, 373);
             this.tagBestAlbums.Name = "tagBestAlbums";
-            this.tagBestAlbums.Size = new System.Drawing.Size(25, 13);
+            this.tagBestAlbums.Size = new System.Drawing.Size(10, 13);
             this.tagBestAlbums.TabIndex = 14;
-            this.tagBestAlbums.Text = "___";
+            this.tagBestAlbums.Text = " ";
             // 
             // goToAcountView
             // 
@@ -97,12 +100,23 @@ namespace ProjetPT2K
             this.goToAcountView.TabStop = false;
             this.goToAcountView.Click += new System.EventHandler(this.GoToAccountView_Click);
             // 
+            // mostBorrowedAlbumsLabel
+            // 
+            this.mostBorrowedAlbumsLabel.AutoSize = true;
+            this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 332);
+            this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
+            this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
+            this.mostBorrowedAlbumsLabel.TabIndex = 16;
+            this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(192)))), ((int)(((byte)(208)))));
-            this.ClientSize = new System.Drawing.Size(804, 451);
+            this.ClientSize = new System.Drawing.Size(947, 605);
+            this.Controls.Add(this.mostBorrowedAlbumsLabel);
             this.Controls.Add(this.goToAcountView);
             this.Controls.Add(this.tagBestAlbums);
             this.Controls.Add(this.tagRecommandations);
@@ -126,5 +140,6 @@ namespace ProjetPT2K
         private System.Windows.Forms.Label tagRecommandations;
         private System.Windows.Forms.Label tagBestAlbums;
         private System.Windows.Forms.PictureBox goToAcountView;
+        private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
     }
 }

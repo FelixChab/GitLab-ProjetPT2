@@ -12,11 +12,11 @@ namespace ProjetPT2K
 {
     public partial class MainView : Form
     {
-        Account account;
+        ABONNÉS account;
         public MainView(Account account)
         {
             InitializeComponent();
-            this.account = account;
+            this.account = (ABONNÉS) account;
         }
 
         private void mainMenuListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,12 +33,23 @@ namespace ProjetPT2K
                 albums.Add(album);
             }*/
             //ALBUMS album;
-            Point position = tagBestAlbums.Location;
+
+            Point position = tagRecommandations.Location;
+            foreach (ALBUMS album in account.GetRecommandations().Keys)
+            {
+                DisplayAlbum display = new DisplayAlbum(album, position);
+                display.DrawAlbum(e.Graphics);
+                position = new Point(position.X + 100, position.Y);
+            }
+            position = tagBestAlbums.Location;
             foreach (ALBUMS album in Database.GetInstance().GetBestAlbums().Keys)
             {
                 DisplayAlbum display = new DisplayAlbum(album, position);
-                display.drawAlbum(e.Graphics);
+                display.DrawAlbum(e.Graphics);
+                position = new Point(position.X + 100, position.Y);
             }
+            
+            
         }
 
         private void GoToAccountView_Click(object sender, EventArgs e)

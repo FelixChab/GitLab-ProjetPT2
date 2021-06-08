@@ -46,6 +46,12 @@ namespace ProjetPT2K
                     theGenre = loan.ALBUMS.GENRES;
                 }
 
+                if (topGenres[loan.ALBUMS.GENRES] > loanNumber)
+                {
+                    loanNumber = topGenres[loan.ALBUMS.GENRES];
+                    theGenre = loan.ALBUMS.GENRES;
+                }
+
             }
             return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
         }
