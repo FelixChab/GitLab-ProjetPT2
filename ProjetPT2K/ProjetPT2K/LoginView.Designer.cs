@@ -60,7 +60,7 @@ namespace ProjetPT2K
             this.logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
             this.logo.Location = new System.Drawing.Point(0, 0);
             this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(121, 112);
+            this.logo.Size = new System.Drawing.Size(105, 105);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logo.TabIndex = 3;
             this.logo.TabStop = false;
@@ -83,15 +83,15 @@ namespace ProjetPT2K
             // 
             // errorLabel
             // 
-            this.errorLabel.AutoSize = true;
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorLabel.Location = new System.Drawing.Point(132, 230);
+            this.errorLabel.Location = new System.Drawing.Point(0, 284);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(150, 19);
+            this.errorLabel.Size = new System.Drawing.Size(426, 23);
             this.errorLabel.TabIndex = 7;
-            this.errorLabel.Text = "Mot de passe incorect";
+            this.errorLabel.Text = "Mot de passe incorrect";
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.errorLabel.Visible = false;
             // 
             // userlabel
@@ -149,7 +149,7 @@ namespace ProjetPT2K
             // 
             this.connectionButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.connectionButton.ForeColor = System.Drawing.Color.Black;
-            this.connectionButton.Location = new System.Drawing.Point(116, 252);
+            this.connectionButton.Location = new System.Drawing.Point(116, 228);
             this.connectionButton.Name = "connectionButton";
             this.connectionButton.Size = new System.Drawing.Size(192, 40);
             this.connectionButton.TabIndex = 1;
