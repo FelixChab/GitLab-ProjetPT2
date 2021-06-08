@@ -50,8 +50,13 @@ namespace ProjetPT2K
          */
         public void RestoreCleanState()
         {
+<<<<<<< HEAD
             this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
             this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
+=======
+            this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
+            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
+>>>>>>> bf6cf64 (Created UT based class)
         }
 
         /**
