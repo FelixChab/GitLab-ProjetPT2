@@ -25,6 +25,7 @@ namespace UnitTestProjetPT2K
             CreateAccount();
             BorrowAlbum();
             ListAlbums();
+            Extends();
         }
 
         /// <summary>
@@ -78,28 +79,31 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
         }
 
+        /// <summary>
+        /// Attempt to display the lists of loans from a subscriber
+        /// </summary>
         private void ListAlbums()
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
                                where album.CODE_ALBUM == 1
                                select album).FirstOrDefault();
-<<<<<<< HEAD
         }
 
-        private void ListAlbums()
+        /// <summary>
+        /// Attempt to borrow an album.
+        /// </summary>
+        private void Extends()
         {
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == 1
-                               select album).FirstOrDefault();
+            EMPRUNTER loan = this._Subscriber.EMPRUNTER.FirstOrDefault();
+            Assert.IsNotNull(loan);
+            Assert.IsFalse(loan.HasBeenExtended());
 
-            
+            loan.Extend();
+            Assert.AreNotEqual(loan.DATE_RETOUR, loan.DATE_RETOUR_ATTENDUE);
+            Assert.AreNotEqual(loan.DATE_RETOUR, (loan.DATE_RETOUR_ATTENDUE));
+            Assert.IsTrue(loan.HasBeenExtended());
         }
-=======
-
-            
-        }
-
->>>>>>> 2c49e59b7a50d0e4359c4bbb0ed6dce29bf86d6a
     }
-
 }
+
+
