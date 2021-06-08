@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
@@ -79,12 +79,15 @@ namespace ProjetPT2K
                           where (subscriber.LOGIN_ABONNÉ == login)
                           && (subscriber.PASSWORD_ABONNÉ == password)
                           select subscriber;
+
             return (ABONNÉS)request.FirstOrDefault();
         }
 
-        /**
-         * Return true if an account with the given login already exists in the database
-         */
+        /// <summary>
+        /// Return true if an account with the given login already exists in the database
+        /// </summary>
+        /// <param name="login"> the login we are looking for </param>
+        /// <returns> a boolean </returns>
         public bool AccountExists(string login)
         {
             ABONNÉS account = (from subscriber in this.Connection.ABONNÉS
@@ -94,11 +97,15 @@ namespace ProjetPT2K
             return account != null;
         }
 
-        /**
-         * Create a new subscriber account in the database
-         */
-        public void CreateAccount(string firstname, string lastname, int countryCode,
-                string login, string password)
+        /// <summary>
+        /// Create a new subscriber account in the database
+        /// </summary>
+        /// <param name="firstname"> the firstname of the user </param>
+        /// <param name="lastname"> the lastname of the user </param>
+        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="login"> the login of the user </param>
+        /// <param name="password"> the password of the user </param>
+        public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
         {
             ABONNÉS subscriber = new ABONNÉS
             {
@@ -128,6 +135,20 @@ namespace ProjetPT2K
                          select album;
 
             return albums.ToList();
+        }
+
+        /// <summary>
+        /// Return the album corresponding to the given ID in the database.
+        /// </summary>
+        /// <param name="ID"> the ID of the album </param>
+        /// <returns> an Album object </returns>
+        public ALBUMS GetAlbumWithID(int ID)
+        {
+            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
+                               where album.CODE_ALBUM == ID
+                               select album).FirstOrDefault();
+
+            return theAlbum;
         }
 
         public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)

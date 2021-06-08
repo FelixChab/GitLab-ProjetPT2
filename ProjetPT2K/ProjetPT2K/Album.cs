@@ -19,11 +19,10 @@ namespace ProjetPT2K
             return true;
         }
 
-        /**
-         * Return the string representation of the Album.
-         * 
-         * @return a string
-         */
+        /// <summary>
+        /// Return the string representation of the Album.
+        /// </summary>
+        /// <returns> a string </returns>
         public override String ToString()
         {
             string availability = this.IsAvailable() ? "" : " (indisponible)";
