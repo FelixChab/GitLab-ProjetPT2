@@ -13,7 +13,7 @@ namespace ProjetPT2K
     public partial class NewAccountView : Form
     {
 
-        private Boolean created = false;
+        public Boolean accountCreated = false;
 
         private MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
         public NewAccountView()
@@ -47,9 +47,10 @@ namespace ProjetPT2K
                 reset();
                 return;
             }
-            this.DialogResult = DialogResult.OK;
             Database.GetInstance().CreateAccount(prenom, nom, pays.CODE_PAYS, username, password);
-            created = true;
+            accountCreated = true;
+            this.DialogResult = DialogResult.OK;
+
             Close();
         }
 
