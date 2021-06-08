@@ -85,6 +85,12 @@
     <Compile Include="AppView.Designer.cs">
       <DependentUpon>AppView.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Loan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="BD.Context.cs">
@@ -131,6 +137,9 @@
     <EmbeddedResource Include="CreateAccountView.resx">
       <DependentUpon>CreateAccountView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginView.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -139,6 +148,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SubscriberView.resx">
       <DependentUpon>SubscriberView.cs</DependentUpon>
@@ -175,6 +185,7 @@
       <DependentUpon>BD.edmx</DependentUpon>
       <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
+    <None Include="Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
