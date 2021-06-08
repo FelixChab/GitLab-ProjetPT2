@@ -17,10 +17,7 @@ namespace ProjetPT2K
 
     public partial class MusiquePT2_KEntities : DbContext
     {
-        public MusiquePT2_KEntities()
-            : base("name=MusiquePT2_KEntities")
-        {
-        }
+        public MusiquePT2_KEntities() : base("name=MusiquePT2_KEntities") {}
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

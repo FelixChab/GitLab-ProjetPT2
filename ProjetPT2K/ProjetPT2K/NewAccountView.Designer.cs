@@ -31,7 +31,7 @@ namespace ProjetPT2K
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.InscriptionLabel = new System.Windows.Forms.Label();
             this.connectionBackground = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,25 +40,26 @@ namespace ProjetPT2K
             this.familyNameLabelTitle = new System.Windows.Forms.Label();
             this.namelabel = new System.Windows.Forms.TextBox();
             this.nameLabelTitle = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.userlabel = new System.Windows.Forms.TextBox();
             this.passwordlabel = new System.Windows.Forms.TextBox();
             this.labelPasswordTitle = new System.Windows.Forms.Label();
             this.labelUsernameTitle = new System.Windows.Forms.Label();
             this.connectionButton = new System.Windows.Forms.Button();
-            this.errorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).BeginInit();
             this.connectionBackground.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // PictureBoxLogo
             // 
-            this.pictureBox1.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(105, 105);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.PictureBoxLogo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
+            this.PictureBoxLogo.Location = new System.Drawing.Point(0, 0);
+            this.PictureBoxLogo.Name = "PictureBoxLogo";
+            this.PictureBoxLogo.Size = new System.Drawing.Size(105, 105);
+            this.PictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBoxLogo.TabIndex = 0;
+            this.PictureBoxLogo.TabStop = false;
+            this.PictureBoxLogo.Click += new System.EventHandler(this.PictureBoxLogo_Click);
             // 
             // InscriptionLabel
             // 
@@ -96,7 +97,7 @@ namespace ProjetPT2K
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(216, 267);
+            this.label1.Location = new System.Drawing.Point(217, 268);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 26);
             this.label1.TabIndex = 13;
@@ -123,7 +124,7 @@ namespace ProjetPT2K
             // 
             this.familyNameLabelTitle.AutoSize = true;
             this.familyNameLabelTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.familyNameLabelTitle.Location = new System.Drawing.Point(321, 99);
+            this.familyNameLabelTitle.Location = new System.Drawing.Point(324, 99);
             this.familyNameLabelTitle.Name = "familyNameLabelTitle";
             this.familyNameLabelTitle.Size = new System.Drawing.Size(52, 26);
             this.familyNameLabelTitle.TabIndex = 10;
@@ -141,11 +142,24 @@ namespace ProjetPT2K
             // 
             this.nameLabelTitle.AutoSize = true;
             this.nameLabelTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabelTitle.Location = new System.Drawing.Point(106, 99);
+            this.nameLabelTitle.Location = new System.Drawing.Point(104, 100);
             this.nameLabelTitle.Name = "nameLabelTitle";
             this.nameLabelTitle.Size = new System.Drawing.Size(76, 26);
             this.nameLabelTitle.TabIndex = 8;
             this.nameLabelTitle.Text = "Prénom";
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.errorLabel.Location = new System.Drawing.Point(0, 361);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(475, 23);
+            this.errorLabel.TabIndex = 7;
+            this.errorLabel.Text = "Identifiant non disponible";
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorLabel.Visible = false;
             // 
             // userlabel
             // 
@@ -158,7 +172,7 @@ namespace ProjetPT2K
             // passwordlabel
             // 
             this.passwordlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordlabel.Location = new System.Drawing.Point(263, 208);
+            this.passwordlabel.Location = new System.Drawing.Point(257, 208);
             this.passwordlabel.Name = "passwordlabel";
             this.passwordlabel.Size = new System.Drawing.Size(191, 30);
             this.passwordlabel.TabIndex = 5;
@@ -168,7 +182,7 @@ namespace ProjetPT2K
             // 
             this.labelPasswordTitle.AutoSize = true;
             this.labelPasswordTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPasswordTitle.Location = new System.Drawing.Point(299, 179);
+            this.labelPasswordTitle.Location = new System.Drawing.Point(287, 180);
             this.labelPasswordTitle.Name = "labelPasswordTitle";
             this.labelPasswordTitle.Size = new System.Drawing.Size(128, 26);
             this.labelPasswordTitle.TabIndex = 4;
@@ -178,7 +192,7 @@ namespace ProjetPT2K
             // 
             this.labelUsernameTitle.AutoSize = true;
             this.labelUsernameTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsernameTitle.Location = new System.Drawing.Point(89, 179);
+            this.labelUsernameTitle.Location = new System.Drawing.Point(89, 180);
             this.labelUsernameTitle.Name = "labelUsernameTitle";
             this.labelUsernameTitle.Size = new System.Drawing.Size(107, 26);
             this.labelUsernameTitle.TabIndex = 3;
@@ -194,20 +208,7 @@ namespace ProjetPT2K
             this.connectionButton.TabIndex = 1;
             this.connectionButton.Text = "Inscription";
             this.connectionButton.UseVisualStyleBackColor = true;
-            this.connectionButton.Click += new System.EventHandler(this.inscriptionButton);
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
-            this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorLabel.Location = new System.Drawing.Point(0, 361);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(475, 23);
-            this.errorLabel.TabIndex = 7;
-            this.errorLabel.Text = "Identifiant non disponible";
-            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.errorLabel.Visible = false;
+            this.connectionButton.Click += new System.EventHandler(this.InscriptionButton);
             // 
             // NewAccountView
             // 
@@ -216,10 +217,10 @@ namespace ProjetPT2K
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(800, 576);
             this.Controls.Add(this.connectionBackground);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PictureBoxLogo);
             this.Name = "NewAccountView";
             this.Text = "Form2";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).EndInit();
             this.connectionBackground.ResumeLayout(false);
             this.connectionBackground.PerformLayout();
             this.ResumeLayout(false);
@@ -229,7 +230,7 @@ namespace ProjetPT2K
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PictureBoxLogo;
         private System.Windows.Forms.Label InscriptionLabel;
         private System.Windows.Forms.Panel connectionBackground;
         private System.Windows.Forms.TextBox namelabel;
