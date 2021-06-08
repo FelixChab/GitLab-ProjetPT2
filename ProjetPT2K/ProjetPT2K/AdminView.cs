@@ -38,15 +38,15 @@ namespace ProjetPT2K
             result.Items.Add("Base de données purgée");
         }
 
-        private void mostBorrowedAlbumsButton_Click(object sender, EventArgs e)
+        private void MostBorrowedAlbumsButton_Click(object sender, EventArgs e)
         {
             result.Items.Clear();
-            foreach(ALBUMS albums in admin.GetBestAlbums().Keys){
-                result.Items.Add(albums);
+            foreach(var entry in admin.GetBestAlbums()){
+                result.Items.Add(entry.Key.ToString() + " - Emprunté " + entry.Value + " fois");
             }
         }
 
-        private void albumNotCheckedButton_Click(object sender, EventArgs e)
+        private void AlbumNotCheckedButton_Click(object sender, EventArgs e)
         {
             result.Items.Clear();
             admin.GetAlbumsNoLoan().ForEach(a => result.Items.Add(a));

@@ -106,7 +106,7 @@ namespace ProjetPT2K
                     topAlbums.Add(target, empruntCount);
                 }
             }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value ascending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
+            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
             return sorted;
         }
     }

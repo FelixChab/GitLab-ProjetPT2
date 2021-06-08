@@ -42,7 +42,7 @@ namespace ProjetPT2K
             this.result.FormattingEnabled = true;
             this.result.Location = new System.Drawing.Point(393, 12);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(338, 420);
+            this.result.Size = new System.Drawing.Size(906, 420);
             this.result.TabIndex = 0;
             // 
             // extendedLoansButton
@@ -83,7 +83,7 @@ namespace ProjetPT2K
             this.mostBorrowedAlbumsButton.TabIndex = 4;
             this.mostBorrowedAlbumsButton.Text = "Albums les plus empruntés";
             this.mostBorrowedAlbumsButton.UseVisualStyleBackColor = true;
-            this.mostBorrowedAlbumsButton.Click += new System.EventHandler(this.mostBorrowedAlbumsButton_Click);
+            this.mostBorrowedAlbumsButton.Click += new System.EventHandler(this.MostBorrowedAlbumsButton_Click);
             // 
             // albumNotCheckedButton
             // 
@@ -93,13 +93,13 @@ namespace ProjetPT2K
             this.albumNotCheckedButton.TabIndex = 5;
             this.albumNotCheckedButton.Text = "Albums non empruntés depuis un an";
             this.albumNotCheckedButton.UseVisualStyleBackColor = true;
-            this.albumNotCheckedButton.Click += new System.EventHandler(this.albumNotCheckedButton_Click);
+            this.albumNotCheckedButton.Click += new System.EventHandler(this.AlbumNotCheckedButton_Click);
             // 
             // AdminView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1330, 450);
             this.Controls.Add(this.albumNotCheckedButton);
             this.Controls.Add(this.mostBorrowedAlbumsButton);
             this.Controls.Add(this.purgeButton);

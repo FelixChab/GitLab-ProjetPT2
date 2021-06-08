@@ -26,11 +26,30 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
-        public List<ALBUMS> GetRecommandations()
+        public Dictionary<ALBUMS, int> GetRecommandations()
         {
-            
+            int loanNumber = -1;
+            GENRES theGenre = null;
+            Dictionary<GENRES, int> topGenres = new Dictionary<GENRES, int>();
+            foreach (EMPRUNTER loan in this.EMPRUNTER)
+            {
+                if (topGenres.ContainsKey(loan.ALBUMS.GENRES))
+                {
+                    topGenres[loan.ALBUMS.GENRES]++;
+                }
+                else
+                {
+                    topGenres[loan.ALBUMS.GENRES] = 1;
+                }
 
-            return null;
+                if (topGenres[loan.ALBUMS.GENRES] > loanNumber)
+                {
+                    loanNumber = topGenres[loan.ALBUMS.GENRES];
+                    theGenre = loan.ALBUMS.GENRES;
+                }
+
+            }
+            return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
         }
 
         /**
