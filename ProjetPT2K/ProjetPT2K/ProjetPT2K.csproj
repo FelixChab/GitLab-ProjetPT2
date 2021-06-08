@@ -115,7 +115,6 @@
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subscriber.cs" />
     <Compile Include="SubscriberView.cs">
       <SubType>Form</SubType>
     </Compile>
