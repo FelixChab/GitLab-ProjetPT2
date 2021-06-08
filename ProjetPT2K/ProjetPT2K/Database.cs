@@ -50,7 +50,7 @@ namespace ProjetPT2K
          */
         public void RestoreCleanState()
         {
-            this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
+            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE ABONNÉS");
             this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
         }
 
