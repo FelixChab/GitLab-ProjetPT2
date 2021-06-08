@@ -26,14 +26,8 @@ namespace ProjetPT2K
         // clique sur création de compte
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewAccountView accountView = new NewAccountView();
+            NewAccountView accountView = new NewAccountView(this);
             accountView.Show();
-            if(accountView.accountCreated)
-            {
-                errorLabel.Text = "Votre compte a bien été créer.";
-                errorLabel.ForeColor = Color.LightGreen;
-                errorLabel.Visible = true;
-            }
 
         }
 
@@ -76,6 +70,11 @@ namespace ProjetPT2K
                 errorLabel.Visible = true;
 
             }
+        }
+
+        public Label getErrorLabel()
+        {
+            return errorLabel;
         }
     }
 }

@@ -13,12 +13,13 @@ namespace ProjetPT2K
     public partial class NewAccountView : Form
     {
 
-        public Boolean accountCreated = false;
-
+        
+        public Login login;
         private MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
-        public NewAccountView()
+        public NewAccountView(Login l)
         {
             InitializeComponent();
+            login = l;
             List<PAYS> list = (from a in Connection.PAYS select a).ToList();
             foreach(PAYS p in list)
             {
@@ -48,9 +49,9 @@ namespace ProjetPT2K
                 return;
             }
             Database.GetInstance().CreateAccount(prenom, nom, pays.CODE_PAYS, username, password);
-            accountCreated = true;
-            this.DialogResult = DialogResult.OK;
-
+            login.getErrorLabel().Text = "Votre compte a bien été créer.";
+            login.getErrorLabel().ForeColor = Color.LightGreen;
+            login.getErrorLabel().Visible = true;
             Close();
         }
 
