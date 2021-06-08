@@ -113,7 +113,7 @@ namespace ProjetPT2K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 311);
+            this.ClientSize = new System.Drawing.Size(1025, 510);
             this.Controls.Add(this.extendAllButton);
             this.Controls.Add(this.albumTitleTextBox);
             this.Controls.Add(this.actionButton);
@@ -123,6 +123,7 @@ namespace ProjetPT2K
             this.Controls.Add(this.mainMenuListBox);
             this.Name = "SubscriberView";
             this.Text = "SubscriberView";
+            this.Load += new System.EventHandler(this.SubscriberView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

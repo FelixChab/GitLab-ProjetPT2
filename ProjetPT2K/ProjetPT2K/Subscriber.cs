@@ -22,8 +22,8 @@ namespace ProjetPT2K
                 DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(album.GENRES.DÉLAI)
             };
 
-            this.Connection.EMPRUNTER.Add(borrow);
-            this.Connection.SaveChanges();
+            Connection.EMPRUNTER.Add(borrow);
+            Connection.SaveChanges();
         }
 
         /**
