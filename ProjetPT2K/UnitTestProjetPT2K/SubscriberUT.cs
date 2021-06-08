@@ -1,4 +1,3 @@
-using System;
 using ProjetPT2K;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -77,6 +76,13 @@ namespace UnitTestProjetPT2K
 
             Assert.AreEqual(1, loan.CODE_ALBUM);
             Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
+        }
+
+        private void ListAlbums()
+        {
+            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
+                               where album.CODE_ALBUM == 1
+                               select album).FirstOrDefault();
         }
 
         private void ListAlbums()
