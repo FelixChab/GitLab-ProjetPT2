@@ -83,6 +83,7 @@ namespace UnitTestProjetPT2K
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
                                where album.CODE_ALBUM == 1
                                select album).FirstOrDefault();
+<<<<<<< HEAD
         }
 
         private void ListAlbums()
@@ -93,6 +94,12 @@ namespace UnitTestProjetPT2K
 
             
         }
+=======
+
+            
+        }
+
+>>>>>>> 2c49e59b7a50d0e4359c4bbb0ed6dce29bf86d6a
     }
 
 }

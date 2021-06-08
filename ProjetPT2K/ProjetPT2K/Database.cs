@@ -50,22 +50,8 @@ namespace ProjetPT2K
          */
         public void RestoreCleanState()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
             this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
-=======
-            this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
-=======
-            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE ABONNÉS");
->>>>>>> 7f70523 (Adjustments in UT)
-            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
->>>>>>> bf6cf64 (Created UT based class)
-=======
-            this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
-            this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
->>>>>>> 80f17cf (Finished UT for US 1)
         }
 
         /**
