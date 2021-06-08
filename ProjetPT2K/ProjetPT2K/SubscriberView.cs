@@ -154,5 +154,10 @@ namespace ProjetPT2K
             extendAllButton.Enabled = extendAllButton.Visible = false;
             albumTitleTextBox.Enabled = albumTitleTextBox.Visible = false;
         }
+
+        private void SubscriberView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
