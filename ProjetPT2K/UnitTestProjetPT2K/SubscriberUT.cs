@@ -79,6 +79,9 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
         }
 
+        /// <summary>
+        /// Ensure the list of loans is correct
+        /// </summary>
         private void ListAlbums()
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
