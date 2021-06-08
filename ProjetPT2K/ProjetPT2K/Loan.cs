@@ -4,30 +4,32 @@ namespace ProjetPT2K
 {
     public partial class EMPRUNTER
     {
-        /**
-         * Return true if the current loan has been extended.
-         * 
-         * @return a boolean
-         */
+        /// <summary>
+        /// Return true if the current loan has been extended.
+        /// </summary>
+        /// <returns> a boolean </returns>
         public bool HasBeenExtended()
         {
             return (this.DATE_RETOUR_ATTENDUE - this.DATE_EMPRUNT) > TimeSpan.FromDays(this.ALBUMS.GENRES.DÉLAI);
         }
 
-        /**
-         * Extend the current loan by a year.
-         */
+        /// <summary>
+        /// Extend the current loan by a month.
+        /// </summary>
+        /// <returns> a boolean </returns>
         public void Extend()
         {
-            this.DATE_RETOUR_ATTENDUE = this.DATE_RETOUR_ATTENDUE.AddDays(30);
-            Database.GetInstance().GetConnection().SaveChanges();
+            if (!HasBeenExtended())
+            {
+                this.DATE_RETOUR_ATTENDUE = this.DATE_RETOUR_ATTENDUE.AddDays(30);
+                Database.GetInstance().GetConnection().SaveChanges();
+            }
         }
 
-        /**
-         * Return the string representation of the Loan.
-         * 
-         * @return a string
-         */
+        /// <summary>
+        /// Return the string representation of the loan.
+        /// </summary>
+        /// <returns> a string </returns>
         public override String ToString()
         {
             string extended = this.HasBeenExtended() ? " (prolongé)" : "";

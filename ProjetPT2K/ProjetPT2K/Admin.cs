@@ -1,38 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
     public class Admin : Account
     {
-        /* Administrator login & credentials */
+        /// <summary>
+        /// The login of the administrator.
+        /// </summary>
         public static string LOGIN = "ADMIN";
+
+        /// <summary>
+        /// The paswword of the administrator.
+        /// </summary>
         public static string PASSWORD = "admin";
 
+        /// <summary>
+        /// Non-parametotised constructor creating a new Admin object.
+        /// </summary>
         public Admin()
         {
             this.IsAdministrator = true;
         }
 
-        /**
-         * Method to get albums loans that are late
-         */
-        public List<ALBUMS> GetLateLoans()
+        /// <summary>
+        /// Method to get late loans.
+        /// </summary>
+        /// <returns> a list of Album objects </returns>
+        public List<EMPRUNTER> GetLateLoans()
         {
-            List<ALBUMS> lateLoans = (from a in Connection.ALBUMS
-                                      join e in Connection.EMPRUNTER
-                                      on a.CODE_ALBUM equals e.CODE_ALBUM
-                                      where (e.DATE_RETOUR == null && e.DATE_RETOUR_ATTENDUE > DateTime.Now)
-                                      select a).ToList();
+            List<EMPRUNTER> lateLoans = new List<EMPRUNTER>();
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            {
+                if (theLoan.DATE_RETOUR == null && theLoan.DATE_RETOUR_ATTENDUE.CompareTo(DateTime.Now) < 0)
+                {
+                    lateLoans.Add(theLoan);
+                }
+            }
             return lateLoans;
         }
 
-        /**
-         * Method to get subscriber who are 10-days late on a loan
-         */
+        /// <summary>
+        /// Return the list of subscribers who have a 10-days late loan.
+        /// </summary>
+        /// <returns> a list of Abonné objects </returns>
         public List<ABONNÉS> GetLateSubscribers()
         {
             List<ABONNÉS> lateSubscribers= new List<ABONNÉS>();

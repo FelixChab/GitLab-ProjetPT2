@@ -30,16 +30,6 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Restore the database to a clean state for unit tests.
-        /// </summary>
-        private void RestoreCleanState()
-        {
-            this.Database.RestoreCleanState();
-            // Ensures the database is empty
-            Assert.IsFalse(this.Database.AccountExists("jean"));
-        }
-
-        /// <summary>
         /// Attempt to create a new account in the database.
         /// </summary>
         private void CreateAccount()
@@ -66,9 +56,7 @@ namespace UnitTestProjetPT2K
         private void BorrowAlbum()
         {
             Assert.AreEqual(0, this._Subscriber.EMPRUNTER.Count);
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == 1
-                               select album).FirstOrDefault();
+            ALBUMS theAlbum = this.Database.GetAlbumWithID(1);
 
             Assert.IsNotNull(theAlbum);
             this._Subscriber.BorrowAlbum(theAlbum);
@@ -85,21 +73,17 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void ListAlbums()
         {
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == 2
-                               select album).FirstOrDefault();
+            ALBUMS theAlbum = this.Database.GetAlbumWithID(2);
 
             Assert.IsNotNull(theAlbum);
             this._Subscriber.BorrowAlbum(theAlbum);
 
             List<EMPRUNTER> theLoans = (from loan in this.Connection.EMPRUNTER
-                               where loan.CODE_ABONNÉ == this._Subscriber.CODE_ABONNÉ
-                               select loan).ToList();
+                                        where loan.CODE_ABONNÉ == this._Subscriber.CODE_ABONNÉ
+                                        select loan).ToList();
 
             foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
-            {
                 Assert.IsTrue(theLoans.Contains(loan));
-            }
         }
 
         }
