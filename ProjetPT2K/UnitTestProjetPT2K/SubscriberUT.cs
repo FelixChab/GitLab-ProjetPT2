@@ -1,5 +1,6 @@
 using ProjetPT2K;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProjetPT2K
@@ -78,28 +79,28 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
         }
 
+        /// <summary>
+        /// Ensure the list of loans is correct
+        /// </summary>
         private void ListAlbums()
         {
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == 1
-                               select album).FirstOrDefault();
-<<<<<<< HEAD
-        }
-
-        private void ListAlbums()
-        {
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == 1
+                               where album.CODE_ALBUM == 2
                                select album).FirstOrDefault();
 
-            
-        }
-=======
+            Assert.IsNotNull(theAlbum);
+            this._Subscriber.BorrowAlbum(theAlbum);
 
-            
+            List<EMPRUNTER> theLoans = (from loan in this.Connection.EMPRUNTER
+                               where loan.CODE_ABONNÉ == this._Subscriber.CODE_ABONNÉ
+                               select loan).ToList();
+
+            foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
+            {
+                Assert.IsTrue(theLoans.Contains(loan));
+            }
         }
 
->>>>>>> 2c49e59b7a50d0e4359c4bbb0ed6dce29bf86d6a
     }
 
 }
