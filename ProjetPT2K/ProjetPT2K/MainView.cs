@@ -51,6 +51,8 @@ namespace ProjetPT2K
                 AlbumsDisplayed.Add(display);
                 position = new Point(position.X + 100, position.Y);
             }
+            
+            
         }
 
         private void GoToAccountView_Click(object sender, EventArgs e)

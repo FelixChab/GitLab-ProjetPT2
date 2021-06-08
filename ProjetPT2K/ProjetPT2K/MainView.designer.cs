@@ -163,6 +163,16 @@ namespace ProjetPT2K
             this.listeAlbum.TabIndex = 26;
             this.listeAlbum.Text = "Rechercher";
             // 
+            // mostBorrowedAlbumsLabel
+            // 
+            this.mostBorrowedAlbumsLabel.AutoSize = true;
+            this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 332);
+            this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
+            this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
+            this.mostBorrowedAlbumsLabel.TabIndex = 16;
+            this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
