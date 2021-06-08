@@ -92,7 +92,9 @@
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
     <Compile Include="Loan.cs" />
-    <Compile Include="NewAccountView.cs" />
+    <Compile Include="NewAccountView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="NewAccountView.Designer.cs">
       <DependentUpon>NewAccountView.cs</DependentUpon>
     </Compile>

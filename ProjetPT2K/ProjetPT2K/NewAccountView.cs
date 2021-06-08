@@ -40,8 +40,7 @@ namespace ProjetPT2K
                 reset();
                 return;
             }
-            ABONNÉS abonne = (ABONNÉS)(from a in Connection.ABONNÉS where a.LOGIN_ABONNÉ == username select a);
-            if(abonne != null)
+            if(Database.GetInstance().AccountExists(username))
             {
                 errorLabel.Text = "Identifiant non disponible";
                 errorLabel.Visible = true;
