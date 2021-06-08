@@ -60,6 +60,12 @@
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="Account.cs" />
+    <Compile Include="AccountView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountView.Designer.cs">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
@@ -134,6 +140,12 @@
       <DependentUpon>SubscriberView.cs</DependentUpon>
     </Compile>
     <Compile Include="Subscriber.cs" />
+    <EmbeddedResource Include="AccountView.resx">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminView.resx">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppView.resx">
       <DependentUpon>AppView.cs</DependentUpon>
     </EmbeddedResource>
