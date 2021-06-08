@@ -10,13 +10,12 @@ namespace ProjetPT2K
 {
     class DisplayAlbum : ALBUMS
     {
-        //List<ALBUMS> albums;
         private ALBUMS album;
-        //private List<byte[]> pictures { get; set; }
-
         private byte[] picture { get; set; }
-        private string title { get { return this.title; } set { this.title = TITRE_ALBUM; } }
-        private string editor { get { return this.editor; } set { this.editor = EDITEURS.NOM_EDITEUR; } }
+        private string title;
+        public string Title { get { return this.title; } set { this.title = TITRE_ALBUM; } }
+        private string editor;
+        public string Editor { get { return this.editor; } set { this.editor = EDITEURS.NOM_EDITEUR; } }
         private Point position { get; set; }
 
         /// <summary>
@@ -28,23 +27,16 @@ namespace ProjetPT2K
         {
             this.album = album;
             this.position = position;
-            //this.pictures = new List<byte[]>();
-            //this.albums.ForEach(a => pictures.Add(a.POCHETTE));
+            this.picture = album.POCHETTE;
         }
 
         /// <summary>
         ///  Return an image from a bytes arrray
         /// </summary>
-        public Image getImages()
+        public Image GetImage()
         {
-            List<Image> images = new List<Image>();
-            //foreach (byte[] pictureInBytes in pictures)
-            //{
             MemoryStream ms = new MemoryStream(picture);
             Image img = Image.FromStream(ms);
-            images.Add(img);
-
-            //}
             return img;
         }
 
@@ -52,17 +44,13 @@ namespace ProjetPT2K
         /// Draw an album
         /// </summary>
         /// <param name="g">The graphics</param>
-        public void drawAlbum(Graphics g)
+        public void DrawAlbum(Graphics g)
         {
-            if (getImages() != null)
+            if (GetImage() != null)
             {
-                //foreach (Image image in getImages())
-                //{
-                g.DrawImage(getImages(), position.X, position.Y, 50, 50);
-                position = new Point(position.X + 200, position.Y);
-                g.DrawString("Titre : " + title, new Font(("Comic sans MS"), 11), new SolidBrush(Color.Black), new Point(position.X, getImages().Height + 20));
-                g.DrawString("Éditeur : " + editor, new Font(("Comic sans MS"), 9), new SolidBrush(Color.Black), new Point(position.X, getImages().Height + 40));
-                //}
+                g.DrawImage(GetImage(), position.X, position.Y, 75, 75);
+                g.DrawString("Titre : " + title, new Font(("Comic sans MS"), 11), new SolidBrush(Color.Black), new Point(position.X, position.Y  + 95));
+                g.DrawString("Éditeur : " + editor, new Font(("Comic sans MS"), 9), new SolidBrush(Color.Black), new Point(position.X, position.Y + 115));
             }
             else
             {
@@ -71,6 +59,11 @@ namespace ProjetPT2K
                     "qu'au moins \n" +
                     "10 albums auront étaient empruntés.", new Font("Comic Sans MS", 12), new SolidBrush(Color.Red), position);
             }
+        }
+
+        public bool Contains (Point p)
+        {
+            return true;
         }
     }
 }
