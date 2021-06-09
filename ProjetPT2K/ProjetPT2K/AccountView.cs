@@ -14,15 +14,17 @@ namespace ProjetPT2K
     {
         private readonly ABONNÉS Acount;
         ABONNÉS Subriber;
+        
         public AccountView(ABONNÉS acount )
         {
             InitializeComponent();
             this.Subriber = acount;
-            label6.Text = Subriber.NOM_ABONNÉ.Trim();
-            label7.Text = Subriber.PRÉNOM_ABONNÉ.Trim();
-            label8.Text = Subriber.LOGIN_ABONNÉ.Trim();
-            label9.Text = "*******".Trim();
-            label10.Text = ""+Subriber.PAYS;
+            this.listeAlbum.Padding = new System.Windows.Forms.Padding(50);
+            name.Text = Subriber.NOM_ABONNÉ.Trim();
+            firstname.Text = Subriber.PRÉNOM_ABONNÉ.Trim();
+            username.Text = Subriber.LOGIN_ABONNÉ.Trim();
+            password.Text = "*******".Trim();
+            country.Text = ""+Subriber.PAYS;
             ListLoans();
             this.Acount = acount;
         }
@@ -38,17 +40,6 @@ namespace ProjetPT2K
         {
             RefreshLoanList();
             extendAllButton.Visible = extendAllButton.Enabled = true;
-        }
-
-        private void AccountView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,12 +72,26 @@ namespace ProjetPT2K
                 RefreshLoanList();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void listeAlbum_TextChanged(object sender, EventArgs e)
+        {
+            RefreshAlbumList();
+        }
+
+
+        private void RefreshAlbumList()
+        {
+            listeAlbum.Items.Clear();
+            string pattern = listeAlbum.Text;
+            List<ALBUMS> albums = Database.GetInstance().GetAlbumsContaining(pattern);
+            albums.ForEach(album => listeAlbum.Items.Add(album));
+        }
+
+        private void Logo_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
