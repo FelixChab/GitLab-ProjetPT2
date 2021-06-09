@@ -51,13 +51,40 @@ namespace ProjetPT2K
                 AlbumsDisplayed.Add(display);
                 position = new Point(position.X + 100, position.Y);
             }
-            
-            
         }
 
         private void GoToAccountView_Click(object sender, EventArgs e)
         {
             // Open account view
+        }
+
+        private void MainView_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void MainView_MouseClick(object sender, MouseEventArgs e)
+        {
+            foreach (DisplayAlbum display in AlbumsDisplayed)
+            {
+                if (display.Contains(e.Location))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        //ContextMenuStrip ContextMenuAlbum new ContextMenuStrip
+
+                    }
+                    else
+                    {
+                        ContextMenuStrip contextMenuAlbum = new ContextMenuStrip();
+                        contextMenuAlbum.Items.Add("Afficher les détails");
+                        contextMenuAlbum.Items.Add("Emprunter");
+
+                        //contextMenuAlbum.Show(e.Location);
+                    }
+                }
+            }
+
         }
 
         private void MainView_MouseMove(object sender, MouseEventArgs e)
