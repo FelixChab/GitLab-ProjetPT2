@@ -4,30 +4,33 @@ using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
-
+    /// <summary>
+    /// Class representing the database and its connection.
+    /// </summary>
     public class Database
     {
-        /**
-         * The (unique) instance of the database
-         */
+        /// <summary>
+        /// The (unique) instance of the database
+        /// </summary>
         private static Database _Database;
 
-        /**
-         * Attributes allowing the connection
-         */
+        /// <summary>
+        /// Attributes allowing the connection
+        /// </summary>
         private readonly MusiquePT2_KEntities Connection;
 
-        /**
-         * The non-parameterised constructor creating a new instance of Database
-         */
+        /// <summary>
+        /// The non-parameterised constructor creating a new instance of Database
+        /// </summary>
         private Database()
         {
             this.Connection = new MusiquePT2_KEntities();
         }
 
-        /**
-         * Function that allows the instanciation of the database
-         */
+        /// <summary>
+        /// Function that allows the instanciation of the database
+        /// </summary>
+        /// <returns> a Database object </returns>
         public static Database GetInstance()
         {
             if (_Database == null)
@@ -37,29 +40,30 @@ namespace ProjetPT2K
             return _Database;
         }
 
-        /**
-         * Function responsible for the connection with the database
-         */
+        /// <summary>
+        /// Return the connection to the database.
+        /// </summary>
+        /// <returns> a MusiquePT2_KEntities object </returns>
         public MusiquePT2_KEntities GetConnection()
         {
             return this.Connection;
         }
 
-        /**
-         * Restore the database to a state where no subscribers and no loans are registered.
-         */
+        /// <summary>
+        /// Restore the database to a state where no subscribers and no loans are registered.
+        /// </summary>
         public void RestoreCleanState()
         {
             this.Connection.Database.ExecuteSqlCommand("TRUNCATE TABLE EMPRUNTER");
             this.Connection.Database.ExecuteSqlCommand("DELETE FROM ABONNÉS");
         }
 
-        /**
-         * Function that allows a subscriber to log itself the application
-         * 
-         * @param login, the login of the subscriber
-         * @param password, the passeword of the subscriber
-         * */
+        /// <summary>
+        /// Return the account retrieved from the database corresponding to the given credentials.
+        /// </summary>
+        /// <param name="login"> the login of the account </param>
+        /// <param name="password"> the password of the account </param>
+        /// <returns></returns>
         public Account Login(string login, string password)
         {
             Account account;
@@ -70,9 +74,12 @@ namespace ProjetPT2K
             return account;
         }
 
-        /**
-         * Retrieve the subscriber account corresponding to the given login and password
-         */
+        /// <summary>
+        /// Retrieve the subscriber account corresponding to the given login and password.
+        /// </summary>
+        /// <param name="login"> the login of the subscriber </param>
+        /// <param name="password"> the password of the subscriber </param>
+        /// <returns> an Account object </returns>
         private Account FetchSubscriberAccount(string login, string password)
         {
             var request = from subscriber in this.Connection.ABONNÉS
@@ -135,6 +142,35 @@ namespace ProjetPT2K
                          select album;
 
             return albums.ToList();
+        }
+
+        /// <summary>
+        /// Return the list of all the inactive subscribers of the database (those who have not borrowed an album in a year).
+        /// </summary>
+        /// <returns> a list of Abonné objects </returns>
+        public List<ABONNÉS> GetInactiveSubscribers()
+        {
+            List<ABONNÉS> inactiveSubscribers = new List<ABONNÉS>();
+            foreach (ABONNÉS subscriber in this.Connection.ABONNÉS)
+            {
+                if (!subscriber.IsActive())
+                    inactiveSubscribers.Add(subscriber);
+                /*
+                EMPRUNTER loan = subscriber.EMPRUNTER.FirstOrDefault();
+                if (loan != null && loan.DATE_RETOUR != null && loan.DATE_RETOUR.Value.AddYears(1) < DateTime.Now)
+                {
+                    List<EMPRUNTER> loans = new List<EMPRUNTER>();
+                    loans.AddRange(subscriber.EMPRUNTER);
+                    foreach (EMPRUNTER e in loans)
+                    {
+                        subscriber.EMPRUNTER.Remove(e);
+                    }
+                    Connection.ABONNÉS.Remove(subscriber);
+                }
+                */
+            }
+
+            return inactiveSubscribers;
         }
 
         /// <summary>

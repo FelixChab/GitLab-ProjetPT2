@@ -2,23 +2,20 @@
 {
     public abstract class Account
     {
-        /**
-         * True if the considered account has administrator priviledges.
-         */
+        /// <summary>
+        /// True if the considered account has administrator priviledges.
+        /// </summary>
         public bool IsAdministrator { get; set; }
 
-        /**
-         * Return the open connection to the database.
-         * 
-         * @return a MusiquePT2_KEntities object
-         */
-        protected MusiquePT2_KEntities Connection 
-        { 
-            get 
-            { 
-                return Database.GetInstance().GetConnection(); 
-            } 
-        }
+        /// <summary>
+        /// The Database object the tests will use.
+        /// </summary>
+        protected Database Database = Database.GetInstance();
+
+        /// <summary>
+        /// The connection to the dabase.
+        /// </summary>
+        protected MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
 
     }
 }

@@ -28,7 +28,7 @@ namespace ProjetPT2K
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add("| Emprunts étendus :");
             listBoxAdminResults.Items.Add(" ");
-            CurrentAdmin.GetLateLoans().ForEach(a => listBoxAdminResults.Items.Add(a));
+            CurrentAdmin.GetExtendedLoans().ForEach(a => listBoxAdminResults.Items.Add(a));
         }
 
         private void ButtonLateLoans_Click(object sender, EventArgs e)
