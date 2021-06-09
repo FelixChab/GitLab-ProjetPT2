@@ -1,3 +1,4 @@
+using System;
 using ProjetPT2K;
 using System.Linq;
 using System.Collections.Generic;
@@ -102,14 +103,20 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void ExtendLoan()
         {
-            EMPRUNTER loan = this._Subscriber.EMPRUNTER.FirstOrDefault();
-            Assert.IsNotNull(loan);
-            Assert.IsFalse(loan.HasBeenExtended());
+            EMPRUNTER theLoan = this._Subscriber.EMPRUNTER.FirstOrDefault();
+            Assert.IsNotNull(theLoan);
 
-            loan.Extend();
-            Assert.AreNotEqual(loan.DATE_RETOUR, loan.DATE_RETOUR_ATTENDUE);
-            Assert.AreNotEqual(loan.DATE_RETOUR, (loan.DATE_RETOUR_ATTENDUE));
-            Assert.IsTrue(loan.HasBeenExtended());
+            // Ensure the loan has not been extended yet
+            Assert.IsFalse(theLoan.HasBeenExtended());
+            theLoan.Extend();
+
+            // Ensure the date is correct
+            int theDelay = theLoan.ALBUMS.GENRES.DÉLAI;
+            DateTime theDate = theLoan.DATE_EMPRUNT.AddDays(theDelay).AddMonths(1);
+            Assert.AreEqual(theDate, theLoan.DATE_RETOUR_ATTENDUE);
+
+            // Ensure the loan has been extended
+            Assert.IsTrue(theLoan.HasBeenExtended());
         }
 
 
