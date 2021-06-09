@@ -19,6 +19,7 @@ namespace ProjetPT2K
         public FormAdmin(Admin admin)
         {
             this.CurrentAdmin = admin;
+            this.listBoxAdminResults.ScrollAlwaysVisible = false;
             InitializeComponent();
         }
 
@@ -68,5 +69,22 @@ namespace ProjetPT2K
             CurrentAdmin.GetAlbumsNoLoan().ForEach(a => listBoxAdminResults.Items.Add(a));
         }
 
+        private void FormAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonsubsribers_Click(object sender, EventArgs e)
+        {
+            listBoxAdminResults.Items.Clear();
+            listBoxAdminResults.Items.Add("| Liste des abonnés :");
+
+            Database.GetInstance().GetConnection().ABONNÉS.ToList().ForEach(p =>
+            {
+                String text = p.ToString();
+                listBoxAdminResults.Items.Add(text);
+
+            });
+        }
     }
 }
