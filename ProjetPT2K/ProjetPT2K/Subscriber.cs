@@ -77,7 +77,7 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";
+            return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ;
         }
 
 
