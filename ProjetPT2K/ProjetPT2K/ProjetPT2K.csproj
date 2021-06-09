@@ -67,6 +67,13 @@
       <DependentUpon>AccountView.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin.cs" />
+    <Compile Include="AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountView.Designer.cs">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
