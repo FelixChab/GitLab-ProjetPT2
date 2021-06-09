@@ -77,14 +77,35 @@ namespace ProjetPT2K
         private void buttonsubsribers_Click(object sender, EventArgs e)
         {
             listBoxAdminResults.Items.Clear();
-            listBoxAdminResults.Items.Add("| Liste des abonnés :");
+            listBoxAdminResults.Items.Add(FormatText(new String[]{ "Abonné", "Emprunts"}));
 
             Database.GetInstance().GetConnection().ABONNÉS.ToList().ForEach(p =>
             {
                 String text = p.ToString();
-                listBoxAdminResults.Items.Add(text);
+                listBoxAdminResults.Items.Add(FormatText(new String[] { text, p.EMPRUNTER.Count+""}));
 
             });
+        }
+
+
+        public String FormatText(String[] args)
+        {
+            String text = "";
+            foreach (String s in args)
+            {
+                String user = s;
+                if (user.Length > 20)
+                {
+                    user.Substring(0, 20);
+                }
+                text = text + user;
+                for (int i = 0; i < 20 - user.Length; i++)
+                {
+                    text = text + " ";
+                }
+                text = text + " | ";
+            }
+            return text;
         }
     }
 }
