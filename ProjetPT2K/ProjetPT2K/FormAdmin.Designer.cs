@@ -36,9 +36,16 @@ namespace ProjetPT2K
             this.ButtonCleanse = new System.Windows.Forms.Button();
             this.ButtonMostLoaned = new System.Windows.Forms.Button();
             this.ButtonLessLoaned = new System.Windows.Forms.Button();
-            this.labelButtonsBackground = new System.Windows.Forms.Label();
             this.buttonsubsribers = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pageLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -56,17 +63,20 @@ namespace ProjetPT2K
             // 
             // listBoxAdminResults
             // 
+            this.listBoxAdminResults.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxAdminResults.FormattingEnabled = true;
-            this.listBoxAdminResults.Location = new System.Drawing.Point(428, 46);
+            this.listBoxAdminResults.ItemHeight = 18;
+            this.listBoxAdminResults.Location = new System.Drawing.Point(334, 138);
             this.listBoxAdminResults.Name = "listBoxAdminResults";
-            this.listBoxAdminResults.Size = new System.Drawing.Size(651, 485);
+            this.listBoxAdminResults.Size = new System.Drawing.Size(671, 418);
             this.listBoxAdminResults.TabIndex = 1;
+            this.listBoxAdminResults.SelectedIndexChanged += new System.EventHandler(this.listBoxAdminResults_SelectedIndexChanged);
             // 
             // ButtonExtendedLoans
             // 
             this.ButtonExtendedLoans.AutoEllipsis = true;
             this.ButtonExtendedLoans.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonExtendedLoans.Location = new System.Drawing.Point(195, 50);
+            this.ButtonExtendedLoans.Location = new System.Drawing.Point(67, 138);
             this.ButtonExtendedLoans.Name = "ButtonExtendedLoans";
             this.ButtonExtendedLoans.Size = new System.Drawing.Size(190, 40);
             this.ButtonExtendedLoans.TabIndex = 2;
@@ -77,7 +87,7 @@ namespace ProjetPT2K
             // ButtonLateLoans
             // 
             this.ButtonLateLoans.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonLateLoans.Location = new System.Drawing.Point(195, 121);
+            this.ButtonLateLoans.Location = new System.Drawing.Point(67, 210);
             this.ButtonLateLoans.Name = "ButtonLateLoans";
             this.ButtonLateLoans.Size = new System.Drawing.Size(190, 40);
             this.ButtonLateLoans.TabIndex = 3;
@@ -88,7 +98,7 @@ namespace ProjetPT2K
             // ButtonCleanse
             // 
             this.ButtonCleanse.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonCleanse.Location = new System.Drawing.Point(195, 202);
+            this.ButtonCleanse.Location = new System.Drawing.Point(67, 273);
             this.ButtonCleanse.Name = "ButtonCleanse";
             this.ButtonCleanse.Size = new System.Drawing.Size(190, 40);
             this.ButtonCleanse.TabIndex = 4;
@@ -99,7 +109,7 @@ namespace ProjetPT2K
             // ButtonMostLoaned
             // 
             this.ButtonMostLoaned.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonMostLoaned.Location = new System.Drawing.Point(195, 277);
+            this.ButtonMostLoaned.Location = new System.Drawing.Point(67, 337);
             this.ButtonMostLoaned.Name = "ButtonMostLoaned";
             this.ButtonMostLoaned.Size = new System.Drawing.Size(190, 59);
             this.ButtonMostLoaned.TabIndex = 5;
@@ -110,7 +120,7 @@ namespace ProjetPT2K
             // ButtonLessLoaned
             // 
             this.ButtonLessLoaned.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonLessLoaned.Location = new System.Drawing.Point(195, 369);
+            this.ButtonLessLoaned.Location = new System.Drawing.Point(67, 420);
             this.ButtonLessLoaned.Name = "ButtonLessLoaned";
             this.ButtonLessLoaned.Size = new System.Drawing.Size(190, 59);
             this.ButtonLessLoaned.TabIndex = 6;
@@ -118,20 +128,10 @@ namespace ProjetPT2K
             this.ButtonLessLoaned.UseVisualStyleBackColor = true;
             this.ButtonLessLoaned.Click += new System.EventHandler(this.ButtonLessLoaned_Click);
             // 
-            // labelButtonsBackground
-            // 
-            this.labelButtonsBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(161)))), ((int)(((byte)(193)))));
-            this.labelButtonsBackground.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelButtonsBackground.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelButtonsBackground.Location = new System.Drawing.Point(151, 50);
-            this.labelButtonsBackground.Name = "labelButtonsBackground";
-            this.labelButtonsBackground.Size = new System.Drawing.Size(11, 476);
-            this.labelButtonsBackground.TabIndex = 7;
-            // 
             // buttonsubsribers
             // 
             this.buttonsubsribers.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonsubsribers.Location = new System.Drawing.Point(195, 467);
+            this.buttonsubsribers.Location = new System.Drawing.Point(67, 499);
             this.buttonsubsribers.Name = "buttonsubsribers";
             this.buttonsubsribers.Size = new System.Drawing.Size(190, 59);
             this.buttonsubsribers.TabIndex = 8;
@@ -139,14 +139,68 @@ namespace ProjetPT2K
             this.buttonsubsribers.UseVisualStyleBackColor = true;
             this.buttonsubsribers.Click += new System.EventHandler(this.buttonsubsribers_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(115, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(242, 33);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Panel administrateur";
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Location = new System.Drawing.Point(47, 0);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(33, 23);
+            this.pageLabel.TabIndex = 10;
+            this.pageLabel.Text = "1/1";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pageLabel);
+            this.panel1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(880, 562);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(125, 27);
+            this.panel1.TabIndex = 11;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ProjetPT2K.Properties.Resources.previous;
+            this.pictureBox1.Location = new System.Drawing.Point(5, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 19);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ProjetPT2K.Properties.Resources.next;
+            this.pictureBox2.Location = new System.Drawing.Point(80, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(41, 19);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(1112, 613);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonsubsribers);
-            this.Controls.Add(this.labelButtonsBackground);
             this.Controls.Add(this.ButtonLessLoaned);
             this.Controls.Add(this.ButtonMostLoaned);
             this.Controls.Add(this.ButtonCleanse);
@@ -158,7 +212,12 @@ namespace ProjetPT2K
             this.Text = "FormAdmin";
             this.Load += new System.EventHandler(this.FormAdmin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -171,7 +230,11 @@ namespace ProjetPT2K
         private System.Windows.Forms.Button ButtonCleanse;
         private System.Windows.Forms.Button ButtonMostLoaned;
         private System.Windows.Forms.Button ButtonLessLoaned;
-        private System.Windows.Forms.Label labelButtonsBackground;
         private System.Windows.Forms.Button buttonsubsribers;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label pageLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

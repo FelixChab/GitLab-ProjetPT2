@@ -78,6 +78,7 @@
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tab.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CreateAccountView.cs">
       <SubType>Form</SubType>
@@ -222,6 +223,9 @@
       <DependentUpon>BD.edmx</DependentUpon>
       <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
+    <None Include="img\previous.png" />
+    <None Include="img\next.png" />
+    <None Include="img\icons8-flèche-droite-96.png" />
     <None Include="img\icon.ico" />
     <None Include="img\App-Logo.png" />
     <None Include="img\Logo.ico" />
