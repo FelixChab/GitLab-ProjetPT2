@@ -27,6 +27,7 @@ namespace UnitTestProjetPT2K
             BorrowAlbum();
             ListAlbums();
             Extends();
+            getRecommendations();
         }
 
         /// <summary>
@@ -99,6 +100,32 @@ namespace UnitTestProjetPT2K
             Assert.AreNotEqual(loan.DATE_RETOUR, loan.DATE_RETOUR_ATTENDUE);
             Assert.AreNotEqual(loan.DATE_RETOUR, (loan.DATE_RETOUR_ATTENDUE));
             Assert.IsTrue(loan.HasBeenExtended());
+        }
+
+
+        /// <summary>
+        /// Attempt to getRecommendations.
+        /// </summary>
+        private void getRecommendations()
+        {
+
+            Dictionary<ALBUMS, int> dict = this._Subscriber.GetRecommandations();
+
+            // check if the list of recommendations is in the right order
+            for (int i = 1; i < dict.Count; i++)
+            {
+                int lim = dict.ElementAt(i).Value;
+                int after = dict.ElementAt(i - 1).Value;
+                Assert.IsTrue(lim >= after);
+            }
+
+            // check if the genre of recommendations is the good one.
+            for (int i = 1; i < dict.Count; i++)
+            {
+                ALBUMS genre = dict.ElementAt(i).Key;
+                ALBUMS afterGenre = dict.ElementAt(i - 1).Key;
+                Assert.AreEqual(genre.CODE_GENRE, afterGenre.CODE_GENRE);
+            }
         }
     }
 

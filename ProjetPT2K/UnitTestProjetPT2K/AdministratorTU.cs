@@ -26,8 +26,8 @@ namespace UnitTestProjetPT2K
         {
             RestoreCleanState();
             checkBestAlbums();
-            CreateAccount();
-            InsertExtendedLoans();
+            CreateAccounts();
+           // InsertExtendedLoans();
             GetExtendedLoans();
             getBestAlbums();
         }
@@ -38,7 +38,7 @@ namespace UnitTestProjetPT2K
         private void CreateAccounts()
         {
             this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            Account subscriber = this.Database.Login("jean", "pierre");
+            Account subscriber1 = this.Database.Login("jean", "pierre");
             this.Database.CreateAccount("Jean", "patrick", 1, "patrick", "patrick");
             Account subscriber2 = this.Database.Login("patrick", "patrick");
             // Ensure the account was added to the database
@@ -153,7 +153,7 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void getBestAlbums()
         {
-           ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
+            ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
             EMPRUNTER theLoan = new EMPRUNTER
             {
@@ -164,7 +164,7 @@ namespace UnitTestProjetPT2K
             };
             this.Connection.EMPRUNTER.Add(theLoan);
             this.Connection.SaveChanges();
-          
+
 
             Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
             Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();

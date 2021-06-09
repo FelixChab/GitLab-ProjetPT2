@@ -60,6 +60,7 @@
     <Compile Include="SubscriberUT.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="AdministratorTU.cs" />
+    <Compile Include="LoanUT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
