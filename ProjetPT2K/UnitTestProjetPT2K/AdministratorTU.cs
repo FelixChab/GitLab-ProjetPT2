@@ -2,6 +2,7 @@
 using ProjetPT2K;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace UnitTestProjetPT2K
 {
@@ -15,6 +16,7 @@ namespace UnitTestProjetPT2K
         /// the administrator used in this tests.
         /// </summary>
         private readonly Admin _Administrator = new Admin();
+        private readonly ABONNÉS subscriber = new ABONNÉS();
 
         /// <summary>
         /// Call the unit tests in an ordered manner.
@@ -23,10 +25,11 @@ namespace UnitTestProjetPT2K
         public void OrderedUnitTests()
         {
             RestoreCleanState();
-            CreateAccounts();
+            checkBestAlbums();
+            CreateAccount();
+            InsertExtendedLoans();
             GetExtendedLoans();
-            GetLateSubscribers();
-            PurgeDatabase();
+            getBestAlbums();
         }
 
         /// <summary>
@@ -35,12 +38,9 @@ namespace UnitTestProjetPT2K
         private void CreateAccounts()
         {
             this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            this.Database.CreateAccount("Jean", "Marie",  2, "jean", "marie");
-
-            // Retrieve the newly created accounts
-            Account subscriber1 = this.Database.Login("jean", "pierre");
-            Account subscriber2 = this.Database.Login("jean", "marie");
-            
+            Account subscriber = this.Database.Login("jean", "pierre");
+            this.Database.CreateAccount("Jean", "patrick", 1, "patrick", "patrick");
+            Account subscriber2 = this.Database.Login("patrick", "patrick");
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
@@ -84,7 +84,7 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(0, this._Administrator.GetLateSubscribers().Count);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "pierre");
 
-            ALBUMS theAlbum = this.Database.GetAlbumWithID(2);
+            ALBUMS theAlbum = this.Database.GetAlbumWithID(3);
             Assert.IsNotNull(theAlbum);
 
             EMPRUNTER theLoan = new EMPRUNTER
@@ -138,5 +138,46 @@ namespace UnitTestProjetPT2K
             // Ensure the late subscriber is Jean Marie
             Assert.AreEqual(theSubscriber, inactiveSubscribers[0]);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void checkBestAlbums()
+        {
+            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+        }
+
+        /// <summary>
+        /// Attempt list the 10 best albums.
+        /// </summary>
+        private void getBestAlbums()
+        {
+           ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
+            EMPRUNTER theLoan = new EMPRUNTER
+            {
+                CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                DATE_EMPRUNT = new DateTime(2020, 12, 12),
+                DATE_RETOUR_ATTENDUE = new DateTime(2021, 1, 15),
+            };
+            this.Connection.EMPRUNTER.Add(theLoan);
+            this.Connection.SaveChanges();
+          
+
+            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+            Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
+
+
+
+            for (int i = 1; i < dict.Count; i++)
+            {
+                int lim = dict.ElementAt(i).Value;
+                int after = dict.ElementAt(i - 1).Value;
+                Assert.IsTrue(lim >= after);
+            }
+        }
+
     }
 }

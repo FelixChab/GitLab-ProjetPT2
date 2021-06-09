@@ -101,6 +101,6 @@ namespace UnitTestProjetPT2K
             Assert.IsTrue(loan.HasBeenExtended());
         }
     }
+
+
 }
-
-
