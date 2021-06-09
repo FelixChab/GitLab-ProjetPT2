@@ -86,5 +86,17 @@ namespace ProjetPT2K
             }
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            AccountView accountDetails = new AccountView(account);
+            accountDetails.ShowDialog();
+            this.Close();
+        }
+
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            Refresh();
+        }
     }
 }
