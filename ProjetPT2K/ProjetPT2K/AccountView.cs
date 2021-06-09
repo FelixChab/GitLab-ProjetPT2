@@ -12,7 +12,7 @@ namespace ProjetPT2K
 {
     public partial class AccountView : Form
     {
-        private readonly ABONNÉS Acount;
+        private readonly ABONNÉS Account;
         ABONNÉS Subriber;
         
         public AccountView(ABONNÉS acount )
@@ -26,7 +26,7 @@ namespace ProjetPT2K
             password.Text = "*******".Trim();
             country.Text = ""+Subriber.PAYS;
             ListLoans();
-            this.Acount = acount;
+            this.Account = acount;
         }
 
         private void InitializeAlbumList()
@@ -88,12 +88,14 @@ namespace ProjetPT2K
 
         private void Logo_Click(object sender, EventArgs e)
         {
-
+            MainView view = new MainView(Account);
+            view.ShowDialog();
+            this.Close();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            Refresh();
         }
     }
 }
