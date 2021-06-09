@@ -20,8 +20,8 @@ namespace ProjetPT2K
                 DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(album.GENRES.DÉLAI)
             };
 
-            this.Connection.EMPRUNTER.Add(borrow);
-            this.Connection.SaveChanges();
+            Connection.EMPRUNTER.Add(borrow);
+            Connection.SaveChanges();
         }
 
         public Dictionary<ALBUMS, int> GetRecommandations()
@@ -38,6 +38,12 @@ namespace ProjetPT2K
                 else
                 {
                     topGenres[loan.ALBUMS.GENRES] = 1;
+                }
+
+                if (topGenres[loan.ALBUMS.GENRES] > loanNumber)
+                {
+                    loanNumber = topGenres[loan.ALBUMS.GENRES];
+                    theGenre = loan.ALBUMS.GENRES;
                 }
 
                 if (topGenres[loan.ALBUMS.GENRES] > loanNumber)

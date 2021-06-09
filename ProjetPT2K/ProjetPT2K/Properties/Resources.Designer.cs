@@ -63,7 +63,17 @@ namespace ProjetPT2K.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap App_Logo {
+        internal static System.Drawing.Bitmap Bouton_compte_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("Bouton_compte-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo {
             get {
                 object obj = ResourceManager.GetObject("App_Logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

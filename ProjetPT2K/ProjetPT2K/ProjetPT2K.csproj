@@ -60,6 +60,19 @@
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="Account.cs" />
+    <Compile Include="AccountView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountView.Designer.cs">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs" />
+    <Compile Include="AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountView.Designer.cs">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
@@ -98,6 +111,12 @@
     <Compile Include="NewAccountView.Designer.cs">
       <DependentUpon>NewAccountView.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainView.designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="BD.Context.cs">
       <AutoGen>True</AutoGen>
@@ -134,6 +153,12 @@
       <DependentUpon>SubscriberView.cs</DependentUpon>
     </Compile>
     <Compile Include="Subscriber.cs" />
+    <EmbeddedResource Include="AccountView.resx">
+      <DependentUpon>AccountView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminView.resx">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppView.resx">
       <DependentUpon>AppView.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewAccountView.resx">
       <DependentUpon>NewAccountView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
