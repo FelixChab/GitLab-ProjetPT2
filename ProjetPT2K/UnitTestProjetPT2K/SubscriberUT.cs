@@ -86,6 +86,7 @@ namespace UnitTestProjetPT2K
                 Assert.IsTrue(theLoans.Contains(loan));
         }
 
+
         /// <summary>
         /// Attempt to borrow an album.
         /// </summary>
@@ -102,5 +103,3 @@ namespace UnitTestProjetPT2K
         }
     }
 }
-
-

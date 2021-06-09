@@ -2,6 +2,7 @@
 using ProjetPT2K;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace UnitTestProjetPT2K
 {
@@ -15,6 +16,7 @@ namespace UnitTestProjetPT2K
         /// the administrator used in this tests.
         /// </summary>
         private readonly Admin _Administrator = new Admin();
+        private readonly ABONNÉS subscriberr = new ABONNÉS();
 
         /// <summary>
         /// Call the unit tests in an ordered manner.
@@ -23,10 +25,11 @@ namespace UnitTestProjetPT2K
         public void OrderedUnitTests()
         {
             RestoreCleanState();
-            CreateAccounts();
+            checkBestAlbums();
+            CreateAccount();
+            InsertExtendedLoans();
             GetExtendedLoans();
-            GetLateSubscribers();
-            PurgeDatabase();
+            getBestAlbums();
         }
 
         /// <summary>
@@ -84,7 +87,7 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(0, this._Administrator.GetLateSubscribers().Count);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "pierre");
 
-            ALBUMS theAlbum = this.Database.GetAlbumWithID(2);
+            ALBUMS theAlbum = this.Database.GetAlbumWithID(3);
             Assert.IsNotNull(theAlbum);
 
             EMPRUNTER theLoan = new EMPRUNTER
@@ -138,5 +141,44 @@ namespace UnitTestProjetPT2K
             // Ensure the late subscriber is Jean Marie
             Assert.AreEqual(theSubscriber, inactiveSubscribers[0]);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void checkBestAlbums()
+        {
+            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+        }
+
+        /// <summary>
+        /// Attempt list the 10 best albums.
+        /// </summary>
+        private void getBestAlbums()
+        {
+            ALBUMS album1 = Database.GetAlbumWithID(2);
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "pierre");
+            EMPRUNTER theLoan = new EMPRUNTER
+            {
+                CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
+                CODE_ALBUM = album1.CODE_ALBUM,
+                DATE_EMPRUNT = new DateTime(2020, 12, 12),
+            };
+
+
+
+              //  Assert.AreEqual(1, this._Administrator.GetBestAlbums().Count);
+            Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
+
+
+
+            for (int i = 1; i < dict.Count; i++)
+            {
+                int lim = dict.ElementAt(i).Value;
+                int after = dict.ElementAt(i - 1).Value;
+                Assert.IsTrue(lim >= after);
+            }
+        }
+
     }
 }
