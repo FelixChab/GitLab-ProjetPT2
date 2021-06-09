@@ -68,8 +68,8 @@ namespace ProjetPT2K
         public Account Login(string login, string password)
         {
             Account account;
-            if (login == Admin.LOGIN && password == Admin.PASSWORD)
-                account = new Admin();
+            if (login == Administrator.LOGIN && password == Administrator.PASSWORD)
+                account = new Administrator();
             else
                 account = FetchSubscriberAccount(login, password);
             return account;
@@ -83,12 +83,12 @@ namespace ProjetPT2K
         /// <returns> an Account object </returns>
         private Account FetchSubscriberAccount(string login, string password)
         {
-            var request = from subscriber in this.Connection.ABONNÉS
+            ABONNÉS theSubscriber = (from subscriber in this.Connection.ABONNÉS
                           where (subscriber.LOGIN_ABONNÉ == login)
                           && (subscriber.PASSWORD_ABONNÉ == password)
-                          select subscriber;
+                          select subscriber).FirstOrDefault();
 
-            return (ABONNÉS)request.FirstOrDefault();
+            return theSubscriber;
         }
 
         /// <summary>
@@ -115,27 +115,22 @@ namespace ProjetPT2K
         /// <param name="password"> the password of the user </param>
         public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
         {
-            
-            ABONNÉS subscriber = new ABONNÉS
+            if (!AccountExists(login))
             {
-                CODE_PAYS = countryCode,
-                NOM_ABONNÉ = lastname,
-                PRÉNOM_ABONNÉ = firstname,
-                LOGIN_ABONNÉ = login,
-                PASSWORD_ABONNÉ = password
-            };
-            if(countryCode == -1)
-            {
-                 subscriber = new ABONNÉS
+                ABONNÉS theSubscriber = new ABONNÉS
                 {
                     NOM_ABONNÉ = lastname,
                     PRÉNOM_ABONNÉ = firstname,
                     LOGIN_ABONNÉ = login,
                     PASSWORD_ABONNÉ = password
                 };
+
+                if (countryCode == -1)
+                    theSubscriber.CODE_PAYS = countryCode;
+
+                this.Connection.ABONNÉS.Add(theSubscriber);
+                this.Connection.SaveChanges();
             }
-            this.Connection.ABONNÉS.Add(subscriber);
-            this.Connection.SaveChanges();
         }
 
         public List<ALBUMS> GetAllAlbums()
@@ -166,21 +161,7 @@ namespace ProjetPT2K
             {
                 if (!subscriber.IsActive())
                     inactiveSubscribers.Add(subscriber);
-                /*
-                EMPRUNTER loan = subscriber.EMPRUNTER.FirstOrDefault();
-                if (loan != null && loan.DATE_RETOUR != null && loan.DATE_RETOUR.Value.AddYears(1) < DateTime.Now)
-                {
-                    List<EMPRUNTER> loans = new List<EMPRUNTER>();
-                    loans.AddRange(subscriber.EMPRUNTER);
-                    foreach (EMPRUNTER e in loans)
-                    {
-                        subscriber.EMPRUNTER.Remove(e);
-                    }
-                    Connection.ABONNÉS.Remove(subscriber);
-                }
-                */
             }
-
             return inactiveSubscribers;
         }
 
@@ -194,7 +175,6 @@ namespace ProjetPT2K
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
                                where album.CODE_ALBUM == ID
                                select album).FirstOrDefault();
-
             return theAlbum;
         }
 

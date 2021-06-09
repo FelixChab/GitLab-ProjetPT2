@@ -59,14 +59,24 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(0, this._Subscriber.EMPRUNTER.Count);
             ALBUMS theAlbum = this.Database.GetAlbumWithID(1);
 
+            // Ensure the album can be borrowed
+            Assert.AreEqual(true, theAlbum.IsAvailable());
+
             Assert.IsNotNull(theAlbum);
             this._Subscriber.BorrowAlbum(theAlbum);
 
+            // Ensure the album has been borrowed
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
-            EMPRUNTER loan = this._Subscriber.EMPRUNTER.First();
 
-            Assert.AreEqual(1, loan.CODE_ALBUM);
-            Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
+            this._Subscriber.BorrowAlbum(theAlbum);
+            // Ensure the album cannot be borrowed anymore
+            Assert.IsFalse(theAlbum.IsAvailable());
+            Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
+
+            EMPRUNTER theLoan = this._Subscriber.EMPRUNTER.First();
+
+            Assert.AreEqual(theAlbum, theLoan.ALBUMS);
+            Assert.AreEqual(this._Subscriber, theLoan.ABONNÉS);
         }
 
         /// <summary>
@@ -88,9 +98,9 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to borrow an album.
+        /// Attempt to extend a loan.
         /// </summary>
-        private void Extends()
+        private void ExtendLoan()
         {
             EMPRUNTER loan = this._Subscriber.EMPRUNTER.FirstOrDefault();
             Assert.IsNotNull(loan);

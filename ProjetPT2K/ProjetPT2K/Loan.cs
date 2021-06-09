@@ -46,9 +46,8 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            string extended = this.HasBeenExtended() ? " (prolongé)" : "";
             return this.ALBUMS.TITRE_ALBUM.Trim() + " - du " + this.DATE_EMPRUNT.ToShortDateString()
-                + " au " + this.DATE_RETOUR_ATTENDUE.ToShortDateString() + extended;
+                + " au " + this.DATE_RETOUR_ATTENDUE.ToShortDateString();
         }
     }
 }
