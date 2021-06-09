@@ -29,10 +29,7 @@ namespace ProjetPT2K
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.recommandationsLabel = new System.Windows.Forms.Label();
-            this.mainMenuListBox = new System.Windows.Forms.ListBox();
-            this.albumTitleTextBox = new System.Windows.Forms.TextBox();
             this.tagRecommandations = new System.Windows.Forms.Label();
             this.tagBestAlbums = new System.Windows.Forms.Label();
             this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
@@ -54,25 +51,6 @@ namespace ProjetPT2K
             this.recommandationsLabel.Size = new System.Drawing.Size(185, 29);
             this.recommandationsLabel.TabIndex = 9;
             this.recommandationsLabel.Text = "Recommandations";
-            // 
-            // mainMenuListBox
-            // 
-            this.mainMenuListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(129)))), ((int)(((byte)(172)))));
-            this.mainMenuListBox.FormattingEnabled = true;
-            this.mainMenuListBox.Location = new System.Drawing.Point(12, 12);
-            this.mainMenuListBox.Name = "mainMenuListBox";
-            this.mainMenuListBox.Size = new System.Drawing.Size(179, 433);
-            this.mainMenuListBox.TabIndex = 10;
-            this.mainMenuListBox.SelectedIndexChanged += new System.EventHandler(this.mainMenuListBox_SelectedIndexChanged);
-            // 
-            // albumTitleTextBox
-            // 
-            this.albumTitleTextBox.Enabled = false;
-            this.albumTitleTextBox.Location = new System.Drawing.Point(231, 12);
-            this.albumTitleTextBox.Name = "albumTitleTextBox";
-            this.albumTitleTextBox.Size = new System.Drawing.Size(372, 20);
-            this.albumTitleTextBox.TabIndex = 11;
-            this.albumTitleTextBox.Visible = false;
             // 
             // tagRecommandations
             // 
@@ -185,11 +163,19 @@ namespace ProjetPT2K
             // 
             this.mostBorrowedAlbumsLabel.AutoSize = true;
             this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 332);
+            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 283);
             this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
             this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
             this.mostBorrowedAlbumsLabel.TabIndex = 16;
             this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(134, -10);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(3, 467);
+            this.panel1.TabIndex = 17;
             // 
             // MainView
             // 
@@ -205,8 +191,6 @@ namespace ProjetPT2K
             this.Controls.Add(this.mostBorrowedAlbumsLabel);
             this.Controls.Add(this.tagBestAlbums);
             this.Controls.Add(this.tagRecommandations);
-            this.Controls.Add(this.albumTitleTextBox);
-            this.Controls.Add(this.mainMenuListBox);
             this.Controls.Add(this.recommandationsLabel);
             this.Name = "MainView";
             this.Text = "MainView";
@@ -223,8 +207,6 @@ namespace ProjetPT2K
         #endregion
 
         private System.Windows.Forms.Label recommandationsLabel;
-        private System.Windows.Forms.ListBox mainMenuListBox;
-        private System.Windows.Forms.TextBox albumTitleTextBox;
         private System.Windows.Forms.Label tagRecommandations;
         private System.Windows.Forms.Label tagBestAlbums;
         private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
