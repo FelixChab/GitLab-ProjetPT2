@@ -71,78 +71,20 @@ namespace ProjetPT2K
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        //ContextMenuStrip ContextMenuAlbum new ContextMenuStrip
+                        MainView view = new MainView(account);
+                        view.ShowDialog();
 
                     }
-                    else
+                    /*else
                     {
                         ContextMenuStrip contextMenuAlbum = new ContextMenuStrip();
                         contextMenuAlbum.Items.Add("Afficher les détails");
                         contextMenuAlbum.Items.Add("Emprunter");
 
-                        //contextMenuAlbum.Show(e.Location);
-                    }
+                        contextMenuAlbum.Show(e.Location);
+                    }*/
                 }
             }
-
-        }
-
-        private void MainView_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void MainView_MouseClick(object sender, MouseEventArgs e)
-        {
-            foreach (DisplayAlbum display in AlbumsDisplayed)
-            {
-                if (display.Contains(e.Location))
-                {
-                    if (e.Button == MouseButtons.Left)
-                    {
-                        //ContextMenuStrip ContextMenuAlbum new ContextMenuStrip
-
-                    }
-                    else
-                    {
-                        ContextMenuStrip contextMenuAlbum = new ContextMenuStrip();
-                        contextMenuAlbum.Items.Add("Afficher les détails");
-                        contextMenuAlbum.Items.Add("Emprunter");
-
-                        //contextMenuAlbum.Show(e.Location);
-                    }
-                }
-            }
-
-        }
-
-        private void MainView_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void MainView_MouseClick(object sender, MouseEventArgs e)
-        {
-            foreach (DisplayAlbum display in AlbumsDisplayed)
-            {
-                if (display.Contains(e.Location))
-                {
-                    if (e.Button == MouseButtons.Left)
-                    {
-                        //ContextMenuStrip ContextMenuAlbum new ContextMenuStrip
-
-                    }
-                    else
-                    {
-                        ContextMenuStrip contextMenuAlbum = new ContextMenuStrip();
-                        contextMenuAlbum.Items.Add("Afficher les détails");
-                        contextMenuAlbum.Items.Add("Emprunter");
-
-                        //contextMenuAlbum.Show(e.Location);
-                    }
-                }
-            }
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

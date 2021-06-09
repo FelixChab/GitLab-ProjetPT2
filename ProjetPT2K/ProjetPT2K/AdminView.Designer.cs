@@ -1,7 +1,7 @@
 ﻿
 namespace ProjetPT2K
 {
-    partial class FormAdmin
+    partial class AdminView
     {
         /// <summary>
         /// Required designer variable.

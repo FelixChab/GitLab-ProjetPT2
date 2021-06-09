@@ -33,7 +33,6 @@ namespace ProjetPT2K
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.connectionLabel = new System.Windows.Forms.Label();
-            this.logo = new System.Windows.Forms.PictureBox();
             this.connectionBackground = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.userlabel = new System.Windows.Forms.TextBox();
@@ -42,8 +41,9 @@ namespace ProjetPT2K
             this.labelUserLogin = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.connectionButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.logo = new System.Windows.Forms.PictureBox();
             this.connectionBackground.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
             // connectionLabel
@@ -56,16 +56,6 @@ namespace ProjetPT2K
             this.connectionLabel.Size = new System.Drawing.Size(171, 45);
             this.connectionLabel.TabIndex = 0;
             this.connectionLabel.Text = "Connexion";
-            // 
-            // logo
-            // 
-            this.logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
-            this.logo.Location = new System.Drawing.Point(0, 0);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(105, 105);
-            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.TabIndex = 3;
-            this.logo.TabStop = false;
             // 
             // connectionBackground
             // 
@@ -159,6 +149,16 @@ namespace ProjetPT2K
             this.connectionButton.UseVisualStyleBackColor = true;
             this.connectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
             // 
+            // logo
+            // 
+            this.logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
+            this.logo.Location = new System.Drawing.Point(0, 0);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(105, 105);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logo.TabIndex = 3;
+            this.logo.TabStop = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,9 +171,9 @@ namespace ProjetPT2K
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.Text = "Form2";
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.connectionBackground.ResumeLayout(false);
             this.connectionBackground.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -181,7 +181,6 @@ namespace ProjetPT2K
         #endregion
 
         private System.Windows.Forms.Label connectionLabel;
-        private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.Panel connectionBackground;
         private System.Windows.Forms.Button connectionButton;
         private System.Windows.Forms.TextBox userlabel;
@@ -190,5 +189,6 @@ namespace ProjetPT2K
         private System.Windows.Forms.Label labelUserLogin;
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.PictureBox logo;
     }
 }

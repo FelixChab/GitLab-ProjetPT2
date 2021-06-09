@@ -69,7 +69,7 @@ namespace ProjetPT2K
                 }
                 else
                 {
-                    FormAdmin view = new FormAdmin((Admin)account);
+                    AdminView view = new AdminView((Admin)account);
                     view.ShowDialog();
                 }
             }
