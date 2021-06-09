@@ -54,7 +54,7 @@ namespace ProjetPT2K
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add("| Top 10 Albums :");
             listBoxAdminResults.Items.Add(" ");
-            foreach (var entry in CurrentAdmin.GetBestAlbums())
+            foreach (var entry in CurrentAdmin.GetMostBorrowedAlbums())
             {
                 i++;
                 listBoxAdminResults.Items.Add("(" + i + ")" + " " + entry.Key.ToString() + " - Emprunté " + entry.Value + " fois");

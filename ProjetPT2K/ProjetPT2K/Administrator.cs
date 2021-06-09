@@ -114,7 +114,7 @@ namespace ProjetPT2K
         /// Return the 10 most borrowed albums of the year.
         /// </summary>
         /// <returns> a dictionnary of Album objects and int </returns>
-        public Dictionary<ALBUMS, int> GetTopAlbums()
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
         {
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
             foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)

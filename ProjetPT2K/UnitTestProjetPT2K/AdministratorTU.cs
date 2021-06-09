@@ -12,7 +12,7 @@ namespace UnitTestProjetPT2K
     public class AdministratorTU : UnitTest
     {
         /// <summary>
-        /// the administrator used in this tests.
+        /// The administrator used in this tests.
         /// </summary>
         private readonly Administrator _Administrator = new Administrator();
 
@@ -31,7 +31,7 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to create a new account in the database.
+        /// Create new accounts in the database.
         /// </summary>
         private void CreateAccounts()
         {
@@ -53,7 +53,7 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to retrieve the extended loans from the database.
+        /// Retrieve the extended loans from the database.
         /// </summary>
         private void GetExtendedLoans()
         {
@@ -85,7 +85,7 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to retrieve the late subscribers.
+        /// Retrieve the subscribers with a late loan.
         /// </summary>
         private void GetLateSubscribers()
         {
@@ -148,7 +148,7 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to remove from the database the subscribers who have not borrowed an album in a year.
+        /// Remove from the database the subscribers who have not borrowed an album in a year.
         /// </summary>
         private void PurgeDatabase()
         {
