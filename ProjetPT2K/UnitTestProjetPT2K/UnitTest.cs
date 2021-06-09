@@ -27,6 +27,5 @@ namespace UnitTestProjetPT2K
             // Ensures the database is empty
             Assert.IsFalse(this.Database.AccountExists("jean"));
         }
-
     }
 }

@@ -13,10 +13,10 @@ namespace ProjetPT2K
     public partial class FormAdmin : Form
     {
 
-        private Admin CurrentAdmin;
+        private Administrator CurrentAdmin;
 
         /* Constructeur surcharge admin */
-        public FormAdmin(Admin admin)
+        public FormAdmin(Administrator admin)
         {
             this.CurrentAdmin = admin;
             this.listBoxAdminResults.ScrollAlwaysVisible = false;
@@ -66,7 +66,7 @@ namespace ProjetPT2K
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add("| Albums non-empruntés depuis 1 an :");
             listBoxAdminResults.Items.Add(" ");
-            CurrentAdmin.GetAlbumsNoLoan().ForEach(a => listBoxAdminResults.Items.Add(a));
+            CurrentAdmin.GetUnpopularAlbums().ForEach(a => listBoxAdminResults.Items.Add(a));
         }
 
         private void FormAdmin_Load(object sender, EventArgs e)

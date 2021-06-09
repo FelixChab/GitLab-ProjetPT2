@@ -14,7 +14,7 @@ namespace UnitTestProjetPT2K
         /// <summary>
         /// the administrator used in this tests.
         /// </summary>
-        private readonly Admin _Administrator = new Admin();
+        private readonly Administrator _Administrator = new Administrator();
 
         /// <summary>
         /// Call the unit tests in an ordered manner.
@@ -26,6 +26,7 @@ namespace UnitTestProjetPT2K
             CreateAccounts();
             GetExtendedLoans();
             GetLateSubscribers();
+            GetUnpopularAlbums();
             PurgeDatabase();
         }
 
@@ -34,18 +35,26 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccounts()
         {
-            this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            this.Database.CreateAccount("Jean", "Marie",  2, "jean", "marie");
+            this.Database.CreateAccount("Jean", "Pierre",  1, "jean", "pierre");
+            this.Database.CreateAccount("Marc", "Antoine", 2, "marc", "antoine");
+            this.Database.CreateAccount("Jean", "Marie",   3, "jean", "marie");
 
             // Retrieve the newly created accounts
             Account subscriber1 = this.Database.Login("jean", "pierre");
-            Account subscriber2 = this.Database.Login("jean", "marie");
-            
+            Account subscriber2 = this.Database.Login("marc", "antoine");
+
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
+
+            // Ensure an account with an existing login cannot be created
+            Account subscriber3 = this.Database.Login("jean", "marie");
+            Assert.IsNull(subscriber3);
         }
 
+        /// <summary>
+        /// Attempt to retrieve the extended loans from the database.
+        /// </summary>
         private void GetExtendedLoans()
         {
             // Ensure there are currently no extended loans in the database
@@ -107,14 +116,14 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to remove from the database the subscribers who have not borrowed an album in a year.
+        /// Retrieve the list of unpopular albums (not borrowed in a year).
         /// </summary>
-        private void PurgeDatabase()
+        private void GetUnpopularAlbums()
         {
-            // Ensure there are currently no inactive subscriber in the database
-            Assert.AreEqual(0, this.Database.GetInactiveSubscribers().Count);
+            // Ensure there are no unpopular album in the database
+            Assert.AreEqual(0, this._Administrator.GetUnpopularAlbums().Count);
 
-            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "marie");
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("marc", "antoine");
 
             ALBUMS theAlbum = this.Database.GetAlbumWithID(3);
             Assert.IsNotNull(theAlbum);
@@ -123,20 +132,38 @@ namespace UnitTestProjetPT2K
             {
                 CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
                 CODE_ALBUM = theAlbum.CODE_ALBUM,
-                DATE_EMPRUNT = new DateTime(2012, 12, 12),
-                DATE_RETOUR_ATTENDUE = new DateTime(2012, 12, 25),
-                DATE_RETOUR = new DateTime(2012, 12, 25)
+                DATE_EMPRUNT = new DateTime(2019, 12, 12),
+                DATE_RETOUR_ATTENDUE = new DateTime(2020, 1, 25)
             };
 
             this.Connection.EMPRUNTER.Add(theLoan);
             this.Connection.SaveChanges();
 
+            // Ensure there is now one unpopular album in the database
+            List<ALBUMS> unpopularAlbums = this._Administrator.GetUnpopularAlbums();
+            Assert.AreEqual(1, unpopularAlbums.Count);
+
+            // Ensure the unpopular album is the one we inserted in the database
+            Assert.AreEqual(theAlbum, unpopularAlbums[0]);
+        }
+
+        /// <summary>
+        /// Attempt to remove from the database the subscribers who have not borrowed an album in a year.
+        /// </summary>
+        private void PurgeDatabase()
+        {
             // Ensure there is now one inactive subscriber in the database
             List<ABONNÉS> inactiveSubscribers = this.Database.GetInactiveSubscribers();
             Assert.AreEqual(1, inactiveSubscribers.Count);
 
-            // Ensure the late subscriber is Jean Marie
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("marc", "antoine");
+
+            // Ensure the late subscriber is Marc Antoine
             Assert.AreEqual(theSubscriber, inactiveSubscribers[0]);
+
+            this._Administrator.PurgeDatabase();
+            // Ensure the inactive user has been removed from the database
+            Assert.AreEqual(0, this.Database.GetInactiveSubscribers().Count);
         }
     }
 }
