@@ -115,6 +115,7 @@ namespace ProjetPT2K
         /// <param name="password"> the password of the user </param>
         public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
         {
+            
             ABONNÉS subscriber = new ABONNÉS
             {
                 CODE_PAYS = countryCode,
@@ -123,7 +124,16 @@ namespace ProjetPT2K
                 LOGIN_ABONNÉ = login,
                 PASSWORD_ABONNÉ = password
             };
-
+            if(countryCode == -1)
+            {
+                 subscriber = new ABONNÉS
+                {
+                    NOM_ABONNÉ = lastname,
+                    PRÉNOM_ABONNÉ = firstname,
+                    LOGIN_ABONNÉ = login,
+                    PASSWORD_ABONNÉ = password
+                };
+            }
             this.Connection.ABONNÉS.Add(subscriber);
             this.Connection.SaveChanges();
         }
@@ -243,35 +253,6 @@ namespace ProjetPT2K
                 }
             }
             Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value ascending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
-        }
-
-        public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)
-        {
-            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS
-                                 join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM
-                                 where a.GENRES.LIBELLÉ_GENRE == genre.LIBELLÉ_GENRE
-                                 orderby a.EMPRUNTER.Count descending
-                                 select a).ToList();
-            for (int start = 0; start < list.Count; start++)
-            {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
-            }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
             return sorted;
         }
     }

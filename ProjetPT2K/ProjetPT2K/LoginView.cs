@@ -53,11 +53,12 @@ namespace ProjetPT2K
                 errorLabel.ForeColor = Color.LightGreen;
                 if (!account.IsAdministrator)
                 {
-                    // todo show subscriber panel
+                    MainView view = new MainView(account);
+                    view.ShowDialog();
                 }
                 else
                 {
-                    FormAdmin formAdmin = new FormAdmin((Admin)account);
+                    AdminView formAdmin = new AdminView((Admin)account);
                     formAdmin.Show();
                 }
                 errorLabel.Text = "Succés ! " + "(" + AccountType + ")";

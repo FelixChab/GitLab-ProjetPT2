@@ -30,12 +30,13 @@ namespace ProjetPT2K
         /* Function of the inscription button */
         private void InscriptionButton(object sender, EventArgs e)
         {
-            String prenom = namelabel.Text;
+            string prenom = namelabel.Text;
             String nom = familyNameLabel.Text;
             PAYS pays = (PAYS)countryboxlabel.SelectedItem;
             String username = userlabel.Text;
             String password = passwordlabel.Text;
-            if (!ValidArgs(new string[] { prenom, nom, pays.ToString(), username, password}))
+
+            if (!ValidArgs(new string[] { prenom, nom, username, password}))
             {
                 errorLabel.Text = "Une des informations est incorrecte.";
                 errorLabel.Visible = true;
@@ -49,7 +50,12 @@ namespace ProjetPT2K
                 Reset();
                 return;
             }
-            Database.GetInstance().CreateAccount(prenom, nom, pays.CODE_PAYS, username, password);
+            int codePays = -1;
+            if (pays != null)
+            {
+                codePays = pays.CODE_PAYS;
+            }
+            Database.GetInstance().CreateAccount(prenom, nom, codePays, username, password);
             login.GetErrorLabel().Text = "Votre compte a bien été créer.";
             login.GetErrorLabel().ForeColor = Color.LightGreen;
             login.GetErrorLabel().Visible = true;
@@ -70,7 +76,7 @@ namespace ProjetPT2K
         {
             foreach(String s in args)
             {
-                if (s.Length <= 1) return false;
+                if (s.Length <= 1 && s.Trim().Length > 1) return false;
             }
             return true;
         }

@@ -262,7 +262,7 @@ namespace ProjetPT2K
             // 
             this.Logo.BackColor = System.Drawing.Color.Transparent;
             this.Logo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Logo.Image = global::ProjetPT2K.Properties.Resources.Logo;
+            this.Logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
             this.Logo.InitialImage = null;
             this.Logo.Location = new System.Drawing.Point(11, 3);
             this.Logo.Margin = new System.Windows.Forms.Padding(2);

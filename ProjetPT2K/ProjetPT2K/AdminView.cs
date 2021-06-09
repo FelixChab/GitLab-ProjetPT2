@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
-    public partial class FormAdmin : Form
+    public partial class AdminView : Form
     {
 
         private Admin CurrentAdmin;
@@ -72,7 +72,7 @@ namespace ProjetPT2K
         }
 
         /* Constructeur surcharge admin */
-        public FormAdmin(Admin admin)
+        public AdminView(Admin admin)
         {
             this.CurrentAdmin = admin;
             InitializeComponent();
@@ -113,7 +113,7 @@ namespace ProjetPT2K
 
             listBoxAdminResults.Items.Add(FormatText(new string[]{"Classement", "Album", "Emprunts"}, padding));
             listBoxAdminResults.Items.Add(" ");
-            foreach (var entry in CurrentAdmin.GetBestAlbums())
+            foreach (var entry in Database.GetInstance().GetBestAlbums())
             {
                 i++;
                 listBoxAdminResults.Items.Add(FormatText(new string[] { i.ToString(), entry.Key.ToString(), entry.Value + " fois" }, padding));

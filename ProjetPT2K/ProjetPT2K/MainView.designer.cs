@@ -86,7 +86,7 @@ namespace ProjetPT2K
             // 
             this.Logo.BackColor = System.Drawing.Color.Transparent;
             this.Logo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Logo.Image = global::ProjetPT2K.Properties.Resources.Logo;
+            this.Logo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
             this.Logo.InitialImage = null;
             this.Logo.Location = new System.Drawing.Point(11, 3);
             this.Logo.Margin = new System.Windows.Forms.Padding(2);
@@ -140,42 +140,6 @@ namespace ProjetPT2K
             this.listeAlbum.Size = new System.Drawing.Size(553, 37);
             this.listeAlbum.TabIndex = 26;
             this.listeAlbum.Text = "Rechercher";
-            // 
-            // mostBorrowedAlbumsLabel
-            // 
-            this.mostBorrowedAlbumsLabel.AutoSize = true;
-            this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 283);
-            this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
-            this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
-            this.mostBorrowedAlbumsLabel.TabIndex = 16;
-            this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(134, -10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(3, 467);
-            this.panel1.TabIndex = 17;
-            // 
-            // mostBorrowedAlbumsLabel
-            // 
-            this.mostBorrowedAlbumsLabel.AutoSize = true;
-            this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 283);
-            this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
-            this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
-            this.mostBorrowedAlbumsLabel.TabIndex = 16;
-            this.mostBorrowedAlbumsLabel.Text = "Les albums les plus empruntés";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(134, -10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(3, 467);
-            this.panel1.TabIndex = 17;
             // 
             // MainView
             // 
