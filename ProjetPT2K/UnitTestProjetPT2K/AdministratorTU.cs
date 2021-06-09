@@ -16,7 +16,7 @@ namespace UnitTestProjetPT2K
         /// the administrator used in this tests.
         /// </summary>
         private readonly Admin _Administrator = new Admin();
-        private readonly ABONNÉS subscriberr = new ABONNÉS();
+        private readonly ABONNÉS subscriber = new ABONNÉS();
 
         /// <summary>
         /// Call the unit tests in an ordered manner.
@@ -38,12 +38,9 @@ namespace UnitTestProjetPT2K
         private void CreateAccounts()
         {
             this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            this.Database.CreateAccount("Jean", "Marie",  2, "jean", "marie");
-
-            // Retrieve the newly created accounts
-            Account subscriber1 = this.Database.Login("jean", "pierre");
-            Account subscriber2 = this.Database.Login("jean", "marie");
-            
+            Account subscriber = this.Database.Login("jean", "pierre");
+            this.Database.CreateAccount("Jean", "patrick", 1, "patrick", "patrick");
+            Account subscriber2 = this.Database.Login("patrick", "patrick");
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
@@ -156,18 +153,20 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void getBestAlbums()
         {
-            ALBUMS album1 = Database.GetAlbumWithID(2);
-            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "pierre");
+           ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
             EMPRUNTER theLoan = new EMPRUNTER
             {
                 CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
-                CODE_ALBUM = album1.CODE_ALBUM,
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
                 DATE_EMPRUNT = new DateTime(2020, 12, 12),
+                DATE_RETOUR_ATTENDUE = new DateTime(2021, 1, 15),
             };
+            this.Connection.EMPRUNTER.Add(theLoan);
+            this.Connection.SaveChanges();
+          
 
-
-
-              //  Assert.AreEqual(1, this._Administrator.GetBestAlbums().Count);
+            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
             Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
 
 
