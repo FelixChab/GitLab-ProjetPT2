@@ -17,17 +17,19 @@ namespace ProjetPT2K
         private string editor;
         public string Editor { get { return this.editor; } set { this.editor = EDITEURS.NOM_EDITEUR; } }
         private Point position { get; set; }
+        Size ImageWidth { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="album">The album to draw</param>
         /// <param name="position">The position of the draw</param>
-        public DisplayAlbum(ALBUMS album, Point position)
+        public DisplayAlbum(ALBUMS album, Point position,Size ImageWidth)
         {
             this.album = album;
             this.position = position;
             this.picture = album.POCHETTE;
+            this.ImageWidth = ImageWidth;
         }
 
         /// <summary>
@@ -36,7 +38,8 @@ namespace ProjetPT2K
         public Image GetImage()
         {
             MemoryStream ms = new MemoryStream(picture);
-            Image img = Image.FromStream(ms);
+            Bitmap img = new Bitmap (ms);
+            //img.SetResolution(ImageWidth.Width, ImageWidth.Height);
             return img;
         }
 
@@ -48,9 +51,9 @@ namespace ProjetPT2K
         {
             if (GetImage() != null)
             {
-                g.DrawImage(GetImage(), position.X, position.Y, 75, 75);
-                g.DrawString("Titre : " + title, new Font(("Comic sans MS"), 11), new SolidBrush(Color.Black), new Point(position.X, position.Y  + 95));
-                g.DrawString("Éditeur : " + editor, new Font(("Comic sans MS"), 9), new SolidBrush(Color.Black), new Point(position.X, position.Y + 115));
+                g.DrawImage(GetImage(), position.X, position.Y,ImageWidth.Width,ImageWidth.Height);
+                //g.DrawString("Titre : " + title, new Font(("Comic sans MS"), 11), new SolidBrush(Color.Black), new Point(position.X, position.Y  + 95));
+                //g.DrawString("Éditeur : " + editor, new Font(("Comic sans MS"), 9), new SolidBrush(Color.Black), new Point(position.X, position.Y + 115));
             }
             else
             {
@@ -63,7 +66,7 @@ namespace ProjetPT2K
 
         public bool Contains (Point p)
         {
-            return true;
+            return position.X < p.X && position.X + GetImage().Width >p.X && position.Y<p.Y && position.Y+GetImage().Height>p.Y;
         }
     }
 }
