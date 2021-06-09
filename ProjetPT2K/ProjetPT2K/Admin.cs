@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing the administrator account.
+    /// </summary>
     public class Admin : Account
     {
         /// <summary>
@@ -25,18 +28,16 @@ namespace ProjetPT2K
         }
 
         /// <summary>
-        /// Method to get late loans.
+        /// Return the list of extended loans in the database.
         /// </summary>
-        /// <returns> a list of Album objects </returns>
-        public List<EMPRUNTER> GetLateLoans()
+        /// <returns> a list of Emprunter objects </returns>
+        public List<EMPRUNTER> GetExtendedLoans()
         {
             List<EMPRUNTER> lateLoans = new List<EMPRUNTER>();
             foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
             {
-                if (theLoan.DATE_RETOUR == null && theLoan.DATE_RETOUR_ATTENDUE.CompareTo(DateTime.Now) < 0)
-                {
+                if (theLoan.HasBeenExtended())
                     lateLoans.Add(theLoan);
-                }
             }
             return lateLoans;
         }
@@ -47,46 +48,35 @@ namespace ProjetPT2K
         /// <returns> a list of Abonné objects </returns>
         public List<ABONNÉS> GetLateSubscribers()
         {
-            List<ABONNÉS> lateSubscribers= new List<ABONNÉS>();
-            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            List<ABONNÉS> lateSubscribers = new List<ABONNÉS>();
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
             {
-                if (e.DATE_RETOUR == null && e.DATE_EMPRUNT.AddDays(10).CompareTo(DateTime.Now) <= 0)
-                {
-                    lateSubscribers.Add(e.ABONNÉS);
-                }
+                if (theLoan.IsLate())
+                    lateSubscribers.Add(theLoan.ABONNÉS);
             }
             return lateSubscribers;
         }
 
-        /**
-         * Method to purge database : remove subscriber who have not borrowed for a year (and his loans)
-         */
+        /// <summary>
+        /// Attempt to remove from the database the subscribers who have not borrowed an album in a year.
+        /// </summary>
         public void PurgeDatabase()
         {
-            foreach (ABONNÉS sub in Connection.ABONNÉS){
-                EMPRUNTER music = sub.EMPRUNTER.FirstOrDefault();
-                if (music != null && music.DATE_RETOUR != null && music.DATE_RETOUR.Value.AddYears(1) < DateTime.Now){
-                    List < EMPRUNTER >loans = new List<EMPRUNTER>();
-                    loans.AddRange(sub.EMPRUNTER);
-                    foreach(EMPRUNTER e in loans)
-                    {
-                        sub.EMPRUNTER.Remove(e);
-                    }
-                    Connection.ABONNÉS.Remove(sub);
-                }
-            }
+            List<ABONNÉS> inactiveSubscribers = this.Database.GetInactiveSubscribers();
+            inactiveSubscribers.ForEach(subscriber => this.Connection.ABONNÉS.Remove(subscriber));
             Connection.SaveChanges();
         }
 
-        /**
-         * Method that returns a list of albums not loan in a year
-         */
+        /// <summary>
+        /// Method that returns a list of albums not borrowed in a year.
+        /// </summary>
+        /// <returns></returns>
         public List<ALBUMS> GetAlbumsNoLoan()
         {
             List<ALBUMS> noLoans = new List<ALBUMS>();
             foreach (EMPRUNTER e in Connection.EMPRUNTER)
             {
-                    if ((DateTime.Now-e.DATE_RETOUR)>=TimeSpan.FromDays(365))
+                if ((DateTime.Now - e.DATE_RETOUR) >= TimeSpan.FromDays(365))
                 {
                     noLoans.Add(e.ALBUMS);
                 }

@@ -6,11 +6,10 @@ namespace ProjetPT2K
     public partial class ABONNÉS : Account
     {
 
-        /**
-         * Function that allows to borrow an album.
-         *
-         * @param album the album the subscriber want to borrow
-         */
+        /// <summary>
+        /// Borrow the given album from the database for the current subscriber.
+        /// </summary>
+        /// <param name="album"> the considered album </param>
         public void BorrowAlbum(ALBUMS album)
         {
             EMPRUNTER borrow = new EMPRUNTER
@@ -51,9 +50,25 @@ namespace ProjetPT2K
             return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
         }
 
-        /**
-         * Return the string representation of the subscriber
-         */
+        /// <summary>
+        /// Return true if the subscriber has borrowed an album in less than a year.
+        /// </summary>
+        /// <returns> a boolean </returns>
+        public bool IsActive()
+        {
+            foreach (EMPRUNTER theLoan in this.EMPRUNTER)
+            {
+                TimeSpan theGap = DateTime.Now - theLoan.DATE_EMPRUNT; 
+                if (theGap.TotalDays >= 365)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Return the string representation of the subscriber.
+        /// </summary>
+        /// <returns> a string </returns>
         public override String ToString()
         {
             return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ + " (" + CODE_ABONNÉ + ")";

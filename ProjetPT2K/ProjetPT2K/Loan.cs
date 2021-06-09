@@ -2,6 +2,9 @@
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing a loan in the database.
+    /// </summary>
     public partial class EMPRUNTER
     {
         /// <summary>
@@ -10,7 +13,18 @@ namespace ProjetPT2K
         /// <returns> a boolean </returns>
         public bool HasBeenExtended()
         {
-            return (this.DATE_RETOUR_ATTENDUE - this.DATE_EMPRUNT) > TimeSpan.FromDays(this.ALBUMS.GENRES.DÉLAI);
+            TimeSpan theGap = this.DATE_RETOUR_ATTENDUE - this.DATE_EMPRUNT;
+            return theGap.TotalDays > this.ALBUMS.GENRES.DÉLAI;
+        }
+
+        /// <summary>
+        /// Return true if the current loan is late by 10 days.
+        /// </summary>
+        /// <returns> a boolean </returns>
+        public bool IsLate()
+        {
+            TimeSpan theGap = DateTime.Now - this.DATE_RETOUR_ATTENDUE;
+            return this.DATE_RETOUR == null && theGap.TotalDays >= 10;
         }
 
         /// <summary>
@@ -19,7 +33,7 @@ namespace ProjetPT2K
         /// <returns> a boolean </returns>
         public void Extend()
         {
-            if (!HasBeenExtended())
+            if (!this.HasBeenExtended())
             {
                 this.DATE_RETOUR_ATTENDUE = this.DATE_RETOUR_ATTENDUE.AddDays(30);
                 Database.GetInstance().GetConnection().SaveChanges();
