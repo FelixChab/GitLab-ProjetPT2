@@ -82,8 +82,11 @@ namespace ProjetPT2K
             InitializeComponent();
             this.listBoxAdminResults.ScrollAlwaysVisible = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
             ButtonExtendedLoans_Click(null, null);
 =======
+=======
+>>>>>>> f58f6f2e1f6453c32c63d425a92beabed8333149
             printContent(readLateLoans, "|                  Abonnés en retards d'emprunt :                  |");
 
 >>>>>>> f58f6f2e1f6453c32c63d425a92beabed8333149
