@@ -16,58 +16,49 @@ namespace ProjetPT2K
         private Administrator CurrentAdmin;
 
         private String header;
-        private List<String> content = new List<string>();
+        private Action function;
+        private int count;
         private int page = 0;
         private int perPage = 20;
 
-        public void printContent(List<String> content, String header)
+        public void printContent(Action function, String header)
         {
             this.page = 0;
             this.header = header;
-            this.content.Clear();
+            this.function = function;
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add(header);
-            for (int i = 0; i<perPage; i++)
-            {
-                if (i >= content.Count) continue;
-                this.content.Add(content[i]);
-                listBoxAdminResults.Items.Add(content[i]);
-            }
+            showCurrent();
             updatePageLabel();
         }
-
-
-        public void nextPage()
+        public int getPageCount()
         {
-            int total = this.content.Count / perPage;
-            if (page == (total-1)) return;
-            page++;
-            printCurrent();
-            
-
+            return count % perPage == 0 ? count / perPage : ((count / perPage) + 1);
         }
-        public void printCurrent()
+        public void showCurrent()
         {
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add(header);
-            for (int i = page * perPage; i < ((page * perPage) + perPage); i++)
-            {
-                if (i >= content.Count) break;
-                listBoxAdminResults.Items.Add(content[i]);
-            }
+            function.Invoke();
             updatePageLabel();
         }
 
         public void updatePageLabel()
         {
-            pageLabel.Text = (page + 1) + "/" + (content.Count / perPage);
+            pageLabel.Text = (page + 1) + "/" + getPageCount();
+        }
+        public void nextPage()
+        {
+            if (page == (getPageCount() - 1)) return;
+            page++;
+            showCurrent();
         }
 
         public void previousPage()
         {
             if (page == 0) return;
             page--;
-            printCurrent();
+            showCurrent();
 
         }
 
@@ -133,24 +124,24 @@ namespace ProjetPT2K
 
         }
 
+        private int[] SubscriberPadding = new int[] { 25, 25, 15, 15 };
+
         private void buttonsubsribers_Click(object sender, EventArgs e)
         {
-            int[] padding = new int[] { 25, 25, 15, 15 };
-            listBoxAdminResults.Items.Clear();
-            List<String> list = new List<string>();
-            
-            list.Add("_________________________________________________________________________________");
-            Database.GetInstance().GetConnection().ABONNÉS.ToList().ForEach(p =>
-            {
-                String text = p.ToString();
-                // TODO corriger affichage
-                list.Add(FormatText(new String[] { p.NOM_ABONNÉ, p.PRÉNOM_ABONNÉ, "#"+ p.CODE_ABONNÉ, p.EMPRUNTER.Count.ToString() },
-                               padding));
-              list.Add("_________________________________________________________________________________");
-            });
-            printContent(list, FormatText(new String[] { "Nom", "Prénom", "Code-abonné", "Emprunts" }, padding));
+            printContent(readSubscriber, FormatText(new string[] { "Nom", "Prénom", "Emprunts" }, SubscriberPadding));
         }
 
+        public void readSubscriber()
+        {
+            this.count = Database.GetInstance().GetConnection().ABONNÉS.Count();
+            int start = perPage * page;
+            listBoxAdminResults.Items.Clear();
+            foreach (ABONNÉS sub in Database.GetInstance().GetConnection().ABONNÉS.Skip(start).Take(perPage))
+            {
+                listBoxAdminResults.Items.Add(header);
+                listBoxAdminResults.Items.Add(FormatText(new string[] { sub.NOM_ABONNÉ, sub.PRÉNOM_ABONNÉ, sub.EMPRUNTER.Count()+""}, SubscriberPadding)); ;
+            }
+        }
 
         public String FormatText(String[] args, int[] padding)
         {
