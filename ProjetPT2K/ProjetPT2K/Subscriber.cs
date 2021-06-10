@@ -52,7 +52,7 @@ namespace ProjetPT2K
         {
             foreach (EMPRUNTER theLoan in this.EMPRUNTER)
             {
-                if (theLoan.ABONNÉS.Equals(theAlbum))
+                if (theLoan.ALBUMS.Equals(theAlbum))
                     return theLoan;
             }
             return null;
