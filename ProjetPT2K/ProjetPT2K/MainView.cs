@@ -14,6 +14,7 @@ namespace ProjetPT2K
     {
         ABONNÉS account;
         List<DisplayAlbum> AlbumsDisplayed = new List<DisplayAlbum>();
+
         public MainView(Account account)
         {
             InitializeComponent();
@@ -24,7 +25,6 @@ namespace ProjetPT2K
         {
 
         }
-
 
         private void MainView_Paint(object sender, PaintEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace ProjetPT2K
 
         private void MainView_MouseMove(object sender, MouseEventArgs e)
         {
-
+            // ...
         }
 
         private void MainView_MouseClick(object sender, MouseEventArgs e)
@@ -71,9 +71,9 @@ namespace ProjetPT2K
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        MainView view = new MainView(account);
+                        Close();
+                        AlbumView view = new AlbumView(display.GetAlbum(), account);
                         view.ShowDialog();
-
                     }
                     /*else
                     {

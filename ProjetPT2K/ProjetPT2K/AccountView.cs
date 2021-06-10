@@ -13,20 +13,20 @@ namespace ProjetPT2K
     public partial class AccountView : Form
     {
         private readonly ABONNÉS Account;
-        ABONNÉS Subriber;
+        ABONNÉS Subscriber;
         
-        public AccountView(ABONNÉS acount )
+        public AccountView(ABONNÉS account)
         {
             InitializeComponent();
-            this.Subriber = acount;
+            this.Subscriber = account;
             this.listeAlbum.Padding = new System.Windows.Forms.Padding(50);
-            name.Text = Subriber.NOM_ABONNÉ.Trim();
-            firstname.Text = Subriber.PRÉNOM_ABONNÉ.Trim();
-            username.Text = Subriber.LOGIN_ABONNÉ.Trim();
+            name.Text = Subscriber.NOM_ABONNÉ.Trim();
+            firstname.Text = Subscriber.PRÉNOM_ABONNÉ.Trim();
+            username.Text = Subscriber.LOGIN_ABONNÉ.Trim();
             password.Text = "*******".Trim();
-            country.Text = ""+Subriber.PAYS;
+            country.Text = "" + Subscriber.PAYS;
             ListLoans();
-            this.Account = acount;
+            this.Account = account;
         }
 
         private void InitializeAlbumList()
@@ -55,7 +55,7 @@ namespace ProjetPT2K
         private void RefreshLoanList()
         {
             this.actionListBox.Items.Clear();
-            var loans = this.Subriber.EMPRUNTER;
+            var loans = this.Subscriber.EMPRUNTER;
             foreach (EMPRUNTER loan in loans)
             {
                 this.actionListBox.Items.Add(loan);
@@ -64,7 +64,7 @@ namespace ProjetPT2K
 
         private void ExtendAllButton_Click(object sender, EventArgs e)
         { 
-                foreach (EMPRUNTER loan in this.Subriber.EMPRUNTER)
+                foreach (EMPRUNTER loan in this.Subscriber.EMPRUNTER)
                 {
                     if (!loan.HasBeenExtended())
                         loan.Extend();
@@ -90,7 +90,7 @@ namespace ProjetPT2K
         {
             MainView view = new MainView(Account);
             view.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
