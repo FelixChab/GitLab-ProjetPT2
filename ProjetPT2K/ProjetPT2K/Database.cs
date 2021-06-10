@@ -106,6 +106,7 @@ namespace ProjetPT2K
         /// <param name="countryCode"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
+<<<<<<< HEAD
         public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
         {
             try

@@ -91,6 +91,10 @@ namespace UnitTestProjetPT2K
 
             // Ensure the album cannot be borrowed anymore
             Assert.ThrowsException<Exception>(() => this._Subscriber.BorrowAlbum(theAlbum));
+<<<<<<< HEAD:ProjetPT2K/UnitTestProjetPT2K/SubscriberUnitTest.cs
+=======
+            
+>>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and):ProjetPT2K/UnitTestProjetPT2K/SubscriberUT.cs
             Assert.IsFalse(theAlbum.IsAvailable());
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
 
@@ -99,8 +103,14 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(theAlbum, theLoan.ALBUMS);
             Assert.AreEqual(this._Subscriber, theLoan.ABONNÉS);
 
+<<<<<<< HEAD:ProjetPT2K/UnitTestProjetPT2K/SubscriberUnitTest.cs
             // Ensure it is possible to borrow the album again once it has been returned
             theLoan.Return();
+=======
+            theLoan.DATE_RETOUR = new DateTime(2021, 6, 9);
+            this.Connection.SaveChanges();
+
+>>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and):ProjetPT2K/UnitTestProjetPT2K/SubscriberUT.cs
             this._Subscriber.BorrowAlbum(theAlbum);
         }
 
