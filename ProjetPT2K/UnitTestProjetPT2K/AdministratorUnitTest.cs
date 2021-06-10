@@ -10,7 +10,7 @@ namespace UnitTestProjetPT2K
     /// Unit tests for the class Administrator.
     /// </summary>
     [TestClass]
-    public class AdministratorTU : UnitTest
+    public class AdministratorUnitTest : UnitTest
     {
         /// <summary>
         /// The administrator used in this tests.
