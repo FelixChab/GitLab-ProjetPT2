@@ -15,15 +15,23 @@ namespace ProjetPT2K
     public partial class Login : Form
     {
         private MusiquePT2_KEntities database = Database.GetInstance().GetConnection();
-
-        /* Constructeur standard */
+        
+        
+        /// <summary>
+        /// Standard constructor.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             errorLabel.Visible = false;
         }
 
-        /* Method of the "create account" button */
+
+        /// <summary>
+        /// Function of the "create account button"
+        /// </summary>
+        /// <param name="sender"> the object conserned</param>
+        /// <param name="e"> the event</param>
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             NewAccountView accountView = new NewAccountView(this);
@@ -31,7 +39,11 @@ namespace ProjetPT2K
 
         }
 
-        /* Method of the "connection" button */
+        /// <summary>
+        /// Fucntion of the "connection" button
+        /// </summary>
+        /// <param name="sender"> the object concerned </param>
+        /// <param name="e"> the event </param>
         private void ConnectionButton_Click(object sender, EventArgs e)
         {
             string login = userlabel.Text;
@@ -66,6 +78,10 @@ namespace ProjetPT2K
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Label GetErrorLabel()
         {
             return errorLabel;
