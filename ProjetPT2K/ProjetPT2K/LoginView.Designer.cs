@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
@@ -41,6 +42,7 @@ namespace ProjetPT2K
             this.labelUserLogin = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.connectionButton = new System.Windows.Forms.Button();
+
             this.logo = new System.Windows.Forms.PictureBox();
             this.connectionBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -92,7 +94,7 @@ namespace ProjetPT2K
             this.userlabel.Location = new System.Drawing.Point(116, 102);
             this.userlabel.Name = "userlabel";
             this.userlabel.Size = new System.Drawing.Size(192, 30);
-            this.userlabel.TabIndex = 6;
+            this.userlabel.TabIndex = 0;
             // 
             // passwordlabel
             // 
@@ -100,8 +102,10 @@ namespace ProjetPT2K
             this.passwordlabel.Location = new System.Drawing.Point(117, 175);
             this.passwordlabel.Name = "passwordlabel";
             this.passwordlabel.Size = new System.Drawing.Size(191, 30);
-            this.passwordlabel.TabIndex = 5;
+            this.passwordlabel.TabIndex = 1;
             this.passwordlabel.UseSystemPasswordChar = true;
+            this.passwordlabel.KeyDown += new System.Windows.Forms.KeyEventHandler(enterKey);
+
             // 
             // labelPasswordLogin
             // 
@@ -177,6 +181,8 @@ namespace ProjetPT2K
             this.ResumeLayout(false);
 
         }
+
+
 
         #endregion
 

@@ -63,6 +63,11 @@ namespace ProjetPT2K
             }
         }
 
+        /// <summary>
+        /// Function that tells if a position contain a point.
+        /// </summary>
+        /// <param name="p"> the point</param>
+        /// <returns> hte position of the point </returns>
         public bool Contains (Point p)
         {
             return position.X < p.X && position.X + GetImage().Width >p.X && position.Y<p.Y && position.Y+GetImage().Height>p.Y;

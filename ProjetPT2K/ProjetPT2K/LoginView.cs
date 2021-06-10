@@ -15,23 +15,38 @@ namespace ProjetPT2K
     public partial class Login : Form
     {
         private MusiquePT2_KEntities database = Database.GetInstance().GetConnection();
-
-        /* Constructeur standard */
+        
+        
+        /// <summary>
+        /// Standard constructor.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             errorLabel.Visible = false;
         }
 
-        /* Method of the "create account" button */
+        /// <summary>
+        /// Function of the "create account button"
+        /// </summary>
+        /// <param name="sender"> the object conserned</param>
+        /// <param name="e"> the event</param>
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             NewAccountView accountView = new NewAccountView(this);
             accountView.Show();
         }
 
-        /* Method of the "connection" button */
+        /// <summary>
+        /// Fucntion of the "connection" button
+        /// </summary>
+        /// <param name="sender"> the object concerned </param>
+        /// <param name="e"> the event </param>
         private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            connect();
+        }
+        private void connect()
         {
             string login = userlabel.Text;
             string password = passwordlabel.Text;
@@ -48,8 +63,11 @@ namespace ProjetPT2K
             }
             else
             {
-                string AccountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
+                string AccountType = account.IsAdministrator ? "administrateur" : "abonné";
                 errorLabel.ForeColor = Color.LightGreen;
+                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
+                errorLabel.Visible = true;
+                Hide();
                 if (!account.IsAdministrator)
                 {
                     MainView view = new MainView(account);
@@ -57,17 +75,27 @@ namespace ProjetPT2K
                 }
                 else
                 {
-                    AdminView formAdmin = new AdminView((Administrator)account);
-                    formAdmin.Show();
+                    AdminView formAdmin = new AdminView((Administrator)account, this);
+                    formAdmin.ShowDialog();
+                    Show();
                 }
-                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
-                errorLabel.Visible = true;
+
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Label GetErrorLabel()
         {
             return errorLabel;
         }
+
+        private void passwordlabel_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
+

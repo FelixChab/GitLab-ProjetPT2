@@ -53,16 +53,18 @@ namespace ProjetPT2K
             }
         }
 
-        private void GoToAccountView_Click(object sender, EventArgs e)
-        {
-            // Open account view
-        }
+
 
         private void MainView_MouseMove(object sender, MouseEventArgs e)
         {
             // ...
         }
 
+        /// <summary>
+        /// Function that display album when the mouse is clicked
+        /// </summary>
+        /// <param name="sender"> the object concerned</param>
+        /// <param name="e"> the event</param>
         private void MainView_MouseClick(object sender, MouseEventArgs e)
         {
             foreach (DisplayAlbum display in AlbumsDisplayed)
@@ -87,6 +89,12 @@ namespace ProjetPT2K
             }
         }
 
+
+        /// <summary>
+        /// Function that handle the pictureBox1 clicked
+        /// </summary>
+        /// <param name="sender"> the object concerned</param>
+        /// <param name="e"> the event</param>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             AccountView accountDetails = new AccountView(account);
@@ -94,6 +102,12 @@ namespace ProjetPT2K
             this.Close();
         }
 
+
+        /// <summary>
+        /// Function that
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logo_Click(object sender, EventArgs e)
         {
             Refresh();

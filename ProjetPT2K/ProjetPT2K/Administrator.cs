@@ -62,11 +62,12 @@ namespace ProjetPT2K
         /// <summary>
         /// Attempt to remove from the database the subscribers who have not borrowed an album in a year.
         /// </summary>
-        public void PurgeDatabase()
+        public List<ABONNÉS> PurgeDatabase()
         {
             List<ABONNÉS> inactiveSubscribers = this.Database.GetInactiveSubscribers();
             inactiveSubscribers.ForEach(subscriber => this.Connection.ABONNÉS.Remove(subscriber));
             Connection.SaveChanges();
+            return inactiveSubscribers;
         }
 
         /// <summary>
@@ -76,10 +77,10 @@ namespace ProjetPT2K
         public List<ALBUMS> GetUnpopularAlbums()
         {
             List<ALBUMS> unpopularAlbums = new List<ALBUMS>();
-            List<ALBUMS> theAlbums = this.Connection.ALBUMS.ToList();
+            List<ALBUMS> theAlbums = this.Connection.ALBUMS.Where(x=>x.EMPRUNTER.Count > 0).ToList();
             foreach (ALBUMS theAlbum in theAlbums)
             {
-                if (!theAlbum.IsPopular())
+                if(!theAlbum.IsPopular())
                     unpopularAlbums.Add(theAlbum);
             }
             return unpopularAlbums;
