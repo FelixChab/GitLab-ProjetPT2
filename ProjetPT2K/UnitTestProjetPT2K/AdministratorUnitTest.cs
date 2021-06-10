@@ -27,8 +27,9 @@ namespace UnitTestProjetPT2K
             CreateAccounts();
             GetExtendedLoans();
             GetLateSubscribers();
-            GetUnpopularAlbums();
+            //GetUnpopularAlbums();
             PurgeDatabase();
+            GetMostBorrowedAlbums();
         }
 
         /// <summary>
@@ -134,8 +135,9 @@ namespace UnitTestProjetPT2K
             {
                 CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
                 CODE_ALBUM = theAlbum.CODE_ALBUM,
-                DATE_EMPRUNT = new DateTime(2019, 12, 12),
-                DATE_RETOUR_ATTENDUE = new DateTime(2020, 1, 25)
+                DATE_EMPRUNT = new DateTime(2018, 12, 12),
+                DATE_RETOUR_ATTENDUE = new DateTime(2019, 1, 25),
+                DATE_RETOUR = new DateTime(2019, 1, 25)
             };
 
             this.Connection.EMPRUNTER.Add(theLoan);
@@ -169,9 +171,9 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt list the 10 best albums.
+        /// Attempt list the 10 most borrowed albums.
         /// </summary>
-        private void GetBestAlbums()
+        private void GetMostBorrowedAlbums()
         {
             ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");

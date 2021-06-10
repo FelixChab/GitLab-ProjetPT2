@@ -28,7 +28,7 @@ namespace UnitTestProjetPT2K
             BorrowAlbum();
             ListAlbums();
             ExtendLoan();
-            getRecommendations();
+            GetRecommendations();
         }
 
         /// <summary>
@@ -148,25 +148,24 @@ namespace UnitTestProjetPT2K
         /// <summary>
         /// Attempt to getRecommendations.
         /// </summary>
-        private void getRecommendations()
+        private void GetRecommendations()
         {
 
-            Dictionary<ALBUMS, int> dict = this._Subscriber.GetRecommandations();
-
+            Dictionary<ALBUMS, int> theRecommandations = this._Subscriber.GetRecommandations();
             // check if the list of recommendations is in the right order
-            for (int i = 1; i < dict.Count; i++)
+            for (int i = 1; i < theRecommandations.Count; i++)
             {
-                int lim = dict.ElementAt(i).Value;
-                int after = dict.ElementAt(i - 1).Value;
+                int lim = theRecommandations.ElementAt(i).Value;
+                int after = theRecommandations.ElementAt(i - 1).Value;
                 Assert.IsTrue(lim >= after);
             }
 
             // check if the genre of recommendations is the good one.
-            for (int i = 1; i < dict.Count; i++)
+            for (int i = 1; i < theRecommandations.Count; i++)
             {
-                ALBUMS genre = dict.ElementAt(i).Key;
-                ALBUMS afterGenre = dict.ElementAt(i - 1).Key;
-                Assert.AreEqual(genre.CODE_GENRE, afterGenre.CODE_GENRE);
+                ALBUMS theFirstAlbum = theRecommandations.ElementAt(i).Key;
+                ALBUMS theSecondAlbum = theRecommandations.ElementAt(i - 1).Key;
+                Assert.AreEqual(theFirstAlbum.CODE_GENRE, theSecondAlbum.CODE_GENRE);
             }
         }
     }
