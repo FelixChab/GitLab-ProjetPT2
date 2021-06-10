@@ -24,11 +24,7 @@ VALUES (1, 'Hugo', 'Victor', 'victor', 'hugo')
 
 -- William Shakespeare (william shakespeare)
 INSERT INTO ABONNÉS (CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ)
-<<<<<<< HEAD
 VALUES (5, 'Shakespeare', 'William', 'william', 'shakespeare')
-=======
-VALUES (1, 'Shakespeare', 'William', 'william', 'shakespeare')
->>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and)
 
 -- Napoléon Bonnaparte (napoléon bonnaparte)
 INSERT INTO ABONNÉS (CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ)
@@ -40,10 +36,7 @@ VALUES (1, 'Bonnaparte', 'Napoléon', 'napoléon', 'bonnaparte')
 -- Variable initialization
 SELECT @marc = CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = 'marc'
 SELECT @victor = CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = 'victor'
-<<<<<<< HEAD
 SELECT @william = CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = 'william'
-=======
->>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and)
 SELECT @napoléon = CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = 'napoléon'
 
 
@@ -80,16 +73,6 @@ INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTEN
 VALUES (@marc, 6, GETDATE(), DATEADD(DD, 2, GETDATE()))
 
 
-<<<<<<< HEAD
-
-
--- inactive subscriber (Deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE, DATE_RETOUR)
-VALUES (@napoléon, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
--- inactive subscriber (Not deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
-VALUES (@william, 8, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
 
 
 -- inactive subscriber (Not deleted)
@@ -115,17 +98,6 @@ VALUES (@william, 13, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE())
 -- inactive subscriber (Not deleted)
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 14, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
-
--- inactive subscriber (Deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE, DATE_RETOUR)
-VALUES (@napoléon, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
--- inactive subscriber (Not deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
-VALUES (@william, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
-
 -- inactive subscriber (Not deleted)
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 15, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
@@ -133,22 +105,6 @@ VALUES (@william, 15, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE())
 -- inactive subscriber (Not deleted)
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 16, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
-
-=======
-
-
--- inactive subscriber (Deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE, DATE_RETOUR)
-VALUES (@napoléon, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
--- inactive subscriber (Not deleted)
-INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
-VALUES (@william, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
-
-
->>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and)
-
 
 -- Loan display
 SELECT * FROM EMPRUNTER

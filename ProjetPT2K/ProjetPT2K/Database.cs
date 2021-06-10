@@ -99,18 +99,13 @@ namespace ProjetPT2K
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
-=======
-        /// Create a new subscriber account in the database
->>>>>>> c19613d (Merge)
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
         /// <param name="countryCode"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-<<<<<<< HEAD
         public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
         {
             try
