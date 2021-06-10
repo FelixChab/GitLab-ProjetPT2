@@ -23,13 +23,14 @@ namespace ProjetPT2K
             errorLabel.Visible = false;
         }
 
-        private  void KeyDown_method(object sender, KeyEventArgs e)
+        private void enterKey(object sender, KeyEventArgs e)
         {
-            if ((char)e.KeyCode == (char)Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 connect();
             }
-        }
+        
+    }
 
         /* Method of the "create account" button */
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -63,6 +64,9 @@ namespace ProjetPT2K
             {
                 string AccountType = account.IsAdministrator ? "administrateur" : "abonné";
                 errorLabel.ForeColor = Color.LightGreen;
+                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
+                errorLabel.Visible = true;
+                Hide();
                 if (!account.IsAdministrator)
                 {
                     MainView view = new MainView(account);
@@ -70,12 +74,11 @@ namespace ProjetPT2K
                 }
                 else
                 {
-                    AdminView formAdmin = new AdminView((Administrator)account);
-                    formAdmin.Show();
+                    AdminView formAdmin = new AdminView((Administrator)account, this);
+                    formAdmin.ShowDialog();
+                    Show();
                 }
-                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
-                errorLabel.Visible = true;
-                Hide();
+
             }
         }
 
