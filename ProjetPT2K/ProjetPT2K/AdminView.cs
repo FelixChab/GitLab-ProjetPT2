@@ -1,20 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing the view for the administrator account.
+    /// </summary>
     public partial class AdminView : Form
     {
+        /// <summary>
+        /// The administrator of the form
+        /// </summary>
+        private readonly Administrator _Administrator;
 
-        private Administrator CurrentAdmin;
-        private Login login;
+        /// <summary>
+        /// Parametorised constructor creating a new AdminView object.
+        /// </summary>
+        /// <param name="theAdministrator"> the administrator of the view </param>
+        public AdminView(Administrator theAdministrator)
+        {
+            InitializeComponent();
+            this._Administrator = theAdministrator;
+            this.listBoxAdminResults.ScrollAlwaysVisible = false;
+        }
 
         #region page system
         private String header;
@@ -76,25 +88,6 @@ namespace ProjetPT2K
         }
         #endregion
 
-        /* Constructeur surcharge admin */
-        public AdminView(Administrator admin, Login login)
-        {
-            this.CurrentAdmin = admin;
-            this.login = login;
-            InitializeComponent();
-            this.listBoxAdminResults.ScrollAlwaysVisible = false;
-            ButtonExtendedLoans_Click(null, null);
-            printContent(readLateLoans, "|                  Abonnés en retards d'emprunt :                  |");
-
-        }
-
-            private void test(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-            
-
-        }
-
         #region extended and late loans
         /// <summary>
         /// Funtction that extends loans by clicking on the button.
@@ -112,7 +105,7 @@ namespace ProjetPT2K
         /// </summary>
         public void readExtentedLoans()
         {
-            List<EMPRUNTER> list = CurrentAdmin.GetExtendedLoans();
+            List<EMPRUNTER> list = _Administrator.GetExtendedLoans();
             this.count = list.Count();
             int start = perPage * page;
             int size = count < start + perPage ? (count - start) : perPage;
@@ -142,7 +135,7 @@ namespace ProjetPT2K
         /// </summary>
         public void readLateLoans()
         {
-            List<ABONNÉS> list = CurrentAdmin.GetLateSubscribers();
+            List<ABONNÉS> list = _Administrator.GetLateSubscribers();
             this.count = list.Count();
             int start = perPage * page;
             int size = count < start + perPage ? (count - start) : perPage;
@@ -174,8 +167,8 @@ namespace ProjetPT2K
         /// </summary>
         public void readPurge()
         {
-            List<ABONNÉS> subList = CurrentAdmin.PurgeDatabase();
-            foreach (ABONNÉS sub in subList)
+            List<ABONNÉS> subList =_Administrator.PurgeDatabase();
+            foreach(ABONNÉS sub in subList)
             {
                 this.listBoxAdminResults.Items.Add("L'abonné " + sub.NOM_ABONNÉ + " " + sub.PRÉNOM_ABONNÉ + " à été supprimé.");
             }
@@ -243,7 +236,7 @@ namespace ProjetPT2K
         public void readLessLoaned()
         {
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
-            List<ALBUMS> albums = CurrentAdmin.GetUnpopularAlbums();
+            List<ALBUMS> albums = _Administrator.GetUnpopularAlbums();
             this.count = albums.Count();
             int start = perPage * page;
             int size = count < start + perPage ? (count - start) : perPage;

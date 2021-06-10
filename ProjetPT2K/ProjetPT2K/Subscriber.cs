@@ -32,20 +32,81 @@ namespace ProjetPT2K
         {
             if (theAlbum.IsAvailable())
             {
-                EMPRUNTER theLoan = new EMPRUNTER
-                {
-                    CODE_ABONNÉ = this.CODE_ABONNÉ,
-                    CODE_ALBUM = theAlbum.CODE_ALBUM,
-                    DATE_EMPRUNT = DateTime.Today,
-                    DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theAlbum.GENRES.DÉLAI)
-                };
-
-                this.Connection.EMPRUNTER.Add(theLoan);
-                this.Connection.SaveChanges();
+                EMPRUNTER theLoan = this.GetLoanOfAlbum(theAlbum);
+                if (theLoan != null)
+                    UpdateLoan(theLoan);
+                else
+                    CreateLoan(theAlbum);
+            }
+            else
+            {
+                throw new Exception("L'album n'est pas disponible à l'emprunt");
             }
         }
 
+        /// <summary>
+        /// Return the loan of the current subscriber whose album is the same as the given one.
+        /// </summary>
+        /// <param name="theAlbum"> the considered album </param>
+        /// <returns></returns>
+        private EMPRUNTER GetLoanOfAlbum(ALBUMS theAlbum)
+        {
+            foreach (EMPRUNTER theLoan in this.EMPRUNTER)
+            {
+                if (theLoan.ALBUMS.Equals(theAlbum))
+                    return theLoan;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Update the borrow date and the return date of the given loan.
+        /// </summary>
+        /// <param name="theLoan"> the considered loan </param>
+        private void UpdateLoan(EMPRUNTER theLoan)
+        {
+            ALBUMS theAlbum = theLoan.ALBUMS;
+
+            theLoan.DATE_RETOUR = null;
+            theLoan.DATE_EMPRUNT = DateTime.Now;
+            theLoan.DATE_RETOUR_ATTENDUE = DateTime.Now.AddDays(theAlbum.GENRES.DÉLAI);
+
+            this.Connection.SaveChanges();
+        }
+
+        /// <summary>
+        /// Create a new loan for the given album and insert it into the database.
+        /// </summary>
+        /// <param name="theAlbum"> the considered album </param>
+        private void CreateLoan(ALBUMS theAlbum)
+        {
+            EMPRUNTER theLoan = new EMPRUNTER
+            {
+                CODE_ABONNÉ = this.CODE_ABONNÉ,
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                DATE_EMPRUNT = DateTime.Today,
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theAlbum.GENRES.DÉLAI)
+            };
+
+            this.Connection.EMPRUNTER.Add(theLoan);
+            this.Connection.SaveChanges();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<ALBUMS, int> GetRecommandations()
+        {
+            GENRES theGenre = this.GetMostBorrowedGenre();
+            return Database.GetInstance().GetMostBorrowedAlbumsOfGenre(theGenre);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private GENRES GetMostBorrowedGenre()
         {
             int loanNumber = -1;
             GENRES theGenre = null;
@@ -74,7 +135,7 @@ namespace ProjetPT2K
                 }
 
             }
-            return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
+            return theGenre;
         }
 
         /// <summary>
@@ -83,7 +144,7 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            return (NOM_ABONNÉ.Trim() + " " + PRÉNOM_ABONNÉ.Trim());
+            return NOM_ABONNÉ.Trim() + " " + PRÉNOM_ABONNÉ.Trim();
         }
     }
 }

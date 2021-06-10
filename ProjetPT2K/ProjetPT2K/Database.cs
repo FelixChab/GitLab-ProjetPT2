@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ProjetPT2K
 {
@@ -61,106 +62,127 @@ namespace ProjetPT2K
         /// <summary>
         /// Return the account retrieved from the database corresponding to the given credentials.
         /// </summary>
-        /// <param name="login"> the login of the account </param>
-        /// <param name="password"> the password of the account </param>
+        /// <param name="theLogin"> the login of the account </param>
+        /// <param name="thePassword"> the password of the account </param>
         /// <returns></returns>
-        public Account Login(string login, string password)
+        public Account Login(string theLogin, string thePassword)
         {
-            Account account;
-            if (login == Administrator.LOGIN && password == Administrator.PASSWORD)
-                account = new Administrator();
-            else
-                account = FetchSubscriberAccount(login, password);
-            return account;
+            if (theLogin == Administrator.LOGIN && thePassword == Administrator.PASSWORD)
+                return new Administrator();
+            return FetchSubscriberAccount(theLogin, thePassword);
         }
 
         /// <summary>
         /// Retrieve the subscriber account corresponding to the given login and password.
         /// </summary>
-        /// <param name="login"> the login of the subscriber </param>
-        /// <param name="password"> the password of the subscriber </param>
+        /// <param name="theLogin"> the login of the subscriber </param>
+        /// <param name="thePassword"> the password of the subscriber </param>
         /// <returns> an Account object </returns>
-        private Account FetchSubscriberAccount(string login, string password)
+        private Account FetchSubscriberAccount(string theLogin, string thePassword)
         {
-            ABONNÉS theSubscriber = (from subscriber in this.Connection.ABONNÉS
-                          where (subscriber.LOGIN_ABONNÉ == login)
-                          && (subscriber.PASSWORD_ABONNÉ == password)
-                          select subscriber).FirstOrDefault();
-
-            return theSubscriber;
+            List<ABONNÉS> theSubscribers = this.Connection.ABONNÉS.ToList();
+            return theSubscribers.Find(subsbcriber =>
+                subsbcriber.LOGIN_ABONNÉ.Trim() == theLogin &&
+                subsbcriber.PASSWORD_ABONNÉ.Trim() == thePassword);
         }
 
         /// <summary>
         /// Return true if an account with the given login already exists in the database
         /// </summary>
-        /// <param name="login"> the login we are looking for </param>
+        /// <param name="theLogin"> the login we are looking for </param>
         /// <returns> a boolean </returns>
-        public bool AccountExists(string login)
+        public bool AccountExists(string theLogin)
         {
-            ABONNÉS account = (from subscriber in this.Connection.ABONNÉS
-                               where (subscriber.LOGIN_ABONNÉ == login)
-                               select subscriber).FirstOrDefault();
-
-            return account != null;
+            List<ABONNÉS> theSubscribers = this.Connection.ABONNÉS.ToList();
+            return theSubscribers.Find(subsbcriber =>
+                subsbcriber.LOGIN_ABONNÉ.Trim() == theLogin) != null;
         }
 
         /// <summary>
-        /// Create a new subscriber account in the database
+        /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
         /// <param name="countryCode"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-        public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
+        public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
         {
-            if (!AccountExists(login))
+            try
             {
-                ABONNÉS theSubscriber = new ABONNÉS
-                {
-                    NOM_ABONNÉ = lastname,
-                    PRÉNOM_ABONNÉ = firstname,
-                    LOGIN_ABONNÉ = login,
-                    PASSWORD_ABONNÉ = password
-                };
-
-                if (countryCode > 0)
-                    theSubscriber.CODE_PAYS = countryCode;
-
-                this.Connection.ABONNÉS.Add(theSubscriber);
-                this.Connection.SaveChanges();
+                CredentialsAreValid(firstname, lastname, login, password);
+            } 
+            catch
+            {
+                throw;
             }
-            else
-            {
+            if (AccountExists(login) || !CredentialsAreValid(firstname, lastname, login, password))
                 throw new Exception("Nom d'utilisateur indisponible");
-            }
+            CreateAccount(firstname, lastname, countryCode, login, password);
         }
 
         /// <summary>
-        /// Function that allows to get all the albums.
+        /// Return true if the login and the password are valid.
         /// </summary>
-        /// <returns> the lsit of all the albums </returns>
+        /// <param name="theCredentials"> the list of credentials (login & password) </param>
+        /// <returns></returns>
+        private bool CredentialsAreValid(params string[] theCredentials)
+        {
+            Regex theRegex = new Regex("^[A-Za-z0-9]*$");
+            foreach (string theCredential in theCredentials)
+            {
+                if (theCredential.Length == 0)
+                    throw new Exception("Les champs ne doivent pas être vides");
+                if (theCredential.Length > 32)
+                    throw new Exception("Les champs ne doivent pas dépasser 32 caractères");
+                if (!theRegex.IsMatch(theCredential))
+                    throw new Exception("Les champs ne peuvent contenir que des lettres et des chiffres");
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Create a new subscriber account in the database
+        /// </summary>
+        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="login"> the login of the user </param>
+        /// <param name="password"> the password of the user </param>
+        private void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
+        {
+            ABONNÉS theSubscriber = new ABONNÉS
+            {
+                NOM_ABONNÉ = lastname,
+                PRÉNOM_ABONNÉ = firstname,
+                LOGIN_ABONNÉ = login,
+                PASSWORD_ABONNÉ = password
+            };
+
+            if (countryCode > 0)
+                theSubscriber.CODE_PAYS = countryCode;
+
+            this.Connection.ABONNÉS.Add(theSubscriber);
+            this.Connection.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// Return all the allbums of the database.
+        /// </summary>
+        /// <returns> a list of Album objects </returns>
         public List<ALBUMS> GetAllAlbums()
         {
-            List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
-                         select album).ToList();
-
-            return theAlbums;
+            return this.Connection.ALBUMS.ToList();
         }
 
-
         /// <summary>
-        /// Function that allows to get an album by searching a string that this album is containing.
+        /// Return all the albums of the database whose name contains the given pattern.
         /// </summary>
-        /// <param name="pattern"> the substrig that is contained in an album title </param>
-        /// <returns> the list that contains all the album name containing the substring </returns>
-        public List<ALBUMS> GetAlbumsContaining(string pattern)
+        /// <param name="thePattern"> the given pattern </param>
+        /// <returns> a list of Albums objects </returns>
+        public List<ALBUMS> GetAlbumsContaining(string thePattern)
         {
-            var albums = from album in this.Connection.ALBUMS
-                         where album.TITRE_ALBUM.Contains(pattern)
-                         select album;
-
-            return albums.ToList();
+            List<ALBUMS> theAlbums = this.GetAllAlbums();
+            return theAlbums.FindAll(album => album.TITRE_ALBUM.Contains(thePattern));
         }
 
         /// <summary>
@@ -169,62 +191,45 @@ namespace ProjetPT2K
         /// <returns> a list of Abonné objects </returns>
         public List<ABONNÉS> GetInactiveSubscribers()
         {
-            List<ABONNÉS> inactiveSubscribers = new List<ABONNÉS>();
+            List<ABONNÉS> theInactiveSubscribers = new List<ABONNÉS>();
             List<ABONNÉS> theSubscribers = this.Connection.ABONNÉS.ToList();
             foreach (ABONNÉS theSubscriber in theSubscribers)
             {
                 if (!theSubscriber.IsActive())
-                    inactiveSubscribers.Add(theSubscriber);
+                    theInactiveSubscribers.Add(theSubscriber);
             }
-            return inactiveSubscribers;
+            return theInactiveSubscribers;
         }
 
         /// <summary>
         /// Return the album corresponding to the given ID in the database.
         /// </summary>
-        /// <param name="ID"> the ID of the album </param>
+        /// <param name="theID"> the ID of the album </param>
         /// <returns> an Album object </returns>
-        public ALBUMS GetAlbumWithID(int ID)
+        public ALBUMS GetAlbumWithID(int theID)
         {
-            ALBUMS theAlbum = (from album in this.Connection.ALBUMS
-                               where album.CODE_ALBUM == ID
-                               select album).FirstOrDefault();
-            return theAlbum;
+            List<ALBUMS> theAlbums = this.GetAllAlbums();
+            return theAlbums.Find(theAlbum => theAlbum.CODE_ALBUM == theID);
         }
 
-
         /// <summary>
-        /// Function that allosw to get the best ablums of genre.
+        /// Return the 10 most borrowed albums of the year of the given genre.
         /// </summary>
-        /// <param name="genre"> the genre of the albums </param>
-        /// <returns> the list of the best albums of the genre </returns>
-        public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)
+        /// <param name="theGenre"> the considered genre </param>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbumsOfGenre(GENRES theGenre)
         {
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS
-                                 join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM
-                                 where a.GENRES.LIBELLÉ_GENRE == genre.LIBELLÉ_GENRE
-                                 orderby a.EMPRUNTER.Count descending
-                                 select a).ToList();
-            for (int start = 0; start < list.Count; start++)
+            foreach (EMPRUNTER theLoan in theLoans)
             {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if ((theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year) && (theLoan.ALBUMS.GENRES == theGenre))
+                    topAlbums[theLoan.ALBUMS] = 1;
             }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
 
         /// <summary>
@@ -233,8 +238,9 @@ namespace ProjetPT2K
         /// <returns> a dictionnary of Album objects and int </returns>
         public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
         {
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            foreach (EMPRUNTER theLoan in theLoans)
             {
                 if (topAlbums.ContainsKey(theLoan.ALBUMS))
                     topAlbums[theLoan.ALBUMS]++;

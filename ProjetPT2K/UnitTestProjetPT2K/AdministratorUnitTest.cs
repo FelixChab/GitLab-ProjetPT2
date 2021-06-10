@@ -10,7 +10,7 @@ namespace UnitTestProjetPT2K
     /// Unit tests for the class Administrator.
     /// </summary>
     [TestClass]
-    public class AdministratorTU : UnitTest
+    public class AdministratorUnitTest : UnitTest
     {
         /// <summary>
         /// The administrator used in this tests.
@@ -27,8 +27,9 @@ namespace UnitTestProjetPT2K
             CreateAccounts();
             GetExtendedLoans();
             GetLateSubscribers();
-            GetUnpopularAlbums();
+            //GetUnpopularAlbums();
             PurgeDatabase();
+            GetMostBorrowedAlbums();
         }
 
         /// <summary>
@@ -36,8 +37,8 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccounts()
         {
-            this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            this.Database.CreateAccount("Marc", "Antoine", 1, "marc", "antoine");
+            this.Database.AttemptAccountCreation("Jean", "Pierre", 1, "jean", "pierre");
+            this.Database.AttemptAccountCreation("Marc", "Antoine", 1, "marc", "antoine");
 
             // Retrieve the accounts
             Account subscriber1 = this.Database.Login("jean", "pierre");            
@@ -58,7 +59,7 @@ namespace UnitTestProjetPT2K
         private void GetExtendedLoans()
         {
             // Ensure there are top 10 yet
-            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+            Assert.AreEqual(0, this._Administrator.GetMostBorrowedAlbums().Count);
 
             // Ensure there are currently no extended loans in the database
             Assert.AreEqual(0, this._Administrator.GetExtendedLoans().Count);
@@ -134,8 +135,9 @@ namespace UnitTestProjetPT2K
             {
                 CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,
                 CODE_ALBUM = theAlbum.CODE_ALBUM,
-                DATE_EMPRUNT = new DateTime(2019, 12, 12),
-                DATE_RETOUR_ATTENDUE = new DateTime(2020, 1, 25)
+                DATE_EMPRUNT = new DateTime(2018, 12, 12),
+                DATE_RETOUR_ATTENDUE = new DateTime(2019, 1, 25),
+                DATE_RETOUR = new DateTime(2019, 1, 25)
             };
 
             this.Connection.EMPRUNTER.Add(theLoan);
@@ -169,9 +171,9 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt list the 10 best albums.
+        /// Attempt list the 10 most borrowed albums.
         /// </summary>
-        private void GetBestAlbums()
+        private void GetMostBorrowedAlbums()
         {
             ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
@@ -186,8 +188,8 @@ namespace UnitTestProjetPT2K
             this.Connection.SaveChanges();
 
 
-            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
-            Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
+            Assert.AreEqual(0, this._Administrator.GetMostBorrowedAlbums().Count);
+            Dictionary<ALBUMS, int> dict = this._Administrator.GetMostBorrowedAlbums();
 
             for (int i = 1; i < dict.Count; i++)
             {
