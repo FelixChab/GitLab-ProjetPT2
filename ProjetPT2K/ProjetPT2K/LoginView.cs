@@ -23,6 +23,14 @@ namespace ProjetPT2K
             errorLabel.Visible = false;
         }
 
+        private  void KeyDown_method(object sender, KeyEventArgs e)
+        {
+            if ((char)e.KeyCode == (char)Keys.Enter)
+            {
+                connect();
+            }
+        }
+
         /* Method of the "create account" button */
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -33,6 +41,10 @@ namespace ProjetPT2K
 
         /* Method of the "connection" button */
         private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            connect();
+        }
+        private void connect()
         {
             string login = userlabel.Text;
             string password = passwordlabel.Text;
@@ -49,7 +61,7 @@ namespace ProjetPT2K
             }
             else
             {
-                string AccountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
+                string AccountType = account.IsAdministrator ? "administrateur" : "abonné";
                 errorLabel.ForeColor = Color.LightGreen;
                 if (!account.IsAdministrator)
                 {
@@ -63,12 +75,20 @@ namespace ProjetPT2K
                 }
                 errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
                 errorLabel.Visible = true;
+                Hide();
             }
         }
 
+        
+    
         public Label GetErrorLabel()
         {
             return errorLabel;
+        }
+
+        private void passwordlabel_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

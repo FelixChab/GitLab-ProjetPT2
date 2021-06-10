@@ -42,6 +42,7 @@ namespace ProjetPT2K
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.connectionButton = new System.Windows.Forms.Button();
             this.logo = new System.Windows.Forms.PictureBox();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_method);
             this.connectionBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
@@ -102,6 +103,7 @@ namespace ProjetPT2K
             this.passwordlabel.Size = new System.Drawing.Size(191, 30);
             this.passwordlabel.TabIndex = 1;
             this.passwordlabel.UseSystemPasswordChar = true;
+            this.passwordlabel.TextChanged += new System.EventHandler(this.passwordlabel_TextChanged);
             // 
             // labelPasswordLogin
             // 
