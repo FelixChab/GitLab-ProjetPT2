@@ -81,7 +81,12 @@ namespace ProjetPT2K
             this.CurrentAdmin = admin;
             InitializeComponent();
             this.listBoxAdminResults.ScrollAlwaysVisible = false;
+<<<<<<< HEAD
             ButtonExtendedLoans_Click(null, null);
+=======
+            printContent(readLateLoans, "|                  Abonnés en retards d'emprunt :                  |");
+
+>>>>>>> f58f6f2e1f6453c32c63d425a92beabed8333149
         }
         #region extended and late loans
         private void ButtonExtendedLoans_Click(object sender, EventArgs e)
