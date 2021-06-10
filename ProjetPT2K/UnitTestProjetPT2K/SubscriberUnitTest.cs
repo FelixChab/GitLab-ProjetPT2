@@ -10,7 +10,7 @@ namespace UnitTestProjetPT2K
     /// Unit tests for the class Subscriber.
     /// </summary>
     [TestClass]
-    public class SubscriberUT : UnitTest
+    public class SubscriberUnitTest : UnitTest
     {
         /// <summary>
         /// The subscriber used in the test.
@@ -91,7 +91,7 @@ namespace UnitTestProjetPT2K
 
             // Ensure the album cannot be borrowed anymore
             Assert.ThrowsException<Exception>(() => this._Subscriber.BorrowAlbum(theAlbum));
-            
+
             Assert.IsFalse(theAlbum.IsAvailable());
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
 
@@ -100,9 +100,8 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(theAlbum, theLoan.ALBUMS);
             Assert.AreEqual(this._Subscriber, theLoan.ABONNÉS);
 
-            theLoan.DATE_RETOUR = new DateTime(2021, 6, 9);
-            this.Connection.SaveChanges();
-
+            // Ensure it is possible to borrow the album again once it has been returned
+            theLoan.Return();
             this._Subscriber.BorrowAlbum(theAlbum);
         }
 
