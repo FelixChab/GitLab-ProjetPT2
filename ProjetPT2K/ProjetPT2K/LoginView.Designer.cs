@@ -92,7 +92,7 @@ namespace ProjetPT2K
             this.userlabel.Location = new System.Drawing.Point(116, 102);
             this.userlabel.Name = "userlabel";
             this.userlabel.Size = new System.Drawing.Size(192, 30);
-            this.userlabel.TabIndex = 6;
+            this.userlabel.TabIndex = 0;
             // 
             // passwordlabel
             // 
@@ -100,7 +100,7 @@ namespace ProjetPT2K
             this.passwordlabel.Location = new System.Drawing.Point(117, 175);
             this.passwordlabel.Name = "passwordlabel";
             this.passwordlabel.Size = new System.Drawing.Size(191, 30);
-            this.passwordlabel.TabIndex = 5;
+            this.passwordlabel.TabIndex = 1;
             this.passwordlabel.UseSystemPasswordChar = true;
             // 
             // labelPasswordLogin

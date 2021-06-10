@@ -16,6 +16,7 @@ namespace ProjetPT2K
         {
             foreach (EMPRUNTER theLoan in this.EMPRUNTER)
             {
+                if (theLoan.DATE_RETOUR == null) continue;
                 TimeSpan theGap = DateTime.Now - theLoan.DATE_EMPRUNT;
                 if (theGap.TotalDays >= 365)
                     return false;
@@ -82,7 +83,7 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ;
+            return (NOM_ABONNÉ.Trim() + " " + PRÉNOM_ABONNÉ.Trim());
         }
     }
 }
