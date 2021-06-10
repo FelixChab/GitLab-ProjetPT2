@@ -15,7 +15,10 @@ namespace ProjetPT2K
         public Login login;
         private readonly MusiquePT2_KEntities Connection = Database.GetInstance().GetConnection();
 
-        /* Constructeur */
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="l"> the login </param>
         public NewAccountView(Login l)
         {
             InitializeComponent();
@@ -27,7 +30,11 @@ namespace ProjetPT2K
             }
         }
 
-        /* Function of the inscription button */
+        /// <summary>
+        /// Function of the inscription button
+        /// </summary>
+        /// <param name="sender"> the object concerned</param>
+        /// <param name="e"> the event</param>
         private void InscriptionButton(object sender, EventArgs e)
         {
             string prenom = namelabel.Text;
@@ -62,7 +69,9 @@ namespace ProjetPT2K
             Close();
         }
 
-        /* Method of reset */
+        /// <summary>
+        ///  Method of reset
+        /// </summary>
         public void Reset()
         {
             namelabel.Text = "";
@@ -72,6 +81,11 @@ namespace ProjetPT2K
         }
 
         /* ??? */
+        /// <summary>
+        /// Function that tells if an argument is valable or not.
+        /// </summary>
+        /// <param name="args"> the name or login of a subscriber </param>
+        /// <returns> true if the argument is valable and not if it's not.</returns>
         private Boolean ValidArgs(String[] args)
         {
             foreach(String s in args)
@@ -80,6 +94,7 @@ namespace ProjetPT2K
             }
             return true;
         }
+
 
         private void PictureBoxLogo_Click(object sender, EventArgs e)
         {
