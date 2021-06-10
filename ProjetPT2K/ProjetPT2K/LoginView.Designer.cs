@@ -104,7 +104,6 @@ namespace ProjetPT2K
             this.passwordlabel.Size = new System.Drawing.Size(191, 30);
             this.passwordlabel.TabIndex = 1;
             this.passwordlabel.UseSystemPasswordChar = true;
-            this.passwordlabel.KeyDown += new System.Windows.Forms.KeyEventHandler(enterKey);
 
             // 
             // labelPasswordLogin
