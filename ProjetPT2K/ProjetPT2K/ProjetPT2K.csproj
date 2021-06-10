@@ -66,11 +66,7 @@
     <Compile Include="AccountView.Designer.cs">
       <DependentUpon>AccountView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin.cs" />
-    <Compile Include="AccountView.Designer.cs">
-      <DependentUpon>AccountView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Admin.cs" />
+    <Compile Include="Administrator.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
@@ -224,7 +220,7 @@
     <None Include="img\icon.ico" />
     <None Include="img\App-Logo.png" />
     <None Include="img\Logo.ico" />
-    <None Include="Resources\logo.bmp" />
+    <None Include="resources\logo.bmp" />
     <None Include="/img/Logo.png" />
   </ItemGroup>
   <ItemGroup>

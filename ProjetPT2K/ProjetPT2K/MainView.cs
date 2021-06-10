@@ -44,7 +44,7 @@ namespace ProjetPT2K
                 position = new Point(position.X + 100, position.Y);
             }
             position = tagBestAlbums.Location;
-            foreach (ALBUMS album in Database.GetInstance().GetBestAlbums().Keys)
+            foreach (ALBUMS album in Database.GetInstance().GetMostBorrowedAlbums().Keys)
             {
                 display = new DisplayAlbum(album, position, new Size(75, 75));
                 display.DrawAlbum(e.Graphics);

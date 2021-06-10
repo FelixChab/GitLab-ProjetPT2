@@ -7,7 +7,7 @@ namespace ProjetPT2K
     /// <summary>
     /// Class representing the administrator account.
     /// </summary>
-    public class Admin : Account
+    public class Administrator : Account
     {
         /// <summary>
         /// The login of the administrator.
@@ -22,7 +22,7 @@ namespace ProjetPT2K
         /// <summary>
         /// Non-parametotised constructor creating a new Admin object.
         /// </summary>
-        public Admin()
+        public Administrator()
         {
             this.IsAdministrator = true;
         }
@@ -34,7 +34,8 @@ namespace ProjetPT2K
         public List<EMPRUNTER> GetExtendedLoans()
         {
             List<EMPRUNTER> lateLoans = new List<EMPRUNTER>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
+            foreach (EMPRUNTER theLoan in theLoans)
             {
                 if (theLoan.HasBeenExtended())
                     lateLoans.Add(theLoan);
@@ -49,7 +50,8 @@ namespace ProjetPT2K
         public List<ABONNÉS> GetLateSubscribers()
         {
             List<ABONNÉS> lateSubscribers = new List<ABONNÉS>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
+            foreach (EMPRUNTER theLoan in theLoans)
             {
                 if (theLoan.IsLate())
                     lateSubscribers.Add(theLoan.ABONNÉS);
@@ -68,20 +70,37 @@ namespace ProjetPT2K
         }
 
         /// <summary>
-        /// Method that returns a list of albums not borrowed in a year.
+        /// Return the list of albums that have not been borrowed in a year.
         /// </summary>
         /// <returns></returns>
-        public List<ALBUMS> GetAlbumsNoLoan()
+        public List<ALBUMS> GetUnpopularAlbums()
         {
-            List<ALBUMS> noLoans = new List<ALBUMS>();
-            foreach (EMPRUNTER e in Connection.EMPRUNTER)
+            List<ALBUMS> unpopularAlbums = new List<ALBUMS>();
+            List<ALBUMS> theAlbums = this.Connection.ALBUMS.ToList();
+            foreach (ALBUMS theAlbum in theAlbums)
             {
-                if ((DateTime.Now - e.DATE_RETOUR) >= TimeSpan.FromDays(365))
-                {
-                    noLoans.Add(e.ALBUMS);
-                }
+                if (!theAlbum.IsPopular())
+                    unpopularAlbums.Add(theAlbum);
             }
-            return noLoans;
+            return unpopularAlbums;
+        }
+
+        /// <summary>
+        /// Return the 10 most borrowed albums of the year.
+        /// </summary>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
+        {
+            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            {
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if (theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                    topAlbums[theLoan.ALBUMS] = 1;
+            }
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
     }
 }

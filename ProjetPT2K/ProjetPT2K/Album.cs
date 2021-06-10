@@ -2,21 +2,38 @@
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing an album in the database
+    /// </summary>
     public partial class ALBUMS
     {
-        /**
-         * Return true if the album is available, i.e. can be borrowed.
-         * 
-         * @return a boolean
-         */
+        /// <summary>
+        /// Return true if the album is available (it can be borrowed).
+        /// </summary>
+        /// <returns></returns>
         public bool IsAvailable()
         {
-            foreach (EMPRUNTER loan in this.EMPRUNTER)
+            foreach (EMPRUNTER theLoan in this.EMPRUNTER)
             {
-                if (loan.DATE_RETOUR != null)
+                if (theLoan.DATE_RETOUR == null)
                     return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Return true if the album has been borrowed less than a year ago.
+        /// </summary>
+        /// <returns> a boolean </returns>
+        public bool IsPopular()
+        {
+            foreach (EMPRUNTER theLoan in this.EMPRUNTER)
+            {
+                TimeSpan theGap = DateTime.Now - theLoan.DATE_EMPRUNT;
+                if (theGap.TotalDays <= 365)
+                    return true;
+            }
+            return this.EMPRUNTER.Count == 0 || false;
         }
 
         /// <summary>
@@ -25,8 +42,7 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            string availability = this.IsAvailable() ? "" : " (indisponible)";
-            return this.TITRE_ALBUM.Trim() + " - " + this.GENRES.LIBELLÉ_GENRE.Trim() + availability;
+            return this.TITRE_ALBUM.Trim() + " - " + this.GENRES.LIBELLÉ_GENRE.Trim();
         }
     }
 }

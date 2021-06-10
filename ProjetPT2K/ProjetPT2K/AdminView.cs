@@ -13,7 +13,7 @@ namespace ProjetPT2K
     public partial class AdminView : Form
     {
 
-        private Admin CurrentAdmin;
+        private Administrator CurrentAdmin;
 
         private String header;
         private List<String> content = new List<string>();
@@ -72,7 +72,7 @@ namespace ProjetPT2K
         }
 
         /* Constructeur surcharge admin */
-        public AdminView(Admin admin)
+        public AdminView(Administrator admin)
         {
             this.CurrentAdmin = admin;
             InitializeComponent();
@@ -113,7 +113,7 @@ namespace ProjetPT2K
 
             listBoxAdminResults.Items.Add(FormatText(new string[]{"Classement", "Album", "Emprunts"}, padding));
             listBoxAdminResults.Items.Add(" ");
-            foreach (var entry in Database.GetInstance().GetBestAlbums())
+            foreach (var entry in Database.GetInstance().GetMostBorrowedAlbums())
             {
                 i++;
                 listBoxAdminResults.Items.Add(FormatText(new string[] { i.ToString(), entry.Key.ToString(), entry.Value + " fois" }, padding));
@@ -125,7 +125,7 @@ namespace ProjetPT2K
             listBoxAdminResults.Items.Clear();
             listBoxAdminResults.Items.Add("|            Albums non-empruntés depuis 1 an             |");
             listBoxAdminResults.Items.Add(" ");
-            CurrentAdmin.GetAlbumsNoLoan().ForEach(a => listBoxAdminResults.Items.Add(a.ToString()));
+            CurrentAdmin.GetUnpopularAlbums().ForEach(a => listBoxAdminResults.Items.Add(a.ToString()));
         }
 
         private void FormAdmin_Load(object sender, EventArgs e)

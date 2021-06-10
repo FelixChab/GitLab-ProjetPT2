@@ -1,3 +1,4 @@
+using System;
 using ProjetPT2K;
 using System.Linq;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace UnitTestProjetPT2K
             CreateAccount();
             BorrowAlbum();
             ListAlbums();
-            Extends();
+            ExtendLoan();
             getRecommendations();
         }
 
@@ -59,14 +60,24 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(0, this._Subscriber.EMPRUNTER.Count);
             ALBUMS theAlbum = this.Database.GetAlbumWithID(1);
 
+            // Ensure the album can be borrowed
+            Assert.AreEqual(true, theAlbum.IsAvailable());
+
             Assert.IsNotNull(theAlbum);
             this._Subscriber.BorrowAlbum(theAlbum);
 
+            // Ensure the album has been borrowed
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
-            EMPRUNTER loan = this._Subscriber.EMPRUNTER.First();
 
-            Assert.AreEqual(1, loan.CODE_ALBUM);
-            Assert.AreEqual(this._Subscriber.CODE_ABONNÉ, loan.CODE_ABONNÉ);
+            this._Subscriber.BorrowAlbum(theAlbum);
+            // Ensure the album cannot be borrowed anymore
+            Assert.IsFalse(theAlbum.IsAvailable());
+            Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
+
+            EMPRUNTER theLoan = this._Subscriber.EMPRUNTER.First();
+
+            Assert.AreEqual(theAlbum, theLoan.ALBUMS);
+            Assert.AreEqual(this._Subscriber, theLoan.ABONNÉS);
         }
 
         /// <summary>
@@ -88,18 +99,24 @@ namespace UnitTestProjetPT2K
         }
 
         /// <summary>
-        /// Attempt to borrow an album.
+        /// Attempt to extend a loan.
         /// </summary>
-        private void Extends()
+        private void ExtendLoan()
         {
-            EMPRUNTER loan = this._Subscriber.EMPRUNTER.FirstOrDefault();
-            Assert.IsNotNull(loan);
-            Assert.IsFalse(loan.HasBeenExtended());
+            EMPRUNTER theLoan = this._Subscriber.EMPRUNTER.FirstOrDefault();
+            Assert.IsNotNull(theLoan);
 
-            loan.Extend();
-            Assert.AreNotEqual(loan.DATE_RETOUR, loan.DATE_RETOUR_ATTENDUE);
-            Assert.AreNotEqual(loan.DATE_RETOUR, (loan.DATE_RETOUR_ATTENDUE));
-            Assert.IsTrue(loan.HasBeenExtended());
+            // Ensure the loan has not been extended yet
+            Assert.IsFalse(theLoan.HasBeenExtended());
+            theLoan.Extend();
+
+            // Ensure the date is correct
+            int theDelay = theLoan.ALBUMS.GENRES.DÉLAI;
+            DateTime theDate = theLoan.DATE_EMPRUNT.AddDays(theDelay).AddMonths(1);
+            Assert.AreEqual(theDate, theLoan.DATE_RETOUR_ATTENDUE);
+
+            // Ensure the loan has been extended
+            Assert.IsTrue(theLoan.HasBeenExtended());
         }
 
 

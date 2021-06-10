@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -68,8 +67,8 @@ namespace ProjetPT2K
         public Account Login(string login, string password)
         {
             Account account;
-            if (login == Admin.LOGIN && password == Admin.PASSWORD)
-                account = new Admin();
+            if (login == Administrator.LOGIN && password == Administrator.PASSWORD)
+                account = new Administrator();
             else
                 account = FetchSubscriberAccount(login, password);
             return account;
@@ -83,12 +82,12 @@ namespace ProjetPT2K
         /// <returns> an Account object </returns>
         private Account FetchSubscriberAccount(string login, string password)
         {
-            var request = from subscriber in this.Connection.ABONNÉS
+            ABONNÉS theSubscriber = (from subscriber in this.Connection.ABONNÉS
                           where (subscriber.LOGIN_ABONNÉ == login)
                           && (subscriber.PASSWORD_ABONNÉ == password)
-                          select subscriber;
+                          select subscriber).FirstOrDefault();
 
-            return (ABONNÉS)request.FirstOrDefault();
+            return theSubscriber;
         }
 
         /// <summary>
@@ -115,35 +114,34 @@ namespace ProjetPT2K
         /// <param name="password"> the password of the user </param>
         public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
         {
-            
-            ABONNÉS subscriber = new ABONNÉS
+            if (!AccountExists(login))
             {
-                CODE_PAYS = countryCode,
-                NOM_ABONNÉ = lastname,
-                PRÉNOM_ABONNÉ = firstname,
-                LOGIN_ABONNÉ = login,
-                PASSWORD_ABONNÉ = password
-            };
-            if(countryCode == -1)
-            {
-                 subscriber = new ABONNÉS
+                ABONNÉS theSubscriber = new ABONNÉS
                 {
                     NOM_ABONNÉ = lastname,
                     PRÉNOM_ABONNÉ = firstname,
                     LOGIN_ABONNÉ = login,
                     PASSWORD_ABONNÉ = password
                 };
+
+                if (countryCode > 0)
+                    theSubscriber.CODE_PAYS = countryCode;
+
+                this.Connection.ABONNÉS.Add(theSubscriber);
+                this.Connection.SaveChanges();
             }
-            this.Connection.ABONNÉS.Add(subscriber);
-            this.Connection.SaveChanges();
+            else
+            {
+                throw new Exception("Nom d'utilisateur indisponible");
+            }
         }
 
         public List<ALBUMS> GetAllAlbums()
         {
-            var albums = from album in this.Connection.ALBUMS
-                         select album;
+            List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
+                         select album).ToList();
 
-            return albums.ToList();
+            return theAlbums;
         }
 
         public List<ALBUMS> GetAlbumsContaining(string pattern)
@@ -162,25 +160,12 @@ namespace ProjetPT2K
         public List<ABONNÉS> GetInactiveSubscribers()
         {
             List<ABONNÉS> inactiveSubscribers = new List<ABONNÉS>();
-            foreach (ABONNÉS subscriber in this.Connection.ABONNÉS)
+            List<ABONNÉS> theSubscribers = this.Connection.ABONNÉS.ToList();
+            foreach (ABONNÉS theSubscriber in theSubscribers)
             {
-                if (!subscriber.IsActive())
-                    inactiveSubscribers.Add(subscriber);
-                /*
-                EMPRUNTER loan = subscriber.EMPRUNTER.FirstOrDefault();
-                if (loan != null && loan.DATE_RETOUR != null && loan.DATE_RETOUR.Value.AddYears(1) < DateTime.Now)
-                {
-                    List<EMPRUNTER> loans = new List<EMPRUNTER>();
-                    loans.AddRange(subscriber.EMPRUNTER);
-                    foreach (EMPRUNTER e in loans)
-                    {
-                        subscriber.EMPRUNTER.Remove(e);
-                    }
-                    Connection.ABONNÉS.Remove(subscriber);
-                }
-                */
+                if (!theSubscriber.IsActive())
+                    inactiveSubscribers.Add(theSubscriber);
             }
-
             return inactiveSubscribers;
         }
 
@@ -194,7 +179,6 @@ namespace ProjetPT2K
             ALBUMS theAlbum = (from album in this.Connection.ALBUMS
                                where album.CODE_ALBUM == ID
                                select album).FirstOrDefault();
-
             return theAlbum;
         }
 
@@ -227,33 +211,22 @@ namespace ProjetPT2K
             return sorted;
         }
 
-
-        /**
-       * Method to get top 10 albums of the year
-       */
-        public Dictionary<ALBUMS, int> GetBestAlbums()
+        /// <summary>
+        /// Return the 10 most borrowed albums of the year.
+        /// </summary>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
         {
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM orderby a.EMPRUNTER.Count descending select a).ToList();
-            for (int start = 0; start < list.Count; start++)
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
             {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if (theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                    topAlbums[theLoan.ALBUMS] = 1;
             }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value ascending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
     }
 }
