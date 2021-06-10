@@ -99,7 +99,11 @@ namespace ProjetPT2K
         }
 
         /// <summary>
+<<<<<<< HEAD
         /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
+=======
+        /// Create a new subscriber account in the database
+>>>>>>> c19613d (Merge)
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
