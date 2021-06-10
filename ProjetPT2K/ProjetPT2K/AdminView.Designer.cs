@@ -42,6 +42,8 @@ namespace ProjetPT2K
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(test);
+
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -236,3 +238,4 @@ namespace ProjetPT2K
         private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
+ 

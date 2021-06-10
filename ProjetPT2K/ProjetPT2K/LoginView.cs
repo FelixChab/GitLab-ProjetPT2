@@ -23,6 +23,15 @@ namespace ProjetPT2K
             errorLabel.Visible = false;
         }
 
+        private void enterKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                connect();
+            }
+        
+    }
+
         /* Method of the "create account" button */
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -33,6 +42,10 @@ namespace ProjetPT2K
 
         /* Method of the "connection" button */
         private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            connect();
+        }
+        private void connect()
         {
             string login = userlabel.Text;
             string password = passwordlabel.Text;
@@ -49,8 +62,11 @@ namespace ProjetPT2K
             }
             else
             {
-                string AccountType = account.IsAdministrator ? "(administrateur)" : "(abonné)";
+                string AccountType = account.IsAdministrator ? "administrateur" : "abonné";
                 errorLabel.ForeColor = Color.LightGreen;
+                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
+                errorLabel.Visible = true;
+                Hide();
                 if (!account.IsAdministrator)
                 {
                     MainView view = new MainView(account);
@@ -58,17 +74,24 @@ namespace ProjetPT2K
                 }
                 else
                 {
-                    AdminView formAdmin = new AdminView((Administrator)account);
-                    formAdmin.Show();
+                    AdminView formAdmin = new AdminView((Administrator)account, this);
+                    formAdmin.ShowDialog();
+                    Show();
                 }
-                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
-                errorLabel.Visible = true;
+
             }
         }
 
+        
+    
         public Label GetErrorLabel()
         {
             return errorLabel;
+        }
+
+        private void passwordlabel_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

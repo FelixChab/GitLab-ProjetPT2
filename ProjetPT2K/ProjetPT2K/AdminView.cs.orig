@@ -14,7 +14,6 @@ namespace ProjetPT2K
     {
 
         private Administrator CurrentAdmin;
-        private Login login;
 
         #region page system
         private String header;
@@ -77,24 +76,21 @@ namespace ProjetPT2K
         #endregion
 
         /* Constructeur surcharge admin */
-        public AdminView(Administrator admin, Login login)
+        public AdminView(Administrator admin)
         {
             this.CurrentAdmin = admin;
-            this.login = login;
             InitializeComponent();
             this.listBoxAdminResults.ScrollAlwaysVisible = false;
+<<<<<<< HEAD
+<<<<<<< HEAD
             ButtonExtendedLoans_Click(null, null);
+=======
+=======
+>>>>>>> f58f6f2e1f6453c32c63d425a92beabed8333149
             printContent(readLateLoans, "|                  Abonnés en retards d'emprunt :                  |");
 
+>>>>>>> f58f6f2e1f6453c32c63d425a92beabed8333149
         }
-
-            private void test(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-            
-
-        }
-
         #region extended and late loans
         private void ButtonExtendedLoans_Click(object sender, EventArgs e)
         {
