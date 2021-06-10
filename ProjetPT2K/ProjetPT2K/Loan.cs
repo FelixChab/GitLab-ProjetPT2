@@ -41,6 +41,15 @@ namespace ProjetPT2K
         }
 
         /// <summary>
+        /// Set the return date of the current loan and update the database.
+        /// </summary>
+        public void Return()
+        {
+            this.DATE_RETOUR = DateTime.Now;
+            Database.GetInstance().GetConnection().SaveChanges();
+        }
+
+        /// <summary>
         /// Return the string representation of the loan.
         /// </summary>
         /// <returns> a string </returns>

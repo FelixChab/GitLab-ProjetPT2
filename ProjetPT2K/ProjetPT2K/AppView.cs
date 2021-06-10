@@ -112,7 +112,7 @@ namespace ProjetPT2K
             {
                 if (!this.Database.AccountExists(view.Login))
                 {
-                    this.Database.CreateAccount(view.FirstName, view.LastName, view.Country.CODE_PAYS, view.Login, view.Password);
+                    this.Database.AttemptAccountCreation(view.FirstName, view.LastName, view.Country.CODE_PAYS, view.Login, view.Password);
                     mainMenuText.Items.Add("Compte abonné créé avec succès");
                 }
                 else
