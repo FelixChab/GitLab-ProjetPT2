@@ -40,12 +40,12 @@ namespace ProjetPT2K
             this.label1 = new System.Windows.Forms.Label();
             this.pageLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -67,10 +67,10 @@ namespace ProjetPT2K
             this.listBoxAdminResults.FormattingEnabled = true;
             this.listBoxAdminResults.ItemHeight = 18;
             this.listBoxAdminResults.Location = new System.Drawing.Point(334, 138);
+            this.listBoxAdminResults.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxAdminResults.Name = "listBoxAdminResults";
             this.listBoxAdminResults.Size = new System.Drawing.Size(671, 418);
             this.listBoxAdminResults.TabIndex = 1;
-            this.listBoxAdminResults.SelectedIndexChanged += new System.EventHandler(this.listBoxAdminResults_SelectedIndexChanged);
             // 
             // ButtonExtendedLoans
             // 
@@ -152,7 +152,7 @@ namespace ProjetPT2K
             // pageLabel
             // 
             this.pageLabel.AutoSize = true;
-            this.pageLabel.Location = new System.Drawing.Point(47, 0);
+            this.pageLabel.Location = new System.Drawing.Point(62, 2);
             this.pageLabel.Name = "pageLabel";
             this.pageLabel.Size = new System.Drawing.Size(33, 23);
             this.pageLabel.TabIndex = 10;
@@ -164,11 +164,21 @@ namespace ProjetPT2K
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.pageLabel);
             this.panel1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(880, 562);
+            this.panel1.Location = new System.Drawing.Point(850, 562);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(125, 27);
+            this.panel1.Size = new System.Drawing.Size(155, 27);
             this.panel1.TabIndex = 11;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ProjetPT2K.Properties.Resources.next;
+            this.pictureBox2.Location = new System.Drawing.Point(111, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(41, 19);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -181,18 +191,7 @@ namespace ProjetPT2K
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ProjetPT2K.Properties.Resources.next;
-            this.pictureBox2.Location = new System.Drawing.Point(80, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(41, 19);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // FormAdmin
+            // AdminView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,14 +207,13 @@ namespace ProjetPT2K
             this.Controls.Add(this.ButtonExtendedLoans);
             this.Controls.Add(this.listBoxAdminResults);
             this.Controls.Add(this.logo);
-            this.Name = "FormAdmin";
+            this.Name = "AdminView";
             this.Text = "FormAdmin";
-            this.Load += new System.EventHandler(this.FormAdmin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
