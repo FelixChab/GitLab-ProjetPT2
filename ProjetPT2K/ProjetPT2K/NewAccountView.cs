@@ -55,7 +55,7 @@ namespace ProjetPT2K
             {
                 codePays = pays.CODE_PAYS;
             }
-            Database.GetInstance().CreateAccount(prenom, nom, codePays, username, password);
+            Database.GetInstance().AttemptAccountCreation(prenom, nom, codePays, username, password);
             login.GetErrorLabel().Text = "Votre compte a bien été créer.";
             login.GetErrorLabel().ForeColor = Color.LightGreen;
             login.GetErrorLabel().Visible = true;

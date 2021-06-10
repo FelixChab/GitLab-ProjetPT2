@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ProjetPT2K
 {
@@ -83,9 +84,9 @@ namespace ProjetPT2K
         private Account FetchSubscriberAccount(string login, string password)
         {
             ABONNÉS theSubscriber = (from subscriber in this.Connection.ABONNÉS
-                          where (subscriber.LOGIN_ABONNÉ == login)
-                          && (subscriber.PASSWORD_ABONNÉ == password)
-                          select subscriber).FirstOrDefault();
+                                     where (subscriber.LOGIN_ABONNÉ == login)
+                                     && (subscriber.PASSWORD_ABONNÉ == password)
+                                     select subscriber).FirstOrDefault();
 
             return theSubscriber;
         }
@@ -105,6 +106,22 @@ namespace ProjetPT2K
         }
 
         /// <summary>
+        /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
+        /// </summary>
+        /// <param name="firstname"> the firstname of the user </param>
+        /// <param name="lastname"> the lastname of the user </param>
+        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="login"> the login of the user </param>
+        /// <param name="password"> the password of the user </param>
+        public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
+        {
+            if (!AccountExists(login) && CredentialsAreValid(login, password))
+                CreateAccount(firstname, lastname, countryCode, login, password);
+            else
+                throw new Exception("Nom d'utilisateur indisponible");
+        }
+
+        /// <summary>
         /// Create a new subscriber account in the database
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
@@ -112,34 +129,45 @@ namespace ProjetPT2K
         /// <param name="countryCode"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-        public void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
+        private void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
         {
-            if (!AccountExists(login))
+            ABONNÉS theSubscriber = new ABONNÉS
             {
-                ABONNÉS theSubscriber = new ABONNÉS
-                {
-                    NOM_ABONNÉ = lastname,
-                    PRÉNOM_ABONNÉ = firstname,
-                    LOGIN_ABONNÉ = login,
-                    PASSWORD_ABONNÉ = password
-                };
+                NOM_ABONNÉ = lastname,
+                PRÉNOM_ABONNÉ = firstname,
+                LOGIN_ABONNÉ = login,
+                PASSWORD_ABONNÉ = password
+            };
 
-                if (countryCode > 0)
-                    theSubscriber.CODE_PAYS = countryCode;
+            if (countryCode > 0)
+                theSubscriber.CODE_PAYS = countryCode;
 
-                this.Connection.ABONNÉS.Add(theSubscriber);
-                this.Connection.SaveChanges();
-            }
-            else
+            this.Connection.ABONNÉS.Add(theSubscriber);
+            this.Connection.SaveChanges();
+        }
+
+        /// <summary>
+        /// Return true if the login and the password are valid.
+        /// </summary>
+        /// <param name="theCredentials"> the list of credentials (login & password) </param>
+        /// <returns></returns>
+        private bool CredentialsAreValid(params string[] theCredentials)
+        {
+            Regex theRegex = new Regex("^[A-Za-z0-9]*$");
+            foreach (string theCredential in theCredentials)
             {
-                throw new Exception("Nom d'utilisateur indisponible");
+                if (theCredential.Length == 0)
+                    throw new Exception("Vous devez renseigner un mot de passe et un nom d'utilisateur");
+                if (!theRegex.IsMatch(theCredential))
+                    throw new Exception("Le mot de passe et le nom d'utilisateur ne peux contenir que des lettres et des chiffres ");
             }
+            return true;
         }
 
         public List<ALBUMS> GetAllAlbums()
         {
             List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
-                         select album).ToList();
+                                      select album).ToList();
 
             return theAlbums;
         }
