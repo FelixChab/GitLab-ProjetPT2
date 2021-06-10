@@ -1,178 +1,116 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
     public partial class SubscriberView : Form
     {
-        /**
-         * The index of the selected item of the main menu.
-         */
-        private int MenuIndex;
+        ABONNÉS account;
+        List<DisplayAlbum> AlbumsDisplayed = new List<DisplayAlbum>();
 
-        /**
-         * The currently logged in subscriber.
-         */
-        private readonly ABONNÉS Subscriber;
-
-        /**
-         * Parametorised constructor creating a new SubscriberView object.
-         * 
-         * @param subscriber the logged in account
-         */
-        public SubscriberView(Account subscriber)
+        public SubscriberView(Account account)
         {
             InitializeComponent();
-            this.Subscriber = (ABONNÉS)subscriber;
-            MainMenu();
+            this.account = (ABONNÉS)account;
         }
 
-        /**
-         * Display the main menu on the form.
-         */
-        private void MainMenu()
+        private void mainMenuListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mainMenuListBox.Items.Clear();
-            mainMenuListBox.Items.Add("Abonné");
-            mainMenuListBox.Items.Add("1. Emprunter un album");
-            mainMenuListBox.Items.Add("2. Lister les emprunts");
-            mainMenuListBox.Items.Add("3. Voir les recommendations");
+
         }
 
-        private void SelectionButton_Click(object sender, EventArgs e)
+        private void MainView_Paint(object sender, PaintEventArgs e)
         {
-            this.MenuIndex = mainMenuListBox.SelectedIndex;
-            switch (this.MenuIndex)
+            List<ALBUMS> albums = new List<ALBUMS>();
+            /*foreach (ALBUMS album in Database.GetInstance().GetBestAlbums().Keys)
             {
-                case 1:
-                    {
-                        HideActionVisuals();
-                        albumTitleTextBox.Enabled = albumTitleTextBox.Visible = true;
-                        InitializeAlbumList();
-                        break;
-                    }
-                case 2:
-                    {
-                        ListLoans();
-                        break;
-                    }
-                case 3:
-                    {
-                        GetRecommandations();
-                        break;
-                    }
+                albums.Add(album);
+            }*/
+            //ALBUMS album;
+            DisplayAlbum display;
+            Point position = tagRecommandations.Location;
+            foreach (ALBUMS album in account.GetRecommandations().Keys)
+            {
+                display = new DisplayAlbum(album, position, new Size(75, 75));
+                display.DrawAlbum(e.Graphics);
+                AlbumsDisplayed.Add(display);
+                position = new Point(position.X + 100, position.Y);
+            }
+            position = tagBestAlbums.Location;
+            foreach (ALBUMS album in Database.GetInstance().GetMostBorrowedAlbums().Keys)
+            {
+                display = new DisplayAlbum(album, position, new Size(75, 75));
+                display.DrawAlbum(e.Graphics);
+                AlbumsDisplayed.Add(display);
+                position = new Point(position.X + 100, position.Y);
             }
         }
 
-        private void GetRecommandations()
+
+
+        private void MainView_MouseMove(object sender, MouseEventArgs e)
         {
-            actionListBox.Items.Clear();
-            var recommandations = this.Subscriber.GetRecommandations();
-            foreach (var entry in recommandations)
+            // ...
+        }
+
+        /// <summary>
+        /// Function that display album when the mouse is clicked
+        /// </summary>
+        /// <param name="sender"> the object concerned</param>
+        /// <param name="e"> the event</param>
+        private void MainView_MouseClick(object sender, MouseEventArgs e)
+        {
+            foreach (DisplayAlbum display in AlbumsDisplayed)
             {
-                actionListBox.Items.Add(entry.Key.ToString() + " - Emprunté par " + entry.Value + " abonnés");
-            }
-        }
-
-        private void InitializeAlbumList()
-        {
-            actionListBox.Items.Clear();
-            List<ALBUMS> albums = Database.GetInstance().GetAllAlbums();
-            albums.ForEach(album => actionListBox.Items.Add(album));
-        }
-
-        private void RefreshAlbumList()
-        {
-            actionListBox.Items.Clear();
-            string pattern = albumTitleTextBox.Text;
-            List<ALBUMS> albums = Database.GetInstance().GetAlbumsContaining(pattern);
-            albums.ForEach(album => actionListBox.Items.Add(album));
-        }
-
-        private void RefreshLoanList()
-        {
-            this.actionListBox.Items.Clear();
-            var loans = this.Subscriber.EMPRUNTER;
-            foreach (EMPRUNTER loan in loans)
-            {
-                this.actionListBox.Items.Add(loan);
-            }
-        }
-
-        private void ListLoans()
-        {
-            RefreshLoanList();
-            extendAllButton.Visible = extendAllButton.Enabled = true;
-        }
-
-        private void AlbumTitleTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RefreshAlbumList();
-        }
-
-        private void ActionButton_Click(object sender, EventArgs e)
-        {
-            switch (this.MenuIndex)
-            {
-                case 1:
-                    ALBUMS album = (ALBUMS)actionListBox.SelectedItem;
-                    this.Subscriber.BorrowAlbum(album);
-                    break;
-                case 2:
-                    EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
-                    if (loan != null)
-                    {
-                        loan.Extend();
-                        RefreshLoanList();
-                    }
-                    break;
-            }
-
-        }
-
-        private void ActionListBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-            if (this.MenuIndex == 1)
-            {
-                actionButton.Text = "Emprunter";
-                actionButton.Enabled = actionButton.Visible = true;
-            }
-            else if (this.MenuIndex == 2)
-            {
-                EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
-                if (!loan.HasBeenExtended())
+                if (display.Contains(e.Location))
                 {
-                    actionButton.Text = "Prolonger";
-                    actionButton.Enabled = actionButton.Visible = true;
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        Close();
+                        AlbumView view = new AlbumView(display.GetAlbum(), account);
+                        view.ShowDialog();
+                    }
+                    /*else
+                    {
+                        ContextMenuStrip contextMenuAlbum = new ContextMenuStrip();
+                        contextMenuAlbum.Items.Add("Afficher les détails");
+                        contextMenuAlbum.Items.Add("Emprunter");
+
+                        contextMenuAlbum.Show(e.Location);
+                    }*/
                 }
             }
         }
 
-        /**
-         * Event triggered when the extendAll button is clicked.
-         */
-        private void ExtendAllButton_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// Function that handle the pictureBox1 clicked
+        /// </summary>
+        /// <param name="sender"> the object concerned</param>
+        /// <param name="e"> the event</param>
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            foreach (EMPRUNTER loan in this.Subscriber.EMPRUNTER)
-            {
-                if (!loan.HasBeenExtended())
-                    loan.Extend();
-            }
-            RefreshLoanList();
+            AccountView accountDetails = new AccountView(account);
+            accountDetails.ShowDialog();
+            this.Close();
         }
 
-        private void HideActionVisuals()
-        {
-            actionButton.Enabled = actionButton.Visible = false;
-            extendAllButton.Enabled = extendAllButton.Visible = false;
-            albumTitleTextBox.Enabled = albumTitleTextBox.Visible = false;
-        }
 
-        private void SubscriberView_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Function that
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Logo_Click(object sender, EventArgs e)
         {
-
+            Refresh();
         }
     }
 }

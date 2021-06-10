@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing the view of an album
+    /// </summary>
     public partial class AlbumView : Form
     {
         private readonly ALBUMS album;
@@ -53,7 +56,7 @@ namespace ProjetPT2K
          */
         private void PictureBoxLogo_Click(object sender, EventArgs e)
         {
-            MainView main = new MainView(account);
+            SubscriberView main = new SubscriberView(account);
             main.ShowDialog();
             Close();
         }

@@ -103,10 +103,10 @@ namespace ProjetPT2K
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
-        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="theCountry"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-        public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
+        public void AttemptAccountCreation(string firstname, string lastname, PAYS theCountry, string login, string password)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace ProjetPT2K
             }
             if (AccountExists(login) || !CredentialsAreValid(firstname, lastname, login, password))
                 throw new Exception("Nom d'utilisateur indisponible");
-            CreateAccount(firstname, lastname, countryCode, login, password);
+            CreateAccount(firstname, lastname, theCountry, login, password);
         }
 
         /// <summary>
@@ -144,10 +144,10 @@ namespace ProjetPT2K
         /// <summary>
         /// Create a new subscriber account in the database
         /// </summary>
-        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="theCountry"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-        private void CreateAccount(string firstname, string lastname, int countryCode, string login, string password)
+        private void CreateAccount(string firstname, string lastname, PAYS theCountry, string login, string password)
         {
             ABONNÉS theSubscriber = new ABONNÉS
             {
@@ -157,8 +157,8 @@ namespace ProjetPT2K
                 PASSWORD_ABONNÉ = password
             };
 
-            if (countryCode > 0)
-                theSubscriber.CODE_PAYS = countryCode;
+            if (theCountry.CODE_PAYS > 0)
+                theSubscriber.CODE_PAYS = theCountry.CODE_PAYS;
 
             this.Connection.ABONNÉS.Add(theSubscriber);
             this.Connection.SaveChanges();

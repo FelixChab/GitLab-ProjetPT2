@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace ProjetPT2K
 {
-    partial class Login
+    partial class LoginView
     {
         /// <summary>
         /// Required designer variable.
@@ -32,17 +32,16 @@ namespace ProjetPT2K
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginView));
             this.connectionLabel = new System.Windows.Forms.Label();
             this.connectionBackground = new System.Windows.Forms.Panel();
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.userlabel = new System.Windows.Forms.TextBox();
-            this.passwordlabel = new System.Windows.Forms.TextBox();
+            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.LoginLabel = new System.Windows.Forms.TextBox();
+            this.PasswordLabel = new System.Windows.Forms.TextBox();
             this.labelPasswordLogin = new System.Windows.Forms.Label();
             this.labelUserLogin = new System.Windows.Forms.Label();
-            this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.CreateAccountLabel = new System.Windows.Forms.LinkLabel();
             this.connectionButton = new System.Windows.Forms.Button();
-
             this.logo = new System.Windows.Forms.PictureBox();
             this.connectionBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -62,12 +61,12 @@ namespace ProjetPT2K
             // connectionBackground
             // 
             this.connectionBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(129)))), ((int)(((byte)(172)))));
-            this.connectionBackground.Controls.Add(this.errorLabel);
-            this.connectionBackground.Controls.Add(this.userlabel);
-            this.connectionBackground.Controls.Add(this.passwordlabel);
+            this.connectionBackground.Controls.Add(this.ErrorLabel);
+            this.connectionBackground.Controls.Add(this.LoginLabel);
+            this.connectionBackground.Controls.Add(this.PasswordLabel);
             this.connectionBackground.Controls.Add(this.labelPasswordLogin);
             this.connectionBackground.Controls.Add(this.labelUserLogin);
-            this.connectionBackground.Controls.Add(this.linkLabel);
+            this.connectionBackground.Controls.Add(this.CreateAccountLabel);
             this.connectionBackground.Controls.Add(this.connectionButton);
             this.connectionBackground.Controls.Add(this.connectionLabel);
             this.connectionBackground.Location = new System.Drawing.Point(192, 51);
@@ -77,34 +76,33 @@ namespace ProjetPT2K
             // 
             // errorLabel
             // 
-            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
-            this.errorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorLabel.Location = new System.Drawing.Point(0, 284);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(426, 23);
-            this.errorLabel.TabIndex = 7;
-            this.errorLabel.Text = "Mot de passe incorrect";
-            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.errorLabel.Visible = false;
+            this.ErrorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ErrorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ErrorLabel.Location = new System.Drawing.Point(0, 284);
+            this.ErrorLabel.Name = "errorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(426, 23);
+            this.ErrorLabel.TabIndex = 7;
+            this.ErrorLabel.Text = "Mot de passe incorrect";
+            this.ErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ErrorLabel.Visible = false;
             // 
-            // userlabel
+            // LoginLabel
             // 
-            this.userlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userlabel.Location = new System.Drawing.Point(116, 102);
-            this.userlabel.Name = "userlabel";
-            this.userlabel.Size = new System.Drawing.Size(192, 30);
-            this.userlabel.TabIndex = 0;
+            this.LoginLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginLabel.Location = new System.Drawing.Point(116, 102);
+            this.LoginLabel.Name = "LoginLabel";
+            this.LoginLabel.Size = new System.Drawing.Size(192, 30);
+            this.LoginLabel.TabIndex = 0;
             // 
-            // passwordlabel
+            // PasswordLabel
             // 
-            this.passwordlabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordlabel.Location = new System.Drawing.Point(117, 175);
-            this.passwordlabel.Name = "passwordlabel";
-            this.passwordlabel.Size = new System.Drawing.Size(191, 30);
-            this.passwordlabel.TabIndex = 1;
-            this.passwordlabel.UseSystemPasswordChar = true;
-
+            this.PasswordLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLabel.Location = new System.Drawing.Point(117, 175);
+            this.PasswordLabel.Name = "PasswordLabel";
+            this.PasswordLabel.Size = new System.Drawing.Size(191, 30);
+            this.PasswordLabel.TabIndex = 1;
+            this.PasswordLabel.UseSystemPasswordChar = true;
             // 
             // labelPasswordLogin
             // 
@@ -126,19 +124,19 @@ namespace ProjetPT2K
             this.labelUserLogin.TabIndex = 3;
             this.labelUserLogin.Text = "Identifiant";
             // 
-            // linkLabel
+            // CreateAccountLabel
             // 
-            this.linkLabel.AutoSize = true;
-            this.linkLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel.LinkColor = System.Drawing.Color.Navy;
-            this.linkLabel.Location = new System.Drawing.Point(101, 319);
-            this.linkLabel.Name = "linkLabel";
-            this.linkLabel.Size = new System.Drawing.Size(223, 21);
-            this.linkLabel.TabIndex = 2;
-            this.linkLabel.TabStop = true;
-            this.linkLabel.Text = "Vous n\'avez pas de compte ?";
-            this.linkLabel.VisitedLinkColor = System.Drawing.Color.White;
-            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
+            this.CreateAccountLabel.AutoSize = true;
+            this.CreateAccountLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateAccountLabel.LinkColor = System.Drawing.Color.Navy;
+            this.CreateAccountLabel.Location = new System.Drawing.Point(101, 319);
+            this.CreateAccountLabel.Name = "CreateAccountLabel";
+            this.CreateAccountLabel.Size = new System.Drawing.Size(223, 21);
+            this.CreateAccountLabel.TabIndex = 2;
+            this.CreateAccountLabel.TabStop = true;
+            this.CreateAccountLabel.Text = "Vous n\'avez pas de compte ?";
+            this.CreateAccountLabel.VisitedLinkColor = System.Drawing.Color.White;
+            this.CreateAccountLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateAccountLabel_LinkClicked);
             // 
             // connectionButton
             // 
@@ -162,7 +160,7 @@ namespace ProjetPT2K
             this.logo.TabIndex = 3;
             this.logo.TabStop = false;
             // 
-            // Login
+            // LoginView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,7 +170,7 @@ namespace ProjetPT2K
             this.Controls.Add(this.logo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Login";
+            this.Name = "LoginView";
             this.Text = "Form2";
             this.connectionBackground.ResumeLayout(false);
             this.connectionBackground.PerformLayout();
@@ -188,12 +186,12 @@ namespace ProjetPT2K
         private System.Windows.Forms.Label connectionLabel;
         private System.Windows.Forms.Panel connectionBackground;
         private System.Windows.Forms.Button connectionButton;
-        private System.Windows.Forms.TextBox userlabel;
-        private System.Windows.Forms.TextBox passwordlabel;
+        private System.Windows.Forms.TextBox LoginLabel;
+        private System.Windows.Forms.TextBox PasswordLabel;
         private System.Windows.Forms.Label labelPasswordLogin;
         private System.Windows.Forms.Label labelUserLogin;
-        private System.Windows.Forms.LinkLabel linkLabel;
-        private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.LinkLabel CreateAccountLabel;
+        private System.Windows.Forms.Label ErrorLabel;
         private System.Windows.Forms.PictureBox logo;
     }
 }

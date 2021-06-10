@@ -1,40 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-
 
 namespace ProjetPT2K
 {
-    public partial class Login : Form
+    /// <summary>
+    /// Class representing the view of a Login window.
+    /// </summary>
+    public partial class LoginView : Form
     {
-        private MusiquePT2_KEntities database = Database.GetInstance().GetConnection();
-        
-        
         /// <summary>
-        /// Standard constructor.
+        /// The view to create a new account.
         /// </summary>
-        public Login()
+        private readonly CreateAccountView _CreateAccountView;
+
+        /// <summary>
+        /// The database containing all the data.
+        /// </summary>
+        private readonly Database _Database = Database.GetInstance();
+
+        /// <summary>
+        /// Non parametorised constructor creating a new LoginView object.
+        /// </summary>
+        public LoginView()
         {
             InitializeComponent();
-            errorLabel.Visible = false;
+            this._CreateAccountView = new CreateAccountView(this._Database);
         }
 
         /// <summary>
-        /// Function of the "create account button"
+        /// Event triggered when creating a new account.
         /// </summary>
-        /// <param name="sender"> the object conserned</param>
-        /// <param name="e"> the event</param>
-        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        /// <param name="sender"> the concerned object </param>
+        /// <param name="e"> the event </param>
+        private void CreateAccountLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewAccountView accountView = new NewAccountView(this);
-            accountView.Show();
+            this.Hide();
+            if (this._CreateAccountView.ShowDialog() == DialogResult.OK)
+            {
+                ClearConnectionLabels();
+                ErrorLabel.Visible = true;
+                ErrorLabel.ForeColor = Color.Green;
+                ErrorLabel.Text = "Compte abonné créé";               
+            }
+            this.Show();
         }
 
         /// <summary>
@@ -44,58 +53,51 @@ namespace ProjetPT2K
         /// <param name="e"> the event </param>
         private void ConnectionButton_Click(object sender, EventArgs e)
         {
-            connect();
-        }
-        private void connect()
-        {
-            string login = userlabel.Text;
-            string password = passwordlabel.Text;
-            if (login.Length <= 1 || password.Length <= 1)
+            string theLogin = LoginLabel.Text;
+            string password = PasswordLabel.Text;
+
+            Account theAccount = this._Database.Login(theLogin, password);
+            if (theAccount == null)
             {
-                return;
-            }
-            Account account = Database.GetInstance().Login(login, password);
-            if (account == null)
-            {
-                errorLabel.Text = "Mot de passe incorrect";
-                userlabel.Text = passwordlabel.Text = "";
-                errorLabel.Visible = true;
+                ClearConnectionLabels();
+                ErrorLabel.Visible = true;
+                ErrorLabel.ForeColor = Color.Red;
+                ErrorLabel.Text = "Mot de passe incorrect";
             }
             else
             {
-                string AccountType = account.IsAdministrator ? "administrateur" : "abonné";
-                errorLabel.ForeColor = Color.LightGreen;
-                errorLabel.Text = "Succés ! " + "(" + AccountType + ")";
-                errorLabel.Visible = true;
-                Hide();
-                if (!account.IsAdministrator)
-                {
-                    MainView view = new MainView(account);
-                    view.ShowDialog();
-                }
-                else
-                {
-                    AdminView formAdmin = new AdminView((Administrator)account);
-                    formAdmin.ShowDialog();
-                    Show();
-                }
-
+                ErrorLabel.Visible = false;
+                Login(theAccount);
             }
         }
 
         /// <summary>
-        /// 
+        /// Clear the different connection labels.
         /// </summary>
-        /// <returns></returns>
-        public Label GetErrorLabel()
+        private void ClearConnectionLabels()
         {
-            return errorLabel;
+            LoginLabel.Text = PasswordLabel.Text = "";
         }
 
-        private void passwordlabel_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Open the view of the given account.
+        /// </summary>
+        /// <param name="theAccount"> the account to log in </param>
+        private void Login(Account theAccount)
         {
-            
+            this.Hide();
+            if (!theAccount.IsAdministrator)
+            {
+                SubscriberView theView = new SubscriberView(theAccount);
+                theView.ShowDialog();
+            }
+            else
+            {
+                AdministratorView theView = new AdministratorView(theAccount);
+                theView.ShowDialog();
+            }
+            this.ClearConnectionLabels();
+            this.Show();
         }
     }
 }
-

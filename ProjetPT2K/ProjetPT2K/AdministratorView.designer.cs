@@ -1,7 +1,7 @@
 ﻿
 namespace ProjetPT2K
 {
-    partial class AdminView
+    partial class AdministratorView
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace ProjetPT2K
         private void InitializeComponent()
         {
             this.logo = new System.Windows.Forms.PictureBox();
-            this.listBoxAdminResults = new System.Windows.Forms.ListBox();
+            this.ResultListBox = new System.Windows.Forms.ListBox();
             this.ButtonExtendedLoans = new System.Windows.Forms.Button();
             this.ButtonLateLoans = new System.Windows.Forms.Button();
             this.ButtonCleanse = new System.Windows.Forms.Button();
@@ -64,14 +64,14 @@ namespace ProjetPT2K
             // 
             // listBoxAdminResults
             // 
-            this.listBoxAdminResults.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxAdminResults.FormattingEnabled = true;
-            this.listBoxAdminResults.ItemHeight = 18;
-            this.listBoxAdminResults.Location = new System.Drawing.Point(334, 138);
-            this.listBoxAdminResults.Margin = new System.Windows.Forms.Padding(0);
-            this.listBoxAdminResults.Name = "listBoxAdminResults";
-            this.listBoxAdminResults.Size = new System.Drawing.Size(671, 418);
-            this.listBoxAdminResults.TabIndex = 1;
+            this.ResultListBox.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultListBox.FormattingEnabled = true;
+            this.ResultListBox.ItemHeight = 18;
+            this.ResultListBox.Location = new System.Drawing.Point(334, 138);
+            this.ResultListBox.Margin = new System.Windows.Forms.Padding(0);
+            this.ResultListBox.Name = "listBoxAdminResults";
+            this.ResultListBox.Size = new System.Drawing.Size(671, 418);
+            this.ResultListBox.TabIndex = 1;
             // 
             // ButtonExtendedLoans
             // 
@@ -206,7 +206,7 @@ namespace ProjetPT2K
             this.Controls.Add(this.ButtonCleanse);
             this.Controls.Add(this.ButtonLateLoans);
             this.Controls.Add(this.ButtonExtendedLoans);
-            this.Controls.Add(this.listBoxAdminResults);
+            this.Controls.Add(this.ResultListBox);
             this.Controls.Add(this.logo);
             this.Name = "AdminView";
             this.Text = "FormAdmin";
@@ -223,7 +223,7 @@ namespace ProjetPT2K
         #endregion
 
         private System.Windows.Forms.PictureBox logo;
-        private System.Windows.Forms.ListBox listBoxAdminResults;
+        private System.Windows.Forms.ListBox ResultListBox;
         private System.Windows.Forms.Button ButtonExtendedLoans;
         private System.Windows.Forms.Button ButtonLateLoans;
         private System.Windows.Forms.Button ButtonCleanse;

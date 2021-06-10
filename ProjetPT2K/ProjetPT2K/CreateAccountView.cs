@@ -1,75 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ProjetPT2K
 {
-
+    /// <summary>
+    /// Class representing the view of a CreateAccount window.
+    /// </summary>
     public partial class CreateAccountView : Form
     {
-        /*Attributs*/
-        public string FirstName { get { return firstNameTextBox.Text; } }
-
-        public string LastName { get { return lastNameTextBox.Text; } }
-
-        public string Login { get { return logintextBox.Text; } }
-        
-        public string Password { get { return passwordtextBox.Text; } }
-
-        public PAYS Country { get { return (PAYS)countryComboBox.SelectedItem; } }
+        /// <summary>
+        /// The database containing all the data.
+        /// </summary>
+        private readonly Database _Database;
 
         /// <summary>
-        /// Constructor of the account view.
+        /// Non parametorised constructor creating a new CreateAccountView object.
         /// </summary>
-        public CreateAccountView()
+        public CreateAccountView(Database theDatabase)
         {
             InitializeComponent();
-            InitializeCountryComboBox();
+            this._Database = theDatabase;
+            FillCountryComboBox();
         }
 
+        /// <summary>
+        /// Fill the CountryComboBox with all the available countries from the database.
+        /// </summary>
+        private void FillCountryComboBox()
+        {
+            List<PAYS> theCountries = this._Database.GetConnection().PAYS.ToList();
+            theCountries.ForEach(theCountry => CountryComboBox.Items.Add(theCountry));
+        }
 
         /// <summary>
-        /// Function responsible of the initialization of the countryComboBox.
+        /// Event triggered when the SignUp button is clicked.
         /// </summary>
-        private void InitializeCountryComboBox()
+        /// <param name="sender"> the object concerned </param>
+        /// <param name="e"> the event </param>
+        private void SignUpButton_Click(object sender, EventArgs e)
         {
-            Database database = Database.GetInstance();
-            var countries = (from country in database.GetConnection().PAYS
-                             select country);
+            string theFirstName = FistNameLabel.Text;
+            string theLastName = LastNameLabel.Text;
 
-            foreach (var country in countries)
+            PAYS theCountry = (PAYS)CountryComboBox.SelectedItem;
+            
+            string theLogin = LoginLabel.Text;
+            string thePassword = PasswordLabel.Text;
+
+            try
             {
-                countryComboBox.Items.Add(country);
+                this._Database.AttemptAccountCreation(theFirstName, theLastName, theCountry, theLogin, thePassword);
+                this.Close();
+            }
+            catch (Exception theException)
+            {
+                ClearSignUpLabels();
+                ErrorLabel.Visible = true;
+                ErrorLabel.Text = theException.Message;
             }
         }
 
         /// <summary>
-        /// Function that indicate if a the passeword or the name box are filled.
+        ///  Clear the sign up labels.
         /// </summary>
-        /// <returns> true if it's filled and false if it's not </returns>
-        public bool IsFilled()
+        public void ClearSignUpLabels()
         {
-            return FirstName.Length > 0 && LastName.Length > 0 && Login.Length > 0
-                && Password.Length > 0 && countryComboBox.SelectedItem != null;
-        }
-
-        /// <summary>
-        /// Function that is responsible of the display of the account creation.
-        /// </summary>
-        /// <param name="sender"> the object conserned </param>
-        /// <param name="e"> the event.</param>
-        private void CreateAccountView_Paint(object sender, PaintEventArgs e)
-        {
-            if (this.IsFilled())
-            {
-                validateButton.Enabled = true;
-            }
+            FistNameLabel.Text = "";
+            LastNameLabel.Text = "";
+            LoginLabel.Text = "";
+            PasswordLabel.Text = "";
         }
     }
 }

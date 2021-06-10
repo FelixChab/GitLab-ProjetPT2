@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProjetPT2K
 {
+    /// <summary>
+    /// Class representing a country in the database.
+    /// </summary>
     public partial class PAYS
     {
-        /**
-         * Return the string representation of the counrty.
-         */
+        /// <summary>
+        /// Return the string representation of the country.
+        /// </summary>
+        /// <returns> a string </returns>
         public override String ToString()
         {
-            return NOM_PAYS.Trim();
+            return this.NOM_PAYS.Trim();
         }
     }
 }

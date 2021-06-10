@@ -10,7 +10,7 @@ namespace ProjetPT2K
     /// <summary>
     /// Class representing the view for the administrator account.
     /// </summary>
-    public partial class AdminView : Form
+    public partial class AdministratorView : Form
     {
         /// <summary>
         /// The administrator of the form
@@ -21,11 +21,10 @@ namespace ProjetPT2K
         /// Parametorised constructor creating a new AdminView object.
         /// </summary>
         /// <param name="theAdministrator"> the administrator of the view </param>
-        public AdminView(Administrator theAdministrator)
+        public AdministratorView(Account theAccount)
         {
             InitializeComponent();
-            this._Administrator = theAdministrator;
-            this.listBoxAdminResults.ScrollAlwaysVisible = false;
+            this._Administrator = (Administrator)theAccount;
         }
 
         #region page system
@@ -40,8 +39,8 @@ namespace ProjetPT2K
             this.page = 0;
             this.header = header;
             this.function = function;
-            listBoxAdminResults.Items.Clear();
-            listBoxAdminResults.Items.Add(header);
+            ResultListBox.Items.Clear();
+            ResultListBox.Items.Add(header);
             showCurrent();
             updatePageLabel();
         }
@@ -51,8 +50,8 @@ namespace ProjetPT2K
         }
         public void showCurrent()
         {
-            listBoxAdminResults.Items.Clear();
-            listBoxAdminResults.Items.Add(header);
+            ResultListBox.Items.Clear();
+            ResultListBox.Items.Add(header);
             function.Invoke();
             updatePageLabel();
         }
@@ -111,8 +110,8 @@ namespace ProjetPT2K
             int size = count < start + perPage ? (count - start) : perPage;
             foreach (EMPRUNTER emprunt in list.OrderBy(x => x.CODE_ALBUM).Skip(start).Take(size))
             {
-                listBoxAdminResults.Items.Add(emprunt.ToString());
-                listBoxAdminResults.Items.Add("____________________________________________________________________________________"); ;
+                ResultListBox.Items.Add(emprunt.ToString());
+                ResultListBox.Items.Add("____________________________________________________________________________________"); ;
 
             }
         }
@@ -141,8 +140,8 @@ namespace ProjetPT2K
             int size = count < start + perPage ? (count - start) : perPage;
             foreach (ABONNÉS sub in list.OrderBy(x => x.CODE_ABONNÉ).Skip(start).Take(size))
             {
-                listBoxAdminResults.Items.Add(sub.ToString());
-                listBoxAdminResults.Items.Add("____________________________________________________________________________________"); ;
+                ResultListBox.Items.Add(sub.ToString());
+                ResultListBox.Items.Add("____________________________________________________________________________________"); ;
 
             }
         }
@@ -170,16 +169,16 @@ namespace ProjetPT2K
             List<ABONNÉS> subList =_Administrator.PurgeDatabase();
             foreach(ABONNÉS sub in subList)
             {
-                this.listBoxAdminResults.Items.Add("L'abonné " + sub.NOM_ABONNÉ + " " + sub.PRÉNOM_ABONNÉ + " à été supprimé.");
+                this.ResultListBox.Items.Add("L'abonné " + sub.NOM_ABONNÉ + " " + sub.PRÉNOM_ABONNÉ + " à été supprimé.");
             }
             int count = subList.Count();
             if (count > 0)
             {
-                this.listBoxAdminResults.Items.Add(subList.Count() + " abonné" + (count < 2 ? " a" : "s ont") + " été supprimé.");
+                this.ResultListBox.Items.Add(subList.Count() + " abonné" + (count < 2 ? " a" : "s ont") + " été supprimé.");
             }
             else
             {
-                this.listBoxAdminResults.Items.Add("Aucun abonné n'a été supprimé.");
+                this.ResultListBox.Items.Add("Aucun abonné n'a été supprimé.");
 
             }
         }
@@ -211,7 +210,7 @@ namespace ProjetPT2K
             foreach (var entry in Database.GetInstance().GetMostBorrowedAlbums())
             {
                 i++;
-                listBoxAdminResults.Items.Add(FormatText(new string[] { i.ToString(), entry.Key.ToString(), entry.Value + " fois" }));
+                ResultListBox.Items.Add(FormatText(new string[] { i.ToString(), entry.Key.ToString(), entry.Value + " fois" }));
             }
         }
         #endregion
@@ -242,8 +241,8 @@ namespace ProjetPT2K
             int size = count < start + perPage ? (count - start) : perPage;
             foreach (ALBUMS album in albums.OrderBy(x => x.EMPRUNTER.Count()).Skip(start).Take(size))
             {
-                listBoxAdminResults.Items.Add(album.ToString());
-                listBoxAdminResults.Items.Add("____________________________________________________________________________________"); ;
+                ResultListBox.Items.Add(album.ToString());
+                ResultListBox.Items.Add("____________________________________________________________________________________"); ;
 
             }
         }
@@ -269,8 +268,8 @@ namespace ProjetPT2K
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
             foreach (ABONNÉS sub in db.ABONNÉS.OrderBy(x => x.CODE_ABONNÉ).Skip(start).Take(size))
             {
-                listBoxAdminResults.Items.Add(FormatText(new string[] { sub.NOM_ABONNÉ, sub.PRÉNOM_ABONNÉ, sub.EMPRUNTER.Count() + "" })); ;
-                listBoxAdminResults.Items.Add("____________________________________________________________________________________"); ;
+                ResultListBox.Items.Add(FormatText(new string[] { sub.NOM_ABONNÉ, sub.PRÉNOM_ABONNÉ, sub.EMPRUNTER.Count() + "" })); ;
+                ResultListBox.Items.Add("____________________________________________________________________________________"); ;
 
             }
         }

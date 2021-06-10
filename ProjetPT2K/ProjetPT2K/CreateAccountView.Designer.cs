@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace ProjetPT2K
 {
     partial class CreateAccountView
@@ -29,161 +31,219 @@ namespace ProjetPT2K
         /// </summary>
         private void InitializeComponent()
         {
+            this.PictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.InscriptionLabel = new System.Windows.Forms.Label();
+            this.connectionBackground = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.lastNameTextBox = new System.Windows.Forms.TextBox();
-            this.logintextBox = new System.Windows.Forms.TextBox();
-            this.passwordtextBox = new System.Windows.Forms.TextBox();
-            this.countryComboBox = new System.Windows.Forms.ComboBox();
-            this.cancelbutton = new System.Windows.Forms.Button();
-            this.validateButton = new System.Windows.Forms.Button();
+            this.CountryComboBox = new System.Windows.Forms.ComboBox();
+            this.LastNameLabel = new System.Windows.Forms.TextBox();
+            this.familyNameLabelTitle = new System.Windows.Forms.Label();
+            this.FistNameLabel = new System.Windows.Forms.TextBox();
+            this.nameLabelTitle = new System.Windows.Forms.Label();
+            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.LoginLabel = new System.Windows.Forms.TextBox();
+            this.PasswordLabel = new System.Windows.Forms.TextBox();
+            this.labelPasswordTitle = new System.Windows.Forms.Label();
+            this.labelUsernameTitle = new System.Windows.Forms.Label();
+            this.SignUpButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).BeginInit();
+            this.connectionBackground.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // PictureBoxLogo
+            // 
+            this.PictureBoxLogo.Image = global::ProjetPT2K.Properties.Resources.App_Logo;
+            this.PictureBoxLogo.Location = new System.Drawing.Point(0, 0);
+            this.PictureBoxLogo.Name = "PictureBoxLogo";
+            this.PictureBoxLogo.Size = new System.Drawing.Size(105, 105);
+            this.PictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBoxLogo.TabIndex = 0;
+            this.PictureBoxLogo.TabStop = false;
+            // 
+            // InscriptionLabel
+            // 
+            this.InscriptionLabel.AutoSize = true;
+            this.InscriptionLabel.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InscriptionLabel.ForeColor = System.Drawing.Color.White;
+            this.InscriptionLabel.Location = new System.Drawing.Point(156, 14);
+            this.InscriptionLabel.Name = "InscriptionLabel";
+            this.InscriptionLabel.Size = new System.Drawing.Size(185, 45);
+            this.InscriptionLabel.TabIndex = 0;
+            this.InscriptionLabel.Text = "Inscription";
+            // 
+            // connectionBackground
+            // 
+            this.connectionBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(129)))), ((int)(((byte)(172)))));
+            this.connectionBackground.Controls.Add(this.label1);
+            this.connectionBackground.Controls.Add(this.CountryComboBox);
+            this.connectionBackground.Controls.Add(this.LastNameLabel);
+            this.connectionBackground.Controls.Add(this.familyNameLabelTitle);
+            this.connectionBackground.Controls.Add(this.FistNameLabel);
+            this.connectionBackground.Controls.Add(this.nameLabelTitle);
+            this.connectionBackground.Controls.Add(this.ErrorLabel);
+            this.connectionBackground.Controls.Add(this.LoginLabel);
+            this.connectionBackground.Controls.Add(this.PasswordLabel);
+            this.connectionBackground.Controls.Add(this.labelPasswordTitle);
+            this.connectionBackground.Controls.Add(this.labelUsernameTitle);
+            this.connectionBackground.Controls.Add(this.SignUpButton);
+            this.connectionBackground.Controls.Add(this.InscriptionLabel);
+            this.connectionBackground.Location = new System.Drawing.Point(150, 46);
+            this.connectionBackground.Name = "connectionBackground";
+            this.connectionBackground.Size = new System.Drawing.Size(475, 475);
+            this.connectionBackground.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 50);
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(217, 268);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Prénom";
+            this.label1.Size = new System.Drawing.Size(51, 26);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Pays";
             // 
-            // label2
+            // CountryComboBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Nom";
+            this.CountryComboBox.FormattingEnabled = true;
+            this.CountryComboBox.ItemHeight = 13;
+            this.CountryComboBox.Location = new System.Drawing.Point(149, 296);
+            this.CountryComboBox.Name = "CountryComboBox";
+            this.CountryComboBox.Size = new System.Drawing.Size(192, 21);
+            this.CountryComboBox.TabIndex = 12;
             // 
-            // label3
+            // LastNameLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 151);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Nom d\'utilisateur";
+            this.LastNameLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LastNameLabel.Location = new System.Drawing.Point(257, 128);
+            this.LastNameLabel.Name = "LastNameLabel";
+            this.LastNameLabel.Size = new System.Drawing.Size(192, 30);
+            this.LastNameLabel.TabIndex = 11;
             // 
-            // label4
+            // familyNameLabelTitle
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(52, 197);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Mot de passe";
+            this.familyNameLabelTitle.AutoSize = true;
+            this.familyNameLabelTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.familyNameLabelTitle.Location = new System.Drawing.Point(324, 99);
+            this.familyNameLabelTitle.Name = "familyNameLabelTitle";
+            this.familyNameLabelTitle.Size = new System.Drawing.Size(52, 26);
+            this.familyNameLabelTitle.TabIndex = 10;
+            this.familyNameLabelTitle.Text = "Nom";
             // 
-            // label5
+            // FistNameLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 254);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Pays";
+            this.FistNameLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FistNameLabel.Location = new System.Drawing.Point(46, 128);
+            this.FistNameLabel.Name = "FistNameLabel";
+            this.FistNameLabel.Size = new System.Drawing.Size(192, 30);
+            this.FistNameLabel.TabIndex = 9;
             // 
-            // firstNameTextBox
+            // nameLabelTitle
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(179, 47);
-            this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(121, 20);
-            this.firstNameTextBox.TabIndex = 5;
+            this.nameLabelTitle.AutoSize = true;
+            this.nameLabelTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabelTitle.Location = new System.Drawing.Point(104, 100);
+            this.nameLabelTitle.Name = "nameLabelTitle";
+            this.nameLabelTitle.Size = new System.Drawing.Size(76, 26);
+            this.nameLabelTitle.TabIndex = 8;
+            this.nameLabelTitle.Text = "Prénom";
             // 
-            // lastNameTextBox
+            // ErrorLabel
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(179, 100);
-            this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(121, 20);
-            this.lastNameTextBox.TabIndex = 6;
+            this.ErrorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ErrorLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ErrorLabel.Location = new System.Drawing.Point(0, 361);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(475, 23);
+            this.ErrorLabel.TabIndex = 7;
+            this.ErrorLabel.Text = "Identifiant non disponible";
+            this.ErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ErrorLabel.Visible = false;
             // 
-            // logintextBox
+            // LoginLabel
             // 
-            this.logintextBox.Location = new System.Drawing.Point(179, 148);
-            this.logintextBox.Name = "logintextBox";
-            this.logintextBox.Size = new System.Drawing.Size(121, 20);
-            this.logintextBox.TabIndex = 7;
+            this.LoginLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginLabel.Location = new System.Drawing.Point(46, 208);
+            this.LoginLabel.Name = "LoginLabel";
+            this.LoginLabel.Size = new System.Drawing.Size(192, 30);
+            this.LoginLabel.TabIndex = 6;
             // 
-            // passwordtextBox
+            // PasswordLabel
             // 
-            this.passwordtextBox.Location = new System.Drawing.Point(179, 194);
-            this.passwordtextBox.Name = "passwordtextBox";
-            this.passwordtextBox.PasswordChar = '*';
-            this.passwordtextBox.Size = new System.Drawing.Size(121, 20);
-            this.passwordtextBox.TabIndex = 8;
+            this.PasswordLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLabel.Location = new System.Drawing.Point(257, 208);
+            this.PasswordLabel.Name = "PasswordLabel";
+            this.PasswordLabel.Size = new System.Drawing.Size(191, 30);
+            this.PasswordLabel.TabIndex = 5;
+            this.PasswordLabel.UseSystemPasswordChar = true;
             // 
-            // countryComboBox
+            // labelPasswordTitle
             // 
-            this.countryComboBox.FormattingEnabled = true;
-            this.countryComboBox.Location = new System.Drawing.Point(179, 251);
-            this.countryComboBox.Name = "countryComboBox";
-            this.countryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.countryComboBox.TabIndex = 10;
+            this.labelPasswordTitle.AutoSize = true;
+            this.labelPasswordTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPasswordTitle.Location = new System.Drawing.Point(287, 180);
+            this.labelPasswordTitle.Name = "labelPasswordTitle";
+            this.labelPasswordTitle.Size = new System.Drawing.Size(128, 26);
+            this.labelPasswordTitle.TabIndex = 4;
+            this.labelPasswordTitle.Text = "Mot de passe";
             // 
-            // cancelbutton
+            // labelUsernameTitle
             // 
-            this.cancelbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelbutton.Location = new System.Drawing.Point(55, 323);
-            this.cancelbutton.Name = "cancelbutton";
-            this.cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.cancelbutton.TabIndex = 11;
-            this.cancelbutton.Text = "Annuler";
-            this.cancelbutton.UseVisualStyleBackColor = true;
+            this.labelUsernameTitle.AutoSize = true;
+            this.labelUsernameTitle.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUsernameTitle.Location = new System.Drawing.Point(89, 180);
+            this.labelUsernameTitle.Name = "labelUsernameTitle";
+            this.labelUsernameTitle.Size = new System.Drawing.Size(107, 26);
+            this.labelUsernameTitle.TabIndex = 3;
+            this.labelUsernameTitle.Text = "Identifiant";
             // 
-            // validateButton
+            // SignUpButton
             // 
-            this.validateButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.validateButton.Enabled = false;
-            this.validateButton.Location = new System.Drawing.Point(179, 323);
-            this.validateButton.Name = "validateButton";
-            this.validateButton.Size = new System.Drawing.Size(75, 23);
-            this.validateButton.TabIndex = 12;
-            this.validateButton.Text = "Valider";
-            this.validateButton.UseVisualStyleBackColor = true;
+            this.SignUpButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.SignUpButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SignUpButton.ForeColor = System.Drawing.Color.Black;
+            this.SignUpButton.Location = new System.Drawing.Point(149, 410);
+            this.SignUpButton.Name = "SignUpButton";
+            this.SignUpButton.Size = new System.Drawing.Size(192, 40);
+            this.SignUpButton.TabIndex = 1;
+            this.SignUpButton.Text = "Inscription";
+            this.SignUpButton.UseVisualStyleBackColor = true;
+            this.SignUpButton.Click += new System.EventHandler(this.SignUpButton_Click);
             // 
             // CreateAccountView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 384);
-            this.Controls.Add(this.validateButton);
-            this.Controls.Add(this.cancelbutton);
-            this.Controls.Add(this.countryComboBox);
-            this.Controls.Add(this.passwordtextBox);
-            this.Controls.Add(this.logintextBox);
-            this.Controls.Add(this.lastNameTextBox);
-            this.Controls.Add(this.firstNameTextBox);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
+            this.ClientSize = new System.Drawing.Size(800, 576);
+            this.Controls.Add(this.connectionBackground);
+            this.Controls.Add(this.PictureBoxLogo);
             this.Name = "CreateAccountView";
-            this.Text = "CreateAccountView";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CreateAccountView_Paint);
+            this.Text = "Form2";
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).EndInit();
+            this.connectionBackground.ResumeLayout(false);
+            this.connectionBackground.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
+
         #endregion
 
+        private System.Windows.Forms.PictureBox PictureBoxLogo;
+        private System.Windows.Forms.Label InscriptionLabel;
+        private System.Windows.Forms.Panel connectionBackground;
+        private System.Windows.Forms.TextBox FistNameLabel;
+        private System.Windows.Forms.Label nameLabelTitle;
+        private System.Windows.Forms.TextBox LoginLabel;
+        private System.Windows.Forms.TextBox PasswordLabel;
+        private System.Windows.Forms.Label labelPasswordTitle;
+        private System.Windows.Forms.Label labelUsernameTitle;
+        private System.Windows.Forms.Button SignUpButton;
+        private System.Windows.Forms.TextBox LastNameLabel;
+        private System.Windows.Forms.Label familyNameLabelTitle;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox firstNameTextBox;
-        private System.Windows.Forms.TextBox lastNameTextBox;
-        private System.Windows.Forms.TextBox logintextBox;
-        private System.Windows.Forms.TextBox passwordtextBox;
-        private System.Windows.Forms.ComboBox countryComboBox;
-        private System.Windows.Forms.Button cancelbutton;
-        private System.Windows.Forms.Button validateButton;
+        private System.Windows.Forms.ComboBox CountryComboBox;
+        private System.Windows.Forms.Label ErrorLabel;
     }
 }

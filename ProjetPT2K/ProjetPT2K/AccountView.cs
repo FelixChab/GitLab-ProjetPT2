@@ -88,7 +88,7 @@ namespace ProjetPT2K
 
         private void Logo_Click(object sender, EventArgs e)
         {
-            MainView view = new MainView(Account);
+            SubscriberView view = new SubscriberView(Account);
             view.ShowDialog();
             Close();
         }
