@@ -106,7 +106,7 @@ namespace ProjetPT2K
         }
 
         /// <summary>
-        /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
+        /// Verify the possibility to create a new subscriber account and creates it if possible.
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
@@ -164,21 +164,24 @@ namespace ProjetPT2K
             return true;
         }
 
+        /// <summary>
+        /// Return all the allbums of the database.
+        /// </summary>
+        /// <returns> a list of Album objects </returns>
         public List<ALBUMS> GetAllAlbums()
         {
-            List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
-                                      select album).ToList();
-
-            return theAlbums;
+            return this.Connection.ALBUMS.ToList();
         }
 
-        public List<ALBUMS> GetAlbumsContaining(string pattern)
+        /// <summary>
+        /// Return all the albums of the database whose name contains the given pattern.
+        /// </summary>
+        /// <param name="thePattern"> the given pattern </param>
+        /// <returns> a list of Albums objects </returns>
+        public List<ALBUMS> GetAlbumsContaining(string thePattern)
         {
-            var albums = from album in this.Connection.ALBUMS
-                         where album.TITRE_ALBUM.Contains(pattern)
-                         select album;
-
-            return albums.ToList();
+            List<ALBUMS> theAlbums = this.Connection.ALBUMS.ToList();
+            return theAlbums.FindAll(album => album.TITRE_ALBUM.Contains(thePattern));
         }
 
         /// <summary>
@@ -210,33 +213,23 @@ namespace ProjetPT2K
             return theAlbum;
         }
 
-        public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)
+        /// <summary>
+        /// Return the 10 most borrowed albums of the year of the given genre.
+        /// </summary>
+        /// <param name="theGenre"> the considered genre </param>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbumsOfGenre(GENRES theGenre)
         {
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS
-                                 join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM
-                                 where a.GENRES.LIBELLÉ_GENRE == genre.LIBELLÉ_GENRE
-                                 orderby a.EMPRUNTER.Count descending
-                                 select a).ToList();
-            for (int start = 0; start < list.Count; start++)
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
             {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if ((theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year) && (theLoan.ALBUMS.GENRES == theGenre))
+                    topAlbums[theLoan.ALBUMS] = 1;
             }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
 
         /// <summary>

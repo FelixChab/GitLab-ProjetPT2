@@ -92,7 +92,21 @@ namespace ProjetPT2K
             this.Connection.SaveChanges();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<ALBUMS, int> GetRecommandations()
+        {
+            GENRES theGenre = this.GetMostBorrowedGenre();
+            return Database.GetInstance().GetMostBorrowedAlbumsOfGenre(theGenre);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private GENRES GetMostBorrowedGenre()
         {
             int loanNumber = -1;
             GENRES theGenre = null;
@@ -121,7 +135,7 @@ namespace ProjetPT2K
                 }
 
             }
-            return Database.GetInstance().GetBestAlbumsOfGenre(theGenre);
+            return theGenre;
         }
 
         /// <summary>
@@ -130,7 +144,7 @@ namespace ProjetPT2K
         /// <returns> a string </returns>
         public override String ToString()
         {
-            return (NOM_ABONNÉ.Trim() + " " + PRÉNOM_ABONNÉ.Trim());
+            return NOM_ABONNÉ.Trim() + " " + PRÉNOM_ABONNÉ.Trim();
         }
     }
 }
