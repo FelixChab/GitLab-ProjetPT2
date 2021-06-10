@@ -67,6 +67,12 @@
       <DependentUpon>AccountView.cs</DependentUpon>
     </Compile>
     <Compile Include="Administrator.cs" />
+    <Compile Include="AdminView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminView.designer.cs">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="ALBUMS.cs">
       <DependentUpon>BD.tt</DependentUpon>
@@ -86,12 +92,6 @@
     </Compile>
     <Compile Include="AppView.Designer.cs">
       <DependentUpon>AppView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdminView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminView.Designer.cs">
-      <DependentUpon>AdminView.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginView.cs">
       <SubType>Form</SubType>
@@ -151,14 +151,14 @@
     <EmbeddedResource Include="AccountView.resx">
       <DependentUpon>AccountView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminView.resx">
+      <DependentUpon>AdminView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppView.resx">
       <DependentUpon>AppView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateAccountView.resx">
       <DependentUpon>CreateAccountView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AdminView.resx">
-      <DependentUpon>AdminView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
