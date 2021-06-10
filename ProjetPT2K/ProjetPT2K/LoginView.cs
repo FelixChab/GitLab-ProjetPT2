@@ -28,7 +28,6 @@ namespace ProjetPT2K
         {
             NewAccountView accountView = new NewAccountView(this);
             accountView.Show();
-
         }
 
         /* Method of the "connection" button */
@@ -43,7 +42,7 @@ namespace ProjetPT2K
             Account account = Database.GetInstance().Login(login, password);
             if (account == null)
             {
-                errorLabel.Text = "Mot de passe incorect";
+                errorLabel.Text = "Mot de passe incorrect";
                 userlabel.Text = passwordlabel.Text = "";
                 errorLabel.Visible = true;
             }

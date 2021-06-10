@@ -10,14 +10,13 @@ namespace ProjetPT2K
 {
     class DisplayAlbum : ALBUMS
     {
-        private ALBUMS album;
+        private readonly ALBUMS album;
         private byte[] picture { get; set; }
-        private string title;
+        private string title, editor;
         public string Title { get { return this.title; } set { this.title = TITRE_ALBUM; } }
-        private string editor;
         public string Editor { get { return this.editor; } set { this.editor = EDITEURS.NOM_EDITEUR; } }
         private Point position { get; set; }
-        Size ImageWidth { get; set; }
+        public Size ImageWidth { get; set; }
 
         /// <summary>
         /// Constructor
@@ -67,6 +66,11 @@ namespace ProjetPT2K
         public bool Contains (Point p)
         {
             return position.X < p.X && position.X + GetImage().Width >p.X && position.Y<p.Y && position.Y+GetImage().Height>p.Y;
+        }
+
+        public ALBUMS GetAlbum()
+        {
+            return this.album;
         }
     }
 }
