@@ -136,6 +136,10 @@ namespace ProjetPT2K
             }
         }
 
+        /// <summary>
+        /// Function that allows to get all the albums.
+        /// </summary>
+        /// <returns> the lsit of all the albums </returns>
         public List<ALBUMS> GetAllAlbums()
         {
             List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
@@ -144,6 +148,12 @@ namespace ProjetPT2K
             return theAlbums;
         }
 
+
+        /// <summary>
+        /// Function that allows to get an album by searching a string that this album is containing.
+        /// </summary>
+        /// <param name="pattern"> the substrig that is contained in an album title </param>
+        /// <returns> the list that contains all the album name containing the substring </returns>
         public List<ALBUMS> GetAlbumsContaining(string pattern)
         {
             var albums = from album in this.Connection.ALBUMS
@@ -182,6 +192,12 @@ namespace ProjetPT2K
             return theAlbum;
         }
 
+
+        /// <summary>
+        /// Function that allosw to get the best ablums of genre.
+        /// </summary>
+        /// <param name="genre"> the genre of the albums </param>
+        /// <returns> the list of the best albums of the genre </returns>
         public Dictionary<ALBUMS, int> GetBestAlbumsOfGenre(GENRES genre)
         {
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();

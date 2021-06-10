@@ -96,11 +96,20 @@ namespace ProjetPT2K
         }
 
         #region extended and late loans
+        /// <summary>
+        /// Funtction that extends loans by clicking on the button.
+        /// </summary>
+        /// <param name="sender"> the object that is concerned </param>
+        /// <param name="e"> the event </param>
         private void ButtonExtendedLoans_Click(object sender, EventArgs e)
         {
             printContent(readExtentedLoans, "|                  Emprunts étendus :                  |");
         }
 
+
+        /// <summary>
+        /// Function responsible of the display of Extended loans
+        /// </summary>
         public void readExtentedLoans()
         {
             List<EMPRUNTER> list = CurrentAdmin.GetExtendedLoans();
@@ -116,12 +125,21 @@ namespace ProjetPT2K
         }
 
 
+        /// <summary>
+        /// Function responsible to display late loans when the button is clicked.
+        /// </summary>
+        /// <param name="sender">  the object that is concerned </param>
+        /// <param name="e"> the event</param>
         private void ButtonLateLoans_Click(object sender, EventArgs e)
         {
             printContent(readLateLoans, "|                  Abonnés en retards d'emprunt :                  |");
 
         }
 
+
+        /// <summary>
+        /// Function that is responsible of the display of late loans.
+        /// </summary>
         public void readLateLoans()
         {
             List<ABONNÉS> list = CurrentAdmin.GetLateSubscribers();
@@ -138,23 +156,33 @@ namespace ProjetPT2K
         #endregion
 
         #region purge
+
+        /// <summary>
+        /// Function responsible of the cleanse display of the base when the button is clicked.
+        /// </summary>
+        /// <param name="sender"> the object that is concerned</param>
+        /// <param name="e"> the event </param>
         private void ButtonCleanse_Click(object sender, EventArgs e)
         {
-            
+
             printContent(readPurge, "| Purge de la base de donnée...");
         }
 
+
+        /// <summary>
+        /// Function that is responsible of reading the database purge.
+        /// </summary>
         public void readPurge()
         {
-            List<ABONNÉS> subList =CurrentAdmin.PurgeDatabase();
-            foreach(ABONNÉS sub in subList)
+            List<ABONNÉS> subList = CurrentAdmin.PurgeDatabase();
+            foreach (ABONNÉS sub in subList)
             {
                 this.listBoxAdminResults.Items.Add("L'abonné " + sub.NOM_ABONNÉ + " " + sub.PRÉNOM_ABONNÉ + " à été supprimé.");
             }
             int count = subList.Count();
-            if(count > 0)
+            if (count > 0)
             {
-                this.listBoxAdminResults.Items.Add(subList.Count() + " abonné"+(count < 2 ? " a" : "s ont")+" été supprimé.");
+                this.listBoxAdminResults.Items.Add(subList.Count() + " abonné" + (count < 2 ? " a" : "s ont") + " été supprimé.");
             }
             else
             {
@@ -166,14 +194,22 @@ namespace ProjetPT2K
 
         #region most loaned
 
+        /// <summary>
+        /// Funciton that is responsble of the display of the most loaned albums when the button is clicked.
+        /// </summary>
+        /// <param name="sender"> the object that is concerned </param>
+        /// <param name="e"> the event </param>
         private void ButtonMostLoaned_Click(object sender, EventArgs e)
         {
-           
+
             printContent(readMostLoaned, FormatText(new string[] { "Classement", "Album", "Emprunts" }));
-       
-           
+
+
         }
 
+        /// <summary>
+        /// Function responsible of the reading of the most Loaned albums.
+        /// </summary>
         public void readMostLoaned()
         {
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
@@ -187,13 +223,23 @@ namespace ProjetPT2K
         }
         #endregion
 
+
         #region less loaned
+
+        /// <summary>
+        /// Function responsible of the  display of the less loaned albums when the button is clicked.
+        /// </summary>
+        /// <param name="sender"> the object that is concerned</param>
+        /// <param name="e"> the event </param>
         private void ButtonLessLoaned_Click(object sender, EventArgs e)
         {
 
             printContent(readLessLoaned, "|            Albums non-empruntés depuis 1 an             |");
         }
 
+        /// <summary>
+        /// Function responsible of the reading of the less loans albums
+        /// </summary>
         public void readLessLoaned()
         {
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
@@ -228,9 +274,9 @@ namespace ProjetPT2K
                 size = count - start;
             }
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
-            foreach (ABONNÉS sub in db.ABONNÉS.OrderBy(x=>x.CODE_ABONNÉ).Skip(start).Take(size))
+            foreach (ABONNÉS sub in db.ABONNÉS.OrderBy(x => x.CODE_ABONNÉ).Skip(start).Take(size))
             {
-                listBoxAdminResults.Items.Add(FormatText(new string[] { sub.NOM_ABONNÉ, sub.PRÉNOM_ABONNÉ, sub.EMPRUNTER.Count()+""})); ;
+                listBoxAdminResults.Items.Add(FormatText(new string[] { sub.NOM_ABONNÉ, sub.PRÉNOM_ABONNÉ, sub.EMPRUNTER.Count() + "" })); ;
                 listBoxAdminResults.Items.Add("____________________________________________________________________________________"); ;
 
             }
@@ -238,13 +284,19 @@ namespace ProjetPT2K
         #endregion
 
         #region format
+
+       /// <summary>
+       /// Format the String array into columns.
+       /// </summary>
+       /// <param name="args"> String to format </param>
+       /// <returns></returns>
         public String FormatText(String[] args)
         {
             StringBuilder line = new StringBuilder();
             for (int i = 0; i < args.Length; i++)
 
             {
-                String s = args[i].Trim();            
+                String s = args[i].Trim();
                 line.Append(s.PadRight(50));
                 line.Append("|");
             }
