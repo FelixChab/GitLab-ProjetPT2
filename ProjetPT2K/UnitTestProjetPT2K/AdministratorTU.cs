@@ -46,6 +46,10 @@ namespace UnitTestProjetPT2K
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
+
+            // Ensure an account with an existing login cannot be created
+            Account subscriber3 = this.Database.Login("jean", "marie");
+            Assert.IsNull(subscriber3);
         }
 
         /// <summary>

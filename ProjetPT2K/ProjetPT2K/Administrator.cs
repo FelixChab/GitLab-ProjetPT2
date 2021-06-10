@@ -84,5 +84,23 @@ namespace ProjetPT2K
             }
             return unpopularAlbums;
         }
+
+        /// <summary>
+        /// Return the 10 most borrowed albums of the year.
+        /// </summary>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
+        {
+            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            {
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if (theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                    topAlbums[theLoan.ALBUMS] = 1;
+            }
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
+        }
     }
 }

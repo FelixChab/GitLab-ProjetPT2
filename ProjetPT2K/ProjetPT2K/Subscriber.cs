@@ -84,6 +84,5 @@ namespace ProjetPT2K
         {
             return NOM_ABONNÉ + " " + PRÉNOM_ABONNÉ;
         }
-
     }
 }
