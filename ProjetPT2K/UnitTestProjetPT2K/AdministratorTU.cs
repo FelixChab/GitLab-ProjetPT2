@@ -36,8 +36,8 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccounts()
         {
-            this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            this.Database.CreateAccount("Marc", "Antoine", 1, "marc", "antoine");
+            this.Database.AttemptAccountCreation("Jean", "Pierre", 1, "jean", "pierre");
+            this.Database.AttemptAccountCreation("Marc", "Antoine", 1, "marc", "antoine");
 
             // Retrieve the accounts
             Account subscriber1 = this.Database.Login("jean", "pierre");            
@@ -58,7 +58,7 @@ namespace UnitTestProjetPT2K
         private void GetExtendedLoans()
         {
             // Ensure there are top 10 yet
-            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+            Assert.AreEqual(0, this._Administrator.GetMostBorrowedAlbums().Count);
 
             // Ensure there are currently no extended loans in the database
             Assert.AreEqual(0, this._Administrator.GetExtendedLoans().Count);
@@ -186,8 +186,8 @@ namespace UnitTestProjetPT2K
             this.Connection.SaveChanges();
 
 
-            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
-            Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
+            Assert.AreEqual(0, this._Administrator.GetMostBorrowedAlbums().Count);
+            Dictionary<ALBUMS, int> dict = this._Administrator.GetMostBorrowedAlbums();
 
             for (int i = 1; i < dict.Count; i++)
             {

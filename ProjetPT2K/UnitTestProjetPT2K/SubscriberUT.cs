@@ -36,20 +36,40 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccount()
         {
-            this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            Account subscriber = this.Database.Login("jean", "pierre");
-            this._Subscriber = (ABONNÉS)subscriber;
+            this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", "antoine");
+            Account Marc = this.Database.Login("marc", "antoine");
+            this._Subscriber = (ABONNÉS)Marc;
 
             Assert.IsNotNull(this._Subscriber);
             Assert.IsFalse(this._Subscriber.IsAdministrator);
 
-            Assert.AreEqual("Jean", this._Subscriber.PRÉNOM_ABONNÉ);
-            Assert.AreEqual("Pierre", this._Subscriber.NOM_ABONNÉ);
+            Assert.AreEqual("Marc", this._Subscriber.PRÉNOM_ABONNÉ);
+            Assert.AreEqual("Antoine", this._Subscriber.NOM_ABONNÉ);
 
-            Assert.AreEqual("jean", this._Subscriber.LOGIN_ABONNÉ);
-            Assert.AreEqual("pierre", this._Subscriber.PASSWORD_ABONNÉ);
+            Assert.AreEqual("marc", this._Subscriber.LOGIN_ABONNÉ);
+            Assert.AreEqual("antoine", this._Subscriber.PASSWORD_ABONNÉ);
 
-            Assert.AreEqual(1, this._Subscriber.CODE_PAYS);
+            Assert.AreEqual(4, this._Subscriber.CODE_PAYS);
+
+            CheckCredentials();
+        }
+
+        /// <summary>
+        /// Ensure the credentials are valid.
+        /// </summary>
+        private void CheckCredentials()
+        {
+            Assert.ThrowsException<Exception>(
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc antoine", "antoine"));
+
+            Assert.ThrowsException<Exception>(
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", "\"antoine"));
+
+            Assert.ThrowsException<Exception>(
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "'marc'", "antoine"));
+
+            Assert.ThrowsException<Exception>(
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", ""));
         }
 
         /// <summary>
@@ -69,8 +89,9 @@ namespace UnitTestProjetPT2K
             // Ensure the album has been borrowed
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
 
-            this._Subscriber.BorrowAlbum(theAlbum);
             // Ensure the album cannot be borrowed anymore
+            Assert.ThrowsException<Exception>(() => this._Subscriber.BorrowAlbum(theAlbum));
+            
             Assert.IsFalse(theAlbum.IsAvailable());
             Assert.AreEqual(1, this._Subscriber.EMPRUNTER.Count);
 
@@ -78,6 +99,11 @@ namespace UnitTestProjetPT2K
 
             Assert.AreEqual(theAlbum, theLoan.ALBUMS);
             Assert.AreEqual(this._Subscriber, theLoan.ABONNÉS);
+
+            theLoan.DATE_RETOUR = new DateTime(2021, 6, 9);
+            this.Connection.SaveChanges();
+
+            this._Subscriber.BorrowAlbum(theAlbum);
         }
 
         /// <summary>
