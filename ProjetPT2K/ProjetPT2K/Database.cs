@@ -99,7 +99,7 @@ namespace ProjetPT2K
         }
 
         /// <summary>
-        /// Create a new subscriber account in the database
+        /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
         /// <param name="lastname"> the lastname of the user </param>
