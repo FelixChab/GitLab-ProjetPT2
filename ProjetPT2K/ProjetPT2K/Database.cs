@@ -115,6 +115,22 @@ namespace ProjetPT2K
         }
 
         /// <summary>
+        /// Verify thepossibility to create a new subscriber account in the database. Creates it if possible.
+        /// </summary>
+        /// <param name="firstname"> the firstname of the user </param>
+        /// <param name="lastname"> the lastname of the user </param>
+        /// <param name="countryCode"> the code of the user's country</param>
+        /// <param name="login"> the login of the user </param>
+        /// <param name="password"> the password of the user </param>
+        public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
+        {
+            if (!AccountExists(login) && CredentialsAreValid(login, password))
+                CreateAccount(firstname, lastname, countryCode, login, password);
+            else
+                throw new Exception("Nom d'utilisateur indisponible");
+        }
+
+        /// <summary>
         /// Create a new subscriber account in the database
         /// </summary>
         /// <param name="firstname"> the firstname of the user </param>
@@ -122,7 +138,6 @@ namespace ProjetPT2K
         /// <param name="countryCode"> the code of the user's country</param>
         /// <param name="login"> the login of the user </param>
         /// <param name="password"> the password of the user </param>
-<<<<<<< HEAD
         public void AttemptAccountCreation(string firstname, string lastname, int countryCode, string login, string password)
         {
             try

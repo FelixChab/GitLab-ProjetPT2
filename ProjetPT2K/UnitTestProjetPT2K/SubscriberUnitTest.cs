@@ -101,9 +101,6 @@ namespace UnitTestProjetPT2K
 
             // Ensure it is possible to borrow the album again once it has been returned
             theLoan.Return();
-            theLoan.DATE_RETOUR = new DateTime(2021, 6, 9);
-            this.Connection.SaveChanges();
-
             this._Subscriber.BorrowAlbum(theAlbum);
         }
 
