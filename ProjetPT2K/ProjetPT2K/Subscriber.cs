@@ -53,7 +53,7 @@ namespace ProjetPT2K
         {
             foreach (EMPRUNTER theLoan in this.EMPRUNTER)
             {
-                if (theLoan.ALBUMS.Equals(theAlbum))
+                if (theLoan.ABONNÉS.Equals(theAlbum))
                     return theLoan;
             }
             return null;
@@ -71,6 +71,24 @@ namespace ProjetPT2K
             theLoan.DATE_EMPRUNT = DateTime.Now;
             theLoan.DATE_RETOUR_ATTENDUE = DateTime.Now.AddDays(theAlbum.GENRES.DÉLAI);
 
+            this.Connection.SaveChanges();
+        }
+
+        /// <summary>
+        /// Create a new loan for the given album and insert it into the database.
+        /// </summary>
+        /// <param name="theAlbum"> the considered album </param>
+        private void CreateLoan(ALBUMS theAlbum)
+        {
+            EMPRUNTER theLoan = new EMPRUNTER
+            {
+                CODE_ABONNÉ = this.CODE_ABONNÉ,
+                CODE_ALBUM = theAlbum.CODE_ALBUM,
+                DATE_EMPRUNT = DateTime.Today,
+                DATE_RETOUR_ATTENDUE = DateTime.Today.AddDays(theAlbum.GENRES.DÉLAI)
+            };
+
+            this.Connection.EMPRUNTER.Add(theLoan);
             this.Connection.SaveChanges();
         }
 

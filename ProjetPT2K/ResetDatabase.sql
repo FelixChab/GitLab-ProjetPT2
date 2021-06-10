@@ -24,7 +24,11 @@ VALUES (1, 'Hugo', 'Victor', 'victor', 'hugo')
 
 -- William Shakespeare (william shakespeare)
 INSERT INTO ABONNÉS (CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ)
+<<<<<<< HEAD
 VALUES (5, 'Shakespeare', 'William', 'william', 'shakespeare')
+=======
+VALUES (1, 'Shakespeare', 'William', 'william', 'shakespeare')
+>>>>>>> 00c8c02 (Wrote method Return() in Loan.cs, refactoring, documentation and)
 
 -- Napoléon Bonnaparte (napoléon bonnaparte)
 INSERT INTO ABONNÉS (CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ)
@@ -108,6 +112,16 @@ VALUES (@william, 13, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE())
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 14, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
 
+
+-- inactive subscriber (Deleted)
+INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE, DATE_RETOUR)
+VALUES (@napoléon, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
+
+-- inactive subscriber (Not deleted)
+INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
+VALUES (@william, 7, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
+
+
 -- inactive subscriber (Not deleted)
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 15, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
@@ -115,6 +129,9 @@ VALUES (@william, 15, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE())
 -- inactive subscriber (Not deleted)
 INSERT INTO EMPRUNTER (CODE_ABONNÉ, CODE_ALBUM, DATE_EMPRUNT, DATE_RETOUR_ATTENDUE)
 VALUES (@william, 16, DATEADD(YYYY, -3, GETDATE()), DATEADD(YYYY, -2, GETDATE()))
+
+
+
 
 -- Loan display
 SELECT * FROM EMPRUNTER
