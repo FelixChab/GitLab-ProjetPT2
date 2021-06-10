@@ -34,7 +34,8 @@ namespace ProjetPT2K
         public List<EMPRUNTER> GetExtendedLoans()
         {
             List<EMPRUNTER> lateLoans = new List<EMPRUNTER>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
+            foreach (EMPRUNTER theLoan in theLoans)
             {
                 if (theLoan.HasBeenExtended())
                     lateLoans.Add(theLoan);
@@ -49,7 +50,8 @@ namespace ProjetPT2K
         public List<ABONNÉS> GetLateSubscribers()
         {
             List<ABONNÉS> lateSubscribers = new List<ABONNÉS>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
+            List<EMPRUNTER> theLoans = this.Connection.EMPRUNTER.ToList();
+            foreach (EMPRUNTER theLoan in theLoans)
             {
                 if (theLoan.IsLate())
                     lateSubscribers.Add(theLoan.ABONNÉS);
@@ -74,58 +76,13 @@ namespace ProjetPT2K
         public List<ALBUMS> GetUnpopularAlbums()
         {
             List<ALBUMS> unpopularAlbums = new List<ALBUMS>();
-            foreach (ALBUMS theAlbum in this.Connection.ALBUMS)
+            List<ALBUMS> theAlbums = this.Connection.ALBUMS.ToList();
+            foreach (ALBUMS theAlbum in theAlbums)
             {
                 if (!theAlbum.IsPopular())
                     unpopularAlbums.Add(theAlbum);
             }
             return unpopularAlbums;
-        }
-
-        /**
-        * Method to get top 10 albums of the year
-        */
-        public Dictionary<ALBUMS, int> GetBestAlbums()
-        {
-            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM orderby a.EMPRUNTER.Count descending select a).ToList();
-            for (int start = 0; start < list.Count; start++)
-            {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
-            }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value descending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
-        }
-
-        /// <summary>
-        /// Return the 10 most borrowed albums of the year.
-        /// </summary>
-        /// <returns> a dictionnary of Album objects and int </returns>
-        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
-        {
-            Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
-            {
-                if (topAlbums.ContainsKey(theLoan.ALBUMS))
-                    topAlbums[theLoan.ALBUMS]++;
-                else if (theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year)
-                    topAlbums[theLoan.ALBUMS] = 1;
-            }
-            return topAlbums.OrderBy(pair => pair.Value).Take(10)
-                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
     }
 }

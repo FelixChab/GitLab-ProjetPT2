@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -125,20 +124,24 @@ namespace ProjetPT2K
                     PASSWORD_ABONNÉ = password
                 };
 
-                if (countryCode == -1)
+                if (countryCode > 0)
                     theSubscriber.CODE_PAYS = countryCode;
 
                 this.Connection.ABONNÉS.Add(theSubscriber);
                 this.Connection.SaveChanges();
             }
+            else
+            {
+                throw new Exception("Nom d'utilisateur indisponible");
+            }
         }
 
         public List<ALBUMS> GetAllAlbums()
         {
-            var albums = from album in this.Connection.ALBUMS
-                         select album;
+            List<ALBUMS> theAlbums = (from album in this.Connection.ALBUMS
+                         select album).ToList();
 
-            return albums.ToList();
+            return theAlbums;
         }
 
         public List<ALBUMS> GetAlbumsContaining(string pattern)
@@ -157,10 +160,11 @@ namespace ProjetPT2K
         public List<ABONNÉS> GetInactiveSubscribers()
         {
             List<ABONNÉS> inactiveSubscribers = new List<ABONNÉS>();
-            foreach (ABONNÉS subscriber in this.Connection.ABONNÉS)
+            List<ABONNÉS> theSubscribers = this.Connection.ABONNÉS.ToList();
+            foreach (ABONNÉS theSubscriber in theSubscribers)
             {
-                if (!subscriber.IsActive())
-                    inactiveSubscribers.Add(subscriber);
+                if (!theSubscriber.IsActive())
+                    inactiveSubscribers.Add(theSubscriber);
             }
             return inactiveSubscribers;
         }
@@ -207,33 +211,22 @@ namespace ProjetPT2K
             return sorted;
         }
 
-
-        /**
-       * Method to get top 10 albums of the year
-       */
-        public Dictionary<ALBUMS, int> GetBestAlbums()
+        /// <summary>
+        /// Return the 10 most borrowed albums of the year.
+        /// </summary>
+        /// <returns> a dictionnary of Album objects and int </returns>
+        public Dictionary<ALBUMS, int> GetMostBorrowedAlbums()
         {
             Dictionary<ALBUMS, int> topAlbums = new Dictionary<ALBUMS, int>();
-            List<ALBUMS> list = (from a in Connection.ALBUMS join e in Connection.EMPRUNTER on a.CODE_ALBUM equals e.CODE_ALBUM orderby a.EMPRUNTER.Count descending select a).ToList();
-            for (int start = 0; start < list.Count; start++)
+            foreach (EMPRUNTER theLoan in this.Connection.EMPRUNTER)
             {
-                ALBUMS target = list[start];
-                int empruntCount = target.EMPRUNTER.Count;
-                foreach (EMPRUNTER e in target.EMPRUNTER)
-                {
-                    if (e.DATE_EMPRUNT.Year != DateTime.Now.Year)
-                    {
-                        empruntCount--;
-                    }
-
-                }
-                if (empruntCount != 0 && !topAlbums.ContainsKey(target))
-                {
-                    topAlbums.Add(target, empruntCount);
-                }
+                if (topAlbums.ContainsKey(theLoan.ALBUMS))
+                    topAlbums[theLoan.ALBUMS]++;
+                else if (theLoan.DATE_EMPRUNT.Year == DateTime.Now.Year)
+                    topAlbums[theLoan.ALBUMS] = 1;
             }
-            Dictionary<ALBUMS, int> sorted = (from entry in topAlbums orderby entry.Value ascending select entry).ToDictionary(entry => entry.Key, entry => entry.Value);
-            return sorted;
+            return topAlbums.OrderBy(pair => pair.Value).Take(10)
+                .ToDictionary(entry => entry.Key, entry => entry.Value);
         }
     }
 }

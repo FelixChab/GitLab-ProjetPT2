@@ -27,7 +27,7 @@ namespace UnitTestProjetPT2K
             CreateAccount();
             BorrowAlbum();
             ListAlbums();
-            Extends();
+            ExtendLoan();
             getRecommendations();
         }
 

@@ -24,9 +24,7 @@ namespace UnitTestProjetPT2K
         public void OrderedUnitTests()
         {
             RestoreCleanState();
-            checkBestAlbums();
             CreateAccounts();
-           // InsertExtendedLoans();
             GetExtendedLoans();
             GetLateSubscribers();
             GetUnpopularAlbums();
@@ -39,16 +37,15 @@ namespace UnitTestProjetPT2K
         private void CreateAccounts()
         {
             this.Database.CreateAccount("Jean", "Pierre", 1, "jean", "pierre");
-            Account subscriber1 = this.Database.Login("jean", "pierre");
-            this.Database.CreateAccount("Jean", "patrick", 1, "patrick", "patrick");
-            Account subscriber2 = this.Database.Login("patrick", "patrick");
+            this.Database.CreateAccount("Marc", "Antoine", 1, "marc", "antoine");
+
+            // Retrieve the accounts
+            Account subscriber1 = this.Database.Login("jean", "pierre");            
+            Account subscriber2 = this.Database.Login("marc", "antoine");
+            
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
-
-            // Ensure an account with an existing login cannot be created
-            Account subscriber3 = this.Database.Login("jean", "marie");
-            Assert.IsNull(subscriber3);
         }
 
         /// <summary>
@@ -56,6 +53,9 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void GetExtendedLoans()
         {
+            // Ensure there are top 10 yet
+            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
+
             // Ensure there are currently no extended loans in the database
             Assert.AreEqual(0, this._Administrator.GetExtendedLoans().Count);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("jean", "pierre");
@@ -121,7 +121,6 @@ namespace UnitTestProjetPT2K
         {
             // Ensure there are no unpopular album in the database
             Assert.AreEqual(0, this._Administrator.GetUnpopularAlbums().Count);
-
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("marc", "antoine");
 
             ALBUMS theAlbum = this.Database.GetAlbumWithID(3);
@@ -165,19 +164,10 @@ namespace UnitTestProjetPT2K
             Assert.AreEqual(0, this.Database.GetInactiveSubscribers().Count);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void checkBestAlbums()
-        {
-            Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
-        }
-
         /// <summary>
         /// Attempt list the 10 best albums.
         /// </summary>
-        private void getBestAlbums()
+        private void GetBestAlbums()
         {
             ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
@@ -194,8 +184,6 @@ namespace UnitTestProjetPT2K
 
             Assert.AreEqual(0, this._Administrator.GetBestAlbums().Count);
             Dictionary<ALBUMS, int> dict = this._Administrator.GetBestAlbums();
-
-
 
             for (int i = 1; i < dict.Count; i++)
             {

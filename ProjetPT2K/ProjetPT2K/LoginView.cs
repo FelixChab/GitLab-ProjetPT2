@@ -58,7 +58,7 @@ namespace ProjetPT2K
                 }
                 else
                 {
-                    FormAdmin formAdmin = new FormAdmin((Administrator)account);
+                    AdminView formAdmin = new AdminView((Administrator)account);
                     formAdmin.Show();
                 }
                 errorLabel.Text = "Succés ! " + "(" + AccountType + ")";

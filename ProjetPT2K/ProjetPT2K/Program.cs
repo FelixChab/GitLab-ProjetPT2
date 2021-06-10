@@ -19,7 +19,7 @@ namespace ProjetPT2K
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // replace for testing
+
             Application.Run(new Login());
             //Application.Run(new AppView());
         }
