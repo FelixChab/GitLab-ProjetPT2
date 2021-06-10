@@ -76,14 +76,8 @@ namespace ProjetPT2K
         /// <returns></returns>
         public List<ALBUMS> GetUnpopularAlbums()
         {
-            List<ALBUMS> unpopularAlbums = new List<ALBUMS>();
-            List<ALBUMS> theAlbums = this.Connection.ALBUMS.Where(x=>x.EMPRUNTER.Count > 0).ToList();
-            foreach (ALBUMS theAlbum in theAlbums)
-            {
-                if(!theAlbum.IsPopular())
-                    unpopularAlbums.Add(theAlbum);
-            }
-            return unpopularAlbums;
+            List<ALBUMS> theAlbums = this.Connection.ALBUMS.ToList();
+            return theAlbums.FindAll(theAlbum => !theAlbum.IsPopular());
         }
 
         /// <summary>
