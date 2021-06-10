@@ -33,7 +33,7 @@ namespace ProjetPT2K
                 if (theGap.TotalDays <= 365)
                     return true;
             }
-            return this.EMPRUNTER.Count == 0 || false;
+            return false;
         }
 
         /// <summary>
