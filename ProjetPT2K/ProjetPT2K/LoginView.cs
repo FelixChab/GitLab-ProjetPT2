@@ -87,6 +87,7 @@ namespace ProjetPT2K
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
         public Label GetErrorLabel()
         {
             return errorLabel;
