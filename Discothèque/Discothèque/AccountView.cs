@@ -13,12 +13,12 @@ namespace Discotèque
     public partial class AccountView : Form
     {
         private readonly ABONNÉS _Subscriber;
-        
+
         public AccountView(ABONNÉS account)
         {
             InitializeComponent();
             this._Subscriber = account;
-            this.SearchBar.Padding = new System.Windows.Forms.Padding(50);
+
             name.Text = _Subscriber.NOM_ABONNÉ.Trim();
             firstname.Text = _Subscriber.PRÉNOM_ABONNÉ.Trim();
             username.Text = _Subscriber.LOGIN_ABONNÉ.Trim();
@@ -45,7 +45,12 @@ namespace Discotèque
             if (loan != null)
             {
                 loan.Extend();
+                MessageBox.Show("L'emprunt a bien été prolongé");
                 RefreshLoanList();
+            }
+            else// if (loan ==  )
+            {
+                MessageBox.Show("L'emprunt a déjà été prolongé");
             }
         }
 
@@ -60,29 +65,30 @@ namespace Discotèque
         }
 
         private void ExtendAllButton_Click(object sender, EventArgs e)
-        { 
-                foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
+        {
+            bool extended = false;
+            foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
+            {
+                if (!loan.HasBeenExtended())
                 {
-                    if (!loan.HasBeenExtended())
-                        loan.Extend();
+                    loan.Extend();
+                    MessageBox.Show("Tous les emprunts ont bien été prolongés");
+                    extended = true;
                 }
-                RefreshLoanList();
-        }
 
-        private void SearchBar_TextChanged(object sender, EventArgs e)
-        {
-            RefreshAlbumList();
-            SearchResults.Visible = true;
-        }
+            } 
+            if (!extended)
+            {
+                MessageBox.Show("Tous les emprunts ont déjà été prolongés");
+            }
 
 
-        private void RefreshAlbumList()
-        {
-            SearchResults.Items.Clear();
-            string pattern = SearchBar.Text;
-            List<ALBUMS> albums = Database.GetInstance().GetAlbumsContaining(pattern);
-            albums.ForEach(album => SearchResults.Items.Add(album));
+
+
+            RefreshLoanList();
         }
+
+
 
         private void Logo_Click(object sender, EventArgs e)
         {
@@ -99,18 +105,7 @@ namespace Discotèque
             // TODO: faire disparaître la search bar en cliquant à l'extérieur
         }
 
-        private void SearchResults_MouseClick(object sender, MouseEventArgs e)
-        {
-            SearchResults.Visible = false;
-            ALBUMS album = (ALBUMS)SearchResults.SelectedItem;
-            if (album != null)
-            {
-                this.Hide();
-                AlbumView theView = new AlbumView(this._Subscriber);
-                theView.ShowDialog();
-                this.Show();
-            }
-        }
+
 
         // liste les albums dans l'actionListBox (à droite) ??? à vérif
         private void actionListBox_SelectedIndexChanged_1(object sender, EventArgs e)

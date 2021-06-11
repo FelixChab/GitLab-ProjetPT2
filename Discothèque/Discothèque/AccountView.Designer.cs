@@ -44,10 +44,7 @@ namespace Discotèque
             this.country = new System.Windows.Forms.Label();
             this.panelLine3 = new System.Windows.Forms.Panel();
             this.Logo = new System.Windows.Forms.PictureBox();
-            this.SearchResults = new System.Windows.Forms.ListBox();
-            this.SearchBar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,11 +57,11 @@ namespace Discotèque
             this.actionListBox.FormattingEnabled = true;
             this.actionListBox.HorizontalScrollbar = true;
             this.actionListBox.ItemHeight = 15;
-            this.actionListBox.Location = new System.Drawing.Point(318, 92);
-            this.actionListBox.MaximumSize = new System.Drawing.Size(520, 360);
-            this.actionListBox.MinimumSize = new System.Drawing.Size(320, 360);
+            this.actionListBox.Location = new System.Drawing.Point(319, 22);
+            this.actionListBox.MaximumSize = new System.Drawing.Size(520, 450);
+            this.actionListBox.MinimumSize = new System.Drawing.Size(320, 350);
             this.actionListBox.Name = "actionListBox";
-            this.actionListBox.Size = new System.Drawing.Size(473, 347);
+            this.actionListBox.Size = new System.Drawing.Size(473, 392);
             this.actionListBox.TabIndex = 0;
             this.actionListBox.SelectedIndexChanged += new System.EventHandler(this.actionListBox_SelectedIndexChanged_1);
             // 
@@ -215,26 +212,6 @@ namespace Discotèque
             this.Logo.TabStop = false;
             this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
-            // SearchResults
-            // 
-            this.SearchResults.FormattingEnabled = true;
-            this.SearchResults.Location = new System.Drawing.Point(140, 58);
-            this.SearchResults.Name = "SearchResults";
-            this.SearchResults.Size = new System.Drawing.Size(399, 147);
-            this.SearchResults.TabIndex = 26;
-            this.SearchResults.Visible = false;
-            this.SearchResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchResults_MouseClick);
-            this.SearchResults.SelectedValueChanged += new System.EventHandler(this.SearchResults_SelectedIndexChanged);
-            this.SearchResults.Leave += new System.EventHandler(this.SearchResults_Leave);
-            // 
-            // SearchBar
-            // 
-            this.SearchBar.Location = new System.Drawing.Point(140, 39);
-            this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(399, 20);
-            this.SearchBar.TabIndex = 27;
-            this.SearchBar.TextChanged += new System.EventHandler(this.SearchBar_TextChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -246,25 +223,12 @@ namespace Discotèque
             this.label1.TabIndex = 29;
             this.label1.Text = "Informations du Compte:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(141, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Recherche";
-            // 
             // AccountView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(804, 451);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.SearchResults);
-            this.Controls.Add(this.SearchBar);
             this.Controls.Add(this.panelLine3);
             this.Controls.Add(this.country);
             this.Controls.Add(this.username);
@@ -304,9 +268,6 @@ namespace Discotèque
         private System.Windows.Forms.Label username;
         private System.Windows.Forms.Label country;
         private System.Windows.Forms.Panel panelLine3;
-        private System.Windows.Forms.ListBox SearchResults;
-        private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
     }
 }
