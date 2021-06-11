@@ -108,10 +108,8 @@ namespace Discotèque
             AlbumDisplay theDisplay = GetAlbumUnderMouse(e.Location);
             if (theDisplay != null)
             {
-                this.Hide();
                 this._AlbumView.ChangeAlbum(theDisplay.Album);
                 this._AlbumView.ShowDialog();
-                this.Show();
             }
         }
 
@@ -122,10 +120,8 @@ namespace Discotèque
         /// <param name="e"></param>
         private void AccountIcon_Click(object sender, EventArgs e)
         {
-            this.Hide();
             AccountView theView = new AccountView(_Subscriber);
             theView.ShowDialog();
-            this.Show();
         }
 
         private void Logo_Click(object sender, EventArgs e)
@@ -175,6 +171,58 @@ namespace Discotèque
         {
             this._PopularAlbums.NextPage();
             Refresh();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchBar_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSearchResults();
+            SearchResults.Visible = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateSearchResults()
+        {
+            SearchResults.Items.Clear();
+            string pattern = SearchBar.Text;
+            List<ALBUMS> albums = Database.GetInstance().GetAlbumsContaining(pattern);
+            albums.ForEach(album => SearchResults.Items.Add(album));
+        }
+
+        /// <summary>
+        /// Event triggered when an element of the SearchResults list is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchResults_MouseClick(object sender, MouseEventArgs e)
+        {
+            ALBUMS theAlbum = (ALBUMS)SearchResults.SelectedItem;
+            if (theAlbum != null)
+            {
+                this._AlbumView.ChangeAlbum(theAlbum);
+                this._AlbumView.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchBar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            SearchResults.Visible = false;
+            if (e.KeyChar == 13)
+            {
+                UpdateSearchResults();
+                SearchResults.Visible = true;
+            }
         }
     }
 }

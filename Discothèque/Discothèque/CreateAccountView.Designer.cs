@@ -110,7 +110,7 @@ namespace Discotèque
             this.CountryComboBox.Location = new System.Drawing.Point(149, 296);
             this.CountryComboBox.Name = "CountryComboBox";
             this.CountryComboBox.Size = new System.Drawing.Size(192, 21);
-            this.CountryComboBox.TabIndex = 12;
+            this.CountryComboBox.TabIndex = 5;
             // 
             // LastNameLabel
             // 
@@ -118,7 +118,7 @@ namespace Discotèque
             this.LastNameLabel.Location = new System.Drawing.Point(257, 128);
             this.LastNameLabel.Name = "LastNameLabel";
             this.LastNameLabel.Size = new System.Drawing.Size(192, 30);
-            this.LastNameLabel.TabIndex = 11;
+            this.LastNameLabel.TabIndex = 2;
             // 
             // familyNameLabelTitle
             // 
@@ -136,7 +136,7 @@ namespace Discotèque
             this.FistNameLabel.Location = new System.Drawing.Point(46, 128);
             this.FistNameLabel.Name = "FistNameLabel";
             this.FistNameLabel.Size = new System.Drawing.Size(192, 30);
-            this.FistNameLabel.TabIndex = 9;
+            this.FistNameLabel.TabIndex = 1;
             // 
             // nameLabelTitle
             // 
@@ -167,7 +167,7 @@ namespace Discotèque
             this.LoginLabel.Location = new System.Drawing.Point(46, 208);
             this.LoginLabel.Name = "LoginLabel";
             this.LoginLabel.Size = new System.Drawing.Size(192, 30);
-            this.LoginLabel.TabIndex = 6;
+            this.LoginLabel.TabIndex = 3;
             // 
             // PasswordLabel
             // 
@@ -175,7 +175,7 @@ namespace Discotèque
             this.PasswordLabel.Location = new System.Drawing.Point(257, 208);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(191, 30);
-            this.PasswordLabel.TabIndex = 5;
+            this.PasswordLabel.TabIndex = 4;
             this.PasswordLabel.UseSystemPasswordChar = true;
             // 
             // labelPasswordTitle
@@ -200,13 +200,12 @@ namespace Discotèque
             // 
             // SignUpButton
             // 
-            this.SignUpButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.SignUpButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SignUpButton.ForeColor = System.Drawing.Color.Black;
             this.SignUpButton.Location = new System.Drawing.Point(149, 410);
             this.SignUpButton.Name = "SignUpButton";
             this.SignUpButton.Size = new System.Drawing.Size(192, 40);
-            this.SignUpButton.TabIndex = 1;
+            this.SignUpButton.TabIndex = 6;
             this.SignUpButton.Text = "Inscription";
             this.SignUpButton.UseVisualStyleBackColor = true;
             this.SignUpButton.Click += new System.EventHandler(this.SignUpButton_Click);

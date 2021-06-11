@@ -22,7 +22,6 @@ namespace Discotèque
             name.Text = _Subscriber.NOM_ABONNÉ.Trim();
             firstname.Text = _Subscriber.PRÉNOM_ABONNÉ.Trim();
             username.Text = _Subscriber.LOGIN_ABONNÉ.Trim();
-            password.Text = "*******".Trim();
             country.Text = "" + _Subscriber.PAYS;
             ListLoans();
         }
@@ -102,7 +101,6 @@ namespace Discotèque
 
         private void SearchResults_MouseClick(object sender, MouseEventArgs e)
         {
-            /*
             SearchResults.Visible = false;
             ALBUMS album = (ALBUMS)SearchResults.SelectedItem;
             if (album != null)
@@ -112,13 +110,12 @@ namespace Discotèque
                 theView.ShowDialog();
                 this.Show();
             }
-            */
         }
 
         // liste les albums dans l'actionListBox (à droite) ??? à vérif
         private void actionListBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            InitializeAlbumList();
+            //
         }
 
         // Retour au menu compte (donc refresh)
