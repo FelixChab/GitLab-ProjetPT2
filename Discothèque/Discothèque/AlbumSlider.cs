@@ -135,7 +135,10 @@ namespace Discotèque
             if (this.CurrentPageIndex == this.TotalPageNumber)
                 borne = this.AlbumsOnLastPage;
             for (int i = this._SeenAlbums; i < (this._SeenAlbums + borne); i++)
-                this.theDisplays[i].Draw(theScreen);
+            {
+                if (i < theDisplays.Count)
+                    this.theDisplays[i].Draw(theScreen);
+            }
         }
     }
 }
