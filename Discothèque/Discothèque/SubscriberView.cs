@@ -169,5 +169,7 @@ namespace Discotèque
             this._PopularAlbums.NextPage();
             Refresh();
         }
+
+
     }
 }
