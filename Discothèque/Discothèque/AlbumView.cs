@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Discotèque
@@ -15,14 +8,18 @@ namespace Discotèque
     /// </summary>
     public partial class AlbumView : Form
     {
-        private readonly ALBUMS album;
-        private readonly ABONNÉS account;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly ALBUMS _Album;
+
+        private readonly ABONNÉS _Account;
 
         public AlbumView(ALBUMS theAlbum, ABONNÉS theAccount)
         {
             InitializeComponent();
-            this.album = theAlbum;
-            this.account = theAccount;
+            this._Album = theAlbum;
+            this._Account = theAccount;
         }
 
         /**
@@ -31,16 +28,8 @@ namespace Discotèque
         private void PictureBoxAccount_Click(object sender, EventArgs e)
         {
             Close();
-            AccountView main = new AccountView(account);
+            AccountView main = new AccountView(_Account);
             main.Show();
-        }
-
-        /**
-         * Method that let the user use a searchbar to find albums (?).
-         */
-        private void TextBoxSearch_TextChanged(object sender, EventArgs e)
-        {
-            // TODO
         }
 
         /**
@@ -48,7 +37,7 @@ namespace Discotèque
          */
         private void ButtonLoan_Click(object sender, EventArgs e)
         {
-            account.BorrowAlbum(album);
+            _Account.BorrowAlbum(_Album);
         }
 
         /**
@@ -63,22 +52,22 @@ namespace Discotèque
 
         private void AlbumView_Paint(object sender, PaintEventArgs e)
         {
-            LabelTitle.Text = album.TITRE_ALBUM;
-            LabelEditor.Text = "Editeur: " + album.EDITEURS.NOM_EDITEUR;
-            if (album.EDITEURS.PAYS == null)
+            LabelTitle.Text = _Album.TITRE_ALBUM;
+            LabelEditor.Text = "Editeur: " + _Album.EDITEURS.NOM_EDITEUR;
+            if (_Album.EDITEURS.PAYS == null)
             {
                 LabelEditorCountry.Text = "null";
             }
             else
             {
-                LabelEditorCountry.Text = "Pays: " + album.EDITEURS.PAYS.NOM_PAYS;
+                LabelEditorCountry.Text = "Pays: " + _Album.EDITEURS.PAYS.NOM_PAYS;
             }
-            LabelYear.Text = album.ANNÉE_ALBUM.ToString();
-            LabelGenre.Text = album.GENRES.LIBELLÉ_GENRE;
-            LabelAlley.Text = "Allée: " + album.ALLÉE_ALBUM;
-            LabelLocker.Text = "Casier: " + album.CASIER_ALBUM.ToString();
-            LabelPrice.Text = album.PRIX_ALBUM.ToString() + "€";
-            AlbumDisplay displayalbum = new AlbumDisplay(album, PictureBoxCover.Location);
+            LabelYear.Text = _Album.ANNÉE_ALBUM.ToString();
+            LabelGenre.Text = _Album.GENRES.LIBELLÉ_GENRE;
+            LabelAlley.Text = "Allée: " + _Album.ALLÉE_ALBUM;
+            LabelLocker.Text = "Casier: " + _Album.CASIER_ALBUM.ToString();
+            LabelPrice.Text = _Album.PRIX_ALBUM.ToString() + "€";
+            AlbumDisplay displayalbum = new AlbumDisplay(_Album, PictureBoxCover.Location);
             //PictureBoxCover.Image = displayalbum.GetAlbumCover();
         }
     }

@@ -33,9 +33,6 @@ namespace Discotèque
             this.LabelLine1 = new System.Windows.Forms.Label();
             this.PictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.LabelLine2 = new System.Windows.Forms.Label();
-            this.TextBoxSearch = new System.Windows.Forms.TextBox();
-            this.LabelSearchText = new System.Windows.Forms.Label();
-            this.PictureBoxSearch = new System.Windows.Forms.PictureBox();
             this.PictureBoxAccount = new System.Windows.Forms.PictureBox();
             this.LabelLocationBackground = new System.Windows.Forms.Label();
             this.PictureBoxCover = new System.Windows.Forms.PictureBox();
@@ -48,9 +45,8 @@ namespace Discotèque
             this.LabelEditor = new System.Windows.Forms.Label();
             this.LabelEditorCountry = new System.Windows.Forms.Label();
             this.LabelPrice = new System.Windows.Forms.Label();
-            this.ButtonLoan = new System.Windows.Forms.Button();
+            this.ActionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCover)).BeginInit();
             this.SuspendLayout();
@@ -81,34 +77,6 @@ namespace Discotèque
             this.LabelLine2.Name = "LabelLine2";
             this.LabelLine2.Size = new System.Drawing.Size(957, 5);
             this.LabelLine2.TabIndex = 2;
-            // 
-            // TextBoxSearch
-            // 
-            this.TextBoxSearch.Location = new System.Drawing.Point(375, 40);
-            this.TextBoxSearch.Name = "TextBoxSearch";
-            this.TextBoxSearch.Size = new System.Drawing.Size(500, 20);
-            this.TextBoxSearch.TabIndex = 3;
-            this.TextBoxSearch.TextChanged += new System.EventHandler(this.TextBoxSearch_TextChanged);
-            // 
-            // LabelSearchText
-            // 
-            this.LabelSearchText.AutoSize = true;
-            this.LabelSearchText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
-            this.LabelSearchText.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelSearchText.Location = new System.Drawing.Point(231, 36);
-            this.LabelSearchText.Name = "LabelSearchText";
-            this.LabelSearchText.Size = new System.Drawing.Size(141, 27);
-            this.LabelSearchText.TabIndex = 4;
-            this.LabelSearchText.Text = "Rechercher...";
-            // 
-            // PictureBoxSearch
-            // 
-            this.PictureBoxSearch.Location = new System.Drawing.Point(875, 25);
-            this.PictureBoxSearch.Name = "PictureBoxSearch";
-            this.PictureBoxSearch.Size = new System.Drawing.Size(59, 50);
-            this.PictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBoxSearch.TabIndex = 5;
-            this.PictureBoxSearch.TabStop = false;
             // 
             // PictureBoxAccount
             // 
@@ -205,7 +173,7 @@ namespace Discotèque
             // 
             this.LabelEditor.AutoSize = true;
             this.LabelEditor.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelEditor.Location = new System.Drawing.Point(966, 387);
+            this.LabelEditor.Location = new System.Drawing.Point(926, 387);
             this.LabelEditor.Name = "LabelEditor";
             this.LabelEditor.Size = new System.Drawing.Size(87, 30);
             this.LabelEditor.TabIndex = 15;
@@ -215,7 +183,7 @@ namespace Discotèque
             // 
             this.LabelEditorCountry.AutoSize = true;
             this.LabelEditorCountry.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelEditorCountry.Location = new System.Drawing.Point(966, 423);
+            this.LabelEditorCountry.Location = new System.Drawing.Point(926, 423);
             this.LabelEditorCountry.Name = "LabelEditorCountry";
             this.LabelEditorCountry.Size = new System.Drawing.Size(58, 29);
             this.LabelEditorCountry.TabIndex = 16;
@@ -225,22 +193,24 @@ namespace Discotèque
             // 
             this.LabelPrice.AutoSize = true;
             this.LabelPrice.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPrice.Location = new System.Drawing.Point(987, 578);
+            this.LabelPrice.Location = new System.Drawing.Point(981, 577);
             this.LabelPrice.Name = "LabelPrice";
             this.LabelPrice.Size = new System.Drawing.Size(61, 35);
             this.LabelPrice.TabIndex = 17;
             this.LabelPrice.Text = "Prix";
             // 
-            // ButtonLoan
+            // ActionButton
             // 
-            this.ButtonLoan.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonLoan.Location = new System.Drawing.Point(957, 510);
-            this.ButtonLoan.Name = "ButtonLoan";
-            this.ButtonLoan.Size = new System.Drawing.Size(125, 64);
-            this.ButtonLoan.TabIndex = 18;
-            this.ButtonLoan.Text = "EMPRUNTER";
-            this.ButtonLoan.UseVisualStyleBackColor = true;
-            this.ButtonLoan.Click += new System.EventHandler(this.ButtonLoan_Click);
+            this.ActionButton.Enabled = false;
+            this.ActionButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActionButton.Location = new System.Drawing.Point(957, 510);
+            this.ActionButton.Name = "ActionButton";
+            this.ActionButton.Size = new System.Drawing.Size(125, 64);
+            this.ActionButton.TabIndex = 18;
+            this.ActionButton.Text = "EMPRUNTER";
+            this.ActionButton.UseVisualStyleBackColor = true;
+            this.ActionButton.Visible = false;
+            this.ActionButton.Click += new System.EventHandler(this.ButtonLoan_Click);
             // 
             // AlbumView
             // 
@@ -248,7 +218,7 @@ namespace Discotèque
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(1185, 662);
-            this.Controls.Add(this.ButtonLoan);
+            this.Controls.Add(this.ActionButton);
             this.Controls.Add(this.LabelPrice);
             this.Controls.Add(this.LabelEditorCountry);
             this.Controls.Add(this.LabelEditor);
@@ -261,9 +231,6 @@ namespace Discotèque
             this.Controls.Add(this.PictureBoxCover);
             this.Controls.Add(this.LabelLocationBackground);
             this.Controls.Add(this.PictureBoxAccount);
-            this.Controls.Add(this.PictureBoxSearch);
-            this.Controls.Add(this.LabelSearchText);
-            this.Controls.Add(this.TextBoxSearch);
             this.Controls.Add(this.LabelLine2);
             this.Controls.Add(this.PictureBoxLogo);
             this.Controls.Add(this.LabelLine1);
@@ -273,7 +240,6 @@ namespace Discotèque
             this.Text = "AlbumView";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumView_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCover)).EndInit();
             this.ResumeLayout(false);
@@ -286,9 +252,6 @@ namespace Discotèque
         private System.Windows.Forms.Label LabelLine1;
         private System.Windows.Forms.PictureBox PictureBoxLogo;
         private System.Windows.Forms.Label LabelLine2;
-        private System.Windows.Forms.TextBox TextBoxSearch;
-        private System.Windows.Forms.Label LabelSearchText;
-        private System.Windows.Forms.PictureBox PictureBoxSearch;
         private System.Windows.Forms.PictureBox PictureBoxAccount;
         private System.Windows.Forms.Label LabelLocationBackground;
         private System.Windows.Forms.PictureBox PictureBoxCover;
@@ -301,6 +264,6 @@ namespace Discotèque
         private System.Windows.Forms.Label LabelEditor;
         private System.Windows.Forms.Label LabelEditorCountry;
         private System.Windows.Forms.Label LabelPrice;
-        private System.Windows.Forms.Button ButtonLoan;
+        private System.Windows.Forms.Button ActionButton;
     }
 }
