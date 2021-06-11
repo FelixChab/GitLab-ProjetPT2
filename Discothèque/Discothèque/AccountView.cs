@@ -13,7 +13,7 @@ namespace Discotèque
     public partial class AccountView : Form
     {
         private readonly ABONNÉS _Subscriber;
-        
+
         public AccountView(ABONNÉS account)
         {
             InitializeComponent();
@@ -42,10 +42,15 @@ namespace Discotèque
         private void extendLoanButton_Click(object sender, EventArgs e)
         {
             EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
-            if (loan != null)
+            if (!loan.HasBeenExtended())
             {
                 loan.Extend();
+                MessageBox.Show("L'emprunt a bien été prolongé");
                 RefreshLoanList();
+            }
+            else
+            {
+                MessageBox.Show("L'emprunt a déjà été prolongé");
             }
         }
 
@@ -56,17 +61,28 @@ namespace Discotèque
             foreach (EMPRUNTER loan in loans)
             {
                 this.actionListBox.Items.Add(loan);
+
             }
         }
 
         private void ExtendAllButton_Click(object sender, EventArgs e)
-        { 
-                foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
+        {
+            bool extended = false;
+            foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
+            {
+                if (!loan.HasBeenExtended())
                 {
-                    if (!loan.HasBeenExtended())
-                        loan.Extend();
+                    MessageBox.Show("Tous les emprunts ont bien été prolongés");
+                    loan.Extend();
+                    extended = true;
+                    RefreshLoanList();
                 }
-                RefreshLoanList();
+            }
+            if (!extended)
+            {
+                MessageBox.Show("Tous les emprunts ont déjà été prolongés");
+            }
+
         }
 
         private void SearchBar_TextChanged(object sender, EventArgs e)
