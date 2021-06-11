@@ -22,7 +22,7 @@ namespace Discotèque
 
         public static readonly Size Size = new Size(100, 100);
 
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriberView));
+        //System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriberView));
 
         /// <summary>
         /// Constructor
@@ -33,8 +33,8 @@ namespace Discotèque
         {
             this._Album = theAlbum;
             this._Position = thePosition;
-            /*
-            if (this._Album != null)
+
+            /*if (this._Album != null)
             {
                 if (this._Album.POCHETTE != null)
                 {
@@ -58,8 +58,19 @@ namespace Discotèque
         /// <param name="theScreen">The graphics</param>
         public void Draw(Graphics theScreen)
         {
-            theScreen.DrawImage(this._AlbumCover, this._Position.X, this._Position.Y,
-                        Size.Width, Size.Height);
+            //if (this._Album.POCHETTE.Length > 5)
+            //{
+                theScreen.DrawImage(this._AlbumCover, this._Position.X, this._Position.Y,
+                            Size.Width, Size.Height);
+                //theScreen.DrawString("Pochette \ndisponible", new Font("Comic Sans MS", 7), new SolidBrush(Color.Red), _Position);
+            /*}
+            else
+            {
+                Rectangle rectangle = new Rectangle(_Position, Size);
+                theScreen.FillRectangle(new SolidBrush(Color.White), rectangle);
+                theScreen.DrawString("Pochette \nindisponible", new Font("Comic Sans MS", 7), new SolidBrush(Color.Red), _Position);
+            }*/
+
             /*
             if (GetAlbumCover() != null)
             {
@@ -94,11 +105,13 @@ namespace Discotèque
         /// </summary>
         private Image _AlbumCover
         {
+
             get
             {
-                MemoryStream theStream = new MemoryStream(this._Album.POCHETTE);
-                return new Bitmap(theStream);
+                return (_Album.POCHETTE!=null && _Album.POCHETTE.Length>0) ? new Bitmap(new MemoryStream(this._Album.POCHETTE)) :  ProjetPT2K.Properties.Resources.defaultPicture;
+      
             }
+
         }
 
         /// <summary>

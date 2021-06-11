@@ -152,7 +152,7 @@ namespace Discotèque
             // pageLabel
             // 
             this.pageLabel.AutoSize = true;
-            this.pageLabel.Location = new System.Drawing.Point(62, 2);
+            this.pageLabel.Location = new System.Drawing.Point(75, 1);
             this.pageLabel.Name = "pageLabel";
             this.pageLabel.Size = new System.Drawing.Size(33, 23);
             this.pageLabel.TabIndex = 10;
@@ -164,15 +164,15 @@ namespace Discotèque
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.pageLabel);
             this.panel1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(850, 562);
+            this.panel1.Location = new System.Drawing.Point(828, 562);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(155, 27);
+            this.panel1.Size = new System.Drawing.Size(187, 27);
             this.panel1.TabIndex = 11;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(111, 5);
+            this.pictureBox2.Location = new System.Drawing.Point(140, 5);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(41, 19);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -183,7 +183,7 @@ namespace Discotèque
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(41, 19);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
