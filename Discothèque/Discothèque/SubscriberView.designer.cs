@@ -72,6 +72,7 @@ namespace Discotèque
             this.RecommandationsTag.Size = new System.Drawing.Size(10, 13);
             this.RecommandationsTag.TabIndex = 13;
             this.RecommandationsTag.Text = " ";
+
             // 
             // PopularAlbumsTag
             // 

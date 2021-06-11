@@ -12,21 +12,19 @@ namespace Discotèque
 {
     public partial class AccountView : Form
     {
-        private readonly ABONNÉS Account;
-        ABONNÉS Subscriber;
+        private readonly ABONNÉS _Subscriber;
         
         public AccountView(ABONNÉS account)
         {
             InitializeComponent();
-            this.Subscriber = account;
-            this.listeAlbum.Padding = new System.Windows.Forms.Padding(50);
-            name.Text = Subscriber.NOM_ABONNÉ.Trim();
-            firstname.Text = Subscriber.PRÉNOM_ABONNÉ.Trim();
-            username.Text = Subscriber.LOGIN_ABONNÉ.Trim();
+            this._Subscriber = account;
+            this.SearchBar.Padding = new System.Windows.Forms.Padding(50);
+            name.Text = _Subscriber.NOM_ABONNÉ.Trim();
+            firstname.Text = _Subscriber.PRÉNOM_ABONNÉ.Trim();
+            username.Text = _Subscriber.LOGIN_ABONNÉ.Trim();
             password.Text = "*******".Trim();
-            country.Text = "" + Subscriber.PAYS;
+            country.Text = "" + _Subscriber.PAYS;
             ListLoans();
-            this.Account = account;
         }
 
         private void InitializeAlbumList()
@@ -42,7 +40,7 @@ namespace Discotèque
             extendAllButton.Visible = extendAllButton.Enabled = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void extendLoanButton_Click(object sender, EventArgs e)
         {
             EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
             if (loan != null)
@@ -55,7 +53,7 @@ namespace Discotèque
         private void RefreshLoanList()
         {
             this.actionListBox.Items.Clear();
-            var loans = this.Subscriber.EMPRUNTER;
+            var loans = this._Subscriber.EMPRUNTER;
             foreach (EMPRUNTER loan in loans)
             {
                 this.actionListBox.Items.Add(loan);
@@ -64,7 +62,7 @@ namespace Discotèque
 
         private void ExtendAllButton_Click(object sender, EventArgs e)
         { 
-                foreach (EMPRUNTER loan in this.Subscriber.EMPRUNTER)
+                foreach (EMPRUNTER loan in this._Subscriber.EMPRUNTER)
                 {
                     if (!loan.HasBeenExtended())
                         loan.Extend();
@@ -72,18 +70,19 @@ namespace Discotèque
                 RefreshLoanList();
         }
 
-        private void listeAlbum_TextChanged(object sender, EventArgs e)
+        private void SearchBar_TextChanged(object sender, EventArgs e)
         {
             RefreshAlbumList();
+            SearchResults.Visible = true;
         }
 
 
         private void RefreshAlbumList()
         {
-            listeAlbum.Items.Clear();
-            string pattern = listeAlbum.Text;
+            SearchResults.Items.Clear();
+            string pattern = SearchBar.Text;
             List<ALBUMS> albums = Database.GetInstance().GetAlbumsContaining(pattern);
-            albums.ForEach(album => listeAlbum.Items.Add(album));
+            albums.ForEach(album => SearchResults.Items.Add(album));
         }
 
         private void Logo_Click(object sender, EventArgs e)
@@ -91,7 +90,37 @@ namespace Discotèque
             Close();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void SearchResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO (?)
+        }
+
+        private void SearchResults_Leave(object sender, EventArgs e)
+        {
+            // TODO: faire disparaître la search bar en cliquant à l'extérieur
+        }
+
+        private void SearchResults_MouseClick(object sender, MouseEventArgs e)
+        {
+            SearchResults.Visible = false;
+            ALBUMS album = (ALBUMS)SearchResults.SelectedItem;
+            if (album != null)
+            {
+                this.Hide();
+                AlbumView theView = new AlbumView(album, this._Subscriber);
+                theView.ShowDialog();
+                this.Show();
+            }
+        }
+
+        // liste les albums dans l'actionListBox (à droite) ??? à vérif
+        private void actionListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            InitializeAlbumList();
+        }
+
+        // Retour au menu compte (donc refresh)
+        private void pictureBoxAccount_Click(object sender, EventArgs e)
         {
             Refresh();
         }
