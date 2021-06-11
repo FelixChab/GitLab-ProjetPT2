@@ -27,6 +27,19 @@ namespace Discotèque
             InitializeComponent();
             this._CreateAccountView = new CreateAccountView(this._Database);
         }
+        /// <summary>
+        /// Event triggered when key down on password label
+        /// </summary>
+        /// <param name="sender"> the concerned object </param>
+        /// <param name="e"> the event </param>
+        private void PasswordLabel_KeyDown(object sender, KeyEventArgs e)
+        {
+           if((char)e.KeyCode == 13)
+            {
+                ConnectionButton_Click(null, null);
+            }
+        }
+
 
         /// <summary>
         /// Event triggered when creating a new account.
