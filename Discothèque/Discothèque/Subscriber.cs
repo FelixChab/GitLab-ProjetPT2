@@ -49,7 +49,7 @@ namespace Discotèque
         /// </summary>
         /// <param name="theAlbum"> the considered album </param>
         /// <returns></returns>
-        private EMPRUNTER GetLoanOfAlbum(ALBUMS theAlbum)
+        public EMPRUNTER GetLoanOfAlbum(ALBUMS theAlbum)
         {
             foreach (EMPRUNTER theLoan in this.EMPRUNTER)
             {

@@ -40,7 +40,8 @@ namespace Discotèque
         /// <param name="theScreen"> the screen </param>
         public void Draw(Graphics theScreen)
         {
-            theScreen.DrawImage(this.AlbumCover, this._Position.X, this._Position.Y,
+            Image theCover = this.Album.DisplayableAlbumCover;
+            theScreen.DrawImage(theCover, this._Position.X, this._Position.Y,
                         Size.Width, Size.Height);
         }
 
