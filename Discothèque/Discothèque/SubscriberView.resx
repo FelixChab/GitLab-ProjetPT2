@@ -1676,7 +1676,7 @@
         tZvRbOCmAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="PreviousRecommandedAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PreviousRecommandation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAX8AAAF/CAYAAAChRMlnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
         IwAALiMBeKU/dgAAX0tJREFUeF7t3Qe87WtV3vude2PuNfGKJRrRGBVBpamIHanSm9gjvZdDFxsoKCi9
@@ -2089,7 +2089,7 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="PreviousBestAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PreviousPopularAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAX8AAAF/CAYAAAChRMlnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
         IwAALiMBeKU/dgAAX0tJREFUeF7t3Qe87WtV3vude2PuNfGKJRrRGBVBpamIHanSm9gjvZdDFxsoKCi9
@@ -2502,7 +2502,7 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="NextRecommandedAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="NextRecommandation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAX8AAAF/CAYAAAChRMlnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
         IwAALiMBeKU/dgAAXuJJREFUeF7t3Qfc7W1V3vmTmTEzJo5YohGNURFUmorYkSq9iT3Se69iAwUFpfdm
@@ -2913,7 +2913,7 @@
         zJn/HxCl7dCORco/AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="NextBestAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="NextPopularAlbums.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAX8AAAF/CAYAAAChRMlnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
         IwAALiMBeKU/dgAAXuJJREFUeF7t3Qfc7W1V3vmTmTEzJo5YohGNURFUmorYkSq9iT3Se69iAwUFpfdm

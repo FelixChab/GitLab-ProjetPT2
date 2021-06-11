@@ -4,90 +4,133 @@ using System.Collections.Generic;
 namespace Discotèque
 {
     /// <summary>
-    /// 
+    /// Class representing a slider of albums.
     /// </summary>
     class AlbumSlider
     {
         /// <summary>
-        /// 
+        /// The total number of pages of the slider.
         /// </summary>
-        public int PageIndex = 1;
+        public int PageNumber = 1;
 
         /// <summary>
-        /// 
+        /// The number of albums displayed so far.
         /// </summary>
-        private int PageNumber = 1;
+        private int _SeenAlbums = 0;
 
-        private int SeenAlbums = 0;
-
-        private int LastPage;
-
-        private readonly Size _Size;
-
+        /// <summary>
+        /// The position of the slider on the screen.
+        /// </summary>
         private readonly Point _Position;
 
-        private static readonly int Margin = 20;
+        /// <summary>
+        /// The number of albums to display per pages of the slider.
+        /// </summary>
+        private readonly int AlbumsPerPages;
 
+        /// <summary>
+        /// the number of albums to display on the last page.
+        /// </summary>
+        private readonly int AlbumsOnLastPage;
+
+        /// <summary>
+        /// The margin between each slider element.
+        /// </summary>
+        public static readonly int Margin = 20;
+
+        /// <summary>
+        /// The list of DisplayAlbum to display on the slider.
+        /// </summary>
         private readonly List<AlbumDisplay> theDisplays;
 
         /// <summary>
-        /// 
+        /// Parametorised constructor creating a new AlbumSlider object.
         /// </summary>
-        /// <param name="theSize"></param>
-        /// <param name="thePosition"></param>
-        /// <param name="theAlbums"></param>
-        public AlbumSlider(Size theSize, Point thePosition, List<ALBUMS> theAlbums)
+        /// <param name="theAlbums"> the albums to display </param>
+        /// <param name="theAlbumsPerPages"> the number of albums to display per slider page </param>
+        /// <param name="thePosition"> the position of the slider </param>
+        public AlbumSlider(List<ALBUMS> theAlbums, int theAlbumsPerPages, Point thePosition)
         {
-            this._Size = theSize;
             this._Position = thePosition;
-            this.LastPage = theAlbums.Count % 5;
-            this.PageNumber += (LastPage > 0) ? 1 : 0; 
+            this.AlbumsOnLastPage = theAlbums.Count % 5;
+            this.AlbumsPerPages = theAlbumsPerPages;
+            this.PageNumber += (AlbumsOnLastPage > 0) ? 1 : 0;
+            this.theDisplays = new List<AlbumDisplay>();
 
             InitializeSlider(theAlbums);
         }
 
         /// <summary>
-        /// 
+        /// The index of the current page.
         /// </summary>
-        /// <param name="theAlbums"></param>
-        private void InitializeSlider(List<ALBUMS> theAlbums)
+        public int CurrentPageIndex
         {
-            Point thePoint = new Point(this._Position.X, this._Position.Y);
-            foreach (ALBUMS theAlbum in theAlbums)
+            get
             {
-                //AlbumDisplay theDisplay = new AlbumDisplay(theAlbum, thePoint);
-                //this.theDisplays.Add(theDisplay);
-                thePoint.X += Margin;
+                return (this._SeenAlbums / this.AlbumsPerPages) + 1;
             }
         }
 
         /// <summary>
-        /// 
+        /// Populate the slider by giving each element a position on screen.
+        /// </summary>
+        /// <param name="theAlbums"> the list of albums </param>
+        private void InitializeSlider(List<ALBUMS> theAlbums)
+        {
+            int i = 0;
+            AlbumDisplay theDisplay;
+            Point thePoint = new Point(this._Position.X, this._Position.Y);
+            foreach (ALBUMS theAlbum in theAlbums)
+            {
+                theDisplay = new AlbumDisplay(theAlbum, thePoint);
+                thePoint.X += AlbumDisplay.Size.Width + Margin;
+                this.theDisplays.Add(theDisplay);
+
+                i++;
+                if (i == this.AlbumsPerPages)
+                    thePoint.X = this._Position.X;
+            }
+        }
+
+        /// <summary>
+        /// Navigate to the next slider page.
         /// </summary>
         public void NextPage()
         {
-            if (this.PageIndex < this.PageNumber)
-                this.PageIndex++;
+            if (this.CurrentPageIndex < this.PageNumber)
+                this._SeenAlbums += this.AlbumsPerPages;
         }
 
         /// <summary>
-        /// 
+        /// Navigate to the previous slider page.
         /// </summary>
         public void PreviousPage()
         {
-            if (this.PageIndex > 0)
-                this.PageIndex--;
+            if (this.CurrentPageIndex > 1)
+                this._SeenAlbums -= this.AlbumsPerPages;
         }
 
         /// <summary>
-        /// 
+        /// Return the AlbumDisplay found at the given position.
         /// </summary>
-        /// <param name="theScreen"></param>
-        public void Draw(Graphics theScreen)
+        /// <param name="theMouse"> the considered position </param>
+        /// <returns> an AlbumDisplay object </returns>
+        public AlbumDisplay GetAlbumUnderMouse(Point theMouse)
         {
-            for (int i = this.SeenAlbums; i < this.theDisplays.Count; i++)
-                this.theDisplays[i].Draw(theScreen);
+            return this.theDisplays.Find(theDisplay => theDisplay.Contains(theMouse));
         }
 
+        /// <summary>
+        /// Draw the slider on the screen.
+        /// </summary>
+        /// <param name="theScreen"> the screen to draw on </param>
+        public void Draw(Graphics theScreen)
+        {
+            int borne = this.AlbumsPerPages;
+            if (this.CurrentPageIndex == this.PageNumber)
+                borne = this.AlbumsOnLastPage;
+            for (int i = this._SeenAlbums; i < (this._SeenAlbums + borne); i++)
+                this.theDisplays[i].Draw(theScreen);
+        }
     }
 }

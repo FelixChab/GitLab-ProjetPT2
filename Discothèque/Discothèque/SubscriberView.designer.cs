@@ -31,26 +31,26 @@ namespace Discotèque
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SubscriberView));
             this.recommandationsLabel = new System.Windows.Forms.Label();
-            this.tagRecommandations = new System.Windows.Forms.Label();
-            this.tagBestAlbums = new System.Windows.Forms.Label();
+            this.RecommandationsTag = new System.Windows.Forms.Label();
+            this.PopularAlbumsTag = new System.Windows.Forms.Label();
             this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.AccountIcon = new System.Windows.Forms.PictureBox();
             this.listeAlbum = new System.Windows.Forms.ComboBox();
-            this.PreviousRecommandedAlbums = new System.Windows.Forms.PictureBox();
-            this.PreviousBestAlbums = new System.Windows.Forms.PictureBox();
-            this.NextRecommandedAlbums = new System.Windows.Forms.PictureBox();
-            this.NextBestAlbums = new System.Windows.Forms.PictureBox();
+            this.PreviousRecommandation = new System.Windows.Forms.PictureBox();
+            this.PreviousPopularAlbums = new System.Windows.Forms.PictureBox();
+            this.NextRecommandation = new System.Windows.Forms.PictureBox();
+            this.NextPopularAlbums = new System.Windows.Forms.PictureBox();
             this.RecommandedPageLabel = new System.Windows.Forms.Label();
             this.BestPageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PreviousRecommandedAlbums)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PreviousBestAlbums)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NextRecommandedAlbums)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NextBestAlbums)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviousRecommandation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviousPopularAlbums)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextRecommandation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextPopularAlbums)).BeginInit();
             this.SuspendLayout();
             // 
             // recommandationsLabel
@@ -63,25 +63,25 @@ namespace Discotèque
             this.recommandationsLabel.TabIndex = 9;
             this.recommandationsLabel.Text = "Recommandations";
             // 
-            // tagRecommandations
+            // RecommandationsTag
             // 
-            this.tagRecommandations.AutoSize = true;
-            this.tagRecommandations.BackColor = System.Drawing.Color.Transparent;
-            this.tagRecommandations.Location = new System.Drawing.Point(244, 162);
-            this.tagRecommandations.Name = "tagRecommandations";
-            this.tagRecommandations.Size = new System.Drawing.Size(10, 13);
-            this.tagRecommandations.TabIndex = 13;
-            this.tagRecommandations.Text = " ";
+            this.RecommandationsTag.AutoSize = true;
+            this.RecommandationsTag.BackColor = System.Drawing.Color.Transparent;
+            this.RecommandationsTag.Location = new System.Drawing.Point(244, 162);
+            this.RecommandationsTag.Name = "RecommandationsTag";
+            this.RecommandationsTag.Size = new System.Drawing.Size(10, 13);
+            this.RecommandationsTag.TabIndex = 13;
+            this.RecommandationsTag.Text = " ";
             // 
-            // tagBestAlbums
+            // PopularAlbumsTag
             // 
-            this.tagBestAlbums.AutoSize = true;
-            this.tagBestAlbums.BackColor = System.Drawing.Color.Transparent;
-            this.tagBestAlbums.Location = new System.Drawing.Point(244, 323);
-            this.tagBestAlbums.Name = "tagBestAlbums";
-            this.tagBestAlbums.Size = new System.Drawing.Size(10, 13);
-            this.tagBestAlbums.TabIndex = 14;
-            this.tagBestAlbums.Text = " ";
+            this.PopularAlbumsTag.AutoSize = true;
+            this.PopularAlbumsTag.BackColor = System.Drawing.Color.Transparent;
+            this.PopularAlbumsTag.Location = new System.Drawing.Point(244, 323);
+            this.PopularAlbumsTag.Name = "PopularAlbumsTag";
+            this.PopularAlbumsTag.Size = new System.Drawing.Size(10, 13);
+            this.PopularAlbumsTag.TabIndex = 14;
+            this.PopularAlbumsTag.Text = " ";
             // 
             // mostBorrowedAlbumsLabel
             // 
@@ -152,49 +152,49 @@ namespace Discotèque
             this.listeAlbum.TabIndex = 26;
             this.listeAlbum.Text = "Rechercher";
             // 
-            // PreviousRecommandedAlbums
+            // PreviousRecommandation
             // 
-            this.PreviousRecommandedAlbums.Image = ((System.Drawing.Image)(resources.GetObject("PreviousRecommandedAlbums.Image")));
-            this.PreviousRecommandedAlbums.Location = new System.Drawing.Point(168, 191);
-            this.PreviousRecommandedAlbums.Name = "PreviousRecommandedAlbums";
-            this.PreviousRecommandedAlbums.Size = new System.Drawing.Size(41, 19);
-            this.PreviousRecommandedAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PreviousRecommandedAlbums.TabIndex = 27;
-            this.PreviousRecommandedAlbums.TabStop = false;
-            this.PreviousRecommandedAlbums.Click += new System.EventHandler(this.PreviousRecommandedAlbums_Click);
+            this.PreviousRecommandation.Image = ((System.Drawing.Image)(resources.GetObject("PreviousRecommandation.Image")));
+            this.PreviousRecommandation.Location = new System.Drawing.Point(168, 191);
+            this.PreviousRecommandation.Name = "PreviousRecommandation";
+            this.PreviousRecommandation.Size = new System.Drawing.Size(41, 19);
+            this.PreviousRecommandation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviousRecommandation.TabIndex = 27;
+            this.PreviousRecommandation.TabStop = false;
+            this.PreviousRecommandation.Click += new System.EventHandler(this.PreviousRecommandation_Click);
             // 
-            // PreviousBestAlbums
+            // PreviousPopularAlbums
             // 
-            this.PreviousBestAlbums.Image = ((System.Drawing.Image)(resources.GetObject("PreviousBestAlbums.Image")));
-            this.PreviousBestAlbums.Location = new System.Drawing.Point(168, 362);
-            this.PreviousBestAlbums.Name = "PreviousBestAlbums";
-            this.PreviousBestAlbums.Size = new System.Drawing.Size(41, 19);
-            this.PreviousBestAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PreviousBestAlbums.TabIndex = 28;
-            this.PreviousBestAlbums.TabStop = false;
-            this.PreviousBestAlbums.Click += new System.EventHandler(this.PreviousBestAlbums_Click);
+            this.PreviousPopularAlbums.Image = ((System.Drawing.Image)(resources.GetObject("PreviousPopularAlbums.Image")));
+            this.PreviousPopularAlbums.Location = new System.Drawing.Point(168, 362);
+            this.PreviousPopularAlbums.Name = "PreviousPopularAlbums";
+            this.PreviousPopularAlbums.Size = new System.Drawing.Size(41, 19);
+            this.PreviousPopularAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviousPopularAlbums.TabIndex = 28;
+            this.PreviousPopularAlbums.TabStop = false;
+            this.PreviousPopularAlbums.Click += new System.EventHandler(this.PreviousPopularAlbums_Click);
             // 
-            // NextRecommandedAlbums
+            // NextRecommandation
             // 
-            this.NextRecommandedAlbums.Image = ((System.Drawing.Image)(resources.GetObject("NextRecommandedAlbums.Image")));
-            this.NextRecommandedAlbums.Location = new System.Drawing.Point(845, 191);
-            this.NextRecommandedAlbums.Name = "NextRecommandedAlbums";
-            this.NextRecommandedAlbums.Size = new System.Drawing.Size(41, 19);
-            this.NextRecommandedAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.NextRecommandedAlbums.TabIndex = 29;
-            this.NextRecommandedAlbums.TabStop = false;
-            this.NextRecommandedAlbums.Click += new System.EventHandler(this.NextRecommandedAlbums_Click);
+            this.NextRecommandation.Image = ((System.Drawing.Image)(resources.GetObject("NextRecommandation.Image")));
+            this.NextRecommandation.Location = new System.Drawing.Point(845, 191);
+            this.NextRecommandation.Name = "NextRecommandation";
+            this.NextRecommandation.Size = new System.Drawing.Size(41, 19);
+            this.NextRecommandation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.NextRecommandation.TabIndex = 29;
+            this.NextRecommandation.TabStop = false;
+            this.NextRecommandation.Click += new System.EventHandler(this.NextRecommandation_Click);
             // 
-            // NextBestAlbums
+            // NextPopularAlbums
             // 
-            this.NextBestAlbums.Image = ((System.Drawing.Image)(resources.GetObject("NextBestAlbums.Image")));
-            this.NextBestAlbums.Location = new System.Drawing.Point(845, 362);
-            this.NextBestAlbums.Name = "NextBestAlbums";
-            this.NextBestAlbums.Size = new System.Drawing.Size(41, 19);
-            this.NextBestAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.NextBestAlbums.TabIndex = 30;
-            this.NextBestAlbums.TabStop = false;
-            this.NextBestAlbums.Click += new System.EventHandler(this.NextBestAlbums_Click);
+            this.NextPopularAlbums.Image = ((System.Drawing.Image)(resources.GetObject("NextPopularAlbums.Image")));
+            this.NextPopularAlbums.Location = new System.Drawing.Point(845, 362);
+            this.NextPopularAlbums.Name = "NextPopularAlbums";
+            this.NextPopularAlbums.Size = new System.Drawing.Size(41, 19);
+            this.NextPopularAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.NextPopularAlbums.TabIndex = 30;
+            this.NextPopularAlbums.TabStop = false;
+            this.NextPopularAlbums.Click += new System.EventHandler(this.NextPopularAlbums_Click);
             // 
             // RecommandedPageLabel
             // 
@@ -210,7 +210,7 @@ namespace Discotèque
             // 
             this.BestPageLabel.AutoSize = true;
             this.BestPageLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BestPageLabel.Location = new System.Drawing.Point(534, 292);
+            this.BestPageLabel.Location = new System.Drawing.Point(534, 290);
             this.BestPageLabel.Name = "BestPageLabel";
             this.BestPageLabel.Size = new System.Drawing.Size(31, 20);
             this.BestPageLabel.TabIndex = 32;
@@ -224,18 +224,18 @@ namespace Discotèque
             this.ClientSize = new System.Drawing.Size(905, 451);
             this.Controls.Add(this.BestPageLabel);
             this.Controls.Add(this.RecommandedPageLabel);
-            this.Controls.Add(this.NextBestAlbums);
-            this.Controls.Add(this.NextRecommandedAlbums);
-            this.Controls.Add(this.PreviousBestAlbums);
-            this.Controls.Add(this.PreviousRecommandedAlbums);
+            this.Controls.Add(this.NextPopularAlbums);
+            this.Controls.Add(this.NextRecommandation);
+            this.Controls.Add(this.PreviousPopularAlbums);
+            this.Controls.Add(this.PreviousRecommandation);
             this.Controls.Add(this.listeAlbum);
             this.Controls.Add(this.AccountIcon);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.Logo);
             this.Controls.Add(this.mostBorrowedAlbumsLabel);
-            this.Controls.Add(this.tagBestAlbums);
-            this.Controls.Add(this.tagRecommandations);
+            this.Controls.Add(this.PopularAlbumsTag);
+            this.Controls.Add(this.RecommandationsTag);
             this.Controls.Add(this.recommandationsLabel);
             this.Name = "SubscriberView";
             this.Text = "MainView";
@@ -243,10 +243,10 @@ namespace Discotèque
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainView_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PreviousRecommandedAlbums)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PreviousBestAlbums)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NextRecommandedAlbums)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NextBestAlbums)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviousRecommandation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviousPopularAlbums)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextRecommandation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NextPopularAlbums)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,18 +255,18 @@ namespace Discotèque
         #endregion
 
         private System.Windows.Forms.Label recommandationsLabel;
-        private System.Windows.Forms.Label tagRecommandations;
-        private System.Windows.Forms.Label tagBestAlbums;
+        private System.Windows.Forms.Label RecommandationsTag;
+        private System.Windows.Forms.Label PopularAlbumsTag;
         private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox AccountIcon;
         private System.Windows.Forms.ComboBox listeAlbum;
-        private System.Windows.Forms.PictureBox PreviousRecommandedAlbums;
-        private System.Windows.Forms.PictureBox PreviousBestAlbums;
-        private System.Windows.Forms.PictureBox NextRecommandedAlbums;
-        private System.Windows.Forms.PictureBox NextBestAlbums;
+        private System.Windows.Forms.PictureBox PreviousRecommandation;
+        private System.Windows.Forms.PictureBox PreviousPopularAlbums;
+        private System.Windows.Forms.PictureBox NextRecommandation;
+        private System.Windows.Forms.PictureBox NextPopularAlbums;
         private System.Windows.Forms.Label RecommandedPageLabel;
         private System.Windows.Forms.Label BestPageLabel;
     }
