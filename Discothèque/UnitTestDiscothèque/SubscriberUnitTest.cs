@@ -36,7 +36,8 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccount()
         {
-            this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", "antoine");
+            List<PAYS> theCountries = this.Connection.PAYS.ToList();
+            this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[3], "marc", "antoine");
             Account Marc = this.Database.Login("marc", "antoine");
             this._Subscriber = (ABONNÉS)Marc;
 
@@ -59,17 +60,19 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CheckCredentials()
         {
-            Assert.ThrowsException<Exception>(
-                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc antoine", "antoine"));
+            List<PAYS> theCountries = this.Connection.PAYS.ToList();
 
             Assert.ThrowsException<Exception>(
-                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", "\"antoine"));
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[4], "marc antoine", "antoine"));
 
             Assert.ThrowsException<Exception>(
-                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "'marc'", "antoine"));
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[4], "marc", "\"antoine"));
 
             Assert.ThrowsException<Exception>(
-                () => this.Database.AttemptAccountCreation("Marc", "Antoine", 4, "marc", ""));
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[4], "'marc'", "antoine"));
+
+            Assert.ThrowsException<Exception>(
+                () => this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[4], "marc", ""));
         }
 
         /// <summary>

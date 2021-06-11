@@ -68,8 +68,8 @@ namespace Discotèque
         /// </summary>
         private void UpdateSliderLabels()
         {
-            this.RecommandedPageLabel.Text = this._Recommandations.CurrentPageIndex + "/" + this._Recommandations.PageNumber;
-            this.BestPageLabel.Text = this._PopularAlbums.CurrentPageIndex + "/" + this._PopularAlbums.PageNumber;
+            this.RecommandedPageLabel.Text = this._Recommandations.CurrentPageIndex + "/" + this._Recommandations.TotalPageNumber;
+            this.BestPageLabel.Text = this._PopularAlbums.CurrentPageIndex + "/" + this._PopularAlbums.TotalPageNumber;
         }
 
         /// <summary>

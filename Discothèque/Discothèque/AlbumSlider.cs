@@ -8,15 +8,16 @@ namespace Discotèque
     /// </summary>
     class AlbumSlider
     {
-        /// <summary>
-        /// The total number of pages of the slider.
-        /// </summary>
-        public int PageNumber = 1;
 
         /// <summary>
         /// The number of albums displayed so far.
         /// </summary>
         private int _SeenAlbums = 0;
+
+        /// <summary>
+        /// The total number of pages of the slider.
+        /// </summary>
+        public int TotalPageNumber = 1;
 
         /// <summary>
         /// The position of the slider on the screen.
@@ -54,7 +55,7 @@ namespace Discotèque
             this._Position = thePosition;
             this.AlbumsOnLastPage = theAlbums.Count % 5;
             this.AlbumsPerPages = theAlbumsPerPages;
-            this.PageNumber += (AlbumsOnLastPage > 0) ? 1 : 0;
+            this.TotalPageNumber += (AlbumsOnLastPage > 0) ? 1 : 0;
             this.theDisplays = new List<AlbumDisplay>();
 
             InitializeSlider(theAlbums);
@@ -97,7 +98,7 @@ namespace Discotèque
         /// </summary>
         public void NextPage()
         {
-            if (this.CurrentPageIndex < this.PageNumber)
+            if (this.CurrentPageIndex < this.TotalPageNumber)
                 this._SeenAlbums += this.AlbumsPerPages;
         }
 
@@ -117,7 +118,11 @@ namespace Discotèque
         /// <returns> an AlbumDisplay object </returns>
         public AlbumDisplay GetAlbumUnderMouse(Point theMouse)
         {
-            return this.theDisplays.Find(theDisplay => theDisplay.Contains(theMouse));
+            List<AlbumDisplay> theDisplaysUnderMouse = this.theDisplays.FindAll(theDisplay => theDisplay.Contains(theMouse));
+            int index = this.CurrentPageIndex - 1;
+            if (index < theDisplaysUnderMouse.Count)
+                return theDisplaysUnderMouse[this.CurrentPageIndex - 1];
+            return null;
         }
 
         /// <summary>
@@ -127,7 +132,7 @@ namespace Discotèque
         public void Draw(Graphics theScreen)
         {
             int borne = this.AlbumsPerPages;
-            if (this.CurrentPageIndex == this.PageNumber)
+            if (this.CurrentPageIndex == this.TotalPageNumber)
                 borne = this.AlbumsOnLastPage;
             for (int i = this._SeenAlbums; i < (this._SeenAlbums + borne); i++)
                 this.theDisplays[i].Draw(theScreen);
