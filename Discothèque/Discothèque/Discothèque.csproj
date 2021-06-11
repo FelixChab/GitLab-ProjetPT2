@@ -196,6 +196,8 @@
       <DependentUpon>BD.edmx</DependentUpon>
       <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
+    <None Include="img\defaultPicture.png" />
+    <None Include="Resources\defaultPicture.png" />
     <None Include="Resources\App-Logo.png" />
     <None Include="img\previous.png" />
     <None Include="img\next.png" />

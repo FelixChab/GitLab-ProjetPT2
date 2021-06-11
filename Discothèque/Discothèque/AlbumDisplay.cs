@@ -60,11 +60,12 @@ namespace Discotèque
         /// </summary>
         private Image AlbumCover
         {
+
             get
             {
-                MemoryStream theStream = new MemoryStream(this.Album.POCHETTE);
-                return new Bitmap(theStream);
+                return (_Album.POCHETTE!=null && _Album.POCHETTE.Length>0) ? new Bitmap(new MemoryStream(this._Album.POCHETTE)) :  ProjetPT2K.Properties.Resources.defaultPicture;
             }
+
         }
 
         public byte[] ImageToByteArray(Image imageIn)
