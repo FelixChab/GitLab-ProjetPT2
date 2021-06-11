@@ -103,6 +103,7 @@ namespace Discotèque
             this.PasswordLabel.Size = new System.Drawing.Size(191, 30);
             this.PasswordLabel.TabIndex = 1;
             this.PasswordLabel.UseSystemPasswordChar = true;
+            this.PasswordLabel.KeyDown += PasswordLabel_KeyDown;
             // 
             // labelPasswordLogin
             // 
@@ -178,6 +179,8 @@ namespace Discotèque
             this.ResumeLayout(false);
 
         }
+
+  
 
 
 
