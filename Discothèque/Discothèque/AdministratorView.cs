@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Discotèque
 {
@@ -32,6 +33,8 @@ namespace Discotèque
         }
 
         #region page system
+
+        private Dictionary<int, ALBUMS> maps = new Dictionary<int, ALBUMS>();
         private String header;
         private Func<Task> function;
         private int count;
@@ -55,6 +58,8 @@ namespace Discotèque
         public async void showCurrent()
         {
             setAllButton(false);
+            maps.Clear();
+            imageAlbum.Visible = false;
             ResultListBox.Items.Clear();
             loadingLabel.Visible = true;
             Refresh();
@@ -129,10 +134,13 @@ namespace Discotèque
             this.count = list.Count();
             int start = perPage * page;
             int size = count < start + perPage ? (count - start) : perPage;
+            int i = 1;
             foreach (EMPRUNTER emprunt in list.OrderBy(x => x.CODE_ALBUM).Skip(start).Take(size))
             {
+                maps.Add(i, emprunt.ALBUMS);
                 ResultListBox.Items.Add(emprunt.ToString());
                 ResultListBox.Items.Add("____________________________________________________________________________________"); ;
+                i = i + 2;
 
             }
         }
@@ -228,10 +236,13 @@ namespace Discotèque
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
             this.count = 10;
             int i = 0;
+            int index = 1;
             foreach (var entry in Database.GetInstance().GetMostBorrowedAlbums())
             {
                 i++;
                 ResultListBox.Items.Add(FormatText(new string[] { i.ToString(), entry.Key.ToString(), entry.Value + " fois" }));
+                maps.Add(index, entry.Key);
+                index++;
             }
         }
         #endregion
@@ -260,10 +271,13 @@ namespace Discotèque
             this.count = albums.Count();
             int start = perPage * page;
             int size = count < start + perPage ? (count - start) : perPage;
+            int index = 1;
             foreach (ALBUMS album in albums.OrderBy(x => x.EMPRUNTER.Count()).Skip(start).Take(size))
             {
+                maps.Add(index, album);
                 ResultListBox.Items.Add(album.ToString());
                 ResultListBox.Items.Add("____________________________________________________________________________________"); ;
+                index = index + 2;
 
             }
         }
@@ -315,8 +329,23 @@ namespace Discotèque
             }
             return line.ToString();
         }
-        #endregion 
 
+        #endregion
 
+        private void tabClick(object sender, EventArgs e)
+        {
+            int index = ResultListBox.SelectedIndex;
+            if (maps.ContainsKey(index))
+            {
+                imageAlbum.Visible = true;
+                ALBUMS album = maps[index];
+                Image image = album.DisplayableAlbumCover;
+                imageAlbum.Image = image;
+            }
+            else
+            {
+                imageAlbum.Visible = false;
+            }
+        }
     }
 }

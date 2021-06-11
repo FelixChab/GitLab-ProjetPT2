@@ -44,10 +44,12 @@ namespace Discotèque
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.loadingLabel = new System.Windows.Forms.Label();
+            this.imageAlbum = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbum)).BeginInit();
             this.SuspendLayout();
             // 
             // logo
@@ -72,6 +74,7 @@ namespace Discotèque
             this.ResultListBox.Name = "ResultListBox";
             this.ResultListBox.Size = new System.Drawing.Size(671, 418);
             this.ResultListBox.TabIndex = 1;
+            this.ResultListBox.SelectedIndexChanged += new System.EventHandler(this.tabClick);
             // 
             // ButtonExtendedLoans
             // 
@@ -204,12 +207,22 @@ namespace Discotèque
             this.loadingLabel.TabIndex = 12;
             this.loadingLabel.Text = "Chargement des données...";
             // 
+            // imageAlbum
+            // 
+            this.imageAlbum.Location = new System.Drawing.Point(904, 21);
+            this.imageAlbum.Name = "imageAlbum";
+            this.imageAlbum.Size = new System.Drawing.Size(100, 100);
+            this.imageAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imageAlbum.TabIndex = 13;
+            this.imageAlbum.TabStop = false;
+            // 
             // AdministratorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(1112, 613);
+            this.Controls.Add(this.imageAlbum);
             this.Controls.Add(this.loadingLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -228,6 +241,7 @@ namespace Discotèque
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,6 +263,7 @@ namespace Discotèque
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label loadingLabel;
+        private System.Windows.Forms.PictureBox imageAlbum;
     }
 }
  
