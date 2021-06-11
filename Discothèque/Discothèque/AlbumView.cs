@@ -44,20 +44,12 @@ namespace Discotèque
             this.Text = this._Album.TITRE_ALBUM;
             LabelTitle.Text = this._Album.TITRE_ALBUM;
             LabelEditor.Text = "Editeur: " + this._Album.EDITEURS.NOM_EDITEUR;
-            if (_Album.EDITEURS.PAYS == null)
-            {
-                LabelEditorCountry.Text = "Pays: inconnu";
-            }
-            else
-            {
-                LabelEditorCountry.Text = "Pays: " + this._Album.EDITEURS.PAYS.NOM_PAYS;
-            }
+            LabelEditorCountry.Text = (_Album.EDITEURS.PAYS == null) ? "Pays: inconnu" : "Pays: " + this._Album.EDITEURS.PAYS.NOM_PAYS;
             LabelYear.Text = _Album.ANNÉE_ALBUM.ToString();
             LabelGenre.Text = _Album.GENRES.LIBELLÉ_GENRE;
             LabelAlley.Text = "Allée: " + _Album.ALLÉE_ALBUM;
             LabelLocker.Text = "Casier: " + _Album.CASIER_ALBUM.ToString();
             LabelPrice.Text = _Album.PRIX_ALBUM.ToString() + "€";
-
             AlbumCoverBox.Image = this._Album.DisplayableAlbumCover;
         }
 

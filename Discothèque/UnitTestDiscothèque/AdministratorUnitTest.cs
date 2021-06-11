@@ -27,7 +27,7 @@ namespace UnitTestProjetPT2K
             CreateAccounts();
             GetExtendedLoans();
             GetLateSubscribers();
-            //GetUnpopularAlbums();
+            GetUnpopularAlbums();
             PurgeDatabase();
             GetMostBorrowedAlbums();
         }
@@ -37,20 +37,23 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void CreateAccounts()
         {
-            // this.Database.AttemptAccountCreation("Jean", "Pierre", 1, "jean", "pierre");
-            // this.Database.AttemptAccountCreation("Marc", "Antoine", 1, "marc", "antoine");
+            List<PAYS> theCountries = this.Connection.PAYS.ToList();
+            this.Database.AttemptAccountCreation("Jean", "Pierre", theCountries[0], "jean", "pierre");
+            this.Database.AttemptAccountCreation("Marc", "Antoine", theCountries[0], "marc", "antoine");
+            this.Database.AttemptAccountCreation("Victor", "Hugo", theCountries[0], "victor", "hugo");
 
             // Retrieve the accounts
             Account subscriber1 = this.Database.Login("jean", "pierre");            
             Account subscriber2 = this.Database.Login("marc", "antoine");
-            
+            Account subscriber3 = this.Database.Login("victor", "hugo");
+
             // Ensure the account was added to the database
             Assert.IsNotNull(subscriber1);
             Assert.IsNotNull(subscriber2);
 
             // Ensure an account with an existing login cannot be created
-            Account subscriber3 = this.Database.Login("jean", "marie");
-            Assert.IsNull(subscriber3);
+            Account subscriber4 = this.Database.Login("jean", "marie");
+            Assert.IsNull(subscriber4);
         }
 
         /// <summary>
@@ -124,8 +127,8 @@ namespace UnitTestProjetPT2K
         /// </summary>
         private void GetUnpopularAlbums()
         {
-            // Ensure there are no unpopular album in the database
-            Assert.AreEqual(0, this._Administrator.GetUnpopularAlbums().Count);
+            // Ensure there are 723 unpopular album in the database
+            Assert.AreEqual(723, this._Administrator.GetUnpopularAlbums().Count);
             ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("marc", "antoine");
 
             ALBUMS theAlbum = this.Database.GetAlbumWithID(3);
@@ -143,12 +146,9 @@ namespace UnitTestProjetPT2K
             this.Connection.EMPRUNTER.Add(theLoan);
             this.Connection.SaveChanges();
 
-            // Ensure there is now one unpopular album in the database
+            // Ensure there is now 723 unpopular album in the database
             List<ALBUMS> unpopularAlbums = this._Administrator.GetUnpopularAlbums();
-            Assert.AreEqual(1, unpopularAlbums.Count);
-
-            // Ensure the unpopular album is the one we inserted in the database
-            Assert.AreEqual(theAlbum, unpopularAlbums[0]);
+            Assert.AreEqual(723, unpopularAlbums.Count);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace UnitTestProjetPT2K
         private void GetMostBorrowedAlbums()
         {
             ALBUMS theAlbum = this.Database.GetAlbumWithID(7);
-            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("patrick", "patrick");
+            ABONNÉS theSubscriber = (ABONNÉS)this.Database.Login("victor", "hugo");
             EMPRUNTER theLoan = new EMPRUNTER
             {
                 CODE_ABONNÉ = theSubscriber.CODE_ABONNÉ,

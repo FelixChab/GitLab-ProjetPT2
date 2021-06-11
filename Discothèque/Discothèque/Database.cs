@@ -111,7 +111,7 @@ namespace Discotèque
             try
             {
                 CredentialsAreValid(firstname, lastname, login, password);
-            } 
+            }
             catch
             {
                 throw;
@@ -132,7 +132,7 @@ namespace Discotèque
             foreach (string theCredential in theCredentials)
             {
                 if (theCredential.Length == 0)
-                    throw new Exception("Les champs ne doivent pas être vides");
+                    throw new Exception("Les champs ne peuvent pas être vides (excepté le pays)");
                 if (theCredential.Length > 32)
                     throw new Exception("Les champs ne doivent pas dépasser 32 caractères");
                 if (!theRegex.IsMatch(theCredential))
@@ -157,7 +157,7 @@ namespace Discotèque
                 PASSWORD_ABONNÉ = password
             };
 
-            if (theCountry.CODE_PAYS > 0)
+            if (theCountry != null)
                 theSubscriber.CODE_PAYS = theCountry.CODE_PAYS;
 
             this.Connection.ABONNÉS.Add(theSubscriber);
@@ -182,7 +182,8 @@ namespace Discotèque
         public List<ALBUMS> GetAlbumsContaining(string thePattern)
         {
             List<ALBUMS> theAlbums = this.GetAllAlbums();
-            return theAlbums.FindAll(album => album.TITRE_ALBUM.Contains(thePattern));
+            return theAlbums.FindAll(album => album.TITRE_ALBUM.ToLower()
+                .Contains(thePattern.ToLower()));
         }
 
         /// <summary>

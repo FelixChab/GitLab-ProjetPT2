@@ -52,6 +52,7 @@ namespace Discotèque
             try
             {
                 this._Database.AttemptAccountCreation(theFirstName, theLastName, theCountry, theLogin, thePassword);
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception theException)
@@ -59,6 +60,7 @@ namespace Discotèque
                 ClearSignUpLabels();
                 ErrorLabel.Visible = true;
                 ErrorLabel.Text = theException.Message;
+                DialogResult = DialogResult.None;
             }
         }
 
