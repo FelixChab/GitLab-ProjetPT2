@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Discotèque
 {
@@ -24,17 +25,20 @@ namespace Discotèque
         public AdministratorView(Account theAccount)
         {
             InitializeComponent();
+            loadingLabel.Visible = false;
             this._Administrator = (Administrator)theAccount;
+            printContent(readExtentedLoans, "|                  Emprunts étendus :                  |");
+
         }
 
         #region page system
         private String header;
-        private Action function;
+        private Func<Task> function;
         private int count;
         private int page = 0;
         private int perPage = 10;
 
-        public void printContent(Action function, String header)
+        public void printContent(Func<Task> function, String header)
         {
             this.page = 0;
             this.header = header;
@@ -48,14 +52,31 @@ namespace Discotèque
         {
             return count % perPage == 0 ? count / perPage : ((count / perPage) + 1);
         }
-        public void showCurrent()
+        public async void showCurrent()
         {
+            setAllButton(false);
             ResultListBox.Items.Clear();
+            loadingLabel.Visible = true;
+            Refresh();
             ResultListBox.Items.Add(header);
-            function.Invoke();
+            Task task = function.Invoke();
+            task.Wait(500);
+            await task;
+            loadingLabel.Visible = false;
             updatePageLabel();
+            Refresh();
+            setAllButton(true);
         }
 
+        public void setAllButton(Boolean enabled)
+        {
+            buttonsubsribers.Enabled = enabled;
+            ButtonExtendedLoans.Enabled = enabled;
+            ButtonLateLoans.Enabled = enabled;
+            ButtonLessLoaned.Enabled = enabled;
+            ButtonMostLoaned.Enabled = enabled;
+            ButtonCleanse.Enabled = enabled;
+        }
         public void updatePageLabel()
         {
             pageLabel.Text = (page + 1) + "/" + getPageCount();
@@ -102,7 +123,7 @@ namespace Discotèque
         /// <summary>
         /// Function responsible of the display of Extended loans
         /// </summary>
-        public void readExtentedLoans()
+        public async Task readExtentedLoans()
         {
             List<EMPRUNTER> list = _Administrator.GetExtendedLoans();
             this.count = list.Count();
@@ -132,7 +153,7 @@ namespace Discotèque
         /// <summary>
         /// Function that is responsible of the display of late loans.
         /// </summary>
-        public void readLateLoans()
+        public async Task readLateLoans()
         {
             List<ABONNÉS> list = _Administrator.GetLateSubscribers();
             this.count = list.Count();
@@ -164,10 +185,10 @@ namespace Discotèque
         /// <summary>
         /// Function that is responsible of reading the database purge.
         /// </summary>
-        public void readPurge()
+        public async Task readPurge()
         {
-            List<ABONNÉS> subList =_Administrator.PurgeDatabase();
-            foreach(ABONNÉS sub in subList)
+            List<ABONNÉS> subList = _Administrator.PurgeDatabase();
+            foreach (ABONNÉS sub in subList)
             {
                 this.ResultListBox.Items.Add("L'abonné " + sub.NOM_ABONNÉ + " " + sub.PRÉNOM_ABONNÉ + " à été supprimé.");
             }
@@ -202,7 +223,7 @@ namespace Discotèque
         /// <summary>
         /// Function responsible of the reading of the most Loaned albums.
         /// </summary>
-        public void readMostLoaned()
+        public async Task readMostLoaned()
         {
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
             this.count = 10;
@@ -232,7 +253,7 @@ namespace Discotèque
         /// <summary>
         /// Function responsible of the reading of the less loans albums
         /// </summary>
-        public void readLessLoaned()
+        public async Task readLessLoaned()
         {
             MusiquePT2_KEntities db = Database.GetInstance().GetConnection();
             List<ALBUMS> albums = _Administrator.GetUnpopularAlbums();
@@ -256,7 +277,7 @@ namespace Discotèque
             printContent(readSubscriber, FormatText(new string[] { "Nom", "Prénom", "Emprunts" }));
         }
 
-        public void readSubscriber()
+        public async Task readSubscriber()
         {
             this.count = Database.GetInstance().GetConnection().ABONNÉS.Count();
             int start = perPage * page;
@@ -277,11 +298,11 @@ namespace Discotèque
 
         #region format
 
-       /// <summary>
-       /// Format the String array into columns.
-       /// </summary>
-       /// <param name="args"> String to format </param>
-       /// <returns></returns>
+        /// <summary>
+        /// Format the String array into columns.
+        /// </summary>
+        /// <param name="args"> String to format </param>
+        /// <returns></returns>
         public String FormatText(String[] args)
         {
             StringBuilder line = new StringBuilder();
