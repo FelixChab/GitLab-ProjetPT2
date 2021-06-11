@@ -109,9 +109,11 @@ namespace Discotèque
             UpdateActionButton();
         }
 
-        /**
-         * Method to navigate to log-in page.
-         */
+        /// <summary>
+        /// Method to navigate to log-in page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PictureBoxLogo_Click(object sender, EventArgs e)
         {
             this.Close();
