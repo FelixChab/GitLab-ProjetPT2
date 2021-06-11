@@ -32,7 +32,7 @@ namespace Discotèque
         private Action function;
         private int count;
         private int page = 0;
-        private int perPage = 20;
+        private int perPage = 10;
 
         public void printContent(Action function, String header)
         {
@@ -194,7 +194,7 @@ namespace Discotèque
         private void ButtonMostLoaned_Click(object sender, EventArgs e)
         {
 
-            printContent(readMostLoaned, FormatText(new string[] { "Classement", "Album", "Emprunts" }));
+            printContent(readMostLoaned, FormatText(new string[] { "#", "Album", "Emprunts" }));
 
 
         }
