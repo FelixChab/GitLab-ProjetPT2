@@ -63,7 +63,7 @@ namespace Discotèque
             this.actionListBox.Name = "actionListBox";
             this.actionListBox.Size = new System.Drawing.Size(473, 392);
             this.actionListBox.TabIndex = 0;
-            this.actionListBox.SelectedIndexChanged += new System.EventHandler(this.actionListBox_SelectedIndexChanged_1);
+
             // 
             // extendLoanButton
             // 

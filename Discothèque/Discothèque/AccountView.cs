@@ -14,6 +14,10 @@ namespace Discotèque
     {
         private readonly ABONNÉS _Subscriber;
 
+        /// <summary>
+        /// Concstructor
+        /// </summary>
+        /// <param name="account"></param>
         public AccountView(ABONNÉS account)
         {
             InitializeComponent();
@@ -26,6 +30,10 @@ namespace Discotèque
             ListLoans();
         }
 
+
+        /// <summary>
+        /// Method that initialize Albums list from database
+        /// </summary>
         private void InitializeAlbumList()
         {
             actionListBox.Items.Clear();
@@ -33,12 +41,22 @@ namespace Discotèque
             albums.ForEach(album => actionListBox.Items.Add(album));
         }
 
+
+        /// <summary>
+        /// Methode that liste loans
+        /// </summary>
         private void ListLoans()
         {
             RefreshLoanList();
             extendAllButton.Visible = extendAllButton.Enabled = true;
         }
 
+
+        /// <summary>
+        /// Method that allows to borrow albums by clicking on a button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void extendLoanButton_Click(object sender, EventArgs e)
         {
             EMPRUNTER loan = (EMPRUNTER)actionListBox.SelectedItem;
@@ -54,6 +72,9 @@ namespace Discotèque
             }
         }
 
+        /// <summary>
+        /// Methode that refresh loans list
+        /// </summary>
         private void RefreshLoanList()
         {
             this.actionListBox.Items.Clear();
@@ -65,6 +86,11 @@ namespace Discotèque
             }
         }
 
+        /// <summary>
+        /// Method that allows to extend all the loans.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExtendAllButton_Click(object sender, EventArgs e)
         {
             bool extended = false;
@@ -86,31 +112,25 @@ namespace Discotèque
         }
 
 
-
+        /// <summary>
+        /// Method that allows to close the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logo_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void SearchResults_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // TODO (?)
-        }
-
-        private void SearchResults_Leave(object sender, EventArgs e)
-        {
-            // TODO: faire disparaître la search bar en cliquant à l'extérieur
-        }
 
 
 
-        // liste les albums dans l'actionListBox (à droite) ??? à vérif
-        private void actionListBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            //
-        }
-
-        // Retour au menu compte (donc refresh)
+ 
+        /// <summary>
+        /// Method that allows to go back to the main menu/ refresh the page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBoxAccount_Click(object sender, EventArgs e)
         {
             Refresh();
