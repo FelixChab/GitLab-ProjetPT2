@@ -11,33 +11,94 @@ namespace Discotèque
         /// <summary>
         /// 
         /// </summary>
-        private readonly ALBUMS _Album;
+        private ALBUMS _Album;
 
-        private readonly ABONNÉS _Account;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly ABONNÉS _Subscriber;
 
-        public AlbumView(ALBUMS theAlbum, ABONNÉS theAccount)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theAccount"></param>
+        public AlbumView(ABONNÉS theAccount)
         {
             InitializeComponent();
-            this._Album = theAlbum;
-            this._Account = theAccount;
+            this._Subscriber = theAccount;
         }
 
-        /**
-         * Method to navigate to the subscriber "main" page.
-         */
-        private void PictureBoxAccount_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theAlbum"></param>
+        public void ChangeAlbum(ALBUMS theAlbum)
         {
-            Close();
-            AccountView main = new AccountView(_Account);
-            main.Show();
+            this._Album = theAlbum;
+            InitializeLabels();
+            UpdateActionButton();
         }
 
-        /**
-         * Method to loan the current album the user is looking at.
-         */
+        private void InitializeLabels()
+        {
+            this.Text = this._Album.TITRE_ALBUM;
+            LabelTitle.Text = this._Album.TITRE_ALBUM;
+            LabelEditor.Text = "Editeur: " + this._Album.EDITEURS.NOM_EDITEUR;
+            if (_Album.EDITEURS.PAYS == null)
+            {
+                LabelEditorCountry.Text = "Pays: inconnu";
+            }
+            else
+            {
+                LabelEditorCountry.Text = "Pays: " + this._Album.EDITEURS.PAYS.NOM_PAYS;
+            }
+            LabelYear.Text = _Album.ANNÉE_ALBUM.ToString();
+            LabelGenre.Text = _Album.GENRES.LIBELLÉ_GENRE;
+            LabelAlley.Text = "Allée: " + _Album.ALLÉE_ALBUM;
+            LabelLocker.Text = "Casier: " + _Album.CASIER_ALBUM.ToString();
+            LabelPrice.Text = _Album.PRIX_ALBUM.ToString() + "€";
+
+            AlbumCoverBox.Image = this._Album.DisplayableAlbumCover;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateActionButton()
+        {
+            ActionButton.Enabled = true;
+            if (this._Album.IsAvailable())
+            {
+                ActionButton.Text = "Emprunter";
+            }
+            else
+            {
+                EMPRUNTER theLoan = this._Subscriber.GetLoanOfAlbum(this._Album);
+                if (theLoan != null)
+                    ActionButton.Text = "Rendre";
+                else
+                {
+                    ActionButton.Text = "Indisponible";
+                    ActionButton.Enabled = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonLoan_Click(object sender, EventArgs e)
         {
-            _Account.BorrowAlbum(_Album);
+            if (this._Album.IsAvailable())
+                this._Subscriber.BorrowAlbum(_Album);
+            else
+            {
+                EMPRUNTER theLoan = this._Subscriber.GetLoanOfAlbum(this._Album);
+                theLoan.Return();
+            }
+            UpdateActionButton();
         }
 
         /**
@@ -45,30 +106,7 @@ namespace Discotèque
          */
         private void PictureBoxLogo_Click(object sender, EventArgs e)
         {
-            // SubscriberView main = new SubscriberView(account);
-            // main.ShowDialog();
-            Close();
-        }
-
-        private void AlbumView_Paint(object sender, PaintEventArgs e)
-        {
-            LabelTitle.Text = _Album.TITRE_ALBUM;
-            LabelEditor.Text = "Editeur: " + _Album.EDITEURS.NOM_EDITEUR;
-            if (_Album.EDITEURS.PAYS == null)
-            {
-                LabelEditorCountry.Text = "null";
-            }
-            else
-            {
-                LabelEditorCountry.Text = "Pays: " + _Album.EDITEURS.PAYS.NOM_PAYS;
-            }
-            LabelYear.Text = _Album.ANNÉE_ALBUM.ToString();
-            LabelGenre.Text = _Album.GENRES.LIBELLÉ_GENRE;
-            LabelAlley.Text = "Allée: " + _Album.ALLÉE_ALBUM;
-            LabelLocker.Text = "Casier: " + _Album.CASIER_ALBUM.ToString();
-            LabelPrice.Text = _Album.PRIX_ALBUM.ToString() + "€";
-            AlbumDisplay displayalbum = new AlbumDisplay(_Album, PictureBoxCover.Location);
-            //PictureBoxCover.Image = displayalbum.GetAlbumCover();
+            this.Close();
         }
     }
 }
