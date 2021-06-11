@@ -45,8 +45,15 @@ namespace Discotèque
         {
             get
             {
-                MemoryStream theStream = new MemoryStream(this.POCHETTE);
-                return new Bitmap(theStream);
+                if (POCHETTE != null && POCHETTE.Length > 0)
+                {
+                    MemoryStream theStream = new MemoryStream(this.POCHETTE);
+                    return new Bitmap(theStream);
+                }
+                else
+                {
+                    return ProjetPT2K.Properties.Resources.defaultPicture;
+                }
             }
         }
 
