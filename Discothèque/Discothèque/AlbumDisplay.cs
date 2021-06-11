@@ -55,14 +55,5 @@ namespace Discotèque
             Rectangle theRectangle = new Rectangle(_Position, Size);
             return theRectangle.Contains(thePoint);
         }
-
-        public byte[] ImageToByteArray(Image imageIn)
-        {
-            var ms = new MemoryStream();
-            {
-                imageIn.Save(ms, imageIn.RawFormat);
-                return ms.ToArray();
-            }
-        }
     }
 }
