@@ -35,7 +35,6 @@ namespace Discotèque
             this.PopularAlbumsTag = new System.Windows.Forms.Label();
             this.mostBorrowedAlbumsLabel = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.AccountIcon = new System.Windows.Forms.PictureBox();
             this.listeAlbum = new System.Windows.Forms.ComboBox();
@@ -57,7 +56,7 @@ namespace Discotèque
             // 
             this.recommandationsLabel.AutoSize = true;
             this.recommandationsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.recommandationsLabel.Location = new System.Drawing.Point(226, 124);
+            this.recommandationsLabel.Location = new System.Drawing.Point(97, 149);
             this.recommandationsLabel.Name = "recommandationsLabel";
             this.recommandationsLabel.Size = new System.Drawing.Size(185, 29);
             this.recommandationsLabel.TabIndex = 9;
@@ -67,7 +66,7 @@ namespace Discotèque
             // 
             this.RecommandationsTag.AutoSize = true;
             this.RecommandationsTag.BackColor = System.Drawing.Color.Transparent;
-            this.RecommandationsTag.Location = new System.Drawing.Point(244, 162);
+            this.RecommandationsTag.Location = new System.Drawing.Point(115, 187);
             this.RecommandationsTag.Name = "RecommandationsTag";
             this.RecommandationsTag.Size = new System.Drawing.Size(10, 13);
             this.RecommandationsTag.TabIndex = 13;
@@ -78,7 +77,7 @@ namespace Discotèque
             // 
             this.PopularAlbumsTag.AutoSize = true;
             this.PopularAlbumsTag.BackColor = System.Drawing.Color.Transparent;
-            this.PopularAlbumsTag.Location = new System.Drawing.Point(244, 323);
+            this.PopularAlbumsTag.Location = new System.Drawing.Point(115, 348);
             this.PopularAlbumsTag.Name = "PopularAlbumsTag";
             this.PopularAlbumsTag.Size = new System.Drawing.Size(10, 13);
             this.PopularAlbumsTag.TabIndex = 14;
@@ -88,7 +87,7 @@ namespace Discotèque
             // 
             this.mostBorrowedAlbumsLabel.AutoSize = true;
             this.mostBorrowedAlbumsLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(226, 283);
+            this.mostBorrowedAlbumsLabel.Location = new System.Drawing.Point(97, 308);
             this.mostBorrowedAlbumsLabel.Name = "mostBorrowedAlbumsLabel";
             this.mostBorrowedAlbumsLabel.Size = new System.Drawing.Size(302, 29);
             this.mostBorrowedAlbumsLabel.TabIndex = 16;
@@ -109,20 +108,12 @@ namespace Discotèque
             this.Logo.TabStop = false;
             this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Location = new System.Drawing.Point(134, -10);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(3, 467);
-            this.panel2.TabIndex = 22;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(146, 81);
+            this.panel3.Location = new System.Drawing.Point(11, 127);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(740, 3);
+            this.panel3.Size = new System.Drawing.Size(882, 10);
             this.panel3.TabIndex = 23;
             // 
             // AccountIcon
@@ -147,7 +138,7 @@ namespace Discotèque
             this.listeAlbum.FormattingEnabled = true;
             this.listeAlbum.IntegralHeight = false;
             this.listeAlbum.ItemHeight = 29;
-            this.listeAlbum.Location = new System.Drawing.Point(182, 12);
+            this.listeAlbum.Location = new System.Drawing.Point(146, 12);
             this.listeAlbum.Name = "listeAlbum";
             this.listeAlbum.Size = new System.Drawing.Size(646, 37);
             this.listeAlbum.TabIndex = 26;
@@ -156,7 +147,7 @@ namespace Discotèque
             // PreviousRecommandation
             // 
             this.PreviousRecommandation.Image = ((System.Drawing.Image)(resources.GetObject("PreviousRecommandation.Image")));
-            this.PreviousRecommandation.Location = new System.Drawing.Point(168, 191);
+            this.PreviousRecommandation.Location = new System.Drawing.Point(39, 216);
             this.PreviousRecommandation.Name = "PreviousRecommandation";
             this.PreviousRecommandation.Size = new System.Drawing.Size(41, 19);
             this.PreviousRecommandation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -167,7 +158,7 @@ namespace Discotèque
             // PreviousPopularAlbums
             // 
             this.PreviousPopularAlbums.Image = ((System.Drawing.Image)(resources.GetObject("PreviousPopularAlbums.Image")));
-            this.PreviousPopularAlbums.Location = new System.Drawing.Point(168, 362);
+            this.PreviousPopularAlbums.Location = new System.Drawing.Point(39, 387);
             this.PreviousPopularAlbums.Name = "PreviousPopularAlbums";
             this.PreviousPopularAlbums.Size = new System.Drawing.Size(41, 19);
             this.PreviousPopularAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -178,7 +169,7 @@ namespace Discotèque
             // NextRecommandation
             // 
             this.NextRecommandation.Image = ((System.Drawing.Image)(resources.GetObject("NextRecommandation.Image")));
-            this.NextRecommandation.Location = new System.Drawing.Point(845, 191);
+            this.NextRecommandation.Location = new System.Drawing.Point(716, 216);
             this.NextRecommandation.Name = "NextRecommandation";
             this.NextRecommandation.Size = new System.Drawing.Size(41, 19);
             this.NextRecommandation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -189,7 +180,7 @@ namespace Discotèque
             // NextPopularAlbums
             // 
             this.NextPopularAlbums.Image = ((System.Drawing.Image)(resources.GetObject("NextPopularAlbums.Image")));
-            this.NextPopularAlbums.Location = new System.Drawing.Point(845, 362);
+            this.NextPopularAlbums.Location = new System.Drawing.Point(716, 387);
             this.NextPopularAlbums.Name = "NextPopularAlbums";
             this.NextPopularAlbums.Size = new System.Drawing.Size(41, 19);
             this.NextPopularAlbums.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -201,7 +192,7 @@ namespace Discotèque
             // 
             this.RecommandedPageLabel.AutoSize = true;
             this.RecommandedPageLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RecommandedPageLabel.Location = new System.Drawing.Point(417, 131);
+            this.RecommandedPageLabel.Location = new System.Drawing.Point(288, 156);
             this.RecommandedPageLabel.Name = "RecommandedPageLabel";
             this.RecommandedPageLabel.Size = new System.Drawing.Size(31, 20);
             this.RecommandedPageLabel.TabIndex = 31;
@@ -211,7 +202,7 @@ namespace Discotèque
             // 
             this.BestPageLabel.AutoSize = true;
             this.BestPageLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BestPageLabel.Location = new System.Drawing.Point(534, 290);
+            this.BestPageLabel.Location = new System.Drawing.Point(405, 315);
             this.BestPageLabel.Name = "BestPageLabel";
             this.BestPageLabel.Size = new System.Drawing.Size(31, 20);
             this.BestPageLabel.TabIndex = 32;
@@ -232,7 +223,6 @@ namespace Discotèque
             this.Controls.Add(this.listeAlbum);
             this.Controls.Add(this.AccountIcon);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.Logo);
             this.Controls.Add(this.mostBorrowedAlbumsLabel);
             this.Controls.Add(this.PopularAlbumsTag);
@@ -260,7 +250,6 @@ namespace Discotèque
         private System.Windows.Forms.Label PopularAlbumsTag;
         private System.Windows.Forms.Label mostBorrowedAlbumsLabel;
         private System.Windows.Forms.PictureBox Logo;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox AccountIcon;
         private System.Windows.Forms.ComboBox listeAlbum;
