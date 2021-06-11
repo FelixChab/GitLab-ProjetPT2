@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 
 namespace Discotèque
 {
@@ -34,6 +36,25 @@ namespace Discotèque
                     return true;
             }
             return false;
+        }
+
+        /// <summary>
+        ///  Return the cover of the album.
+        /// </summary>
+        public Image DisplayableAlbumCover
+        {
+            get
+            {
+                if (POCHETTE != null && POCHETTE.Length > 0)
+                {
+                    MemoryStream theStream = new MemoryStream(this.POCHETTE);
+                    return new Bitmap(theStream);
+                }
+                else
+                {
+                    return ProjetPT2K.Properties.Resources.defaultPicture;
+                }
+            }
         }
 
         /// <summary>

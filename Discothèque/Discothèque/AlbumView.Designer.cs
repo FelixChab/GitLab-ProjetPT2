@@ -30,12 +30,10 @@ namespace Discotèque
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlbumView));
-            this.LabelLine1 = new System.Windows.Forms.Label();
             this.PictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.LabelLine2 = new System.Windows.Forms.Label();
-            this.PictureBoxAccount = new System.Windows.Forms.PictureBox();
             this.LabelLocationBackground = new System.Windows.Forms.Label();
-            this.PictureBoxCover = new System.Windows.Forms.PictureBox();
+            this.AlbumCoverBox = new System.Windows.Forms.PictureBox();
             this.LabelAlley = new System.Windows.Forms.Label();
             this.LabelLocker = new System.Windows.Forms.Label();
             this.LabelLocation = new System.Windows.Forms.Label();
@@ -47,17 +45,8 @@ namespace Discotèque
             this.LabelPrice = new System.Windows.Forms.Label();
             this.ActionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumCoverBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LabelLine1
-            // 
-            this.LabelLine1.BackColor = System.Drawing.Color.Black;
-            this.LabelLine1.Location = new System.Drawing.Point(192, 9);
-            this.LabelLine1.Name = "LabelLine1";
-            this.LabelLine1.Size = new System.Drawing.Size(5, 643);
-            this.LabelLine1.TabIndex = 0;
             // 
             // PictureBoxLogo
             // 
@@ -73,45 +62,35 @@ namespace Discotèque
             // LabelLine2
             // 
             this.LabelLine2.BackColor = System.Drawing.Color.Black;
-            this.LabelLine2.Location = new System.Drawing.Point(215, 95);
+            this.LabelLine2.Location = new System.Drawing.Point(12, 291);
             this.LabelLine2.Name = "LabelLine2";
-            this.LabelLine2.Size = new System.Drawing.Size(957, 5);
+            this.LabelLine2.Size = new System.Drawing.Size(658, 10);
             this.LabelLine2.TabIndex = 2;
-            // 
-            // PictureBoxAccount
-            // 
-            this.PictureBoxAccount.Location = new System.Drawing.Point(1031, 19);
-            this.PictureBoxAccount.Name = "PictureBoxAccount";
-            this.PictureBoxAccount.Size = new System.Drawing.Size(100, 60);
-            this.PictureBoxAccount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBoxAccount.TabIndex = 6;
-            this.PictureBoxAccount.TabStop = false;
-            this.PictureBoxAccount.Click += new System.EventHandler(this.PictureBoxAccount_Click);
             // 
             // LabelLocationBackground
             // 
             this.LabelLocationBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(192)))), ((int)(((byte)(208)))));
-            this.LabelLocationBackground.Location = new System.Drawing.Point(218, 521);
+            this.LabelLocationBackground.Location = new System.Drawing.Point(39, 528);
             this.LabelLocationBackground.Name = "LabelLocationBackground";
             this.LabelLocationBackground.Size = new System.Drawing.Size(154, 108);
             this.LabelLocationBackground.TabIndex = 7;
             // 
-            // PictureBoxCover
+            // AlbumCoverBox
             // 
-            this.PictureBoxCover.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxCover.Image")));
-            this.PictureBoxCover.Location = new System.Drawing.Point(221, 115);
-            this.PictureBoxCover.Name = "PictureBoxCover";
-            this.PictureBoxCover.Size = new System.Drawing.Size(942, 262);
-            this.PictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBoxCover.TabIndex = 8;
-            this.PictureBoxCover.TabStop = false;
+            this.AlbumCoverBox.Image = ((System.Drawing.Image)(resources.GetObject("AlbumCoverBox.Image")));
+            this.AlbumCoverBox.Location = new System.Drawing.Point(180, 9);
+            this.AlbumCoverBox.Name = "AlbumCoverBox";
+            this.AlbumCoverBox.Size = new System.Drawing.Size(461, 262);
+            this.AlbumCoverBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.AlbumCoverBox.TabIndex = 8;
+            this.AlbumCoverBox.TabStop = false;
             // 
             // LabelAlley
             // 
             this.LabelAlley.AutoSize = true;
             this.LabelAlley.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(192)))), ((int)(((byte)(208)))));
             this.LabelAlley.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelAlley.Location = new System.Drawing.Point(232, 566);
+            this.LabelAlley.Location = new System.Drawing.Point(53, 573);
             this.LabelAlley.Name = "LabelAlley";
             this.LabelAlley.Size = new System.Drawing.Size(48, 23);
             this.LabelAlley.TabIndex = 9;
@@ -122,7 +101,7 @@ namespace Discotèque
             this.LabelLocker.AutoSize = true;
             this.LabelLocker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(192)))), ((int)(((byte)(208)))));
             this.LabelLocker.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelLocker.Location = new System.Drawing.Point(232, 595);
+            this.LabelLocker.Location = new System.Drawing.Point(53, 602);
             this.LabelLocker.Name = "LabelLocker";
             this.LabelLocker.Size = new System.Drawing.Size(57, 23);
             this.LabelLocker.TabIndex = 10;
@@ -133,7 +112,7 @@ namespace Discotèque
             this.LabelLocation.AutoSize = true;
             this.LabelLocation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(192)))), ((int)(((byte)(208)))));
             this.LabelLocation.Font = new System.Drawing.Font("Comic Sans MS", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelLocation.Location = new System.Drawing.Point(232, 531);
+            this.LabelLocation.Location = new System.Drawing.Point(53, 538);
             this.LabelLocation.Name = "LabelLocation";
             this.LabelLocation.Size = new System.Drawing.Size(115, 23);
             this.LabelLocation.TabIndex = 11;
@@ -143,7 +122,7 @@ namespace Discotèque
             // 
             this.LabelTitle.AutoSize = true;
             this.LabelTitle.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelTitle.Location = new System.Drawing.Point(233, 387);
+            this.LabelTitle.Location = new System.Drawing.Point(37, 335);
             this.LabelTitle.Name = "LabelTitle";
             this.LabelTitle.Size = new System.Drawing.Size(66, 30);
             this.LabelTitle.TabIndex = 12;
@@ -153,7 +132,7 @@ namespace Discotèque
             // 
             this.LabelGenre.AutoSize = true;
             this.LabelGenre.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelGenre.Location = new System.Drawing.Point(233, 423);
+            this.LabelGenre.Location = new System.Drawing.Point(37, 371);
             this.LabelGenre.Name = "LabelGenre";
             this.LabelGenre.Size = new System.Drawing.Size(66, 27);
             this.LabelGenre.TabIndex = 13;
@@ -163,7 +142,7 @@ namespace Discotèque
             // 
             this.LabelYear.AutoSize = true;
             this.LabelYear.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelYear.Location = new System.Drawing.Point(233, 457);
+            this.LabelYear.Location = new System.Drawing.Point(37, 405);
             this.LabelYear.Name = "LabelYear";
             this.LabelYear.Size = new System.Drawing.Size(66, 27);
             this.LabelYear.TabIndex = 14;
@@ -173,7 +152,7 @@ namespace Discotèque
             // 
             this.LabelEditor.AutoSize = true;
             this.LabelEditor.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelEditor.Location = new System.Drawing.Point(926, 387);
+            this.LabelEditor.Location = new System.Drawing.Point(445, 335);
             this.LabelEditor.Name = "LabelEditor";
             this.LabelEditor.Size = new System.Drawing.Size(87, 30);
             this.LabelEditor.TabIndex = 15;
@@ -183,7 +162,7 @@ namespace Discotèque
             // 
             this.LabelEditorCountry.AutoSize = true;
             this.LabelEditorCountry.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelEditorCountry.Location = new System.Drawing.Point(926, 423);
+            this.LabelEditorCountry.Location = new System.Drawing.Point(445, 371);
             this.LabelEditorCountry.Name = "LabelEditorCountry";
             this.LabelEditorCountry.Size = new System.Drawing.Size(58, 29);
             this.LabelEditorCountry.TabIndex = 16;
@@ -193,7 +172,7 @@ namespace Discotèque
             // 
             this.LabelPrice.AutoSize = true;
             this.LabelPrice.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPrice.Location = new System.Drawing.Point(981, 577);
+            this.LabelPrice.Location = new System.Drawing.Point(527, 584);
             this.LabelPrice.Name = "LabelPrice";
             this.LabelPrice.Size = new System.Drawing.Size(61, 35);
             this.LabelPrice.TabIndex = 17;
@@ -201,15 +180,13 @@ namespace Discotèque
             // 
             // ActionButton
             // 
-            this.ActionButton.Enabled = false;
             this.ActionButton.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ActionButton.Location = new System.Drawing.Point(957, 510);
+            this.ActionButton.Location = new System.Drawing.Point(503, 517);
             this.ActionButton.Name = "ActionButton";
             this.ActionButton.Size = new System.Drawing.Size(125, 64);
             this.ActionButton.TabIndex = 18;
-            this.ActionButton.Text = "EMPRUNTER";
+            this.ActionButton.Text = "Action";
             this.ActionButton.UseVisualStyleBackColor = true;
-            this.ActionButton.Visible = false;
             this.ActionButton.Click += new System.EventHandler(this.ButtonLoan_Click);
             // 
             // AlbumView
@@ -217,7 +194,7 @@ namespace Discotèque
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(187)))));
-            this.ClientSize = new System.Drawing.Size(1185, 662);
+            this.ClientSize = new System.Drawing.Size(676, 662);
             this.Controls.Add(this.ActionButton);
             this.Controls.Add(this.LabelPrice);
             this.Controls.Add(this.LabelEditorCountry);
@@ -228,33 +205,25 @@ namespace Discotèque
             this.Controls.Add(this.LabelLocation);
             this.Controls.Add(this.LabelLocker);
             this.Controls.Add(this.LabelAlley);
-            this.Controls.Add(this.PictureBoxCover);
+            this.Controls.Add(this.AlbumCoverBox);
             this.Controls.Add(this.LabelLocationBackground);
-            this.Controls.Add(this.PictureBoxAccount);
             this.Controls.Add(this.LabelLine2);
             this.Controls.Add(this.PictureBoxLogo);
-            this.Controls.Add(this.LabelLine1);
             this.MaximumSize = new System.Drawing.Size(1201, 701);
-            this.MinimumSize = new System.Drawing.Size(1199, 699);
             this.Name = "AlbumView";
             this.Text = "AlbumView";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumView_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumCoverBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label LabelLine1;
         private System.Windows.Forms.PictureBox PictureBoxLogo;
         private System.Windows.Forms.Label LabelLine2;
-        private System.Windows.Forms.PictureBox PictureBoxAccount;
         private System.Windows.Forms.Label LabelLocationBackground;
-        private System.Windows.Forms.PictureBox PictureBoxCover;
+        private System.Windows.Forms.PictureBox AlbumCoverBox;
         private System.Windows.Forms.Label LabelAlley;
         private System.Windows.Forms.Label LabelLocker;
         private System.Windows.Forms.Label LabelLocation;

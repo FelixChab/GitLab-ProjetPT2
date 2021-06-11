@@ -40,7 +40,8 @@ namespace Discotèque
         /// <param name="theScreen"> the screen </param>
         public void Draw(Graphics theScreen)
         {
-            theScreen.DrawImage(this.AlbumCover, this._Position.X, this._Position.Y,
+            Image theCover = this.Album.DisplayableAlbumCover;
+            theScreen.DrawImage(theCover, this._Position.X, this._Position.Y,
                         Size.Width, Size.Height);
         }
 
@@ -53,18 +54,6 @@ namespace Discotèque
         {
             Rectangle theRectangle = new Rectangle(_Position, Size);
             return theRectangle.Contains(thePoint);
-        }
-
-        /// <summary>
-        ///  Return an image from a bytes arrray
-        /// </summary>
-        private Image AlbumCover
-        {
-            get
-            {
-                MemoryStream theStream = new MemoryStream(this.Album.POCHETTE);
-                return new Bitmap(theStream);
-            }
         }
 
         public byte[] ImageToByteArray(Image imageIn)

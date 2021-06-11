@@ -55,8 +55,9 @@ namespace Discotèque
         /// <returns> a string </returns>
         public override String ToString()
         {
+            string theExtension = this.HasBeenExtended() ? " (prolongé)" : ""; 
             return this.ALBUMS.TITRE_ALBUM.Trim() + " - du " + this.DATE_EMPRUNT.ToShortDateString()
-                + " au " + this.DATE_RETOUR_ATTENDUE.ToShortDateString();
+                + " au " + this.DATE_RETOUR_ATTENDUE.ToShortDateString() + theExtension;
         }
     }
 }

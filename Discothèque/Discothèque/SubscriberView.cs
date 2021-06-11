@@ -32,6 +32,11 @@ namespace Discotèque
         private AlbumSlider _Recommandations;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private readonly AlbumView _AlbumView;
+
+        /// <summary>
         /// Parametorised constructor creating a new Subscriber object.
         /// </summary>
         /// <param name="theAccount"> the account of the subscriber </param>
@@ -40,7 +45,9 @@ namespace Discotèque
             InitializeComponent();
             this._Database = theDatabase;
             this._Subscriber = (ABONNÉS)theAccount;
+            this._AlbumView = new AlbumView(this._Subscriber);
 
+            this.Text = this._Subscriber.ToString();
             InitializeSliders();
         }
 
@@ -102,8 +109,8 @@ namespace Discotèque
             if (theDisplay != null)
             {
                 this.Hide();
-                AlbumView theView = new AlbumView(theDisplay.Album, this._Subscriber);
-                theView.ShowDialog();
+                this._AlbumView.ChangeAlbum(theDisplay.Album);
+                this._AlbumView.ShowDialog();
                 this.Show();
             }
         }
@@ -169,7 +176,5 @@ namespace Discotèque
             this._PopularAlbums.NextPage();
             Refresh();
         }
-
-
     }
 }

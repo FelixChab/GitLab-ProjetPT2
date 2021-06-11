@@ -102,15 +102,17 @@ namespace Discotèque
 
         private void SearchResults_MouseClick(object sender, MouseEventArgs e)
         {
+            /*
             SearchResults.Visible = false;
             ALBUMS album = (ALBUMS)SearchResults.SelectedItem;
             if (album != null)
             {
                 this.Hide();
-                AlbumView theView = new AlbumView(album, this._Subscriber);
+                AlbumView theView = new AlbumView(this._Subscriber);
                 theView.ShowDialog();
                 this.Show();
             }
+            */
         }
 
         // liste les albums dans l'actionListBox (à droite) ??? à vérif
